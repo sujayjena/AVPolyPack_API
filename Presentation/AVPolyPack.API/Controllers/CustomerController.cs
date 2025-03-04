@@ -124,7 +124,14 @@ namespace AVPolyPack.Controllers
                     int resultAddressDetail = await _addressRepository.SaveAddress(parameters.AddressDetail);
                 }
 
-                _response.Message = "Record details saved sucessfully";
+                if (parameters.Id == 0)
+                {
+                    _response.Message = "Record Submitted successfully";
+                }
+                else
+                {
+                    _response.Message = "Record Updated successfully";
+                }
             }
 
             _response.Id = result;

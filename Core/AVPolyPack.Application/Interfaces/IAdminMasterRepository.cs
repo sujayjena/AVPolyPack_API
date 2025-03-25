@@ -50,6 +50,14 @@ namespace AVPolyPack.Application.Interfaces
 
         #endregion
 
+        #region Loom
+
+        Task<int> SaveLoom(Loom_Request parameters);
+        Task<IEnumerable<Loom_Response>> GetLoomList(Loom_Search parameters);
+        Task<Loom_Response?> GetLoomById(long Id);
+
+        #endregion
+
         #region Size
 
         Task<int> SaveSize(Size_Request parameters);
@@ -87,6 +95,22 @@ namespace AVPolyPack.Application.Interfaces
         Task<int> SaveType(Type_Request parameters);
         Task<IEnumerable<Type_Response>> GetTypeList(Type_Search parameters);
         Task<Type_Response?> GetTypeById(long Id);
+
+        #endregion
+
+        #region GSM
+
+        Task<int> SaveGSM(GSM_Request parameters);
+        Task<IEnumerable<GSM_Response>> GetGSMList(GSM_Search parameters);
+        Task<GSM_Response?> GetGSMById(long Id);
+
+        #endregion
+
+        #region Strength
+
+        Task<int> SaveStrength(Strength_Request parameters);
+        Task<IEnumerable<Strength_Response>> GetStrengthList(Strength_Search parameters);
+        Task<Strength_Response?> GetStrengthById(long Id);
 
         #endregion
     }

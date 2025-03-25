@@ -106,6 +106,25 @@ namespace AVPolyPack.Application.Models
 
     #endregion
 
+    #region Loom
+    public class Loom_Search : BaseSearchEntity
+    {
+    }
+
+    public class Loom_Request : BaseEntity
+    {
+        public string? LoomName { get; set; }
+        public bool? IsActive { get; set; }
+    }
+
+    public class Loom_Response : BaseResponseEntity
+    {
+        public string? LoomName { get; set; }
+        public bool? IsActive { get; set; }
+    }
+
+    #endregion
+
     #region Size
     public class Size_Search : BaseSearchEntity
     {
@@ -200,6 +219,44 @@ namespace AVPolyPack.Application.Models
     public class Type_Response : BaseResponseEntity
     {
         public string? TypeName { get; set; }
+        public bool? IsActive { get; set; }
+    }
+
+    #endregion
+
+    #region GSM
+    public class GSM_Search : BaseSearchEntity
+    {
+    }
+
+    public class GSM_Request : BaseEntity
+    {
+        public string? GSMName { get; set; }
+        public bool? IsActive { get; set; }
+    }
+
+    public class GSM_Response : BaseResponseEntity
+    {
+        public string? GSMName { get; set; }
+        public bool? IsActive { get; set; }
+    }
+
+    #endregion
+
+    #region Strength
+    public class Strength_Search : BaseSearchEntity
+    {
+    }
+
+    public class Strength_Request : BaseEntity
+    {
+        public string? StrengthName { get; set; }
+        public bool? IsActive { get; set; }
+    }
+
+    public class Strength_Response : BaseResponseEntity
+    {
+        public string? StrengthName { get; set; }
         public bool? IsActive { get; set; }
     }
 

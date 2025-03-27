@@ -328,4 +328,42 @@ namespace AVPolyPack.Application.Models
     }
 
     #endregion
+
+    #region Cutting1
+    public class Cutting1_Search : BaseSearchEntity
+    {
+    }
+
+    public class Cutting1_Request : BaseEntity
+    {
+        public string? Cutting1Name { get; set; }
+        public bool? IsActive { get; set; }
+    }
+
+    public class Cutting1_Response : BaseResponseEntity
+    {
+        public string? Cutting1Name { get; set; }
+        public bool? IsActive { get; set; }
+    }
+
+    #endregion
+
+    #region Cutting2
+    public class Cutting2_Search : BaseSearchEntity
+    {
+    }
+
+    public class Cutting2_Request : BaseEntity
+    {
+        public string? Cutting2Name { get; set; }
+        public bool? IsActive { get; set; }
+    }
+
+    public class Cutting2_Response : BaseResponseEntity
+    {
+        public string? Cutting2Name { get; set; }
+        public bool? IsActive { get; set; }
+    }
+
+    #endregion
 }

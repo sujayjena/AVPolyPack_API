@@ -137,5 +137,21 @@ namespace AVPolyPack.Application.Interfaces
         Task<Product_Response?> GetProductById(long Id);
 
         #endregion
+
+        #region Cutting1
+
+        Task<int> SaveCutting1(Cutting1_Request parameters);
+        Task<IEnumerable<Cutting1_Response>> GetCutting1List(Cutting1_Search parameters);
+        Task<Cutting1_Response?> GetCutting1ById(long Id);
+
+        #endregion
+
+        #region Cutting2
+
+        Task<int> SaveCutting2(Cutting2_Request parameters);
+        Task<IEnumerable<Cutting2_Response>> GetCutting2List(Cutting2_Search parameters);
+        Task<Cutting2_Response?> GetCutting2ById(long Id);
+
+        #endregion
     }
 }

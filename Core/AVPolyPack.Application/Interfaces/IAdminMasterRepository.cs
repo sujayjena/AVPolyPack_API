@@ -113,5 +113,21 @@ namespace AVPolyPack.Application.Interfaces
         Task<Strength_Response?> GetStrengthById(long Id);
 
         #endregion
+
+        #region LaminationType
+
+        Task<int> SaveLaminationType(LaminationType_Request parameters);
+        Task<IEnumerable<LaminationType_Response>> GetLaminationTypeList(LaminationType_Search parameters);
+        Task<LaminationType_Response?> GetLaminationTypeById(long Id);
+
+        #endregion
+
+        #region Bank
+
+        Task<int> SaveBank(Bank_Request parameters);
+        Task<IEnumerable<Bank_Response>> GetBankList(Bank_Search parameters);
+        Task<Bank_Response?> GetBankById(long Id);
+
+        #endregion
     }
 }

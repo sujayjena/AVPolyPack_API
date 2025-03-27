@@ -261,4 +261,42 @@ namespace AVPolyPack.Application.Models
     }
 
     #endregion
+
+    #region LaminationType
+    public class LaminationType_Search : BaseSearchEntity
+    {
+    }
+
+    public class LaminationType_Request : BaseEntity
+    {
+        public string? LaminationTypeName { get; set; }
+        public bool? IsActive { get; set; }
+    }
+
+    public class LaminationType_Response : BaseResponseEntity
+    {
+        public string? LaminationTypeName { get; set; }
+        public bool? IsActive { get; set; }
+    }
+
+    #endregion
+
+    #region Bank
+    public class Bank_Search : BaseSearchEntity
+    {
+    }
+
+    public class Bank_Request : BaseEntity
+    {
+        public string? BankName { get; set; }
+        public bool? IsActive { get; set; }
+    }
+
+    public class Bank_Response : BaseResponseEntity
+    {
+        public string? BankName { get; set; }
+        public bool? IsActive { get; set; }
+    }
+
+    #endregion
 }

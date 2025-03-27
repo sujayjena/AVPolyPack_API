@@ -299,4 +299,33 @@ namespace AVPolyPack.Application.Models
     }
 
     #endregion
+
+    #region Product
+    public class Product_Search : BaseSearchEntity
+    {
+    }
+
+    public class Product_Request : BaseEntity
+    {
+        public string? ProductName { get; set; }
+        public bool? IsImage { get; set; }
+        public string? ImageOriginalFileName { get; set; }
+
+        [JsonIgnore]
+        public string? ImageFileName { get; set; }
+        public string? Image_Base64 { get; set; }
+        public bool? IsActive { get; set; }
+    }
+
+    public class Product_Response : BaseResponseEntity
+    {
+        public string? ProductName { get; set; }
+        public bool? IsImage { get; set; }
+        public string? ImageOriginalFileName { get; set; }
+        public string? ImageFileName { get; set; }
+        public string? ImageFileURL { get; set; }
+        public bool? IsActive { get; set; }
+    }
+
+    #endregion
 }

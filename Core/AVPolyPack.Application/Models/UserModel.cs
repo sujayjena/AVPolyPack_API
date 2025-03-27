@@ -87,7 +87,9 @@ namespace AVPolyPack.Application.Models
         [JsonIgnore]
         public string? OtherProofFileName { get; set; }
         public string? OtherProof_Base64 { get; set; }
-        public string? BankDetails { get; set; }
+        public int? BankId { get; set; }
+        public string? BankAccountNo { get; set; }
+        public string? BankIFSCCode { get; set; }
         public string? BankDetailsOriginalFileName { get; set; }
 
         [JsonIgnore]
@@ -180,7 +182,10 @@ namespace AVPolyPack.Application.Models
         public string? OtherProofFileName { get; set; }
         public string? OtherProofURL { get; set; }
 
-        public string? BankDetails { get; set; }
+        public int? BankId { get; set; }
+        public string? BankName { get; set; }
+        public string? BankAccountNo { get; set; }
+        public string? BankIFSCCode { get; set; }
         public string? BankDetailsOriginalFileName { get; set; }
         public string? BankDetailsFileName { get; set; }
         public string? BankDetailsURL { get; set; }

@@ -73,7 +73,9 @@ namespace AVPolyPack.Persistence.Repositories
             queryParameters.Add("@OtherProof", parameters.OtherProof);
             queryParameters.Add("@OtherProofOriginalFileName", parameters.OtherProofOriginalFileName);
             queryParameters.Add("@OtherProofFileName", parameters.OtherProofFileName);
-            queryParameters.Add("@BankDetails", parameters.BankDetails);
+            queryParameters.Add("@BankId", parameters.BankId);
+            queryParameters.Add("@BankAccountNo", parameters.BankAccountNo);
+            queryParameters.Add("@BankIFSCCode", parameters.BankIFSCCode);
             queryParameters.Add("@BankDetailsOriginalFileName", parameters.BankDetailsOriginalFileName);
             queryParameters.Add("@BankDetailsFileName", parameters.BankDetailsFileName);
 

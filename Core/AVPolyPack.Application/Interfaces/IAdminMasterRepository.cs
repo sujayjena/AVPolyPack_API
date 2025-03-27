@@ -129,5 +129,13 @@ namespace AVPolyPack.Application.Interfaces
         Task<Bank_Response?> GetBankById(long Id);
 
         #endregion
+
+        #region Product
+
+        Task<int> SaveProduct(Product_Request parameters);
+        Task<IEnumerable<Product_Response>> GetProductList(Product_Search parameters);
+        Task<Product_Response?> GetProductById(long Id);
+
+        #endregion
     }
 }

@@ -1,4 +1,5 @@
 ﻿using AVPolyPack.Application.Enums;
+using AVPolyPack.Application.Helpers;
 using AVPolyPack.Application.Interfaces;
 using AVPolyPack.Application.Models;
 using AVPolyPack.Persistence.Repositories;
@@ -12,12 +13,13 @@ namespace AVPolyPack.API.Controllers.Admin
     {
         private ResponseModel _response;
         private readonly IAdminMasterRepository _adminMasterRepository;
-
+        private IFileManager _fileManager;
         private readonly IConfigRefRepository _configRefRepository;
 
-        public AdminMasterController(IAdminMasterRepository adminMasterRepository)
+        public AdminMasterController(IAdminMasterRepository adminMasterRepository, IFileManager fileManager)
         {
             _adminMasterRepository = adminMasterRepository;
+            _fileManager = fileManager;
 
             _response = new ResponseModel();
             _response.IsSuccess = true;
@@ -970,6 +972,82 @@ namespace AVPolyPack.API.Controllers.Admin
             else
             {
                 var vResultObj = await _adminMasterRepository.GetBankById(Id);
+                _response.Data = vResultObj;
+            }
+            return _response;
+        }
+
+        #endregion
+
+        #region Product
+
+        [Route("[action]")]
+        [HttpPost]
+        public async Task<ResponseModel> SaveProduct(Product_Request parameters)
+        {
+            // Image Upload
+            if (parameters! != null && !string.IsNullOrWhiteSpace(parameters.Image_Base64))
+            {
+                var vUploadFile = _fileManager.UploadDocumentsBase64ToFile(parameters.Image_Base64, "\\Uploads\\Product\\", parameters.ImageOriginalFileName);
+
+                if (!string.IsNullOrWhiteSpace(vUploadFile))
+                {
+                    parameters.ImageFileName = vUploadFile;
+                }
+            }
+
+            int result = await _adminMasterRepository.SaveProduct(parameters);
+
+            if (result == (int)SaveOperationEnums.NoRecordExists)
+            {
+                _response.Message = "No record exists";
+            }
+            else if (result == (int)SaveOperationEnums.ReocrdExists)
+            {
+                _response.Message = "Record already exists";
+            }
+            else if (result == (int)SaveOperationEnums.NoResult)
+            {
+                _response.Message = "Something went wrong, please try again";
+            }
+            else
+            {
+                if (parameters.Id == 0)
+                {
+                    _response.Message = "Record Submitted successfully";
+                }
+                else
+                {
+                    _response.Message = "Record Updated successfully";
+                }
+            }
+
+            _response.Id = result;
+            return _response;
+        }
+
+
+        [Route("[action]")]
+        [HttpPost]
+        public async Task<ResponseModel> GetProductList(Product_Search parameters)
+        {
+            IEnumerable<Product_Response> lstRoles = await _adminMasterRepository.GetProductList(parameters);
+            _response.Data = lstRoles.ToList();
+            _response.Total = parameters.Total;
+            return _response;
+        }
+
+        [Route("[action]")]
+        [HttpPost]
+        public async Task<ResponseModel> GetProductById(long Id)
+        {
+            if (Id <= 0)
+            {
+                _response.Message = "Id is required";
+            }
+            else
+            {
+                var vResultObj = await _adminMasterRepository.GetProductById(Id);
                 _response.Data = vResultObj;
             }
             return _response;

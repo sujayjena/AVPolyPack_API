@@ -588,5 +588,46 @@ namespace AVPolyPack.Persistence.Repositories
         }
 
         #endregion
+
+        #region Product
+
+        public async Task<int> SaveProduct(Product_Request parameters)
+        {
+            DynamicParameters queryParameters = new DynamicParameters();
+            queryParameters.Add("@Id", parameters.Id);
+            queryParameters.Add("@ProductName", parameters.ProductName);
+            queryParameters.Add("@IsImage", parameters.IsImage);
+            queryParameters.Add("@ImageOriginalFileName", parameters.ImageOriginalFileName);
+            queryParameters.Add("@ImageFileName", parameters.ImageFileName);
+            queryParameters.Add("@IsActive", parameters.IsActive);
+            queryParameters.Add("@UserId", SessionManager.LoggedInUserId);
+
+            return await SaveByStoredProcedure<int>("SaveProduct", queryParameters);
+        }
+
+        public async Task<IEnumerable<Product_Response>> GetProductList(Product_Search parameters)
+        {
+            DynamicParameters queryParameters = new DynamicParameters();
+            queryParameters.Add("@SearchText", parameters.SearchText.SanitizeValue());
+            queryParameters.Add("@IsActive", parameters.IsActive);
+            queryParameters.Add("@PageNo", parameters.PageNo);
+            queryParameters.Add("@PageSize", parameters.PageSize);
+            queryParameters.Add("@Total", parameters.Total, null, System.Data.ParameterDirection.Output);
+            queryParameters.Add("@UserId", SessionManager.LoggedInUserId);
+
+            var result = await ListByStoredProcedure<Product_Response>("GetProductList", queryParameters);
+            parameters.Total = queryParameters.Get<int>("Total");
+
+            return result;
+        }
+
+        public async Task<Product_Response?> GetProductById(long Id)
+        {
+            DynamicParameters queryParameters = new DynamicParameters();
+            queryParameters.Add("@Id", Id);
+            return (await ListByStoredProcedure<Product_Response>("GetProductById", queryParameters)).FirstOrDefault();
+        }
+
+        #endregion
     }
 }

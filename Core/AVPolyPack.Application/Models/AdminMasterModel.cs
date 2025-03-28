@@ -404,4 +404,42 @@ namespace AVPolyPack.Application.Models
     }
 
     #endregion
+
+    #region Bottom
+    public class Bottom_Search : BaseSearchEntity
+    {
+    }
+
+    public class Bottom_Request : BaseEntity
+    {
+        public string? BottomName { get; set; }
+        public bool? IsActive { get; set; }
+    }
+
+    public class Bottom_Response : BaseResponseEntity
+    {
+        public string? BottomName { get; set; }
+        public bool? IsActive { get; set; }
+    }
+
+    #endregion
+
+    #region Stich
+    public class Stich_Search : BaseSearchEntity
+    {
+    }
+
+    public class Stich_Request : BaseEntity
+    {
+        public string? StichName { get; set; }
+        public bool? IsActive { get; set; }
+    }
+
+    public class Stich_Response : BaseResponseEntity
+    {
+        public string? StichName { get; set; }
+        public bool? IsActive { get; set; }
+    }
+
+    #endregion
 }

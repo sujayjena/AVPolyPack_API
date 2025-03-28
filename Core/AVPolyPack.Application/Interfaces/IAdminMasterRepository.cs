@@ -169,5 +169,21 @@ namespace AVPolyPack.Application.Interfaces
         Task<Guzzet_Response?> GetGuzzetById(long Id);
 
         #endregion
+
+        #region Bottom
+
+        Task<int> SaveBottom(Bottom_Request parameters);
+        Task<IEnumerable<Bottom_Response>> GetBottomList(Bottom_Search parameters);
+        Task<Bottom_Response?> GetBottomById(long Id);
+
+        #endregion
+
+        #region Stich
+
+        Task<int> SaveStich(Stich_Request parameters);
+        Task<IEnumerable<Stich_Response>> GetStichList(Stich_Search parameters);
+        Task<Stich_Response?> GetStichById(long Id);
+
+        #endregion
     }
 }

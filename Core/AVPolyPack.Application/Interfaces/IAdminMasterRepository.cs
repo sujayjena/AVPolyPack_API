@@ -153,5 +153,21 @@ namespace AVPolyPack.Application.Interfaces
         Task<Cutting2_Response?> GetCutting2ById(long Id);
 
         #endregion
+
+        #region Liner
+
+        Task<int> SaveLiner(Liner_Request parameters);
+        Task<IEnumerable<Liner_Response>> GetLinerList(Liner_Search parameters);
+        Task<Liner_Response?> GetLinerById(long Id);
+
+        #endregion
+
+        #region Guzzet
+
+        Task<int> SaveGuzzet(Guzzet_Request parameters);
+        Task<IEnumerable<Guzzet_Response>> GetGuzzetList(Guzzet_Search parameters);
+        Task<Guzzet_Response?> GetGuzzetById(long Id);
+
+        #endregion
     }
 }

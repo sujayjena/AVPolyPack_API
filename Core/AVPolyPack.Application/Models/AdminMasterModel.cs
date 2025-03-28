@@ -366,4 +366,42 @@ namespace AVPolyPack.Application.Models
     }
 
     #endregion
+
+    #region Liner
+    public class Liner_Search : BaseSearchEntity
+    {
+    }
+
+    public class Liner_Request : BaseEntity
+    {
+        public string? LinerName { get; set; }
+        public bool? IsActive { get; set; }
+    }
+
+    public class Liner_Response : BaseResponseEntity
+    {
+        public string? LinerName { get; set; }
+        public bool? IsActive { get; set; }
+    }
+
+    #endregion
+
+    #region Guzzet
+    public class Guzzet_Search : BaseSearchEntity
+    {
+    }
+
+    public class Guzzet_Request : BaseEntity
+    {
+        public string? GuzzetName { get; set; }
+        public bool? IsActive { get; set; }
+    }
+
+    public class Guzzet_Response : BaseResponseEntity
+    {
+        public string? GuzzetName { get; set; }
+        public bool? IsActive { get; set; }
+    }
+
+    #endregion
 }

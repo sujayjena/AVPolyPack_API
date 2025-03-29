@@ -442,4 +442,23 @@ namespace AVPolyPack.Application.Models
     }
 
     #endregion
+
+    #region Color
+    public class Color_Search : BaseSearchEntity
+    {
+    }
+
+    public class Color_Request : BaseEntity
+    {
+        public string? ColorName { get; set; }
+        public bool? IsActive { get; set; }
+    }
+
+    public class Color_Response : BaseResponseEntity
+    {
+        public string? ColorName { get; set; }
+        public bool? IsActive { get; set; }
+    }
+
+    #endregion
 }

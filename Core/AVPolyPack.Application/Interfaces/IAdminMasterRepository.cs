@@ -185,5 +185,13 @@ namespace AVPolyPack.Application.Interfaces
         Task<Stich_Response?> GetStichById(long Id);
 
         #endregion
+
+        #region Color
+
+        Task<int> SaveColor(Color_Request parameters);
+        Task<IEnumerable<Color_Response>> GetColorList(Color_Search parameters);
+        Task<Color_Response?> GetColorById(long Id);
+
+        #endregion
     }
 }

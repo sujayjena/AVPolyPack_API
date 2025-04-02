@@ -27,6 +27,7 @@ namespace AVPolyPack.Persistence.Repositories
             DynamicParameters queryParameters = new DynamicParameters();
             queryParameters.Add("@Id", parameters.Id);
             queryParameters.Add("@CompanyName", parameters.CompanyName);
+            queryParameters.Add("@RollSeriesPrefix", parameters.RollSeriesPrefix);
             queryParameters.Add("@CompanyTypeId", parameters.CompanyTypeId);
             queryParameters.Add("@RegistrationNumber", parameters.RegistrationNumber);
             queryParameters.Add("@ContactNumber", parameters.ContactNumber);

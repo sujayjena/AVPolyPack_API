@@ -23,6 +23,7 @@ namespace AVPolyPack.Application.Models
     public class Company_Request : BaseEntity
     {
         public string? CompanyName { get; set; }
+        public string? RollSeriesPrefix { get; set; }
         public int? CompanyTypeId { get; set; }
         public string? RegistrationNumber { get; set; }
         public string? ContactNumber { get; set; }
@@ -56,6 +57,7 @@ namespace AVPolyPack.Application.Models
     public class Company_Response : BaseResponseEntity
     {
         public string? CompanyName { get; set; }
+        public string? RollSeriesPrefix { get; set; }
         public int? CompanyTypeId { get; set; }
         public string? CompanyType { get; set; }
         public string? RegistrationNumber { get; set; }

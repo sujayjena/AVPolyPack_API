@@ -1509,5 +1509,70 @@ namespace AVPolyPack.API.Controllers.Admin
         }
 
         #endregion
+
+        #region ItemNumber
+
+        [Route("[action]")]
+        [HttpPost]
+        public async Task<ResponseModel> SaveItemNumber(ItemNumber_Request parameters)
+        {
+            int result = await _adminMasterRepository.SaveItemNumber(parameters);
+
+            if (result == (int)SaveOperationEnums.NoRecordExists)
+            {
+                _response.Message = "No record exists";
+            }
+            else if (result == (int)SaveOperationEnums.ReocrdExists)
+            {
+                _response.Message = "Record already exists";
+            }
+            else if (result == (int)SaveOperationEnums.NoResult)
+            {
+                _response.Message = "Something went wrong, please try again";
+            }
+            else
+            {
+                if (parameters.Id == 0)
+                {
+                    _response.Message = "Record Submitted successfully";
+                }
+                else
+                {
+                    _response.Message = "Record Updated successfully";
+                }
+            }
+
+            _response.Id = result;
+            return _response;
+        }
+
+
+        [Route("[action]")]
+        [HttpPost]
+        public async Task<ResponseModel> GetItemNumberList(ItemNumber_Search parameters)
+        {
+            IEnumerable<ItemNumber_Response> lstRoles = await _adminMasterRepository.GetItemNumberList(parameters);
+            _response.Data = lstRoles.ToList();
+            _response.Total = parameters.Total;
+            return _response;
+        }
+
+        [Route("[action]")]
+        [HttpPost]
+        public async Task<ResponseModel> GetItemNumberById(long Id)
+        {
+            if (Id <= 0)
+            {
+                _response.Message = "Id is required";
+            }
+            else
+            {
+                var vResultObj = await _adminMasterRepository.GetItemNumberById(Id);
+                _response.Data = vResultObj;
+            }
+            return _response;
+        }
+
+        #endregion
     }
 }

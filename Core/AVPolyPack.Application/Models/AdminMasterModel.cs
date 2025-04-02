@@ -461,4 +461,23 @@ namespace AVPolyPack.Application.Models
     }
 
     #endregion
+
+    #region ItemNumber
+    public class ItemNumber_Search : BaseSearchEntity
+    {
+    }
+
+    public class ItemNumber_Request : BaseEntity
+    {
+        public string? ItemNumber { get; set; }
+        public bool? IsActive { get; set; }
+    }
+
+    public class ItemNumber_Response : BaseResponseEntity
+    {
+        public string? ItemNumber { get; set; }
+        public bool? IsActive { get; set; }
+    }
+
+    #endregion
 }

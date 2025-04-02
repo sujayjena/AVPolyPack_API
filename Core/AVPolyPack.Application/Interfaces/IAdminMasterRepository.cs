@@ -193,5 +193,13 @@ namespace AVPolyPack.Application.Interfaces
         Task<Color_Response?> GetColorById(long Id);
 
         #endregion
+
+        #region ItemNumber
+
+        Task<int> SaveItemNumber(ItemNumber_Request parameters);
+        Task<IEnumerable<ItemNumber_Response>> GetItemNumberList(ItemNumber_Search parameters);
+        Task<ItemNumber_Response?> GetItemNumberById(long Id);
+
+        #endregion
     }
 }

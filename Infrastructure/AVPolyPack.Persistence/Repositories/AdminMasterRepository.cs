@@ -895,5 +895,43 @@ namespace AVPolyPack.Persistence.Repositories
         }
 
         #endregion
+
+        #region ItemNumber
+
+        public async Task<int> SaveItemNumber(ItemNumber_Request parameters)
+        {
+            DynamicParameters queryParameters = new DynamicParameters();
+            queryParameters.Add("@Id", parameters.Id);
+            queryParameters.Add("@ItemNumber", parameters.ItemNumber);
+            queryParameters.Add("@IsActive", parameters.IsActive);
+            queryParameters.Add("@UserId", SessionManager.LoggedInUserId);
+
+            return await SaveByStoredProcedure<int>("SaveItemNumber", queryParameters);
+        }
+
+        public async Task<IEnumerable<ItemNumber_Response>> GetItemNumberList(ItemNumber_Search parameters)
+        {
+            DynamicParameters queryParameters = new DynamicParameters();
+            queryParameters.Add("@SearchText", parameters.SearchText.SanitizeValue());
+            queryParameters.Add("@IsActive", parameters.IsActive);
+            queryParameters.Add("@PageNo", parameters.PageNo);
+            queryParameters.Add("@PageSize", parameters.PageSize);
+            queryParameters.Add("@Total", parameters.Total, null, System.Data.ParameterDirection.Output);
+            queryParameters.Add("@UserId", SessionManager.LoggedInUserId);
+
+            var result = await ListByStoredProcedure<ItemNumber_Response>("GetItemNumberList", queryParameters);
+            parameters.Total = queryParameters.Get<int>("Total");
+
+            return result;
+        }
+
+        public async Task<ItemNumber_Response?> GetItemNumberById(long Id)
+        {
+            DynamicParameters queryParameters = new DynamicParameters();
+            queryParameters.Add("@Id", Id);
+            return (await ListByStoredProcedure<ItemNumber_Response>("GetItemNumberById", queryParameters)).FirstOrDefault();
+        }
+
+        #endregion
     }
 }

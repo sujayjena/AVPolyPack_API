@@ -253,7 +253,7 @@ namespace AVPolyPack.Persistence.Repositories
             queryParameters.Add("@Id", parameters.Id);
             queryParameters.Add("@SizeType", parameters.SizeType);
             queryParameters.Add("@SizeName", parameters.SizeName);
-            queryParameters.Add("@SizeInMeter", parameters.SizeInMeter);
+            queryParameters.Add("@SizeInInch", parameters.SizeInInch);
             queryParameters.Add("@IsActive", parameters.IsActive);
             queryParameters.Add("@UserId", SessionManager.LoggedInUserId);
 

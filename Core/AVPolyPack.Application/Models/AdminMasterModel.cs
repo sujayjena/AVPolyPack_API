@@ -134,7 +134,7 @@ namespace AVPolyPack.Application.Models
     {
         public int? SizeType { get; set; }
         public string? SizeName { get; set; }
-        public decimal? SizeInMeter { get; set; }
+        public decimal? SizeInInch { get; set; }
         public bool? IsActive { get; set; }
     }
 
@@ -142,7 +142,7 @@ namespace AVPolyPack.Application.Models
     {
         public int? SizeType { get; set; }
         public string? SizeName { get; set; }
-        public decimal? SizeInMeter { get; set; }
+        public decimal? SizeInInch { get; set; }
         public bool? IsActive { get; set; }
     }
 

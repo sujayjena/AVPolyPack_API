@@ -1055,13 +1055,13 @@ namespace AVPolyPack.API.Controllers.Admin
 
         #endregion
 
-        #region Cutting1
+        #region Cutting Machine
 
         [Route("[action]")]
         [HttpPost]
-        public async Task<ResponseModel> SaveCutting1(Cutting1_Request parameters)
+        public async Task<ResponseModel> SaveCuttingMachine(CuttingMachine_Request parameters)
         {
-            int result = await _adminMasterRepository.SaveCutting1(parameters);
+            int result = await _adminMasterRepository.SaveCuttingMachine(parameters);
 
             if (result == (int)SaveOperationEnums.NoRecordExists)
             {
@@ -1094,9 +1094,9 @@ namespace AVPolyPack.API.Controllers.Admin
 
         [Route("[action]")]
         [HttpPost]
-        public async Task<ResponseModel> GetCutting1List(Cutting1_Search parameters)
+        public async Task<ResponseModel> GetCuttingMachineList(CuttingMachine_Search parameters)
         {
-            IEnumerable<Cutting1_Response> lstRoles = await _adminMasterRepository.GetCutting1List(parameters);
+            IEnumerable<CuttingMachine_Response> lstRoles = await _adminMasterRepository.GetCuttingMachineList(parameters);
             _response.Data = lstRoles.ToList();
             _response.Total = parameters.Total;
             return _response;
@@ -1104,7 +1104,7 @@ namespace AVPolyPack.API.Controllers.Admin
 
         [Route("[action]")]
         [HttpPost]
-        public async Task<ResponseModel> GetCutting1ById(long Id)
+        public async Task<ResponseModel> GetCuttingMachineById(long Id)
         {
             if (Id <= 0)
             {
@@ -1112,7 +1112,7 @@ namespace AVPolyPack.API.Controllers.Admin
             }
             else
             {
-                var vResultObj = await _adminMasterRepository.GetCutting1ById(Id);
+                var vResultObj = await _adminMasterRepository.GetCuttingMachineById(Id);
                 _response.Data = vResultObj;
             }
             return _response;

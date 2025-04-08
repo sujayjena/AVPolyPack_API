@@ -138,11 +138,11 @@ namespace AVPolyPack.Application.Interfaces
 
         #endregion
 
-        #region Cutting1
+        #region Cutting Machine
 
-        Task<int> SaveCutting1(Cutting1_Request parameters);
-        Task<IEnumerable<Cutting1_Response>> GetCutting1List(Cutting1_Search parameters);
-        Task<Cutting1_Response?> GetCutting1ById(long Id);
+        Task<int> SaveCuttingMachine(CuttingMachine_Request parameters);
+        Task<IEnumerable<CuttingMachine_Response>> GetCuttingMachineList(CuttingMachine_Search parameters);
+        Task<CuttingMachine_Response?> GetCuttingMachineById(long Id);
 
         #endregion
 

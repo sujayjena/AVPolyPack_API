@@ -630,20 +630,21 @@ namespace AVPolyPack.Persistence.Repositories
 
         #endregion
 
-        #region Cutting1
+        #region Cutting Machine
 
-        public async Task<int> SaveCutting1(Cutting1_Request parameters)
+        public async Task<int> SaveCuttingMachine(CuttingMachine_Request parameters)
         {
             DynamicParameters queryParameters = new DynamicParameters();
             queryParameters.Add("@Id", parameters.Id);
-            queryParameters.Add("@Cutting1Name", parameters.Cutting1Name);
+            queryParameters.Add("@MachineName", parameters.MachineName);
+            queryParameters.Add("@Descriptions", parameters.Descriptions);
             queryParameters.Add("@IsActive", parameters.IsActive);
             queryParameters.Add("@UserId", SessionManager.LoggedInUserId);
 
-            return await SaveByStoredProcedure<int>("SaveCutting1", queryParameters);
+            return await SaveByStoredProcedure<int>("SaveCuttingMachine", queryParameters);
         }
 
-        public async Task<IEnumerable<Cutting1_Response>> GetCutting1List(Cutting1_Search parameters)
+        public async Task<IEnumerable<CuttingMachine_Response>> GetCuttingMachineList(CuttingMachine_Search parameters)
         {
             DynamicParameters queryParameters = new DynamicParameters();
             queryParameters.Add("@SearchText", parameters.SearchText.SanitizeValue());
@@ -653,17 +654,17 @@ namespace AVPolyPack.Persistence.Repositories
             queryParameters.Add("@Total", parameters.Total, null, System.Data.ParameterDirection.Output);
             queryParameters.Add("@UserId", SessionManager.LoggedInUserId);
 
-            var result = await ListByStoredProcedure<Cutting1_Response>("GetCutting1List", queryParameters);
+            var result = await ListByStoredProcedure<CuttingMachine_Response>("GetCuttingMachineList", queryParameters);
             parameters.Total = queryParameters.Get<int>("Total");
 
             return result;
         }
 
-        public async Task<Cutting1_Response?> GetCutting1ById(long Id)
+        public async Task<CuttingMachine_Response?> GetCuttingMachineById(long Id)
         {
             DynamicParameters queryParameters = new DynamicParameters();
             queryParameters.Add("@Id", Id);
-            return (await ListByStoredProcedure<Cutting1_Response>("GetCutting1ById", queryParameters)).FirstOrDefault();
+            return (await ListByStoredProcedure<CuttingMachine_Response>("GetCuttingMachineById", queryParameters)).FirstOrDefault();
         }
 
         #endregion

@@ -329,20 +329,22 @@ namespace AVPolyPack.Application.Models
 
     #endregion
 
-    #region Cutting1
-    public class Cutting1_Search : BaseSearchEntity
+    #region Cutting Machine
+    public class CuttingMachine_Search : BaseSearchEntity
     {
     }
 
-    public class Cutting1_Request : BaseEntity
+    public class CuttingMachine_Request : BaseEntity
     {
-        public string? Cutting1Name { get; set; }
+        public string? MachineName { get; set; }
+        public string? Descriptions { get; set; }
         public bool? IsActive { get; set; }
     }
 
-    public class Cutting1_Response : BaseResponseEntity
+    public class CuttingMachine_Response : BaseResponseEntity
     {
-        public string? Cutting1Name { get; set; }
+        public string? MachineName { get; set; }
+        public string? Descriptions { get; set; }
         public bool? IsActive { get; set; }
     }
 

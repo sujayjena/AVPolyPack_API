@@ -27,6 +27,64 @@ namespace AVPolyPack.API.Controllers.Admin
             _fileManager = fileManager;
         }
 
+        #region Country 
+
+        [Route("[action]")]
+        [HttpPost]
+        public async Task<ResponseModel> SaveCountry(Country_Request parameters)
+        {
+            int result = await _territoryRepository.SaveCountry(parameters);
+
+            if (result == (int)SaveOperationEnums.NoRecordExists)
+            {
+                _response.Message = "No record exists";
+            }
+            else if (result == (int)SaveOperationEnums.ReocrdExists)
+            {
+                _response.Message = "Record already exists";
+            }
+            else if (result == (int)SaveOperationEnums.NoResult)
+            {
+                _response.Message = "Something went wrong, please try again";
+            }
+            else
+            {
+                _response.Message = "Record details saved successfully";
+            }
+
+            _response.Id = result;
+            return _response;
+        }
+
+
+        [Route("[action]")]
+        [HttpPost]
+        public async Task<ResponseModel> GetCountryList(BaseSearchEntity parameters)
+        {
+            IEnumerable<Country_Response> lstCountrys = await _territoryRepository.GetCountryList(parameters);
+            _response.Data = lstCountrys.ToList();
+            _response.Total = parameters.Total;
+            return _response;
+        }
+
+        [Route("[action]")]
+        [HttpPost]
+        public async Task<ResponseModel> GetCountryById(long Id)
+        {
+            if (Id <= 0)
+            {
+                _response.Message = "Id is required";
+            }
+            else
+            {
+                var vResultObj = await _territoryRepository.GetCountryById(Id);
+                _response.Data = vResultObj;
+            }
+            return _response;
+        }
+
+        #endregion
+
         #region State 
 
         [Route("[action]")]

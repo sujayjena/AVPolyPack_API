@@ -10,6 +10,16 @@ namespace AVPolyPack.Application.Interfaces
 {
     public interface ITerritoryRepository
     {
+        #region Country 
+
+        Task<int> SaveCountry(Country_Request parameters);
+
+        Task<IEnumerable<Country_Response>> GetCountryList(BaseSearchEntity parameters);
+
+        Task<Country_Response?> GetCountryById(long Id);
+
+        #endregion
+
         #region State 
 
         Task<int> SaveState(State_Request parameters);

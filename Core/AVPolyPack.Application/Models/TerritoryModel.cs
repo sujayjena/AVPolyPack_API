@@ -30,6 +30,24 @@ namespace AVPolyPack.Application.Models
 
     #endregion
 
+    #region Country
+
+    public class Country_Request : BaseEntity
+    {
+        public string? CountryName { get; set; }
+
+        public bool? IsActive { get; set; }
+    }
+
+    public class Country_Response : BaseResponseEntity
+    {
+        public string? CountryName { get; set; }
+
+        public bool? IsActive { get; set; }
+    }
+
+    #endregion
+
     #region State
 
     public class State_Request : BaseEntity

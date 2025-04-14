@@ -178,6 +178,8 @@ namespace AVPolyPack.Application.Models
 
     public class Territories_Request : BaseEntity
     {
+        public int? CountryId { get; set; }
+
         public int? StateId { get; set; }
 
         public int? DistrictId { get; set; }
@@ -189,6 +191,10 @@ namespace AVPolyPack.Application.Models
 
     public class Territories_Response : BaseResponseEntity
     {
+        public int? CountryId { get; set; }
+
+        public int? CountryName { get; set; }
+
         public int? StateId { get; set; }
 
         public string? StateName { get; set; }

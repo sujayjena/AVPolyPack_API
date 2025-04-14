@@ -34,6 +34,7 @@ namespace AVPolyPack.Persistence.Repositories
             queryParameters.Add("@Remark", parameters.Remark);
             queryParameters.Add("@CustomerRemark", parameters.CustomerRemark);
             queryParameters.Add("@RefParty", parameters.RefParty);
+            queryParameters.Add("@GSTNumber", parameters.GSTNumber);
             queryParameters.Add("@GSTImage", parameters.GSTImageFileName);
             queryParameters.Add("@GSTImageOriginalFileName", parameters.GSTImageOriginalFileName);
             queryParameters.Add("@PanCardImage", parameters.PanCardImageFileName);

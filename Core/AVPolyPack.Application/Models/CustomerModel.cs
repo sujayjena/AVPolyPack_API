@@ -33,6 +33,8 @@ namespace AVPolyPack.Application.Models
 
         public string? RefParty { get; set; }
 
+        public string? GSTNumber { get; set; }
+
         [JsonIgnore]
         public string? GSTImageFileName { get; set; }
 
@@ -76,6 +78,8 @@ namespace AVPolyPack.Application.Models
 
         public string? RefParty { get; set; }
 
+        public string? GSTNumber { get; set; }
+
         public string? GSTImage { get; set; }
 
         public string? GSTImageOriginalFileName { get; set; }
@@ -89,6 +93,10 @@ namespace AVPolyPack.Application.Models
         public string? PanCardImageURL { get; set; }
 
         public string? Address1 { get; set; }
+
+        public int? CountryId { get; set; }
+
+        public string? CountryName { get; set; }
 
         public int? StateId { get; set; }
 
@@ -130,6 +138,8 @@ namespace AVPolyPack.Application.Models
         public string? CustomerRemark { get; set; }
 
         public string? RefParty { get; set; }
+
+        public string? GSTNumber { get; set; }
 
         public string? GSTImage { get; set; }
 

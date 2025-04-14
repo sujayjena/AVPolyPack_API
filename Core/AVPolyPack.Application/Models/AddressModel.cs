@@ -29,6 +29,8 @@ namespace AVPolyPack.Application.Models
 
         public string? Address1 { get; set; }
 
+        public int? CountryId { get; set; }
+
         public int? StateId { get; set; }
 
         public int? DistrictId { get; set; }
@@ -51,6 +53,10 @@ namespace AVPolyPack.Application.Models
         public string? RefType { get; set; }
 
         public string? Address1 { get; set; }
+
+        public int? CountryId { get; set; }
+
+        public int? CountryName { get; set; }
 
         public int? StateId { get; set; }
 

@@ -28,6 +28,7 @@ namespace AVPolyPack.Persistence.Repositories
             queryParameters.Add("@RefId", parameters.RefId);
             queryParameters.Add("@RefType", parameters.RefType);
             queryParameters.Add("@Address1", parameters.Address1);
+            queryParameters.Add("@CountryId", parameters.CountryId);
             queryParameters.Add("@StateId", parameters.StateId);
             queryParameters.Add("@DistrictId", parameters.DistrictId);
             queryParameters.Add("@CityId", parameters.CityId);

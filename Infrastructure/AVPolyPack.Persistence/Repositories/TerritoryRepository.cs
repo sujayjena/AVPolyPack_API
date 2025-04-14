@@ -205,6 +205,7 @@ namespace AVPolyPack.Persistence.Repositories
         {
             DynamicParameters queryParameters = new DynamicParameters();
             queryParameters.Add("@Id", parameters.Id);
+            queryParameters.Add("@CountryId", parameters.CountryId);
             queryParameters.Add("@StateId", parameters.StateId);
             queryParameters.Add("@DistrictId", parameters.DistrictId);
             queryParameters.Add("@CityId", parameters.CityId);

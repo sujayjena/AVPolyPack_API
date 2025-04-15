@@ -193,7 +193,7 @@ namespace AVPolyPack.Application.Models
     {
         public int? CountryId { get; set; }
 
-        public int? CountryName { get; set; }
+        public string? CountryName { get; set; }
 
         public int? StateId { get; set; }
 

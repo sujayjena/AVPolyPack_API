@@ -482,4 +482,63 @@ namespace AVPolyPack.Application.Models
     }
 
     #endregion
+
+    #region Material
+    public class Material_Search : BaseSearchEntity
+    {
+    }
+
+    public class Material_Request : BaseEntity
+    {
+        public string? MaterialName { get; set; }
+        public bool? IsActive { get; set; }
+    }
+
+    public class Material_Response : BaseResponseEntity
+    {
+        public string? MaterialName { get; set; }
+        public bool? IsActive { get; set; }
+    }
+
+    #endregion
+
+    #region Material Type
+    public class MaterialType_Search : BaseSearchEntity
+    {
+    }
+
+    public class MaterialType_Request : BaseEntity
+    {
+        public string? MaterialType { get; set; }
+        public bool? IsActive { get; set; }
+    }
+
+    public class MaterialType_Response : BaseResponseEntity
+    {
+        public string? MaterialType { get; set; }
+        public bool? IsActive { get; set; }
+    }
+
+    #endregion
+
+    #region UOM
+    public class UOM_Search : BaseSearchEntity
+    {
+    }
+
+    public class UOM_Request : BaseEntity
+    {
+        public string? UOMName { get; set; }
+        public string? UOMDesc { get; set; }
+        public bool? IsActive { get; set; }
+    }
+
+    public class UOM_Response : BaseResponseEntity
+    {
+        public string? UOMName { get; set; }
+        public string? UOMDesc { get; set; }
+        public bool? IsActive { get; set; }
+    }
+
+    #endregion
 }

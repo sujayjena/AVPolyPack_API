@@ -174,6 +174,7 @@ namespace AVPolyPack.Controllers
                     vCustomerDetail_Response.Remark = vResultObj.Remark;
                     vCustomerDetail_Response.CustomerRemark = vResultObj.CustomerRemark;
                     vCustomerDetail_Response.RefParty = vResultObj.RefParty;
+                    vCustomerDetail_Response.GSTNumber = vResultObj.GSTNumber;
                     vCustomerDetail_Response.GSTImage = vResultObj.GSTImage;
                     vCustomerDetail_Response.GSTImageOriginalFileName = vResultObj.GSTImageOriginalFileName;
                     vCustomerDetail_Response.GSTImageURL = vResultObj.GSTImageURL;
@@ -225,6 +226,8 @@ namespace AVPolyPack.Controllers
                         vCustomerDetail_Response.AddressDetail.RefId = Convert.ToInt32(vAddressObj.RefId);
                         vCustomerDetail_Response.AddressDetail.RefType = vAddressObj.RefType;
                         vCustomerDetail_Response.AddressDetail.Address1 = vAddressObj.Address1;
+                        vCustomerDetail_Response.AddressDetail.CountryId = vAddressObj.CountryId;
+                        vCustomerDetail_Response.AddressDetail.CountryName = vAddressObj.CountryName;
                         vCustomerDetail_Response.AddressDetail.StateId = vAddressObj.StateId;
                         vCustomerDetail_Response.AddressDetail.StateName = vAddressObj.StateName;
                         vCustomerDetail_Response.AddressDetail.DistrictId = vAddressObj.DistrictId;

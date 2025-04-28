@@ -1049,5 +1049,45 @@ namespace AVPolyPack.Persistence.Repositories
         }
 
         #endregion
+
+        #region Material Master
+
+        public async Task<int> SaveMaterialMaster(MaterialMaster_Request parameters)
+        {
+            DynamicParameters queryParameters = new DynamicParameters();
+            queryParameters.Add("@Id", parameters.Id);
+            queryParameters.Add("@MaterialId", parameters.MaterialId);
+            queryParameters.Add("@MaterialTypeId", parameters.MaterialTypeId);
+            queryParameters.Add("@UOMId", parameters.UOMId);
+            queryParameters.Add("@IsActive", parameters.IsActive);
+            queryParameters.Add("@UserId", SessionManager.LoggedInUserId);
+
+            return await SaveByStoredProcedure<int>("SaveMaterialMaster", queryParameters);
+        }
+
+        public async Task<IEnumerable<MaterialMaster_Response>> GetMaterialMasterList(MaterialMaster_Search parameters)
+        {
+            DynamicParameters queryParameters = new DynamicParameters();
+            queryParameters.Add("@SearchText", parameters.SearchText.SanitizeValue());
+            queryParameters.Add("@IsActive", parameters.IsActive);
+            queryParameters.Add("@PageNo", parameters.PageNo);
+            queryParameters.Add("@PageSize", parameters.PageSize);
+            queryParameters.Add("@Total", parameters.Total, null, System.Data.ParameterDirection.Output);
+            queryParameters.Add("@UserId", SessionManager.LoggedInUserId);
+
+            var result = await ListByStoredProcedure<MaterialMaster_Response>("GetMaterialMasterList", queryParameters);
+            parameters.Total = queryParameters.Get<int>("Total");
+
+            return result;
+        }
+
+        public async Task<MaterialMaster_Response?> GetMaterialMasterById(long Id)
+        {
+            DynamicParameters queryParameters = new DynamicParameters();
+            queryParameters.Add("@Id", Id);
+            return (await ListByStoredProcedure<MaterialMaster_Response>("GetMaterialMasterById", queryParameters)).FirstOrDefault();
+        }
+
+        #endregion
     }
 }

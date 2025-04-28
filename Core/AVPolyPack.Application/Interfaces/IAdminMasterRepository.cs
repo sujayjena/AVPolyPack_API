@@ -225,5 +225,13 @@ namespace AVPolyPack.Application.Interfaces
         Task<UOM_Response?> GetUOMById(long Id);
 
         #endregion
+
+        #region Material Master
+
+        Task<int> SaveMaterialMaster(MaterialMaster_Request parameters);
+        Task<IEnumerable<MaterialMaster_Response>> GetMaterialMasterList(MaterialMaster_Search parameters);
+        Task<MaterialMaster_Response?> GetMaterialMasterById(long Id);
+
+        #endregion
     }
 }

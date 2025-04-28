@@ -541,4 +541,30 @@ namespace AVPolyPack.Application.Models
     }
 
     #endregion
+
+    #region Material Master
+    public class MaterialMaster_Search : BaseSearchEntity
+    {
+    }
+
+    public class MaterialMaster_Request : BaseEntity
+    {
+        public int? MaterialId { get; set; }
+        public int? MaterialTypeId { get; set; }
+        public int? UOMId { get; set; }
+        public bool? IsActive { get; set; }
+    }
+
+    public class MaterialMaster_Response : BaseResponseEntity
+    {
+        public int? MaterialId { get; set; }
+        public string? MaterialName { get; set; }
+        public int? MaterialTypeId { get; set; }
+        public string? MaterialType { get; set; }
+        public int? UOMId { get; set; }
+        public string? UOMName { get; set; }
+        public bool? IsActive { get; set; }
+    }
+
+    #endregion
 }

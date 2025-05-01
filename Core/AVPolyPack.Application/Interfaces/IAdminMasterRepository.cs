@@ -233,5 +233,29 @@ namespace AVPolyPack.Application.Interfaces
         Task<MaterialMaster_Response?> GetMaterialMasterById(long Id);
 
         #endregion
+
+        #region Material Details
+
+        Task<int> SaveMaterialDetails(MaterialDetails_Request parameters);
+        Task<IEnumerable<MaterialDetails_Response>> GetMaterialDetailsList(MaterialDetails_Search parameters);
+        Task<MaterialDetails_Response?> GetMaterialDetailsById(long Id);
+
+        #endregion
+
+        #region Product Type
+
+        Task<int> SaveProductType(ProductType_Request parameters);
+        Task<IEnumerable<ProductType_Response>> GetProductTypeList(ProductType_Search parameters);
+        Task<ProductType_Response?> GetProductTypeById(long Id);
+
+        #endregion
+
+        #region Payment Term
+
+        Task<int> SavePaymentTerm(PaymentTerm_Request parameters);
+        Task<IEnumerable<PaymentTerm_Response>> GetPaymentTermList(PaymentTerm_Search parameters);
+        Task<PaymentTerm_Response?> GetPaymentTermById(long Id);
+
+        #endregion
     }
 }

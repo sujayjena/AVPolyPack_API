@@ -308,6 +308,7 @@ namespace AVPolyPack.Application.Models
     public class Product_Request : BaseEntity
     {
         public string? ProductName { get; set; }
+        public int? ProductTypeId { get; set; }
         public bool? IsImage { get; set; }
         public string? ImageOriginalFileName { get; set; }
 
@@ -320,6 +321,8 @@ namespace AVPolyPack.Application.Models
     public class Product_Response : BaseResponseEntity
     {
         public string? ProductName { get; set; }
+        public int? ProductTypeId { get; set; }
+        public string? ProductType { get; set; }
         public bool? IsImage { get; set; }
         public string? ImageOriginalFileName { get; set; }
         public string? ImageFileName { get; set; }
@@ -563,6 +566,74 @@ namespace AVPolyPack.Application.Models
         public string? MaterialType { get; set; }
         public int? UOMId { get; set; }
         public string? UOMName { get; set; }
+        public bool? IsActive { get; set; }
+    }
+
+    #endregion
+
+    #region Material Details
+    public class MaterialDetails_Search : BaseSearchEntity
+    {
+    }
+
+    public class MaterialDetails_Request : BaseEntity
+    {
+        public int? MaterialId { get; set; }
+        public int? MaterialTypeId { get; set; }
+        public int? UOMId { get; set; }
+        public decimal? MinQty { get; set; }
+        public decimal? AvailableMaterial { get; set; }
+        public bool? IsActive { get; set; }
+    }
+
+    public class MaterialDetails_Response : BaseResponseEntity
+    {
+        public int? MaterialId { get; set; }
+        public string? MaterialName { get; set; }
+        public int? MaterialTypeId { get; set; }
+        public string? MaterialType { get; set; }
+        public int? UOMId { get; set; }
+        public string? UOMName { get; set; }
+        public decimal? MinQty { get; set; }
+        public decimal? AvailableMaterial { get; set; }
+        public bool? IsActive { get; set; }
+    }
+
+    #endregion
+
+    #region Product Type
+    public class ProductType_Search : BaseSearchEntity
+    {
+    }
+
+    public class ProductType_Request : BaseEntity
+    {
+        public string? ProductType { get; set; }
+        public bool? IsActive { get; set; }
+    }
+
+    public class ProductType_Response : BaseResponseEntity
+    {
+        public string? ProductType { get; set; }
+        public bool? IsActive { get; set; }
+    }
+
+    #endregion
+
+    #region Payment Term
+    public class PaymentTerm_Search : BaseSearchEntity
+    {
+    }
+
+    public class PaymentTerm_Request : BaseEntity
+    {
+        public string? PaymentTerm { get; set; }
+        public bool? IsActive { get; set; }
+    }
+
+    public class PaymentTerm_Response : BaseResponseEntity
+    {
+        public string? PaymentTerm { get; set; }
         public bool? IsActive { get; set; }
     }
 

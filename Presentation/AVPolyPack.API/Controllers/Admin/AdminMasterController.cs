@@ -1806,7 +1806,6 @@ namespace AVPolyPack.API.Controllers.Admin
             return _response;
         }
 
-
         [Route("[action]")]
         [HttpPost]
         public async Task<ResponseModel> GetMaterialMasterList(MaterialMaster_Search parameters)
@@ -1828,6 +1827,200 @@ namespace AVPolyPack.API.Controllers.Admin
             else
             {
                 var vResultObj = await _adminMasterRepository.GetMaterialMasterById(Id);
+                _response.Data = vResultObj;
+            }
+            return _response;
+        }
+
+        #endregion
+
+        #region Material Details
+
+        [Route("[action]")]
+        [HttpPost]
+        public async Task<ResponseModel> SaveMaterialDetails(MaterialDetails_Request parameters)
+        {
+            int result = await _adminMasterRepository.SaveMaterialDetails(parameters);
+
+            if (result == (int)SaveOperationEnums.NoRecordExists)
+            {
+                _response.Message = "No record exists";
+            }
+            else if (result == (int)SaveOperationEnums.ReocrdExists)
+            {
+                _response.Message = "Record already exists";
+            }
+            else if (result == (int)SaveOperationEnums.NoResult)
+            {
+                _response.Message = "Something went wrong, please try again";
+            }
+            else
+            {
+                if (parameters.Id == 0)
+                {
+                    _response.Message = "Record Submitted successfully";
+                }
+                else
+                {
+                    _response.Message = "Record Updated successfully";
+                }
+            }
+
+            _response.Id = result;
+            return _response;
+        }
+
+        [Route("[action]")]
+        [HttpPost]
+        public async Task<ResponseModel> GetMaterialDetailsList(MaterialDetails_Search parameters)
+        {
+            IEnumerable<MaterialDetails_Response> lstRoles = await _adminMasterRepository.GetMaterialDetailsList(parameters);
+            _response.Data = lstRoles.ToList();
+            _response.Total = parameters.Total;
+            return _response;
+        }
+
+        [Route("[action]")]
+        [HttpPost]
+        public async Task<ResponseModel> GetMaterialDetailsById(long Id)
+        {
+            if (Id <= 0)
+            {
+                _response.Message = "Id is required";
+            }
+            else
+            {
+                var vResultObj = await _adminMasterRepository.GetMaterialDetailsById(Id);
+                _response.Data = vResultObj;
+            }
+            return _response;
+        }
+
+        #endregion
+
+        #region Product Type
+
+        [Route("[action]")]
+        [HttpPost]
+        public async Task<ResponseModel> SaveProductType(ProductType_Request parameters)
+        {
+            int result = await _adminMasterRepository.SaveProductType(parameters);
+
+            if (result == (int)SaveOperationEnums.NoRecordExists)
+            {
+                _response.Message = "No record exists";
+            }
+            else if (result == (int)SaveOperationEnums.ReocrdExists)
+            {
+                _response.Message = "Record already exists";
+            }
+            else if (result == (int)SaveOperationEnums.NoResult)
+            {
+                _response.Message = "Something went wrong, please try again";
+            }
+            else
+            {
+                if (parameters.Id == 0)
+                {
+                    _response.Message = "Record Submitted successfully";
+                }
+                else
+                {
+                    _response.Message = "Record Updated successfully";
+                }
+            }
+
+            _response.Id = result;
+            return _response;
+        }
+
+
+        [Route("[action]")]
+        [HttpPost]
+        public async Task<ResponseModel> GetProductTypeList(ProductType_Search parameters)
+        {
+            IEnumerable<ProductType_Response> lstRoles = await _adminMasterRepository.GetProductTypeList(parameters);
+            _response.Data = lstRoles.ToList();
+            _response.Total = parameters.Total;
+            return _response;
+        }
+
+        [Route("[action]")]
+        [HttpPost]
+        public async Task<ResponseModel> GetProductTypeById(long Id)
+        {
+            if (Id <= 0)
+            {
+                _response.Message = "Id is required";
+            }
+            else
+            {
+                var vResultObj = await _adminMasterRepository.GetProductTypeById(Id);
+                _response.Data = vResultObj;
+            }
+            return _response;
+        }
+
+        #endregion
+
+        #region Payment Term
+
+        [Route("[action]")]
+        [HttpPost]
+        public async Task<ResponseModel> SavePaymentTerm(PaymentTerm_Request parameters)
+        {
+            int result = await _adminMasterRepository.SavePaymentTerm(parameters);
+
+            if (result == (int)SaveOperationEnums.NoRecordExists)
+            {
+                _response.Message = "No record exists";
+            }
+            else if (result == (int)SaveOperationEnums.ReocrdExists)
+            {
+                _response.Message = "Record already exists";
+            }
+            else if (result == (int)SaveOperationEnums.NoResult)
+            {
+                _response.Message = "Something went wrong, please try again";
+            }
+            else
+            {
+                if (parameters.Id == 0)
+                {
+                    _response.Message = "Record Submitted successfully";
+                }
+                else
+                {
+                    _response.Message = "Record Updated successfully";
+                }
+            }
+
+            _response.Id = result;
+            return _response;
+        }
+
+
+        [Route("[action]")]
+        [HttpPost]
+        public async Task<ResponseModel> GetPaymentTermList(PaymentTerm_Search parameters)
+        {
+            IEnumerable<PaymentTerm_Response> lstRoles = await _adminMasterRepository.GetPaymentTermList(parameters);
+            _response.Data = lstRoles.ToList();
+            _response.Total = parameters.Total;
+            return _response;
+        }
+
+        [Route("[action]")]
+        [HttpPost]
+        public async Task<ResponseModel> GetPaymentTermById(long Id)
+        {
+            if (Id <= 0)
+            {
+                _response.Message = "Id is required";
+            }
+            else
+            {
+                var vResultObj = await _adminMasterRepository.GetPaymentTermById(Id);
                 _response.Data = vResultObj;
             }
             return _response;

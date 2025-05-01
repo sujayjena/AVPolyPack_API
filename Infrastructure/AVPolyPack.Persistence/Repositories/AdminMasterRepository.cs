@@ -596,6 +596,7 @@ namespace AVPolyPack.Persistence.Repositories
             DynamicParameters queryParameters = new DynamicParameters();
             queryParameters.Add("@Id", parameters.Id);
             queryParameters.Add("@ProductName", parameters.ProductName);
+            queryParameters.Add("@ProductTypeId", parameters.ProductTypeId);
             queryParameters.Add("@IsImage", parameters.IsImage);
             queryParameters.Add("@ImageOriginalFileName", parameters.ImageOriginalFileName);
             queryParameters.Add("@ImageFileName", parameters.ImageFileName);
@@ -1086,6 +1087,124 @@ namespace AVPolyPack.Persistence.Repositories
             DynamicParameters queryParameters = new DynamicParameters();
             queryParameters.Add("@Id", Id);
             return (await ListByStoredProcedure<MaterialMaster_Response>("GetMaterialMasterById", queryParameters)).FirstOrDefault();
+        }
+
+        #endregion
+
+        #region Material Details
+
+        public async Task<int> SaveMaterialDetails(MaterialDetails_Request parameters)
+        {
+            DynamicParameters queryParameters = new DynamicParameters();
+            queryParameters.Add("@Id", parameters.Id);
+            queryParameters.Add("@MaterialId", parameters.MaterialId);
+            queryParameters.Add("@MaterialTypeId", parameters.MaterialTypeId);
+            queryParameters.Add("@UOMId", parameters.UOMId);
+            queryParameters.Add("@MinQty", parameters.MinQty);
+            queryParameters.Add("@AvailableMaterial", parameters.AvailableMaterial);
+            queryParameters.Add("@IsActive", parameters.IsActive);
+            queryParameters.Add("@UserId", SessionManager.LoggedInUserId);
+
+            return await SaveByStoredProcedure<int>("SaveMaterialDetails", queryParameters);
+        }
+
+        public async Task<IEnumerable<MaterialDetails_Response>> GetMaterialDetailsList(MaterialDetails_Search parameters)
+        {
+            DynamicParameters queryParameters = new DynamicParameters();
+            queryParameters.Add("@SearchText", parameters.SearchText.SanitizeValue());
+            queryParameters.Add("@IsActive", parameters.IsActive);
+            queryParameters.Add("@PageNo", parameters.PageNo);
+            queryParameters.Add("@PageSize", parameters.PageSize);
+            queryParameters.Add("@Total", parameters.Total, null, System.Data.ParameterDirection.Output);
+            queryParameters.Add("@UserId", SessionManager.LoggedInUserId);
+
+            var result = await ListByStoredProcedure<MaterialDetails_Response>("GetMaterialDetailsList", queryParameters);
+            parameters.Total = queryParameters.Get<int>("Total");
+
+            return result;
+        }
+
+        public async Task<MaterialDetails_Response?> GetMaterialDetailsById(long Id)
+        {
+            DynamicParameters queryParameters = new DynamicParameters();
+            queryParameters.Add("@Id", Id);
+            return (await ListByStoredProcedure<MaterialDetails_Response>("GetMaterialDetailsById", queryParameters)).FirstOrDefault();
+        }
+
+        #endregion
+
+        #region Product Type
+
+        public async Task<int> SaveProductType(ProductType_Request parameters)
+        {
+            DynamicParameters queryParameters = new DynamicParameters();
+            queryParameters.Add("@Id", parameters.Id);
+            queryParameters.Add("@ProductType", parameters.ProductType);
+            queryParameters.Add("@IsActive", parameters.IsActive);
+            queryParameters.Add("@UserId", SessionManager.LoggedInUserId);
+
+            return await SaveByStoredProcedure<int>("SaveProductType", queryParameters);
+        }
+
+        public async Task<IEnumerable<ProductType_Response>> GetProductTypeList(ProductType_Search parameters)
+        {
+            DynamicParameters queryParameters = new DynamicParameters();
+            queryParameters.Add("@SearchText", parameters.SearchText.SanitizeValue());
+            queryParameters.Add("@IsActive", parameters.IsActive);
+            queryParameters.Add("@PageNo", parameters.PageNo);
+            queryParameters.Add("@PageSize", parameters.PageSize);
+            queryParameters.Add("@Total", parameters.Total, null, System.Data.ParameterDirection.Output);
+            queryParameters.Add("@UserId", SessionManager.LoggedInUserId);
+
+            var result = await ListByStoredProcedure<ProductType_Response>("GetProductTypeList", queryParameters);
+            parameters.Total = queryParameters.Get<int>("Total");
+
+            return result;
+        }
+
+        public async Task<ProductType_Response?> GetProductTypeById(long Id)
+        {
+            DynamicParameters queryParameters = new DynamicParameters();
+            queryParameters.Add("@Id", Id);
+            return (await ListByStoredProcedure<ProductType_Response>("GetProductTypeById", queryParameters)).FirstOrDefault();
+        }
+
+        #endregion
+
+        #region Payment Term
+
+        public async Task<int> SavePaymentTerm(PaymentTerm_Request parameters)
+        {
+            DynamicParameters queryParameters = new DynamicParameters();
+            queryParameters.Add("@Id", parameters.Id);
+            queryParameters.Add("@PaymentTerm", parameters.PaymentTerm);
+            queryParameters.Add("@IsActive", parameters.IsActive);
+            queryParameters.Add("@UserId", SessionManager.LoggedInUserId);
+
+            return await SaveByStoredProcedure<int>("SavePaymentTerm", queryParameters);
+        }
+
+        public async Task<IEnumerable<PaymentTerm_Response>> GetPaymentTermList(PaymentTerm_Search parameters)
+        {
+            DynamicParameters queryParameters = new DynamicParameters();
+            queryParameters.Add("@SearchText", parameters.SearchText.SanitizeValue());
+            queryParameters.Add("@IsActive", parameters.IsActive);
+            queryParameters.Add("@PageNo", parameters.PageNo);
+            queryParameters.Add("@PageSize", parameters.PageSize);
+            queryParameters.Add("@Total", parameters.Total, null, System.Data.ParameterDirection.Output);
+            queryParameters.Add("@UserId", SessionManager.LoggedInUserId);
+
+            var result = await ListByStoredProcedure<PaymentTerm_Response>("GetPaymentTermList", queryParameters);
+            parameters.Total = queryParameters.Get<int>("Total");
+
+            return result;
+        }
+
+        public async Task<PaymentTerm_Response?> GetPaymentTermById(long Id)
+        {
+            DynamicParameters queryParameters = new DynamicParameters();
+            queryParameters.Add("@Id", Id);
+            return (await ListByStoredProcedure<PaymentTerm_Response>("GetPaymentTermById", queryParameters)).FirstOrDefault();
         }
 
         #endregion

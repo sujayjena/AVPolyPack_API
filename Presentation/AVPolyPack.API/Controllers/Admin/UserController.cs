@@ -108,7 +108,7 @@ namespace AVPolyPack.API.Controllers.Admin
             }
             else if (result == -4)
             {
-                _response.Message = "Mobile already exists";
+                _response.Message = "Mobile # already exists";
             }
             else if (result == (int)SaveOperationEnums.NoResult)
             {

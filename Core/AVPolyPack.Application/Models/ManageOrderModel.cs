@@ -1,0 +1,238 @@
+﻿using AVPolyPack.Domain.Entities;
+using AVPolyPack.Persistence.Repositories;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Linq;
+using System.Text;
+using System.Text.Json.Serialization;
+using System.Threading.Tasks;
+
+namespace AVPolyPack.Application.Models
+{
+    #region Order
+    public class Order_Search : BaseSearchEntity
+    {
+        public int? StatusId { get; set; }
+        public int? OrderType { get; set; }
+    }
+
+    public class Order_Request : BaseEntity
+    {
+        public Order_Request()
+        {
+            orderItemList = new List<OrderItem_Request>();
+        }
+        public int? OrderType { get; set; }
+        public int? CustomerId { get; set; }
+        public string? PONumber { get; set; }
+        public DateTime? PODate { get; set; }
+        public string? OrderNumber { get; set; }
+        public DateTime? OrderDate { get; set; }
+        public DateTime? DeliveryDate { get; set; }
+        public int? PaymentTermId { get; set; }
+        public int? StatusId { get; set; }
+
+        public List<OrderItem_Request> orderItemList { get; set; }
+    }
+
+    public class Order_Response : BaseResponseEntity
+    {
+        public Order_Response()
+        {
+            orderItemList = new List<OrderItem_Response>();
+        }
+        public int? OrderType { get; set; }
+        public int? CustomerId { get; set; }
+        public string? CustomerName { get; set; }
+        public string? OrderNumber { get; set; }
+        public DateTime? OrderDate { get; set; }
+        public int? StatusId { get; set; }
+
+        public List<OrderItem_Response> orderItemList { get; set; }
+    }
+    #endregion
+
+    #region Order Item
+    public class OrderItem_Search : BaseSearchEntity
+    {
+        public int? OrderId { get; set; }
+    }
+    public class OrderItem_Request : BaseEntity
+    {
+        public int? OrderId { get; set; }
+        public string? OrderItemNo { get; set; }
+        public int? ProductId { get; set; }
+        public string? Mixing { get; set; }
+        public string? PP { get; set; }
+        public string? CC { get; set; }
+        public string? UV { get; set; }
+        public string? TPT { get; set; }
+        public string? Brightner { get; set; }
+        public string? Color { get; set; }
+        public string? Size { get; set; }
+        public string? GSM { get; set; }
+        public string? GPM { get; set; }
+        public string? Average { get; set; }
+        public string? Gram { get; set; }
+        public string? Mesh { get; set; }
+        public int? TypeId { get; set; }
+        public int? SpecificationId { get; set; }
+        public string? Strength { get; set; }
+
+        [DefaultValue(false)]
+        public bool? IsGuzzet { get; set; }
+        public string? Guzzet { get; set; }
+        public decimal? Quantity { get; set; }
+        public string? Meter { get; set; }
+
+        [DefaultValue(true)]
+        public bool? IsLab { get; set; }
+
+        [DefaultValue(false)]
+        public bool? IsLamination { get; set; }
+        public string? LaminationCoatingGSM { get; set; }
+        public int? LaminationTypeId { get; set; }
+
+        [DefaultValue(true)]
+        public bool? IsInventory { get; set; }
+        public string? OrderRemarks { get; set; }
+        public string? Remarks { get; set; }
+        public string? FabricColor { get; set; }
+        public string? FabricInMeter { get; set; }
+        public string? FabricAvg { get; set; }
+        public string? FabricGram { get; set; }
+        public string? FabricGSM { get; set; }
+        public decimal? FabricQuantity { get; set; }
+        public string? BagSizeWidth { get; set; }
+        public string? BagSizeLength { get; set; }
+        public string? BagWeight { get; set; }
+        public decimal? BagQuantity { get; set; }
+        public decimal? RatePerPcs { get; set; }
+
+        [DefaultValue(false)]
+        public bool? IsHemming { get; set; }
+        public int? ButtomFold { get; set; }
+        public int? ButtomStich { get; set; }
+        public string? StichingYarnColor { get; set; }
+
+        [DefaultValue(false)]
+        public bool? IsBOPPBag { get; set; }
+        public string? PrintingMatter { get; set; }
+
+        [DefaultValue(false)]
+        public bool? IsLiner { get; set; }
+        public int? LinerType { get; set; }
+        public string? LinerWeight { get; set; }
+
+        [DefaultValue(false)]
+        public bool? IsLinerUV { get; set; }
+
+        [DefaultValue(false)]
+        public bool? IsLinerStiching { get; set; }
+        public string? LinerSize { get; set; }
+
+        [DefaultValue(false)]
+        public bool? IsPrinting { get; set; }
+        public int? PrintingSide { get; set; }
+
+        [DefaultValue(false)]
+        public bool? IsCutting { get; set; }
+        public int? CuttingType { get; set; }
+
+        [DefaultValue(false)]
+        public bool? IsPacking { get; set; }
+        public string? PerBallPcs { get; set; }
+        public string? PerBallBundle { get; set; }
+        public string? PerBundlePcs { get; set; }
+        public string? PerBallWeight { get; set; }
+        public string? FrontSideUploadOriginalFileName { get; set; }
+
+        [JsonIgnore]
+        public string? FrontSideUploadFileName { get; set; }
+        public string? FrontSideUpload_Base64 { get; set; }
+        public string? BackSideUploadOriginalFileName { get; set; }
+
+        [JsonIgnore]
+        public string? BackSideUploadFileName { get; set; }
+        public string? BackSideUpload_Base64 { get; set; }
+    }
+
+    public class OrderItem_Response : BaseSearchEntity
+    {
+        public int? OrderId { get; set; }
+        public string? OrderNumber { get; set; }
+        public string? OrderItemNo { get; set; }
+        public int? ProductId { get; set; }
+        public string? ProductName { get; set; }
+        public string? Mixing { get; set; }
+        public string? PP { get; set; }
+        public string? CC { get; set; }
+        public string? UV { get; set; }
+        public string? TPT { get; set; }
+        public string? Brightner { get; set; }
+        public string? Color { get; set; }
+        public string? Size { get; set; }
+        public string? GSM { get; set; }
+        public string? GPM { get; set; }
+        public string? Average { get; set; }
+        public string? Gram { get; set; }
+        public string? Mesh { get; set; }
+        public int? TypeId { get; set; }
+        public string? TypeName { get; set; }
+        public int? SpecificationId { get; set; }
+        public string? SpecificationName { get; set; }
+        public string? Strength { get; set; }
+        public bool? IsGuzzet { get; set; }
+        public string? Guzzet { get; set; }
+        public decimal? Quantity { get; set; }
+        public string? Meter { get; set; }
+        public bool? IsLab { get; set; }
+        public bool? IsLamination { get; set; }
+        public string? LaminationCoatingGSM { get; set; }
+        public int? LaminationTypeId { get; set; }
+        public string? LaminationTypeName { get; set; }
+        public bool? IsInventory { get; set; }
+        public string? OrderRemarks { get; set; }
+        public string? Remarks { get; set; }
+        public string? FabricColor { get; set; }
+        public string? FabricInMeter { get; set; }
+        public string? FabricAvg { get; set; }
+        public string? FabricGram { get; set; }
+        public string? FabricGSM { get; set; }
+        public decimal? FabricQuantity { get; set; }
+        public string? BagSizeWidth { get; set; }
+        public string? BagSizeLength { get; set; }
+        public string? BagWeight { get; set; }
+        public decimal? BagQuantity { get; set; }
+        public decimal? RatePerPcs { get; set; }
+        public bool? IsHemming { get; set; }
+        public int? ButtomFold { get; set; }
+        public int? ButtomStich { get; set; }
+        public string? StichingYarnColor { get; set; }
+        public bool? IsBOPPBag { get; set; }
+        public string? PrintingMatter { get; set; }
+        public bool? IsLiner { get; set; }
+        public int? LinerType { get; set; }
+        public string? LinerWeight { get; set; }
+        public bool? IsLinerUV { get; set; }
+        public bool? IsLinerStiching { get; set; }
+        public string? LinerSize { get; set; }
+        public bool? IsPrinting { get; set; }
+        public int? PrintingSide { get; set; }
+        public bool? IsCutting { get; set; }
+        public int? CuttingType { get; set; }
+        public bool? IsPacking { get; set; }
+        public string? PerBallPcs { get; set; }
+        public string? PerBallBundle { get; set; }
+        public string? PerBundlePcs { get; set; }
+        public string? PerBallWeight { get; set; }
+        public string? FrontSideUploadOriginalFileName { get; set; }
+        public string? FrontSideUploadFileName { get; set; }
+        public string? FrontSideUpload_URL { get; set; }
+        public string? BackSideUploadOriginalFileName { get; set; }
+        public string? BackSideUploadFileName { get; set; }
+        public string? BackSideUpload_URL { get; set; }
+    }
+    #endregion
+}

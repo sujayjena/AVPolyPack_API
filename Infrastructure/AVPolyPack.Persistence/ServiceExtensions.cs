@@ -43,6 +43,7 @@ namespace AVPolyPack.Persistence
             services.AddScoped<IAddressRepository, AddressRepository>();
             services.AddScoped<ILoomsRepository, LoomsRepository>();
             services.AddScoped<IRollsRepository, RollsRepository>();
+            services.AddScoped<IManageOrderRepository, ManageOrderRepository>();
         }
     }
 }

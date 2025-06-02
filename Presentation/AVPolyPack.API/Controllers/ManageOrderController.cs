@@ -83,11 +83,14 @@ namespace AVPolyPack.Controllers
                         }
                     }
 
-                    
+
                     if (vOrder != null)
                     {
                         rowIndex = rowIndex + 1;
-                        item.OrderItemNo = vOrder.OrderNumber + "." + rowIndex;
+                        if (item.Id == 0)
+                        {
+                            item.OrderItemNo = vOrder.OrderNumber + "." + rowIndex;
+                        }
                     }
 
                     //Back Side Upload
@@ -223,6 +226,98 @@ namespace AVPolyPack.Controllers
         public async Task<ResponseModel> DeleteOrderItem(int Id)
         {
             int result = await _manageOrderRepository.DeleteOrderItem(Id);
+
+            if (result == (int)SaveOperationEnums.NoRecordExists)
+            {
+                _response.Message = "No record exists";
+            }
+            else if (result == (int)SaveOperationEnums.ReocrdExists)
+            {
+                _response.Message = "Record already exists";
+            }
+            else if (result == (int)SaveOperationEnums.NoResult)
+            {
+                _response.Message = "Something went wrong, please try again";
+            }
+            else
+            {
+                _response.Message = "Record deleted successfully";
+            }
+
+            _response.Id = result;
+            return _response;
+        }
+        #endregion
+
+        #region Order Item Looms
+
+        [Route("[action]")]
+        [HttpPost]
+        public async Task<ResponseModel> SaveOrderItem_Looms(OrderItem_Looms_Request parameters)
+        {
+            int result = await _manageOrderRepository.SaveOrderItem_Looms(parameters);
+
+            if (result == (int)SaveOperationEnums.NoRecordExists)
+            {
+                _response.Message = "No record exists";
+            }
+            else if (result == (int)SaveOperationEnums.ReocrdExists)
+            {
+                _response.Message = "Record already exists";
+            }
+            else if (result == -3)
+            {
+                _response.Message = "Email already exists";
+            }
+            else if (result == -4)
+            {
+                _response.Message = "Mobile # already exists";
+            }
+            else if (result == (int)SaveOperationEnums.NoResult)
+            {
+                _response.Message = "Something went wrong, please try again";
+            }
+            else
+            {
+                if (parameters.Id == 0)
+                {
+                    _response.Message = "Record Submitted successfully";
+                }
+                else
+                {
+                    _response.Message = "Record Updated successfully";
+                }
+            }
+
+            _response.Id = result;
+            return _response;
+        }
+
+        [Route("[action]")]
+        [HttpPost]
+        public async Task<ResponseModel> GetOrderItem_LoomsList(OrderItem_LoomsList_Search parameters)
+        {
+            IEnumerable<OrderItem_LoomsList_Response> lstOrders = await _manageOrderRepository.GetOrderItem_LoomsList(parameters);
+            _response.Data = lstOrders.ToList();
+            _response.Total = parameters.Total;
+            return _response;
+        }
+
+        [Route("[action]")]
+        [HttpPost]
+        public async Task<ResponseModel> GetOrderItem_LoomsById(OrderItem_Looms_Search parameters)
+        {
+            var vResultObj = await _manageOrderRepository.GetOrderItem_LoomsById(parameters);
+            _response.Data = vResultObj.ToList();
+            _response.Total = parameters.Total;
+            return _response;
+        }
+
+        [Route("[action]")]
+        [HttpPost]
+        public async Task<ResponseModel> DeleteOrderItem_Looms(int Id)
+        {
+            int result = await _manageOrderRepository.DeleteOrderItem_Looms(Id);
 
             if (result == (int)SaveOperationEnums.NoRecordExists)
             {

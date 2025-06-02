@@ -184,5 +184,68 @@ namespace AVPolyPack.Persistence.Repositories
         }
 
         #endregion
+
+        #region Order Item Looms
+        public async Task<int> SaveOrderItem_Looms(OrderItem_Looms_Request parameters)
+        {
+            DynamicParameters queryParameters = new DynamicParameters();
+
+            queryParameters.Add("@Id", parameters.Id);
+            queryParameters.Add("@OrderItemId", parameters.OrderItemId);
+            queryParameters.Add("@LoomAssignNo", parameters.LoomAssignNo);
+            queryParameters.Add("@LoomId", parameters.LoomId);
+            queryParameters.Add("@IsCompletetd", parameters.IsCompletetd);
+            queryParameters.Add("@UserId", SessionManager.LoggedInUserId);
+
+            return await SaveByStoredProcedure<int>("SaveOrderItem_Looms", queryParameters);
+        }
+
+        public async Task<IEnumerable<OrderItem_LoomsList_Response>> GetOrderItem_LoomsList(OrderItem_LoomsList_Search parameters)
+        {
+            DynamicParameters queryParameters = new DynamicParameters();
+
+            queryParameters.Add("@OrderItemId", parameters.OrderItemId);
+            queryParameters.Add("@OrderType", parameters.OrderType);
+            queryParameters.Add("@SearchText", parameters.SearchText.SanitizeValue());
+            queryParameters.Add("@IsActive", parameters.IsActive);
+            queryParameters.Add("@PageNo", parameters.PageNo);
+            queryParameters.Add("@PageSize", parameters.PageSize);
+            queryParameters.Add("@Total", parameters.Total, null, System.Data.ParameterDirection.Output);
+            queryParameters.Add("@UserId", SessionManager.LoggedInUserId);
+
+            var result = await ListByStoredProcedure<OrderItem_LoomsList_Response>("GetOrderItem_LoomsList", queryParameters);
+            parameters.Total = queryParameters.Get<int>("Total");
+
+            return result;
+        }
+
+        public async Task<IEnumerable<OrderItem_Looms_Response>> GetOrderItem_LoomsById(OrderItem_Looms_Search parameters)
+        {
+            DynamicParameters queryParameters = new DynamicParameters();
+
+            queryParameters.Add("@Id", parameters.Id);
+            queryParameters.Add("@OrderItemId", parameters.OrderItemId);
+            queryParameters.Add("@SearchText", parameters.SearchText.SanitizeValue());
+            queryParameters.Add("@IsActive", parameters.IsActive);
+            queryParameters.Add("@PageNo", parameters.PageNo);
+            queryParameters.Add("@PageSize", parameters.PageSize);
+            queryParameters.Add("@Total", parameters.Total, null, System.Data.ParameterDirection.Output);
+            queryParameters.Add("@UserId", SessionManager.LoggedInUserId);
+
+            var result = await ListByStoredProcedure<OrderItem_Looms_Response>("GetOrderItem_LoomsById", queryParameters);
+            parameters.Total = queryParameters.Get<int>("Total");
+
+            return result;
+        }
+
+        public async Task<int> DeleteOrderItem_Looms(int Id)
+        {
+            DynamicParameters queryParameters = new DynamicParameters();
+
+            queryParameters.Add("@Id", Id);
+
+            return await SaveByStoredProcedure<int>("DeleteOrderItem_Looms", queryParameters);
+        }
+        #endregion
     }
 }

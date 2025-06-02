@@ -25,5 +25,12 @@ namespace AVPolyPack.Application.Interfaces
         Task<OrderItem_Response?> GetOrderItemById(int Id);
         Task<int> DeleteOrderItem(int Id);
         #endregion
+
+        #region Order Item Looms
+        Task<int> SaveOrderItem_Looms(OrderItem_Looms_Request parameters);
+        Task<IEnumerable<OrderItem_LoomsList_Response>> GetOrderItem_LoomsList(OrderItem_LoomsList_Search parameters);
+        Task<IEnumerable<OrderItem_Looms_Response>> GetOrderItem_LoomsById(OrderItem_Looms_Search parameters);
+        Task<int> DeleteOrderItem_Looms(int Id);
+        #endregion
     }
 }

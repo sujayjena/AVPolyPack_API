@@ -247,5 +247,75 @@ namespace AVPolyPack.Persistence.Repositories
             return await SaveByStoredProcedure<int>("DeleteOrderItem_Looms", queryParameters);
         }
         #endregion
+
+        #region Order Item Looms Rolls
+        public async Task<int> SaveOrderItem_Looms_Rolls(OrderItem_Looms_Rolls_Request parameters)
+        {
+            DynamicParameters queryParameters = new DynamicParameters();
+
+            queryParameters.Add("@Id", parameters.Id);
+            queryParameters.Add("@OrderItem_LoomsId", parameters.OrderItem_LoomsId);
+            queryParameters.Add("@RollNo", parameters.RollNo);
+            queryParameters.Add("@GrossWeight", parameters.GrossWeight);
+            queryParameters.Add("@TareWeight", parameters.TareWeight);
+            queryParameters.Add("@NetWeight", parameters.NetWeight);
+            queryParameters.Add("@StartReading", parameters.StartReading);
+            queryParameters.Add("@EndReading", parameters.EndReading);
+            queryParameters.Add("@Diff", parameters.Diff);
+            queryParameters.Add("@IsCompletetd", parameters.IsCompletetd);
+            queryParameters.Add("@UserId", SessionManager.LoggedInUserId);
+
+            return await SaveByStoredProcedure<int>("SaveOrderItem_Looms_Rolls", queryParameters);
+        }
+
+        public async Task<IEnumerable<OrderItem_Looms_Rolls_List_Response>> GetOrderItem_Looms_Rolls_List(OrderItem_Looms_Rolls_List_Search parameters)
+        {
+            DynamicParameters queryParameters = new DynamicParameters();
+
+            queryParameters.Add("@FromDate", parameters.FromDate);
+            queryParameters.Add("@ToDate", parameters.ToDate);
+            queryParameters.Add("@OrderItemId", parameters.OrderItemId);
+            queryParameters.Add("@OrderType", parameters.OrderType);
+            queryParameters.Add("@SearchText", parameters.SearchText.SanitizeValue());
+            queryParameters.Add("@IsActive", parameters.IsActive);
+            queryParameters.Add("@PageNo", parameters.PageNo);
+            queryParameters.Add("@PageSize", parameters.PageSize);
+            queryParameters.Add("@Total", parameters.Total, null, System.Data.ParameterDirection.Output);
+            queryParameters.Add("@UserId", SessionManager.LoggedInUserId);
+
+            var result = await ListByStoredProcedure<OrderItem_Looms_Rolls_List_Response>("GetOrderItem_Looms_Rolls_List", queryParameters);
+            parameters.Total = queryParameters.Get<int>("Total");
+
+            return result;
+        }
+
+        public async Task<IEnumerable<OrderItem_Looms_Rolls_Response>> GetOrderItem_Looms_Rolls_ById(OrderItem_Looms_Rolls_Search parameters)
+        {
+            DynamicParameters queryParameters = new DynamicParameters();
+
+            queryParameters.Add("@Id", parameters.Id);
+            queryParameters.Add("@OrderItemId", parameters.OrderItemId);
+            queryParameters.Add("@SearchText", parameters.SearchText.SanitizeValue());
+            queryParameters.Add("@IsActive", parameters.IsActive);
+            queryParameters.Add("@PageNo", parameters.PageNo);
+            queryParameters.Add("@PageSize", parameters.PageSize);
+            queryParameters.Add("@Total", parameters.Total, null, System.Data.ParameterDirection.Output);
+            queryParameters.Add("@UserId", SessionManager.LoggedInUserId);
+
+            var result = await ListByStoredProcedure<OrderItem_Looms_Rolls_Response>("GetOrderItem_Looms_Rolls_ById", queryParameters);
+            parameters.Total = queryParameters.Get<int>("Total");
+
+            return result;
+        }
+
+        public async Task<int> DeleteOrderItem_Looms_Rolls(int Id)
+        {
+            DynamicParameters queryParameters = new DynamicParameters();
+
+            queryParameters.Add("@Id", Id);
+
+            return await SaveByStoredProcedure<int>("DeleteOrderItem_Looms_Rolls", queryParameters);
+        }
+        #endregion
     }
 }

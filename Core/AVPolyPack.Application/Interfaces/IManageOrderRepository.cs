@@ -32,5 +32,12 @@ namespace AVPolyPack.Application.Interfaces
         Task<IEnumerable<OrderItem_Looms_Response>> GetOrderItem_LoomsById(OrderItem_Looms_Search parameters);
         Task<int> DeleteOrderItem_Looms(int Id);
         #endregion
+
+        #region Order Item Looms Rolls
+        Task<int> SaveOrderItem_Looms_Rolls(OrderItem_Looms_Rolls_Request parameters);
+        Task<IEnumerable<OrderItem_Looms_Rolls_List_Response>> GetOrderItem_Looms_Rolls_List(OrderItem_Looms_Rolls_List_Search parameters);
+        Task<IEnumerable<OrderItem_Looms_Rolls_Response>> GetOrderItem_Looms_Rolls_ById(OrderItem_Looms_Rolls_Search parameters);
+        Task<int> DeleteOrderItem_Looms_Rolls(int Id);
+        #endregion
     }
 }

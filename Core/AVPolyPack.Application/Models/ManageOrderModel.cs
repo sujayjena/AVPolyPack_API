@@ -243,6 +243,15 @@ namespace AVPolyPack.Application.Models
         public int? OrderItemId { get; set; }
     }
 
+    public class OrderItem_Looms_List_Request
+    {
+        public OrderItem_Looms_List_Request()
+        {
+            OrderItem_Looms_List = new List<OrderItem_Looms_Request>();
+        }
+        public List<OrderItem_Looms_Request> OrderItem_Looms_List { get; set; }
+    }
+
     public class OrderItem_Looms_Request : BaseEntity
     {
         public int? OrderItemId { get; set; }
@@ -280,6 +289,146 @@ namespace AVPolyPack.Application.Models
         public string? OrderItemNo { get; set; }
         public int? LoomId { get; set; }
         public string? LoomName { get; set; }
+        public int? ProductId { get; set; }
+        public string? ProductName { get; set; }
+        public string? Mixing { get; set; }
+        public string? PP { get; set; }
+        public string? CC { get; set; }
+        public string? UV { get; set; }
+        public string? TPT { get; set; }
+        public string? Brightner { get; set; }
+        public string? Color { get; set; }
+        public string? Size { get; set; }
+        public string? GSM { get; set; }
+        public string? GPM { get; set; }
+        public string? Average { get; set; }
+        public string? Gram { get; set; }
+        public string? Mesh { get; set; }
+        public int? TypeId { get; set; }
+        public string? TypeName { get; set; }
+        public int? SpecificationId { get; set; }
+        public string? SpecificationName { get; set; }
+        public string? Strength { get; set; }
+        public bool? IsGuzzet { get; set; }
+        public string? Guzzet { get; set; }
+        public decimal? Quantity { get; set; }
+        public string? Meter { get; set; }
+        public bool? IsLab { get; set; }
+        public bool? IsLamination { get; set; }
+        public string? LaminationCoatingGSM { get; set; }
+        public int? LaminationTypeId { get; set; }
+        public string? LaminationTypeName { get; set; }
+        public bool? IsInventory { get; set; }
+        public string? OrderRemarks { get; set; }
+        public string? Remarks { get; set; }
+        public string? FabricColor { get; set; }
+        public string? FabricInMeter { get; set; }
+        public string? FabricAvg { get; set; }
+        public string? FabricGram { get; set; }
+        public string? FabricGSM { get; set; }
+        public decimal? FabricQuantity { get; set; }
+        public string? BagSizeWidth { get; set; }
+        public string? BagSizeLength { get; set; }
+        public string? BagWeight { get; set; }
+        public decimal? BagQuantity { get; set; }
+        public decimal? RatePerPcs { get; set; }
+        public bool? IsHemming { get; set; }
+        public int? ButtomFold { get; set; }
+        public int? ButtomStich { get; set; }
+        public string? StichingYarnColor { get; set; }
+        public bool? IsBOPPBag { get; set; }
+        public string? PrintingMatter { get; set; }
+        public bool? IsLiner { get; set; }
+        public int? LinerType { get; set; }
+        public string? LinerWeight { get; set; }
+        public bool? IsLinerUV { get; set; }
+        public bool? IsLinerStiching { get; set; }
+        public string? LinerSize { get; set; }
+        public bool? IsPrinting { get; set; }
+        public int? PrintingSide { get; set; }
+        public bool? IsCutting { get; set; }
+        public int? CuttingType { get; set; }
+        public bool? IsPacking { get; set; }
+        public string? PerBallPcs { get; set; }
+        public string? PerBallBundle { get; set; }
+        public string? PerBundlePcs { get; set; }
+        public string? PerBallWeight { get; set; }
+        public string? FrontSideUploadOriginalFileName { get; set; }
+        public string? FrontSideUploadFileName { get; set; }
+        public string? FrontSideUpload_URL { get; set; }
+        public string? BackSideUploadOriginalFileName { get; set; }
+        public string? BackSideUploadFileName { get; set; }
+        public string? BackSideUpload_URL { get; set; }
+    }
+    #endregion
+
+    #region Order Item Looms Rolls
+    public class OrderItem_Looms_Rolls_Search : BaseSearchEntity
+    {
+        public int? Id { get; set; }
+        public int? OrderItemId { get; set; }
+    }
+    public class OrderItem_Looms_Rolls_List_Request
+    {
+        public OrderItem_Looms_Rolls_List_Request()
+        {
+            OrderItem_Looms_Rolls_List = new List<OrderItem_Looms_Rolls_Request>();
+        }
+        public List<OrderItem_Looms_Rolls_Request> OrderItem_Looms_Rolls_List { get; set; }
+    }
+    public class OrderItem_Looms_Rolls_Request : BaseEntity
+    {
+        public int? OrderItem_LoomsId { get; set; }
+        public string? RollNo { get; set; }
+        public decimal? GrossWeight { get; set; }
+        public decimal? TareWeight { get; set; }
+        public decimal? NetWeight { get; set; }
+        public decimal? StartReading { get; set; }
+        public decimal? EndReading { get; set; }
+        public decimal? Diff { get; set; }
+
+        [DefaultValue(false)]
+        public bool? IsCompletetd { get; set; }
+    }
+
+    public class OrderItem_Looms_Rolls_Response : BaseResponseEntity
+    {
+        public int? OrderItem_LoomsId { get; set; }
+        public string? RollNo { get; set; }
+        public decimal? GrossWeight { get; set; }
+        public decimal? TareWeight { get; set; }
+        public decimal? NetWeight { get; set; }
+        public decimal? StartReading { get; set; }
+        public decimal? EndReading { get; set; }
+        public decimal? Diff { get; set; }
+        public bool? IsCompletetd { get; set; }
+        public DateTime? CompletedDate { get; set; }
+    }
+
+    public class OrderItem_Looms_Rolls_List_Search : BaseSearchEntity
+    {
+        [DefaultValue(null)]
+        public DateTime? FromDate { get; set; }
+
+        [DefaultValue(null)]
+        public DateTime? ToDate { get; set; }
+
+        public int? OrderItemId { get; set; }
+        public int? OrderType { get; set; }
+
+    }
+    public class OrderItem_Looms_Rolls_List_Response : BaseResponseEntity
+    {
+        public int? OrderId { get; set; }
+        public string? OrderNumber { get; set; }
+        public DateTime? OrderDate { get; set; }
+        public DateTime? DeliveryDate { get; set; }
+        public int? PaymentTermId { get; set; }
+        public string? PaymentTerm { get; set; }
+        public string? OrderItemNo { get; set; }
+        public int? LoomId { get; set; }
+        public string? LoomName { get; set; }
+        public string? RollNo { get; set; }
         public int? ProductId { get; set; }
         public string? ProductName { get; set; }
         public string? Mixing { get; set; }

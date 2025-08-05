@@ -89,7 +89,7 @@ namespace AVPolyPack.Controllers
                         rowIndex = rowIndex + 1;
                         if (item.Id == 0)
                         {
-                            item.OrderItemNo = vOrder.OrderNumber + "." + rowIndex;
+                            item.OrderItemNo = (vOrder.OrderType == 1 ? "R_" : "B_") + "" + vOrder.OrderNumber + "." + rowIndex;
                         }
                     }
 

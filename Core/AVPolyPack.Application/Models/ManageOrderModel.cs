@@ -162,6 +162,10 @@ namespace AVPolyPack.Application.Models
     {
         public int? OrderId { get; set; }
         public string? OrderNumber { get; set; }
+        public DateTime? OrderDate { get; set; }
+        public DateTime? DeliveryDate { get; set; }
+        public int? PaymentTermId { get; set; }
+        public string? PaymentTerm { get; set; }
         public string? OrderItemNo { get; set; }
         public int? ProductId { get; set; }
         public string? ProductName { get; set; }

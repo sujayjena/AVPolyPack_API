@@ -638,4 +638,80 @@ namespace AVPolyPack.Application.Models
     }
 
     #endregion
+
+    #region Tape Machine
+    public class TapeMachine_Search : BaseSearchEntity
+    {
+    }
+
+    public class TapeMachine_Request : BaseEntity
+    {
+        public string? TapeMachineName { get; set; }
+        public bool? IsActive { get; set; }
+    }
+
+    public class TapeMachine_Response : BaseResponseEntity
+    {
+        public string? TapeMachineName { get; set; }
+        public bool? IsActive { get; set; }
+    }
+
+    #endregion
+
+    #region Lamination Machine
+    public class LaminationMachine_Search : BaseSearchEntity
+    {
+    }
+
+    public class LaminationMachine_Request : BaseEntity
+    {
+        public string? LaminationMachineName { get; set; }
+        public bool? IsActive { get; set; }
+    }
+
+    public class LaminationMachine_Response : BaseResponseEntity
+    {
+        public string? LaminationMachineName { get; set; }
+        public bool? IsActive { get; set; }
+    }
+
+    #endregion
+
+    #region Printing Machine
+    public class PrintingMachine_Search : BaseSearchEntity
+    {
+    }
+
+    public class PrintingMachine_Request : BaseEntity
+    {
+        public string? PrintingMachineName { get; set; }
+        public bool? IsActive { get; set; }
+    }
+
+    public class PrintingMachine_Response : BaseResponseEntity
+    {
+        public string? PrintingMachineName { get; set; }
+        public bool? IsActive { get; set; }
+    }
+
+    #endregion
+
+    #region Effort Machine
+    public class Effort_Search : BaseSearchEntity
+    {
+    }
+
+    public class Effort_Request : BaseEntity
+    {
+        public string? EffortName { get; set; }
+        public bool? IsActive { get; set; }
+    }
+
+    public class Effort_Response : BaseResponseEntity
+    {
+        public string? EffortName { get; set; }
+        public bool? IsActive { get; set; }
+    }
+
+    #endregion
 }

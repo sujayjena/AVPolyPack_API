@@ -257,5 +257,37 @@ namespace AVPolyPack.Application.Interfaces
         Task<PaymentTerm_Response?> GetPaymentTermById(long Id);
 
         #endregion
+
+        #region Tape Machine
+
+        Task<int> SaveTapeMachine(TapeMachine_Request parameters);
+        Task<IEnumerable<TapeMachine_Response>> GetTapeMachineList(TapeMachine_Search parameters);
+        Task<TapeMachine_Response?> GetTapeMachineById(long Id);
+
+        #endregion
+
+        #region Lamination Machine
+
+        Task<int> SaveLaminationMachine(LaminationMachine_Request parameters);
+        Task<IEnumerable<LaminationMachine_Response>> GetLaminationMachineList(LaminationMachine_Search parameters);
+        Task<LaminationMachine_Response?> GetLaminationMachineById(long Id);
+
+        #endregion
+
+        #region Printing Machine
+
+        Task<int> SavePrintingMachine(PrintingMachine_Request parameters);
+        Task<IEnumerable<PrintingMachine_Response>> GetPrintingMachineList(PrintingMachine_Search parameters);
+        Task<PrintingMachine_Response?> GetPrintingMachineById(long Id);
+
+        #endregion
+
+        #region Effort
+
+        Task<int> SaveEffort(Effort_Request parameters);
+        Task<IEnumerable<Effort_Response>> GetEffortList(Effort_Search parameters);
+        Task<Effort_Response?> GetEffortById(long Id);
+
+        #endregion
     }
 }

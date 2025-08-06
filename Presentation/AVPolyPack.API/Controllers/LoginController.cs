@@ -173,7 +173,7 @@ namespace AVPolyPack.API.Controllers
 
             if (loginResponse != null)
             {
-                if (loginResponse.IsActive == true && (loginResponse.IsWebUser == true && parameters.IsWebOrMobileUser == "W" || loginResponse.IsMobileUser == true && parameters.IsWebOrMobileUser == "M"))
+                if (loginResponse.IsActive == true && (loginResponse.IsWebUser == true && parameters.IsWebOrMobileUser == "W" || loginResponse.IsMobileUser == true && parameters.IsWebOrMobileUser == "M" || loginResponse.IsSupervisor == true && parameters.IsWebOrMobileUser == "M"))
                 {
                     tokenResponse = _jwt.GenerateJwtToken(loginResponse);
 

@@ -96,6 +96,8 @@ namespace AVPolyPack.Application.Models
         public string? BankDetailsFileName { get; set; }
         public string? BankDetails_Base64 { get; set; }
 
+        [DefaultValue(false)]
+        public bool? IsSupervisor { get; set; }
         public bool? IsMobileUser { get; set; }
         public bool? IsWebUser { get; set; }
         public bool? IsActive { get; set; }
@@ -189,7 +191,7 @@ namespace AVPolyPack.Application.Models
         public string? BankDetailsOriginalFileName { get; set; }
         public string? BankDetailsFileName { get; set; }
         public string? BankDetailsURL { get; set; }
-
+        public bool? IsSupervisor { get; set; }
         public bool? IsMobileUser { get; set; }
         public bool? IsWebUser { get; set; }
         public bool? IsActive { get; set; }

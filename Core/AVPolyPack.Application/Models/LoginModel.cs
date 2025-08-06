@@ -84,6 +84,7 @@ namespace AVPolyPack.Application.Models
         public string UserType { get; set; }
         public int? RoleId { get; set; }
         public string RoleName { get; set; }
+        public bool IsSupervisor { get; set; }
         public bool IsWebUser { get; set; }
         public bool IsMobileUser { get; set; }
         public bool IsActive { get; set; }

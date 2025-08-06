@@ -47,6 +47,8 @@ namespace AVPolyPack.Application.Models
         public string? CustomerName { get; set; }
         public string? OrderNumber { get; set; }
         public DateTime? OrderDate { get; set; }
+        public DateTime? DeliveryDate { get; set; }
+        public string? SLAStatus { get; set; }
         public int? StatusId { get; set; }
 
         public List<OrderItem_Response> orderItemList { get; set; }

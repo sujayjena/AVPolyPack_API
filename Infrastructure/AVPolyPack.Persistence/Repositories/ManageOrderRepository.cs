@@ -133,6 +133,7 @@ namespace AVPolyPack.Persistence.Repositories
             queryParameters.Add("@PrintingSide", parameters.PrintingSide);
             queryParameters.Add("@IsCutting", parameters.IsCutting);
             queryParameters.Add("@CuttingType", parameters.CuttingType);
+            queryParameters.Add("@SubCuttingType", parameters.SubCuttingType);
             queryParameters.Add("@IsPacking", parameters.IsPacking);
             queryParameters.Add("@PerBallPcs", parameters.PerBallPcs);
             queryParameters.Add("@PerBallBundle", parameters.PerBallBundle);

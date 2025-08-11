@@ -141,6 +141,7 @@ namespace AVPolyPack.Application.Models
         [DefaultValue(false)]
         public bool? IsCutting { get; set; }
         public int? CuttingType { get; set; }
+        public int? SubCuttingType { get; set; }
 
         [DefaultValue(false)]
         public bool? IsPacking { get; set; }
@@ -228,6 +229,7 @@ namespace AVPolyPack.Application.Models
         public int? PrintingSide { get; set; }
         public bool? IsCutting { get; set; }
         public int? CuttingType { get; set; }
+        public int? SubCuttingType { get; set; }
         public bool? IsPacking { get; set; }
         public string? PerBallPcs { get; set; }
         public string? PerBallBundle { get; set; }
@@ -354,6 +356,7 @@ namespace AVPolyPack.Application.Models
         public int? PrintingSide { get; set; }
         public bool? IsCutting { get; set; }
         public int? CuttingType { get; set; }
+        public int? SubCuttingType { get; set; }
         public bool? IsPacking { get; set; }
         public string? PerBallPcs { get; set; }
         public string? PerBallBundle { get; set; }
@@ -494,6 +497,7 @@ namespace AVPolyPack.Application.Models
         public int? PrintingSide { get; set; }
         public bool? IsCutting { get; set; }
         public int? CuttingType { get; set; }
+        public int? SubCuttingType { get; set; }
         public bool? IsPacking { get; set; }
         public string? PerBallPcs { get; set; }
         public string? PerBallBundle { get; set; }

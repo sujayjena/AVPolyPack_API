@@ -27,9 +27,13 @@ namespace AVPolyPack.Controllers
 
         [Route("[action]")]
         [HttpPost]
-        public async Task<ResponseModel> SaveAttendance(Attendance_Request parameters)
+        public async Task<ResponseModel> SaveAttendance(List<Attendance_Request> parameters)
         {
-            int result = await _manageAttendanceRepository.SaveAttendance(parameters);
+            int result = 0;
+            foreach(var item in parameters)
+            {
+                result = await _manageAttendanceRepository.SaveAttendance(item);
+            }
 
             if (result == (int)SaveOperationEnums.NoRecordExists)
             {

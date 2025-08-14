@@ -33,6 +33,9 @@ namespace AVPolyPack.Application.Models
         public string? RefType { get; set; }
         public int? IsCheckedIn_Out { get; set; }
         public int? EffortId { get; set; }
+
+        [DefaultValue(false)]
+        public bool? IsPresent { get; set; }
     }
 
     public class Attendance_Response
@@ -51,5 +54,6 @@ namespace AVPolyPack.Application.Models
         public DateTime? CheckedOutDate { get; set; }
         public int? EffortId { get; set; }
         public string? EffortName { get; set; }
+        public bool? IsPresent { get; set; }
     }
 }

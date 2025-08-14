@@ -30,6 +30,7 @@ namespace AVPolyPack.Persistence.Repositories
             queryParameters.Add("@RefType", parameters.RefType);
             queryParameters.Add("@IsCheckedIn_Out", parameters.IsCheckedIn_Out);
             queryParameters.Add("@EffortId", parameters.EffortId);
+            queryParameters.Add("@IsPresent", parameters.IsPresent);
             queryParameters.Add("@UserId", SessionManager.LoggedInUserId);
 
             return await SaveByStoredProcedure<int>("SaveAttendance", queryParameters);

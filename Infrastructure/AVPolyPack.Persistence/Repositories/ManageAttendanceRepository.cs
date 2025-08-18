@@ -40,6 +40,13 @@ namespace AVPolyPack.Persistence.Repositories
         {
             DynamicParameters queryParameters = new DynamicParameters();
 
+            queryParameters.Add("@FromDate", parameters.FromDate);
+            queryParameters.Add("@ToDate", parameters.ToDate);
+            queryParameters.Add("@DepartmentId", parameters.DepartmentId);
+            queryParameters.Add("@RoleId", parameters.RoleId);
+            queryParameters.Add("@ShiftType", parameters.ShiftType);
+            queryParameters.Add("@IsPresent", parameters.IsPresent);
+            queryParameters.Add("@IsCheckedIn_Out", parameters.IsCheckedIn_Out);
             queryParameters.Add("@SearchText", parameters.SearchText.SanitizeValue());
             queryParameters.Add("@IsActive", parameters.IsActive);
             queryParameters.Add("@PageNo", parameters.PageNo);
@@ -48,6 +55,29 @@ namespace AVPolyPack.Persistence.Repositories
             queryParameters.Add("@UserId", SessionManager.LoggedInUserId);
 
             var result = await ListByStoredProcedure<Attendance_Response>("GetAttendanceList", queryParameters);
+            parameters.Total = queryParameters.Get<int>("Total");
+
+            return result;
+        }
+
+        public async Task<IEnumerable<EmployeeListForAttendance_Response>> GetEmployeeListForAttendance(EmployeeListForAttendance_Search parameters)
+        {
+            DynamicParameters queryParameters = new DynamicParameters();
+
+            queryParameters.Add("@DepartmentId", parameters.DepartmentId);
+            queryParameters.Add("@RoleId", parameters.RoleId);
+            queryParameters.Add("@ShiftType", parameters.ShiftType);
+            queryParameters.Add("@RefType", parameters.RefType);
+            queryParameters.Add("@RefId", parameters.RefId);
+            queryParameters.Add("@IsPresent", parameters.IsPresent);
+            queryParameters.Add("@SearchText", parameters.SearchText.SanitizeValue());
+            queryParameters.Add("@IsActive", parameters.IsActive);
+            queryParameters.Add("@PageNo", parameters.PageNo);
+            queryParameters.Add("@PageSize", parameters.PageSize);
+            queryParameters.Add("@Total", parameters.Total, null, System.Data.ParameterDirection.Output);
+            queryParameters.Add("@UserId", SessionManager.LoggedInUserId);
+
+            var result = await ListByStoredProcedure<EmployeeListForAttendance_Response>("GetEmployeeListForAttendance", queryParameters);
             parameters.Total = queryParameters.Get<int>("Total");
 
             return result;

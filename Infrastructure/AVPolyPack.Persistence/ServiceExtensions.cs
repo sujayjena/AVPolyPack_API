@@ -49,7 +49,7 @@ namespace AVPolyPack.Persistence
             services.AddScoped<IManageSoftMaterialInRepository, ManageSoftMaterialInRepository>();
             services.AddScoped<IDenierRepository, DenierRepository>();
             services.AddScoped<IMaterialConsumptionRepository, MaterialConsumptionRepository>();
-            services.AddScoped<ITapeMachineRemarksRepository, TapeMachineRemarksRepository>();
+            services.AddScoped<IManageTapeMachineRepository, ManageTapeMachineRepository>();
         }
     }
 }

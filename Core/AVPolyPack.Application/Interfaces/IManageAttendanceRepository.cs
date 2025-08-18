@@ -11,5 +11,6 @@ namespace AVPolyPack.Application.Interfaces
     {
         Task<int> SaveAttendance(Attendance_Request parameters);
         Task<IEnumerable<Attendance_Response>> GetAttendanceList(Attendance_Search parameters);
+        Task<IEnumerable<EmployeeListForAttendance_Response>> GetEmployeeListForAttendance(EmployeeListForAttendance_Search parameters);
     }
 }

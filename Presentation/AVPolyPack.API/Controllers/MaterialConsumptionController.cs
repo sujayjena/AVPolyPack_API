@@ -29,9 +29,13 @@ namespace AVPolyPack.Controllers
 
         [Route("[action]")]
         [HttpPost]
-        public async Task<ResponseModel> SaveConsumption(Consumption_Request parameters)
+        public async Task<ResponseModel> SaveConsumption(List<Consumption_Request> parameters)
         {
-            int result = await _materialConsumptionRepository.SaveConsumption(parameters);
+            int result = 0;
+            foreach(var item in parameters)
+            {
+                result = await _materialConsumptionRepository.SaveConsumption(item);
+            }
 
             if (result == (int)SaveOperationEnums.NoRecordExists)
             {
@@ -47,7 +51,7 @@ namespace AVPolyPack.Controllers
             }
             else
             {
-                if (parameters.Id == 0)
+                if (parameters.FirstOrDefault().Id == 0)
                 {
                     _response.Message = "Record Submitted successfully";
                 }
@@ -93,9 +97,13 @@ namespace AVPolyPack.Controllers
 
         [Route("[action]")]
         [HttpPost]
-        public async Task<ResponseModel> SaveWasteMaterial(WasteMaterial_Request parameters)
+        public async Task<ResponseModel> SaveWasteMaterial(List<WasteMaterial_Request> parameters)
         {
-            int result = await _materialConsumptionRepository.SaveWasteMaterial(parameters);
+            int result = 0;
+            foreach (var item in parameters)
+            {
+                result = await _materialConsumptionRepository.SaveWasteMaterial(item);
+            }
 
             if (result == (int)SaveOperationEnums.NoRecordExists)
             {
@@ -111,7 +119,7 @@ namespace AVPolyPack.Controllers
             }
             else
             {
-                if (parameters.Id == 0)
+                if (parameters.FirstOrDefault().Id == 0)
                 {
                     _response.Message = "Record Submitted successfully";
                 }

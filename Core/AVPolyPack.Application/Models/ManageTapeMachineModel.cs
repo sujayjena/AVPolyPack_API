@@ -123,6 +123,9 @@ namespace AVPolyPack.Application.Models
         [DefaultValue("Employee")]
         public string? RefType { get; set; }
         public int? RefId { get; set; }
+
+        [DefaultValue(false)]
+        public bool? IsAssignMachine { get; set; }
     }
 
     public class EmployeeListForAssignMachine_Response

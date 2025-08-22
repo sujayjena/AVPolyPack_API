@@ -153,6 +153,7 @@ namespace AVPolyPack.Persistence.Repositories
             queryParameters.Add("@TapeMachineId", parameters.TapeMachineId);
             queryParameters.Add("@RefType", parameters.RefType);
             queryParameters.Add("@RefId", parameters.RefId);
+            queryParameters.Add("@IsAssignMachine", parameters.IsAssignMachine);
         
             queryParameters.Add("@SearchText", parameters.SearchText.SanitizeValue());
             queryParameters.Add("@IsActive", parameters.IsActive);

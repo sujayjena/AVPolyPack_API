@@ -126,6 +126,9 @@ namespace AVPolyPack.Application.Models
 
         [DefaultValue(false)]
         public bool? IsAssignMachine { get; set; }
+
+        [DefaultValue(false)]
+        public bool? IsToday { get; set; }
     }
 
     public class EmployeeListForAssignMachine_Response

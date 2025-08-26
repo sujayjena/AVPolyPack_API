@@ -2,6 +2,7 @@
 using AVPolyPack.Persistence.Repositories;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -50,4 +51,56 @@ namespace AVPolyPack.Application.Models
         public string? Remarks { get; set; }
         public bool? IsActive { get; set; }
     }
+
+    #region Loom Assign
+    public class LoomAssign_Request : BaseEntity
+    {
+        public int? LoomId { get; set; }
+        public int? ShiftType { get; set; }
+        public int? EmployeeId { get; set; }
+    }
+    public class LoomAssign_Search : BaseSearchEntity
+    {
+        [DefaultValue(null)]
+        public DateTime? FromDate { get; set; }
+
+        [DefaultValue(null)]
+        public DateTime? ToDate { get; set; }
+        public int ShiftType { get; set; }
+    }
+
+    public class LoomAssign_Response : BaseResponseEntity
+    {
+        public int? LoomId { get; set; }
+        public string? LoomName { get; set; }
+        public int? ShiftType { get; set; }
+        public int? EmployeeId { get; set; }
+        public string? EmployeeName { get; set; }
+    }
+
+    public class LoomListForAssignOperator_Search : BaseSearchEntity
+    {
+        public int ShiftType { get; set; }
+    }
+
+    public class LoomListForAssignOperator_Response
+    {
+        public int? Id { get; set; }
+        public string? LoomName { get; set; }
+    }
+
+    public class OperatorNameSelectList_Response
+    {
+        public long Value { get; set; }
+        public string? Text { get; set; }
+        public string? LoomName { get; set; }
+    }
+
+    #endregion
+
+    #region Order Item Assign
+
+
+
+    #endregion
 }

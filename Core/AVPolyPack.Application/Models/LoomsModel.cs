@@ -81,6 +81,11 @@ namespace AVPolyPack.Application.Models
     public class LoomListForAssignOperator_Search : BaseSearchEntity
     {
         public int ShiftType { get; set; }
+        public bool IsAssign { get; set; }
+        public int EmployeeId { get; set; }
+
+        [DefaultValue(false)]
+        public bool IsIdle { get; set; }
     }
 
     public class LoomListForAssignOperator_Response
@@ -88,19 +93,49 @@ namespace AVPolyPack.Application.Models
         public int? Id { get; set; }
         public string? LoomName { get; set; }
     }
+    public class OperatorNameSelectList_Search
+    {
+        public int? ShiftType { get; set; }
 
+        [DefaultValue(null)]
+        public bool? IsPresent { get; set; }
+    }
     public class OperatorNameSelectList_Response
     {
         public long Value { get; set; }
         public string? Text { get; set; }
         public string? LoomName { get; set; }
+        public bool? IsPresent { get; set; }
     }
 
     #endregion
 
     #region Order Item Assign
 
+    public class OrderItemAssign_Request : BaseEntity
+    {
+        public int? LoomId { get; set; }
+        public int? ShiftType { get; set; }
+        public int? OrderItemId { get; set; }
+    }
+    public class OrderItemAssign_Search : BaseSearchEntity
+    {
+        [DefaultValue(null)]
+        public DateTime? FromDate { get; set; }
 
+        [DefaultValue(null)]
+        public DateTime? ToDate { get; set; }
+        public int ShiftType { get; set; }
+    }
+
+    public class OrderItemAssign_Response : BaseResponseEntity
+    {
+        public int? LoomId { get; set; }
+        public string? LoomName { get; set; }
+        public int? ShiftType { get; set; }
+        public int? OrderItemId { get; set; }
+        public string? OrderItemNo { get; set; }
+    }
 
     #endregion
 }

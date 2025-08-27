@@ -17,11 +17,13 @@ namespace AVPolyPack.Application.Interfaces
         Task<int> SaveLoomAssign(LoomAssign_Request parameters);
         Task<IEnumerable<LoomAssign_Response>> GetLoomAssignList(LoomAssign_Search parameters);
         Task<IEnumerable<LoomListForAssignOperator_Response>> GetLoomListForAssignOperator(LoomListForAssignOperator_Search parameters);
-        Task<IEnumerable<OperatorNameSelectList_Response>> GetOperatorNameForSelectList();
+        Task<IEnumerable<OperatorNameSelectList_Response>> GetOperatorNameForSelectList(OperatorNameSelectList_Search parameters);
         #endregion
 
         #region Order Item Assign
         Task<IEnumerable<SelectListResponse>> GetOrderItemNoForSelectList();
+        Task<int> SaveOrderItemAssign(OrderItemAssign_Request parameters);
+        Task<IEnumerable<OrderItemAssign_Response>> GetOrderItemAssignList(OrderItemAssign_Search parameters);
         #endregion
     }
 }

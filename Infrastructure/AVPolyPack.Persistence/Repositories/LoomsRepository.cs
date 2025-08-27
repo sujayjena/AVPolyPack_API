@@ -106,6 +106,9 @@ namespace AVPolyPack.Persistence.Repositories
             DynamicParameters queryParameters = new DynamicParameters();
 
             queryParameters.Add("@ShiftType", parameters.ShiftType);
+            queryParameters.Add("@IsAssign", parameters.IsAssign);
+            queryParameters.Add("@EmployeeId", parameters.EmployeeId);
+            queryParameters.Add("@IsIdle", parameters.IsIdle);
             queryParameters.Add("@SearchText", parameters.SearchText.SanitizeValue());
             queryParameters.Add("@IsActive", parameters.IsActive);
             queryParameters.Add("@PageNo", parameters.PageNo);
@@ -118,15 +121,18 @@ namespace AVPolyPack.Persistence.Repositories
 
             return result;
         }
-        public async Task<IEnumerable<OperatorNameSelectList_Response>> GetOperatorNameForSelectList()
+        public async Task<IEnumerable<OperatorNameSelectList_Response>> GetOperatorNameForSelectList(OperatorNameSelectList_Search parameters)
         {
             DynamicParameters queryParameters = new DynamicParameters();
+            queryParameters.Add("@ShiftType", parameters.ShiftType);
+            queryParameters.Add("@IsPresent", parameters.IsPresent);
 
             return await ListByStoredProcedure<OperatorNameSelectList_Response>("GetOperatorNameForSelectList", queryParameters);
         }
         #endregion
 
         #region Order Item Assign
+
         public async Task<IEnumerable<SelectListResponse>> GetOrderItemNoForSelectList()
         {
             DynamicParameters queryParameters = new DynamicParameters();
@@ -134,6 +140,38 @@ namespace AVPolyPack.Persistence.Repositories
             return await ListByStoredProcedure<SelectListResponse>("GetOrderItemNoForSelectList", queryParameters);
         }
 
+        public async Task<int> SaveOrderItemAssign(OrderItemAssign_Request parameters)
+        {
+            DynamicParameters queryParameters = new DynamicParameters();
+
+            queryParameters.Add("@Id", parameters.Id);
+            queryParameters.Add("@LoomId", parameters.LoomId);
+            queryParameters.Add("@ShiftType", parameters.ShiftType);
+            queryParameters.Add("@OrderItemId", parameters.OrderItemId);
+            queryParameters.Add("@UserId", SessionManager.LoggedInUserId);
+
+            return await SaveByStoredProcedure<int>("SaveOrderItemAssign", queryParameters);
+        }
+
+        public async Task<IEnumerable<OrderItemAssign_Response>> GetOrderItemAssignList(OrderItemAssign_Search parameters)
+        {
+            DynamicParameters queryParameters = new DynamicParameters();
+
+            queryParameters.Add("@FromDate", parameters.FromDate);
+            queryParameters.Add("@ToDate", parameters.ToDate);
+            queryParameters.Add("@ShiftType", parameters.ShiftType);
+            queryParameters.Add("@SearchText", parameters.SearchText.SanitizeValue());
+            queryParameters.Add("@IsActive", parameters.IsActive);
+            queryParameters.Add("@PageNo", parameters.PageNo);
+            queryParameters.Add("@PageSize", parameters.PageSize);
+            queryParameters.Add("@Total", parameters.Total, null, System.Data.ParameterDirection.Output);
+            queryParameters.Add("@UserId", SessionManager.LoggedInUserId);
+
+            var result = await ListByStoredProcedure<OrderItemAssign_Response>("GetOrderItemAssignList", queryParameters);
+            parameters.Total = queryParameters.Get<int>("Total");
+
+            return result;
+        }
         #endregion
     }
 }

@@ -149,9 +149,9 @@ namespace AVPolyPack.Controllers
 
         [Route("[action]")]
         [HttpPost]
-        public async Task<ResponseModel> GetOperatorNameForSelectList()
+        public async Task<ResponseModel> GetOperatorNameForSelectList(OperatorNameSelectList_Search parameters)
         {
-            IEnumerable<OperatorNameSelectList_Response> lstResponse = await _loomsRepository.GetOperatorNameForSelectList();
+            IEnumerable<OperatorNameSelectList_Response> lstResponse = await _loomsRepository.GetOperatorNameForSelectList(parameters);
             _response.Data = lstResponse.ToList();
             return _response;
         }
@@ -167,6 +167,52 @@ namespace AVPolyPack.Controllers
             _response.Data = lstResponse.ToList();
             return _response;
         }
+
+        [Route("[action]")]
+        [HttpPost]
+        public async Task<ResponseModel> SaveOrderItemAssign(OrderItemAssign_Request parameters)
+        {
+            int result = await _loomsRepository.SaveOrderItemAssign(parameters);
+
+            if (result == (int)SaveOperationEnums.NoRecordExists)
+            {
+                _response.Message = "No record exists";
+            }
+            else if (result == (int)SaveOperationEnums.ReocrdExists)
+            {
+                _response.Message = "Record already exists";
+            }
+            else if (result == (int)SaveOperationEnums.NoResult)
+            {
+                _response.Message = "Something went wrong, please try again";
+            }
+            else
+            {
+                if (parameters.Id == 0)
+                {
+                    _response.Message = "Record Submitted successfully";
+                }
+                else
+                {
+                    _response.Message = "Record Updated successfully";
+                }
+            }
+
+            _response.Id = result;
+            return _response;
+
+        }
+
+        [Route("[action]")]
+        [HttpPost]
+        public async Task<ResponseModel> GetOrderItemAssignList(OrderItemAssign_Search parameters)
+        {
+            var objList = await _loomsRepository.GetOrderItemAssignList(parameters);
+            _response.Data = objList.ToList();
+            _response.Total = parameters.Total;
+            return _response;
+        }
+
 
         #endregion
     }

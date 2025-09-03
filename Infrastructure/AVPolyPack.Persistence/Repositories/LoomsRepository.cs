@@ -172,6 +172,139 @@ namespace AVPolyPack.Persistence.Repositories
 
             return result;
         }
+        public async Task<int> AssignOrderItemCompleted(AssignOrderItemCompleted_Request parameters)
+        {
+            DynamicParameters queryParameters = new DynamicParameters();
+
+            queryParameters.Add("@Id", parameters.Id);
+            queryParameters.Add("@IsCompleted", parameters.IsCompleted);
+            queryParameters.Add("@UserId", SessionManager.LoggedInUserId);
+
+            return await SaveByStoredProcedure<int>("AssignOrderItemCompleted", queryParameters);
+        }
+        #endregion
+
+        #region Size reading
+        public async Task<int> SaveSizeReading(SizeReading_Request parameters)
+        {
+            DynamicParameters queryParameters = new DynamicParameters();
+
+            queryParameters.Add("@Id", parameters.Id);
+            queryParameters.Add("@OrderItemAssignId", parameters.OrderItemAssignId);
+            queryParameters.Add("@ShiftType", parameters.ShiftType);
+            queryParameters.Add("@LoomId", parameters.LoomId);
+            queryParameters.Add("@RequiredSize", parameters.RequiredSize);
+            queryParameters.Add("@Size", parameters.Size);
+            queryParameters.Add("@UserId", SessionManager.LoggedInUserId);
+
+            return await SaveByStoredProcedure<int>("SaveSizeReading", queryParameters);
+        }
+
+        public async Task<IEnumerable<SizeReading_Response>> GetSizeReadingList(SizeReading_Search parameters)
+        {
+            DynamicParameters queryParameters = new DynamicParameters();
+
+            queryParameters.Add("@FromDate", parameters.FromDate);
+            queryParameters.Add("@ToDate", parameters.ToDate);
+            queryParameters.Add("@ShiftType", parameters.ShiftType);
+            queryParameters.Add("@LoomId", parameters.LoomId);
+            queryParameters.Add("@SearchText", parameters.SearchText.SanitizeValue());
+            queryParameters.Add("@IsActive", parameters.IsActive);
+            queryParameters.Add("@PageNo", parameters.PageNo);
+            queryParameters.Add("@PageSize", parameters.PageSize);
+            queryParameters.Add("@Total", parameters.Total, null, System.Data.ParameterDirection.Output);
+            queryParameters.Add("@UserId", SessionManager.LoggedInUserId);
+
+            var result = await ListByStoredProcedure<SizeReading_Response>("GetSizeReadingList", queryParameters);
+            parameters.Total = queryParameters.Get<int>("Total");
+
+            return result;
+        }
+        #endregion
+
+        #region Loom reading
+        public async Task<int> SaveLoomReading(LoomReading_Request parameters)
+        {
+            DynamicParameters queryParameters = new DynamicParameters();
+
+            queryParameters.Add("@Id", parameters.Id);
+            queryParameters.Add("@OrderItemAssignId", parameters.OrderItemAssignId);
+            queryParameters.Add("@ShiftType", parameters.ShiftType);
+            queryParameters.Add("@LoomId", parameters.LoomId);
+            queryParameters.Add("@Reading", parameters.Reading);
+            queryParameters.Add("@PrevReading", parameters.PrevReading);
+            queryParameters.Add("@Production", parameters.Production);
+            queryParameters.Add("@UserId", SessionManager.LoggedInUserId);
+
+            return await SaveByStoredProcedure<int>("SaveLoomReading", queryParameters);
+        }
+
+        public async Task<IEnumerable<LoomReading_Response>> GetLoomReadingList(LoomReading_Search parameters)
+        {
+            DynamicParameters queryParameters = new DynamicParameters();
+
+            queryParameters.Add("@FromDate", parameters.FromDate);
+            queryParameters.Add("@ToDate", parameters.ToDate);
+            queryParameters.Add("@ShiftType", parameters.ShiftType);
+            queryParameters.Add("@LoomId", parameters.LoomId);
+            queryParameters.Add("@SearchText", parameters.SearchText.SanitizeValue());
+            queryParameters.Add("@IsActive", parameters.IsActive);
+            queryParameters.Add("@PageNo", parameters.PageNo);
+            queryParameters.Add("@PageSize", parameters.PageSize);
+            queryParameters.Add("@Total", parameters.Total, null, System.Data.ParameterDirection.Output);
+            queryParameters.Add("@UserId", SessionManager.LoggedInUserId);
+
+            var result = await ListByStoredProcedure<LoomReading_Response>("GetLoomReadingList", queryParameters);
+            parameters.Total = queryParameters.Get<int>("Total");
+
+            return result;
+        }
+        #endregion
+
+        #region Loom Remarks
+        public async Task<int> SaveLoomRemarks(LoomRemarks_Request parameters)
+        {
+            DynamicParameters queryParameters = new DynamicParameters();
+
+            queryParameters.Add("@Id", parameters.Id);
+            queryParameters.Add("@LoomId", parameters.LoomId);
+            queryParameters.Add("@ShiftType", parameters.ShiftType);
+            queryParameters.Add("@Remarks", parameters.Remarks);
+            queryParameters.Add("@IsActive", parameters.IsActive);
+            queryParameters.Add("@UserId", SessionManager.LoggedInUserId);
+
+            return await SaveByStoredProcedure<int>("SaveLoomRemarks", queryParameters);
+        }
+
+        public async Task<IEnumerable<LoomRemarks_Response>> GetLoomRemarksList(LoomRemarks_Search parameters)
+        {
+            DynamicParameters queryParameters = new DynamicParameters();
+
+            queryParameters.Add("@FromDate", parameters.FromDate);
+            queryParameters.Add("@ToDate", parameters.ToDate);
+            queryParameters.Add("@LoomId", parameters.LoomId);
+            queryParameters.Add("@ShiftType", parameters.ShiftType);
+            queryParameters.Add("@SearchText", parameters.SearchText.SanitizeValue());
+            queryParameters.Add("@IsActive", parameters.IsActive);
+            queryParameters.Add("@PageNo", parameters.PageNo);
+            queryParameters.Add("@PageSize", parameters.PageSize);
+            queryParameters.Add("@Total", parameters.Total, null, System.Data.ParameterDirection.Output);
+            queryParameters.Add("@UserId", SessionManager.LoggedInUserId);
+
+            var result = await ListByStoredProcedure<LoomRemarks_Response>("GetLoomRemarksList", queryParameters);
+            parameters.Total = queryParameters.Get<int>("Total");
+
+            return result;
+        }
+
+        public async Task<LoomRemarks_Response?> GetLoomRemarksById(int Id)
+        {
+            DynamicParameters queryParameters = new DynamicParameters();
+
+            queryParameters.Add("@Id", Id);
+
+            return (await ListByStoredProcedure<LoomRemarks_Response>("GetLoomRemarksById", queryParameters)).FirstOrDefault();
+        }
         #endregion
     }
 }

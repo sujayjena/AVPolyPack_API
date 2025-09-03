@@ -80,12 +80,12 @@ namespace AVPolyPack.Application.Models
 
     public class LoomListForAssignOperator_Search : BaseSearchEntity
     {
-        public int ShiftType { get; set; }
-        public bool IsAssign { get; set; }
-        public int EmployeeId { get; set; }
+        public int? ShiftType { get; set; }
+        public bool? IsAssign { get; set; }
+        public int? EmployeeId { get; set; }
 
         [DefaultValue(false)]
-        public bool IsIdle { get; set; }
+        public bool? IsIdle { get; set; }
     }
 
     public class LoomListForAssignOperator_Response
@@ -125,7 +125,7 @@ namespace AVPolyPack.Application.Models
 
         [DefaultValue(null)]
         public DateTime? ToDate { get; set; }
-        public int ShiftType { get; set; }
+        public int? ShiftType { get; set; }
     }
 
     public class OrderItemAssign_Response : BaseResponseEntity
@@ -137,5 +137,109 @@ namespace AVPolyPack.Application.Models
         public string? OrderItemNo { get; set; }
     }
 
+    public class AssignOrderItemCompleted_Request : BaseEntity
+    {
+        public bool? IsCompleted { get; set; }
+    }
+
+    #endregion
+
+    #region Size Reading
+    public class SizeReading_Request : BaseEntity
+    {
+        public int? OrderItemAssignId { get; set; }
+        public int? ShiftType { get; set; }
+        public int? LoomId { get; set; }
+        public string? RequiredSize { get; set; }
+        public string? Size { get; set; }
+    }
+    public class SizeReading_Search : BaseSearchEntity
+    {
+        [DefaultValue(null)]
+        public DateTime? FromDate { get; set; }
+
+        [DefaultValue(null)]
+        public DateTime? ToDate { get; set; }
+        public int? ShiftType { get; set; }
+        public int? LoomId { get; set; }
+    }
+
+    public class SizeReading_Response : BaseResponseEntity
+    {
+        public int? OrderItemAssignId { get; set; }
+        public int? LoomId { get; set; }
+        public string? LoomName { get; set; }
+        public int? ShiftType { get; set; }
+        public int? OrderItemId { get; set; }
+        public string? OrderItemNo { get; set; }
+        public string? RequiredSize { get; set; }
+        public string? Size { get; set; }
+    }
+    #endregion
+
+    #region Loom Reading
+    public class LoomReading_Request : BaseEntity
+    {
+        public int? OrderItemAssignId { get; set; }
+        public int? ShiftType { get; set; }
+        public int? LoomId { get; set; }
+        public string? Reading { get; set; }
+        public string? PrevReading { get; set; }
+        public string? Production { get; set; }
+    }
+    public class LoomReading_Search : BaseSearchEntity
+    {
+        [DefaultValue(null)]
+        public DateTime? FromDate { get; set; }
+
+        [DefaultValue(null)]
+        public DateTime? ToDate { get; set; }
+        public int? ShiftType { get; set; }
+        public int? LoomId { get; set; }
+    }
+
+    public class LoomReading_Response : BaseResponseEntity
+    {
+        public int? OrderItemAssignId { get; set; }
+        public int? LoomId { get; set; }
+        public string? LoomName { get; set; }
+        public int? ShiftType { get; set; }
+        public int? OrderItemId { get; set; }
+        public string? OrderItemNo { get; set; }
+        public string? Reading { get; set; }
+        public string? PrevReading { get; set; }
+        public string? Production { get; set; }
+    }
+    #endregion
+
+    #region Loom Remark
+    public class LoomRemarks_Search : BaseSearchEntity
+    {
+        [DefaultValue(null)]
+        public DateTime? FromDate { get; set; }
+
+        [DefaultValue(null)]
+        public DateTime? ToDate { get; set; }
+
+        public int LoomId { get; set; }
+        public int ShiftType { get; set; }
+    }
+
+    public class LoomRemarks_Request : BaseEntity
+    {
+        public int? LoomId { get; set; }
+        public int? ShiftType { get; set; }
+        public string? Remarks { get; set; }
+        public bool? IsActive { get; set; }
+    }
+
+    public class LoomRemarks_Response : BaseResponseEntity
+    {
+        public int? LoomId { get; set; }
+        public string? LoomName { get; set; }
+        public int? ShiftType { get; set; }
+        public string? Remarks { get; set; }
+        public bool? IsActive { get; set; }
+    }
     #endregion
 }

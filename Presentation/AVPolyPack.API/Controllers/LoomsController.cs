@@ -213,7 +213,192 @@ namespace AVPolyPack.Controllers
             return _response;
         }
 
+        [Route("[action]")]
+        [HttpPost]
+        public async Task<ResponseModel> AssignOrderItemCompleted(AssignOrderItemCompleted_Request parameters)
+        {
+            int result = await _loomsRepository.AssignOrderItemCompleted(parameters);
 
+            if (result == (int)SaveOperationEnums.NoRecordExists)
+            {
+                _response.Message = "No record exists";
+            }
+            else if (result == (int)SaveOperationEnums.ReocrdExists)
+            {
+                _response.Message = "Record already exists";
+            }
+            else if (result == (int)SaveOperationEnums.NoResult)
+            {
+                _response.Message = "Something went wrong, please try again";
+            }
+            else
+            {
+                _response.Message = "Record Submitted successfully";
+            }
+
+            _response.Id = result;
+            return _response;
+
+        }
+
+        #endregion
+
+        #region Size Reading
+        [Route("[action]")]
+        [HttpPost]
+        public async Task<ResponseModel> SaveSizeReading(SizeReading_Request parameters)
+        {
+            int result = await _loomsRepository.SaveSizeReading(parameters);
+
+            if (result == (int)SaveOperationEnums.NoRecordExists)
+            {
+                _response.Message = "No record exists";
+            }
+            else if (result == (int)SaveOperationEnums.ReocrdExists)
+            {
+                _response.Message = "Record already exists";
+            }
+            else if (result == (int)SaveOperationEnums.NoResult)
+            {
+                _response.Message = "Something went wrong, please try again";
+            }
+            else
+            {
+                if (parameters.Id == 0)
+                {
+                    _response.Message = "Record Submitted successfully";
+                }
+                else
+                {
+                    _response.Message = "Record Updated successfully";
+                }
+            }
+
+            _response.Id = result;
+            return _response;
+
+        }
+
+        [Route("[action]")]
+        [HttpPost]
+        public async Task<ResponseModel> GetSizeReadingList(SizeReading_Search parameters)
+        {
+            var objList = await _loomsRepository.GetSizeReadingList(parameters);
+            _response.Data = objList.ToList();
+            _response.Total = parameters.Total;
+            return _response;
+        }
+        #endregion
+
+        #region Loom Reading
+        [Route("[action]")]
+        [HttpPost]
+        public async Task<ResponseModel> SaveLoomReading(LoomReading_Request parameters)
+        {
+            int result = await _loomsRepository.SaveLoomReading(parameters);
+
+            if (result == (int)SaveOperationEnums.NoRecordExists)
+            {
+                _response.Message = "No record exists";
+            }
+            else if (result == (int)SaveOperationEnums.ReocrdExists)
+            {
+                _response.Message = "Record already exists";
+            }
+            else if (result == (int)SaveOperationEnums.NoResult)
+            {
+                _response.Message = "Something went wrong, please try again";
+            }
+            else
+            {
+                if (parameters.Id == 0)
+                {
+                    _response.Message = "Record Submitted successfully";
+                }
+                else
+                {
+                    _response.Message = "Record Updated successfully";
+                }
+            }
+
+            _response.Id = result;
+            return _response;
+
+        }
+
+        [Route("[action]")]
+        [HttpPost]
+        public async Task<ResponseModel> GetLoomReadingList(LoomReading_Search parameters)
+        {
+            var objList = await _loomsRepository.GetLoomReadingList(parameters);
+            _response.Data = objList.ToList();
+            _response.Total = parameters.Total;
+            return _response;
+        }
+        #endregion
+
+        #region Loom Remark
+
+        [Route("[action]")]
+        [HttpPost]
+        public async Task<ResponseModel> SaveLoomRemarks(LoomRemarks_Request parameters)
+        {
+            int result = await _loomsRepository.SaveLoomRemarks(parameters);
+
+            if (result == (int)SaveOperationEnums.NoRecordExists)
+            {
+                _response.Message = "No record exists";
+            }
+            else if (result == (int)SaveOperationEnums.ReocrdExists)
+            {
+                _response.Message = "Record already exists";
+            }
+            else if (result == (int)SaveOperationEnums.NoResult)
+            {
+                _response.Message = "Something went wrong, please try again";
+            }
+            else
+            {
+                if (parameters.Id == 0)
+                {
+                    _response.Message = "Record Submitted successfully";
+                }
+                else
+                {
+                    _response.Message = "Record Updated successfully";
+                }
+            }
+
+            _response.Id = result;
+            return _response;
+        }
+
+
+        [Route("[action]")]
+        [HttpPost]
+        public async Task<ResponseModel> GetLoomRemarksList(LoomRemarks_Search parameters)
+        {
+            IEnumerable<LoomRemarks_Response> lstRoles = await _loomsRepository.GetLoomRemarksList(parameters);
+            _response.Data = lstRoles.ToList();
+            _response.Total = parameters.Total;
+            return _response;
+        }
+
+        [Route("[action]")]
+        [HttpPost]
+        public async Task<ResponseModel> GetLoomRemarksById(int Id)
+        {
+            if (Id <= 0)
+            {
+                _response.Message = "Id is required";
+            }
+            else
+            {
+                var vResultObj = await _loomsRepository.GetLoomRemarksById(Id);
+                _response.Data = vResultObj;
+            }
+            return _response;
+        }
         #endregion
     }
 }

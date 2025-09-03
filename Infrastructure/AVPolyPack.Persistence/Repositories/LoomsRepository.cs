@@ -306,5 +306,60 @@ namespace AVPolyPack.Persistence.Repositories
             return (await ListByStoredProcedure<LoomRemarks_Response>("GetLoomRemarksById", queryParameters)).FirstOrDefault();
         }
         #endregion
+
+        #region Roll
+        public async Task<int> SaveRoll(Roll_Request parameters)
+        {
+            DynamicParameters queryParameters = new DynamicParameters();
+            
+            queryParameters.Add("@Id", parameters.Id);
+            queryParameters.Add("@OrderItemAssignId", parameters.OrderItemAssignId);
+            queryParameters.Add("@ShiftType", parameters.ShiftType);
+            queryParameters.Add("@StartMeter", parameters.StartMeter);
+            queryParameters.Add("@EndMeter", parameters.EndMeter);
+            queryParameters.Add("@TotalMeter", parameters.TotalMeter);
+            queryParameters.Add("@GrossWeight", parameters.GrossWeight);
+            queryParameters.Add("@TareWeight", parameters.TareWeight);
+            queryParameters.Add("@NetWeight", parameters.NetWeight);
+            queryParameters.Add("@CurrentAvg", parameters.CurrentAvg);
+            queryParameters.Add("@CurrentGSM", parameters.CurrentGSM);
+            queryParameters.Add("@GSMDiff", parameters.GSMDiff);
+            queryParameters.Add("@AvgDiff", parameters.AvgDiff);
+            queryParameters.Add("@IsCompleted", parameters.IsCompleted);
+            queryParameters.Add("@UserId", SessionManager.LoggedInUserId);
+
+            return await SaveByStoredProcedure<int>("SaveRoll", queryParameters);
+        }
+
+        public async Task<IEnumerable<Roll_Response>> GetRollList(Roll_Search parameters)
+        {
+            DynamicParameters queryParameters = new DynamicParameters();
+
+            queryParameters.Add("@FromDate", parameters.FromDate);
+            queryParameters.Add("@ToDate", parameters.ToDate);
+            queryParameters.Add("@LoomId", parameters.LoomId);
+            queryParameters.Add("@ShiftType", parameters.ShiftType);
+            queryParameters.Add("@SearchText", parameters.SearchText.SanitizeValue());
+            queryParameters.Add("@IsActive", parameters.IsActive);
+            queryParameters.Add("@PageNo", parameters.PageNo);
+            queryParameters.Add("@PageSize", parameters.PageSize);
+            queryParameters.Add("@Total", parameters.Total, null, System.Data.ParameterDirection.Output);
+            queryParameters.Add("@UserId", SessionManager.LoggedInUserId);
+
+            var result = await ListByStoredProcedure<Roll_Response>("GetRollList", queryParameters);
+            parameters.Total = queryParameters.Get<int>("Total");
+
+            return result;
+        }
+
+        public async Task<Roll_Response?> GetRollById(int Id)
+        {
+            DynamicParameters queryParameters = new DynamicParameters();
+
+            queryParameters.Add("@Id", Id);
+
+            return (await ListByStoredProcedure<Roll_Response>("GetRollById", queryParameters)).FirstOrDefault();
+        }
+        #endregion
     }
 }

@@ -42,5 +42,11 @@ namespace AVPolyPack.Application.Interfaces
         Task<IEnumerable<LoomRemarks_Response>> GetLoomRemarksList(LoomRemarks_Search parameters);
         Task<LoomRemarks_Response?> GetLoomRemarksById(int Id);
         #endregion
+
+        #region Roll
+        Task<int> SaveRoll(Roll_Request parameters);
+        Task<IEnumerable<Roll_Response>> GetRollList(Roll_Search parameters);
+        Task<Roll_Response?> GetRollById(int Id);
+        #endregion
     }
 }

@@ -242,4 +242,60 @@ namespace AVPolyPack.Application.Models
         public bool? IsActive { get; set; }
     }
     #endregion
+
+    #region Roll
+    public class Roll_Request : BaseEntity
+    {
+        public int? OrderItemAssignId { get; set; }
+        public int? ShiftType { get; set; }
+        public decimal? StartMeter { get; set; }
+        public decimal? EndMeter { get; set; }
+        public decimal? TotalMeter { get; set; }
+        public decimal? GrossWeight { get; set; }
+        public decimal? TareWeight { get; set; }
+        public decimal? NetWeight { get; set; }
+        public decimal? CurrentAvg { get; set; }
+        public decimal? CurrentGSM { get; set; }
+        public decimal? GSMDiff { get; set; }
+        public decimal? AvgDiff { get; set; }
+
+        [DefaultValue(false)]
+        public bool? IsCompleted { get; set; }
+    }
+    public class Roll_Search : BaseSearchEntity
+    {
+        [DefaultValue(null)]
+        public DateTime? FromDate { get; set; }
+
+        [DefaultValue(null)]
+        public DateTime? ToDate { get; set; }
+        public int? ShiftType { get; set; }
+        public int? LoomId { get; set; }
+
+        [DefaultValue(null)]
+        public bool? IsCompleted { get; set; }
+    }
+
+    public class Roll_Response : BaseResponseEntity
+    {
+        public int? OrderItemAssignId { get; set; }
+        public int? ShiftType { get; set; }
+        public string? RollNo { get; set; }
+        public int? LoomId { get; set; }
+        public string? LoomName { get; set; }
+        public int? OrderItemId { get; set; }
+        public string? OrderItemNo { get; set; }
+        public decimal? StartMeter { get; set; }
+        public decimal? EndMeter { get; set; }
+        public decimal? TotalMeter { get; set; }
+        public decimal? GrossWeight { get; set; }
+        public decimal? TareWeight { get; set; }
+        public decimal? NetWeight { get; set; }
+        public decimal? CurrentAvg { get; set; }
+        public decimal? CurrentGSM { get; set; }
+        public decimal? GSMDiff { get; set; }
+        public decimal? AvgDiff { get; set; }
+        public bool? IsCompleted { get; set; }
+    }
+    #endregion
 }

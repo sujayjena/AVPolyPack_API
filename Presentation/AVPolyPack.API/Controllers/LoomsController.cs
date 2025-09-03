@@ -400,5 +400,68 @@ namespace AVPolyPack.Controllers
             return _response;
         }
         #endregion
+
+        #region Roll
+        [Route("[action]")]
+        [HttpPost]
+        public async Task<ResponseModel> SaveRoll(Roll_Request parameters)
+        {
+            int result = await _loomsRepository.SaveRoll(parameters);
+
+            if (result == (int)SaveOperationEnums.NoRecordExists)
+            {
+                _response.Message = "No record exists";
+            }
+            else if (result == (int)SaveOperationEnums.ReocrdExists)
+            {
+                _response.Message = "Record already exists";
+            }
+            else if (result == (int)SaveOperationEnums.NoResult)
+            {
+                _response.Message = "Something went wrong, please try again";
+            }
+            else
+            {
+                if (parameters.Id == 0)
+                {
+                    _response.Message = "Record Submitted successfully";
+                }
+                else
+                {
+                    _response.Message = "Record Updated successfully";
+                }
+            }
+
+            _response.Id = result;
+            return _response;
+        }
+
+
+        [Route("[action]")]
+        [HttpPost]
+        public async Task<ResponseModel> GetRollList(Roll_Search parameters)
+        {
+            IEnumerable<Roll_Response> lstRoles = await _loomsRepository.GetRollList(parameters);
+            _response.Data = lstRoles.ToList();
+            _response.Total = parameters.Total;
+            return _response;
+        }
+
+        [Route("[action]")]
+        [HttpPost]
+        public async Task<ResponseModel> GetRollById(int Id)
+        {
+            if (Id <= 0)
+            {
+                _response.Message = "Id is required";
+            }
+            else
+            {
+                var vResultObj = await _loomsRepository.GetRollById(Id);
+                _response.Data = vResultObj;
+            }
+            return _response;
+        }
+        #endregion
     }
 }

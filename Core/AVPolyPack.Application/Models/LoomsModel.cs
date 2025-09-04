@@ -298,6 +298,8 @@ namespace AVPolyPack.Application.Models
         public decimal? GSMDiff { get; set; }
         public decimal? AvgDiff { get; set; }
         public bool? IsCompleted { get; set; }
+        public int? EmployeeId { get; set; }
+        public string? AssignedOperatorName { get; set; }
     }
     #endregion
 }

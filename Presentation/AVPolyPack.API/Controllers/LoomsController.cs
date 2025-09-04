@@ -15,10 +15,12 @@ namespace AVPolyPack.Controllers
     {
         private ResponseModel _response;
         private readonly ILoomsRepository _loomsRepository;
+        private readonly IBarcodeRepository _barcodeRepository;
 
-        public LoomsController(ILoomsRepository loomsRepository)
+        public LoomsController(ILoomsRepository loomsRepository, IBarcodeRepository barcodeRepository)
         {
             _loomsRepository = loomsRepository;
+            _barcodeRepository = barcodeRepository;
 
             _response = new ResponseModel();
             _response.IsSuccess = true;
@@ -430,12 +432,36 @@ namespace AVPolyPack.Controllers
                 {
                     _response.Message = "Record Updated successfully";
                 }
+
+                #region Generate Barcode
+                if (parameters.Id == 0)
+                {
+                    var vVisitor = await _loomsRepository.GetRollById(result);
+                    if (vVisitor != null)
+                    {
+                        var vGenerateBarcode = _barcodeRepository.GenerateBarcode(vVisitor.RollNo, "Roll");
+                        if (vGenerateBarcode.Barcode_Unique_Id != "")
+                        {
+                            var vBarcode_Request = new Barcode_Request()
+                            {
+                                Id = 0,
+                                BarcodeNo = vVisitor.RollNo,
+                                BarcodeType = "Roll",
+                                Barcode_Unique_Id = vGenerateBarcode.Barcode_Unique_Id,
+                                BarcodeOriginalFileName = vGenerateBarcode.BarcodeOriginalFileName,
+                                BarcodeFileName = vGenerateBarcode.BarcodeFileName,
+                                RefId = vVisitor.Id
+                            };
+                            var resultBarcode = _barcodeRepository.SaveBarcode(vBarcode_Request);
+                        }
+                    }
+                }
+                #endregion
             }
 
             _response.Id = result;
             return _response;
         }
-
 
         [Route("[action]")]
         [HttpPost]
@@ -458,6 +484,22 @@ namespace AVPolyPack.Controllers
             else
             {
                 var vResultObj = await _loomsRepository.GetRollById(Id);
+                _response.Data = vResultObj;
+            }
+            return _response;
+        }
+
+        [Route("[action]")]
+        [HttpPost]
+        public async Task<ResponseModel> GetBarcodeById(string BarcodeNo)
+        {
+            if (BarcodeNo == "")
+            {
+                _response.Message = "Barcode No. is required";
+            }
+            else
+            {
+                var vResultObj = await _barcodeRepository.GetBarcodeById(BarcodeNo);
                 _response.Data = vResultObj;
             }
             return _response;

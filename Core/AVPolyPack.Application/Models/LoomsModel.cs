@@ -135,6 +135,8 @@ namespace AVPolyPack.Application.Models
         public int? ShiftType { get; set; }
         public int? OrderItemId { get; set; }
         public string? OrderItemNo { get; set; }
+        public int? EmployeeId { get; set; }
+        public string? AssignedOperatorName { get; set; }
     }
 
     public class AssignOrderItemCompleted_Request : BaseEntity

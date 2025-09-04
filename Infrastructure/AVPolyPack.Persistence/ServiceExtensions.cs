@@ -50,6 +50,7 @@ namespace AVPolyPack.Persistence
             services.AddScoped<IDenierRepository, DenierRepository>();
             services.AddScoped<IMaterialConsumptionRepository, MaterialConsumptionRepository>();
             services.AddScoped<IManageTapeMachineRepository, ManageTapeMachineRepository>();
+            services.AddScoped<IBarcodeRepository, BarcodeRepository>();
         }
     }
 }

@@ -339,6 +339,7 @@ namespace AVPolyPack.Persistence.Repositories
             queryParameters.Add("@ToDate", parameters.ToDate);
             queryParameters.Add("@LoomId", parameters.LoomId);
             queryParameters.Add("@ShiftType", parameters.ShiftType);
+            queryParameters.Add("@IsCompleted", parameters.IsCompleted);
             queryParameters.Add("@SearchText", parameters.SearchText.SanitizeValue());
             queryParameters.Add("@IsActive", parameters.IsActive);
             queryParameters.Add("@PageNo", parameters.PageNo);
@@ -360,6 +361,14 @@ namespace AVPolyPack.Persistence.Repositories
 
             return (await ListByStoredProcedure<Roll_Response>("GetRollById", queryParameters)).FirstOrDefault();
         }
+
+        public async Task<int> RollCodeReset()
+        {
+            DynamicParameters queryParameters = new DynamicParameters();
+
+            return await SaveByStoredProcedure<int>("RollCodeReset", queryParameters);
+        }
+
         #endregion
     }
 }

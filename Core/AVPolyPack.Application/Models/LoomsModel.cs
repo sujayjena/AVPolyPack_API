@@ -276,6 +276,7 @@ namespace AVPolyPack.Application.Models
 
         [DefaultValue(null)]
         public bool? IsCompleted { get; set; }
+
     }
 
     public class Roll_Response : BaseResponseEntity
@@ -298,8 +299,13 @@ namespace AVPolyPack.Application.Models
         public decimal? GSMDiff { get; set; }
         public decimal? AvgDiff { get; set; }
         public bool? IsCompleted { get; set; }
+        public DateTime? CompletedDateTime { get; set; }
         public int? EmployeeId { get; set; }
         public string? AssignedOperatorName { get; set; }
+        public string? RollCode { get; set; }
+        public string? BarcodeOriginalFileName { get; set; }
+        public string? BarcodeFileName { get; set; }
+        public string? BarcodeURL { get; set; }
     }
     #endregion
 }

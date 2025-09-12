@@ -225,5 +225,131 @@ namespace AVPolyPack.Controllers
             return _response;
         }
         #endregion
+
+        #region AvgGSM Entry
+        [Route("[action]")]
+        [HttpPost]
+        public async Task<ResponseModel> SaveAvgGSMEntry_Lamination(AvgGSMEntry_Lamination_Request parameters)
+        {
+            int result = await _manageLaminationRepository.SaveAvgGSMEntry_Lamination(parameters);
+
+            if (result == (int)SaveOperationEnums.NoRecordExists)
+            {
+                _response.Message = "No record exists";
+            }
+            else if (result == (int)SaveOperationEnums.ReocrdExists)
+            {
+                _response.Message = "Record already exists";
+            }
+            else if (result == (int)SaveOperationEnums.NoResult)
+            {
+                _response.Message = "Something went wrong, please try again";
+            }
+            else
+            {
+                if (parameters.Id == 0)
+                {
+                    _response.Message = "Record Submitted successfully";
+                }
+                else
+                {
+                    _response.Message = "Record Updated successfully";
+                }
+            }
+
+            _response.Id = result;
+            return _response;
+        }
+
+        [Route("[action]")]
+        [HttpPost]
+        public async Task<ResponseModel> GetAvgGSMEntry_LaminationList(AvgGSMEntry_Lamination_Search parameters)
+        {
+            IEnumerable<AvgGSMEntry_Lamination_Response> lstRoles = await _manageLaminationRepository.GetAvgGSMEntry_LaminationList(parameters);
+            _response.Data = lstRoles.ToList();
+            _response.Total = parameters.Total;
+            return _response;
+        }
+
+        [Route("[action]")]
+        [HttpPost]
+        public async Task<ResponseModel> GetAvgGSMEntry_LaminationById(int Id)
+        {
+            if (Id <= 0)
+            {
+                _response.Message = "Id is required";
+            }
+            else
+            {
+                var vResultObj = await _manageLaminationRepository.GetAvgGSMEntry_LaminationById(Id);
+                _response.Data = vResultObj;
+            }
+            return _response;
+        }
+
+        #endregion
+
+        #region Strength Entry
+        [Route("[action]")]
+        [HttpPost]
+        public async Task<ResponseModel> SaveStrengthEntry_Lamination(StrengthEntry_Lamination_Request parameters)
+        {
+            int result = await _manageLaminationRepository.SaveStrengthEntry_Lamination(parameters);
+
+            if (result == (int)SaveOperationEnums.NoRecordExists)
+            {
+                _response.Message = "No record exists";
+            }
+            else if (result == (int)SaveOperationEnums.ReocrdExists)
+            {
+                _response.Message = "Record already exists";
+            }
+            else if (result == (int)SaveOperationEnums.NoResult)
+            {
+                _response.Message = "Something went wrong, please try again";
+            }
+            else
+            {
+                if (parameters.Id == 0)
+                {
+                    _response.Message = "Record Submitted successfully";
+                }
+                else
+                {
+                    _response.Message = "Record Updated successfully";
+                }
+            }
+
+            _response.Id = result;
+            return _response;
+        }
+
+        [Route("[action]")]
+        [HttpPost]
+        public async Task<ResponseModel> GetStrengthEntry_LaminationList(StrengthEntry_Lamination_Search parameters)
+        {
+            IEnumerable<StrengthEntry_Lamination_Response> lstRoles = await _manageLaminationRepository.GetStrengthEntry_LaminationList(parameters);
+            _response.Data = lstRoles.ToList();
+            _response.Total = parameters.Total;
+            return _response;
+        }
+
+        [Route("[action]")]
+        [HttpPost]
+        public async Task<ResponseModel> GetStrengthEntry_LaminationById(int Id)
+        {
+            if (Id <= 0)
+            {
+                _response.Message = "Id is required";
+            }
+            else
+            {
+                var vResultObj = await _manageLaminationRepository.GetStrengthEntry_LaminationById(Id);
+                _response.Data = vResultObj;
+            }
+            return _response;
+        }
+
+        #endregion
     }
 }

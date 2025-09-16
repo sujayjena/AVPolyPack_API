@@ -275,8 +275,25 @@ namespace AVPolyPack.Application.Models
         public int? LoomId { get; set; }
 
         [DefaultValue(null)]
-        public bool? IsCompleted { get; set; }
+        public bool? IsRollCompleted { get; set; }
 
+        [DefaultValue(null)]
+        public bool? IsLabTestCompleted { get; set; }
+
+        [DefaultValue(null)]
+        public bool? IsLaminationCompleted { get; set; }
+
+        [DefaultValue(null)]
+        public bool? IsLaminationLabTestCompleted { get; set; }
+
+        [DefaultValue(null)]
+        public bool? IsPrintingCompleted { get; set; }
+
+        [DefaultValue(null)]
+        public bool? IsCuttingCompleted { get; set; }
+
+        [DefaultValue(null)]
+        public bool? IsInventoryCompleted { get; set; }
     }
 
     public class Roll_Response : BaseResponseEntity
@@ -306,6 +323,11 @@ namespace AVPolyPack.Application.Models
         public string? BarcodeOriginalFileName { get; set; }
         public string? BarcodeFileName { get; set; }
         public string? BarcodeURL { get; set; }
+        public bool? LabTestMeshEntry { get; set; }
+        public bool? LabTestAvgGSMEntry { get; set; }
+        public bool? LabTestStrengthEntry { get; set; }
+        public bool? LaminationLabTestAvgGSMEntry { get; set; }
+        public bool? LaminationLabTestStrengthEntry { get; set; }
     }
     #endregion
 }

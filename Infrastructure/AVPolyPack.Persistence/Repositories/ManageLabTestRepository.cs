@@ -39,6 +39,7 @@ namespace AVPolyPack.Persistence.Repositories
             DynamicParameters queryParameters = new DynamicParameters();
             queryParameters.Add("@FromDate", parameters.FromDate);
             queryParameters.Add("@ToDate", parameters.ToDate);
+            queryParameters.Add("@RollId", parameters.RollId);
             queryParameters.Add("@SearchText", parameters.SearchText.SanitizeValue());
             queryParameters.Add("@IsActive", parameters.IsActive);
             queryParameters.Add("@PageNo", parameters.PageNo);
@@ -82,6 +83,7 @@ namespace AVPolyPack.Persistence.Repositories
             DynamicParameters queryParameters = new DynamicParameters();
             queryParameters.Add("@FromDate", parameters.FromDate);
             queryParameters.Add("@ToDate", parameters.ToDate);
+            queryParameters.Add("@RollId", parameters.RollId);
             queryParameters.Add("@SearchText", parameters.SearchText.SanitizeValue());
             queryParameters.Add("@IsActive", parameters.IsActive);
             queryParameters.Add("@PageNo", parameters.PageNo);
@@ -126,6 +128,7 @@ namespace AVPolyPack.Persistence.Repositories
             DynamicParameters queryParameters = new DynamicParameters();
             queryParameters.Add("@FromDate", parameters.FromDate);
             queryParameters.Add("@ToDate", parameters.ToDate);
+            queryParameters.Add("@RollId", parameters.RollId);
             queryParameters.Add("@SearchText", parameters.SearchText.SanitizeValue());
             queryParameters.Add("@IsActive", parameters.IsActive);
             queryParameters.Add("@PageNo", parameters.PageNo);

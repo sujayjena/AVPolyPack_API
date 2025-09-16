@@ -17,6 +17,8 @@ namespace AVPolyPack.Application.Models
 
         [DefaultValue(null)]
         public DateTime? ToDate { get; set; }
+
+        public int? RollId { get; set; }
     }
     public class MeshEntry_Request : BaseEntity
     {
@@ -43,6 +45,8 @@ namespace AVPolyPack.Application.Models
 
         [DefaultValue(null)]
         public DateTime? ToDate { get; set; }
+
+        public int? RollId { get; set; }
     }
     public class AvgGSMEntry_Request : BaseEntity
     {
@@ -73,6 +77,8 @@ namespace AVPolyPack.Application.Models
 
         [DefaultValue(null)]
         public DateTime? ToDate { get; set; }
+
+        public int? RollId { get; set; }
     }
     public class StrengthEntry_Request : BaseEntity
     {

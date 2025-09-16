@@ -212,6 +212,7 @@ namespace AVPolyPack.Application.Models
 
     public class Territories_State_Dist_City_Search
     {
+        public int? CountryId { get; set; }
         public int? StateId { get; set; }
 
         public int? DistrictId { get; set; }

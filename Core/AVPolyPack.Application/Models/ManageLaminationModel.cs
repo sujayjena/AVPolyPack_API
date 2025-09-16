@@ -117,6 +117,8 @@ namespace AVPolyPack.Application.Models
 
         [DefaultValue(null)]
         public DateTime? ToDate { get; set; }
+
+        public int? RollId { get; set; }
     }
     public class AvgGSMEntry_Lamination_Request : BaseEntity
     {
@@ -147,6 +149,8 @@ namespace AVPolyPack.Application.Models
 
         [DefaultValue(null)]
         public DateTime? ToDate { get; set; }
+
+        public int? RollId { get; set; }
     }
     public class StrengthEntry_Lamination_Request : BaseEntity
     {

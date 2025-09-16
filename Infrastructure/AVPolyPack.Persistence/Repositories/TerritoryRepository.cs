@@ -241,6 +241,7 @@ namespace AVPolyPack.Persistence.Repositories
         public async Task<IEnumerable<Territories_State_Dist_City_Response>> GetTerritories_State_Dist_City_List_ById(Territories_State_Dist_City_Search parameters)
         {
             DynamicParameters queryParameters = new DynamicParameters();
+            queryParameters.Add("@CountryId", parameters.CountryId);
             queryParameters.Add("@StateId", parameters.StateId);
             queryParameters.Add("@DistId", parameters.DistrictId);
             queryParameters.Add("@CityId", parameters.CityId);

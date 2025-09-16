@@ -53,6 +53,8 @@ namespace AVPolyPack.Persistence
             services.AddScoped<IBarcodeRepository, BarcodeRepository>();
             services.AddScoped<IManageLabTestRepository, ManageLabTestRepository>();
             services.AddScoped<IManageLaminationRepository, ManageLaminationRepository>();
+            services.AddScoped<IManagePrintingRepository, ManagePrintingRepository>();
+            services.AddScoped<IManageCuttingRepository, ManageCuttingRepository>();
         }
     }
 }

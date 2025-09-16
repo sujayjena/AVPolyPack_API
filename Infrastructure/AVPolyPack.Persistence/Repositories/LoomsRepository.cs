@@ -339,7 +339,13 @@ namespace AVPolyPack.Persistence.Repositories
             queryParameters.Add("@ToDate", parameters.ToDate);
             queryParameters.Add("@LoomId", parameters.LoomId);
             queryParameters.Add("@ShiftType", parameters.ShiftType);
-            queryParameters.Add("@IsCompleted", parameters.IsCompleted);
+            queryParameters.Add("@IsRollCompleted", parameters.IsRollCompleted);
+            queryParameters.Add("@IsLabTestCompleted", parameters.IsLabTestCompleted);
+            queryParameters.Add("@IsLaminationCompleted", parameters.IsLaminationCompleted);
+            queryParameters.Add("@IsLaminationLabTestCompleted", parameters.IsLaminationLabTestCompleted);
+            queryParameters.Add("@IsPrintingCompleted", parameters.IsPrintingCompleted);
+            queryParameters.Add("@IsCuttingCompleted", parameters.IsCuttingCompleted);
+            queryParameters.Add("@IsInventoryCompleted", parameters.IsInventoryCompleted);
             queryParameters.Add("@SearchText", parameters.SearchText.SanitizeValue());
             queryParameters.Add("@IsActive", parameters.IsActive);
             queryParameters.Add("@PageNo", parameters.PageNo);

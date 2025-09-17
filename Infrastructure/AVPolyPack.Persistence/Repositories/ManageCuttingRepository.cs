@@ -20,6 +20,7 @@ namespace AVPolyPack.Persistence.Repositories
             _configuration = configuration;
         }
 
+        #region Cutting
         public async Task<int> SaveCutting(Cutting_Request parameters)
         {
             DynamicParameters queryParameters = new DynamicParameters();
@@ -63,5 +64,45 @@ namespace AVPolyPack.Persistence.Repositories
             queryParameters.Add("@Id", Id);
             return (await ListByStoredProcedure<Cutting_Response>("GetCuttingById", queryParameters)).FirstOrDefault();
         }
+
+        #endregion
+
+        #region Cutting Machine Reading
+        public async Task<int> SaveCuttingMachineReading(CuttingMachineReading_Request parameters)
+        {
+            DynamicParameters queryParameters = new DynamicParameters();
+            queryParameters.Add("@Id", parameters.Id);
+            queryParameters.Add("@ShiftType", parameters.ShiftType);
+            queryParameters.Add("@CuttingMachineId", parameters.CuttingMachineId);
+            queryParameters.Add("@OpeningReading", parameters.OpeningReading);
+            queryParameters.Add("@ClosingReading", parameters.ClosingReading);
+            queryParameters.Add("@UserId", SessionManager.LoggedInUserId);
+
+            return await SaveByStoredProcedure<int>("SaveCuttingMachineReading", queryParameters);
+        }
+
+        public async Task<IEnumerable<CuttingMachineReading_Response>> GetCuttingMachineReadingList(CuttingMachineReading_Search parameters)
+        {
+            DynamicParameters queryParameters = new DynamicParameters();
+            queryParameters.Add("@SearchText", parameters.SearchText.SanitizeValue());
+            queryParameters.Add("@IsActive", parameters.IsActive);
+            queryParameters.Add("@PageNo", parameters.PageNo);
+            queryParameters.Add("@PageSize", parameters.PageSize);
+            queryParameters.Add("@Total", parameters.Total, null, System.Data.ParameterDirection.Output);
+            queryParameters.Add("@UserId", SessionManager.LoggedInUserId);
+
+            var result = await ListByStoredProcedure<CuttingMachineReading_Response>("GetCuttingMachineReadingList", queryParameters);
+            parameters.Total = queryParameters.Get<int>("Total");
+
+            return result;
+        }
+
+        public async Task<CuttingMachineReading_Response?> GetCuttingMachineReadingById(int Id)
+        {
+            DynamicParameters queryParameters = new DynamicParameters();
+            queryParameters.Add("@Id", Id);
+            return (await ListByStoredProcedure<CuttingMachineReading_Response>("GetCuttingMachineReadingById", queryParameters)).FirstOrDefault();
+        }
+        #endregion
     }
 }

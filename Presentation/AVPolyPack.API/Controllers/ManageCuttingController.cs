@@ -26,6 +26,7 @@ namespace AVPolyPack.Controllers
             _manageCuttingRepository = manageCuttingRepository;
         }
 
+        #region cutting
         [Route("[action]")]
         [HttpPost]
         public async Task<ResponseModel> SaveCutting(Cutting_Request parameters)
@@ -85,5 +86,68 @@ namespace AVPolyPack.Controllers
             }
             return _response;
         }
+        #endregion
+
+        #region Cutting Machine Reading
+        [Route("[action]")]
+        [HttpPost]
+        public async Task<ResponseModel> SaveCuttingMachineReading(CuttingMachineReading_Request parameters)
+        {
+            int result = await _manageCuttingRepository.SaveCuttingMachineReading(parameters);
+
+            if (result == (int)SaveOperationEnums.NoRecordExists)
+            {
+                _response.Message = "No record exists";
+            }
+            else if (result == (int)SaveOperationEnums.ReocrdExists)
+            {
+                _response.Message = "Record already exists";
+            }
+            else if (result == (int)SaveOperationEnums.NoResult)
+            {
+                _response.Message = "Something went wrong, please try again";
+            }
+            else
+            {
+                if (parameters.Id == 0)
+                {
+                    _response.Message = "Record Submitted successfully";
+                }
+                else
+                {
+                    _response.Message = "Record Updated successfully";
+                }
+            }
+
+            _response.Id = result;
+            return _response;
+        }
+
+        [Route("[action]")]
+        [HttpPost]
+        public async Task<ResponseModel> GetCuttingMachineReadingList(CuttingMachineReading_Search parameters)
+        {
+            IEnumerable<CuttingMachineReading_Response> lstRoles = await _manageCuttingRepository.GetCuttingMachineReadingList(parameters);
+            _response.Data = lstRoles.ToList();
+            _response.Total = parameters.Total;
+            return _response;
+        }
+
+        [Route("[action]")]
+        [HttpPost]
+        public async Task<ResponseModel> GetCuttingMachineReadingById(int Id)
+        {
+            if (Id <= 0)
+            {
+                _response.Message = "Id is required";
+            }
+            else
+            {
+                var vResultObj = await _manageCuttingRepository.GetCuttingMachineReadingById(Id);
+                _response.Data = vResultObj;
+            }
+            return _response;
+        }
+        #endregion
     }
 }

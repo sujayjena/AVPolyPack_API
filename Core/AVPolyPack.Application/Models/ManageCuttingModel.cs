@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 
 namespace AVPolyPack.Application.Models
 {
+    #region Cutting
     public class Cutting_Search : BaseSearchEntity
     {
         public int? RollId { get; set; }
@@ -49,4 +50,28 @@ namespace AVPolyPack.Application.Models
         public bool? IsCompleted { get; set; }
         public DateTime? CompletedDateTime { get; set; }
     }
+    #endregion
+
+    #region Cutting Machine Reading
+    public class CuttingMachineReading_Search : BaseSearchEntity
+    {
+    }
+    public class CuttingMachineReading_Request : BaseEntity
+    {
+        public int? ShiftType { get; set; }
+        public int? CuttingMachineId { get; set; }
+        public int? OpeningReading { get; set; }
+        public int? ClosingReading { get; set; }
+    }
+
+    public class CuttingMachineReading_Response : BaseResponseEntity
+    {
+        public int? ShiftType { get; set; }
+        public int? CuttingMachineId { get; set; }
+        public string? MachineName { get; set; }
+        public string? Descriptions { get; set; }
+        public int? OpeningReading { get; set; }
+        public int? ClosingReading { get; set; }
+    }
+    #endregion
 }

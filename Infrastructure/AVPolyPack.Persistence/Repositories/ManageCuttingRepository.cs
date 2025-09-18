@@ -84,6 +84,10 @@ namespace AVPolyPack.Persistence.Repositories
         public async Task<IEnumerable<CuttingMachineReading_Response>> GetCuttingMachineReadingList(CuttingMachineReading_Search parameters)
         {
             DynamicParameters queryParameters = new DynamicParameters();
+            queryParameters.Add("@FromDate", parameters.FromDate);
+            queryParameters.Add("@ToDate", parameters.ToDate);
+            queryParameters.Add("@ShiftType", parameters.ShiftType);
+            queryParameters.Add("@CuttingMachineId", parameters.CuttingMachineId);
             queryParameters.Add("@SearchText", parameters.SearchText.SanitizeValue());
             queryParameters.Add("@IsActive", parameters.IsActive);
             queryParameters.Add("@PageNo", parameters.PageNo);

@@ -55,6 +55,13 @@ namespace AVPolyPack.Application.Models
     #region Cutting Machine Reading
     public class CuttingMachineReading_Search : BaseSearchEntity
     {
+        [DefaultValue(null)]
+        public DateTime? FromDate { get; set; }
+
+        [DefaultValue(null)]
+        public DateTime? ToDate { get; set; }
+        public int? ShiftType { get; set; }
+        public int? CuttingMachineId { get; set; }
     }
     public class CuttingMachineReading_Request : BaseEntity
     {

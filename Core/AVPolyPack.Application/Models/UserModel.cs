@@ -45,6 +45,7 @@ namespace AVPolyPack.Application.Models
         public decimal? Rate { get; set; }
 
         public string? AddressLine { get; set; }
+        public int? CountryId { get; set; }
         public int? StateId { get; set; }
         public int? DistrictId { get; set; }
         public int? CityId { get; set; }
@@ -143,6 +144,8 @@ namespace AVPolyPack.Application.Models
         public decimal? Rate { get; set; }
 
         public string? AddressLine { get; set; }
+        public int? CountryId { get; set; }
+        public string? CountryName { get; set; }
         public int? StateId { get; set; }
         public string? StateName { get; set; }
         public int? DistrictId { get; set; }

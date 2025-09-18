@@ -72,6 +72,7 @@ namespace AVPolyPack.Application.Models
         public string? TPT { get; set; }
         public string? Brightner { get; set; }
         public string? Color { get; set; }
+        public int? MeasurementType { get; set; }
         public string? Size { get; set; }
         public string? GSM { get; set; }
         public string? GPM { get; set; }
@@ -179,6 +180,7 @@ namespace AVPolyPack.Application.Models
         public string? TPT { get; set; }
         public string? Brightner { get; set; }
         public string? Color { get; set; }
+        public int? MeasurementType { get; set; }
         public string? Size { get; set; }
         public string? GSM { get; set; }
         public string? GPM { get; set; }

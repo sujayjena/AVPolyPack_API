@@ -86,6 +86,7 @@ namespace AVPolyPack.Persistence.Repositories
             queryParameters.Add("@TPT", parameters.TPT);
             queryParameters.Add("@Brightner", parameters.Brightner);
             queryParameters.Add("@Color", parameters.Color);
+            queryParameters.Add("@MeasurementType", parameters.MeasurementType);
             queryParameters.Add("@Size", parameters.Size);
             queryParameters.Add("@GSM", parameters.GSM);
             queryParameters.Add("@GPM", parameters.GPM);

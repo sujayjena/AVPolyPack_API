@@ -46,6 +46,7 @@ namespace AVPolyPack.Persistence.Repositories
             queryParameters.Add("@Rate", parameters.Rate);
 
             queryParameters.Add("@AddressLine", parameters.AddressLine);
+            queryParameters.Add("@CountryId", parameters.CountryId);
             queryParameters.Add("@StateId", parameters.StateId);
             queryParameters.Add("@DistrictId", parameters.DistrictId);
             queryParameters.Add("@CityId", parameters.CityId);

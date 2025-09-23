@@ -289,5 +289,13 @@ namespace AVPolyPack.Application.Interfaces
         Task<Effort_Response?> GetEffortById(long Id);
 
         #endregion
+
+        #region Starting Series
+
+        Task<int> SaveStartingSeries(StartingSeries_Request parameters);
+        Task<IEnumerable<StartingSeries_Response>> GetStartingSeriesList(StartingSeries_Search parameters);
+        Task<StartingSeries_Response?> GetStartingSeriesById(long Id);
+
+        #endregion
     }
 }

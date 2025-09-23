@@ -154,6 +154,8 @@ namespace AVPolyPack.Persistence.Repositories
             DynamicParameters queryParameters = new DynamicParameters();
 
             queryParameters.Add("@OrderId", parameters.OrderId);
+            queryParameters.Add("@OrderType", parameters.OrderType);
+            queryParameters.Add("@IsAssignLoom", parameters.IsAssignLoom);
             queryParameters.Add("@SearchText", parameters.SearchText.SanitizeValue());
             queryParameters.Add("@IsActive", parameters.IsActive);
             queryParameters.Add("@PageNo", parameters.PageNo);

@@ -714,4 +714,25 @@ namespace AVPolyPack.Application.Models
     }
 
     #endregion
+
+    #region Starting Series
+    public class StartingSeries_Search : BaseSearchEntity
+    {
+    }
+
+    public class StartingSeries_Request : BaseEntity
+    {
+        public string? YearName { get; set; }
+        public string? YearCode { get; set; }
+        public bool? IsActive { get; set; }
+    }
+
+    public class StartingSeries_Response : BaseResponseEntity
+    {
+        public string? YearName { get; set; }
+        public string? YearCode { get; set; }
+        public bool? IsActive { get; set; }
+    }
+
+    #endregion
 }

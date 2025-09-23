@@ -320,6 +320,7 @@ namespace AVPolyPack.Application.Models
         public int? EmployeeId { get; set; }
         public string? AssignedOperatorName { get; set; }
         public string? RollCode { get; set; }
+        public decimal? SizeReadingAvg { get; set; }
         public string? BarcodeOriginalFileName { get; set; }
         public string? BarcodeFileName { get; set; }
         public string? BarcodeURL { get; set; }

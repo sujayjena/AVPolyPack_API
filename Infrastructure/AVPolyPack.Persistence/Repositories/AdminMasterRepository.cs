@@ -1360,5 +1360,44 @@ namespace AVPolyPack.Persistence.Repositories
         }
 
         #endregion
+
+        #region Starting Series
+
+        public async Task<int> SaveStartingSeries(StartingSeries_Request parameters)
+        {
+            DynamicParameters queryParameters = new DynamicParameters();
+            queryParameters.Add("@Id", parameters.Id);
+            queryParameters.Add("@YearName", parameters.YearName);
+            queryParameters.Add("@YearCode", parameters.YearCode);
+            queryParameters.Add("@IsActive", parameters.IsActive);
+            queryParameters.Add("@UserId", SessionManager.LoggedInUserId);
+
+            return await SaveByStoredProcedure<int>("SaveStartingSeries", queryParameters);
+        }
+
+        public async Task<IEnumerable<StartingSeries_Response>> GetStartingSeriesList(StartingSeries_Search parameters)
+        {
+            DynamicParameters queryParameters = new DynamicParameters();
+            queryParameters.Add("@SearchText", parameters.SearchText.SanitizeValue());
+            queryParameters.Add("@IsActive", parameters.IsActive);
+            queryParameters.Add("@PageNo", parameters.PageNo);
+            queryParameters.Add("@PageSize", parameters.PageSize);
+            queryParameters.Add("@Total", parameters.Total, null, System.Data.ParameterDirection.Output);
+            queryParameters.Add("@UserId", SessionManager.LoggedInUserId);
+
+            var result = await ListByStoredProcedure<StartingSeries_Response>("GetStartingSeriesList", queryParameters);
+            parameters.Total = queryParameters.Get<int>("Total");
+
+            return result;
+        }
+
+        public async Task<StartingSeries_Response?> GetStartingSeriesById(long Id)
+        {
+            DynamicParameters queryParameters = new DynamicParameters();
+            queryParameters.Add("@Id", Id);
+            return (await ListByStoredProcedure<StartingSeries_Response>("GetStartingSeriesById", queryParameters)).FirstOrDefault();
+        }
+
+        #endregion
     }
 }

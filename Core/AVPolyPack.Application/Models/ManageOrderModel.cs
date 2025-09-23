@@ -59,6 +59,8 @@ namespace AVPolyPack.Application.Models
     public class OrderItem_Search : BaseSearchEntity
     {
         public int? OrderId { get; set; }
+        public int? OrderType { get; set; }
+        public int? IsAssignLoom { get; set; }
     }
     public class OrderItem_Request : BaseEntity
     {
@@ -171,6 +173,7 @@ namespace AVPolyPack.Application.Models
         public int? PaymentTermId { get; set; }
         public string? PaymentTerm { get; set; }
         public string? OrderItemNo { get; set; }
+        public string? LoomNumber { get; set; }
         public int? ProductId { get; set; }
         public string? ProductName { get; set; }
         public string? Mixing { get; set; }

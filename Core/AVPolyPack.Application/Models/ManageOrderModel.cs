@@ -27,6 +27,12 @@ namespace AVPolyPack.Application.Models
         public int? CustomerId { get; set; }
         public string? PONumber { get; set; }
         public DateTime? PODate { get; set; }
+        public string? POAttachmentOriginalFileName { get; set; }
+
+        [JsonIgnore]
+        public string? POAttachmentFileName { get; set; }
+        public string? POAttachment_Base64 { get; set; }
+
         public string? OrderNumber { get; set; }
         public DateTime? OrderDate { get; set; }
         public DateTime? DeliveryDate { get; set; }
@@ -45,6 +51,11 @@ namespace AVPolyPack.Application.Models
         public int? OrderType { get; set; }
         public int? CustomerId { get; set; }
         public string? CustomerName { get; set; }
+        public string? PONumber { get; set; }
+        public DateTime? PODate { get; set; }
+        public string? POAttachmentOriginalFileName { get; set; }
+        public string? POAttachmentFileName { get; set; }
+        public string? POAttachment_URL { get; set; }
         public string? OrderNumber { get; set; }
         public DateTime? OrderDate { get; set; }
         public DateTime? DeliveryDate { get; set; }

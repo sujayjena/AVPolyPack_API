@@ -34,6 +34,17 @@ namespace AVPolyPack.Controllers
         [HttpPost]
         public async Task<ResponseModel> SaveOrder(Order_Request parameters)
         {
+            // PO Attachment Upload
+            if (parameters != null && !string.IsNullOrWhiteSpace(parameters.POAttachment_Base64))
+            {
+                var vUploadFile = _fileManager.UploadDocumentsBase64ToFile(parameters.POAttachment_Base64, "\\Uploads\\Order\\", parameters.POAttachmentOriginalFileName);
+
+                if (!string.IsNullOrWhiteSpace(vUploadFile))
+                {
+                    parameters.POAttachmentFileName = vUploadFile;
+                }
+            }
+
             int result = await _manageOrderRepository.SaveOrder(parameters);
 
             if (result == (int)SaveOperationEnums.NoRecordExists)
@@ -139,6 +150,8 @@ namespace AVPolyPack.Controllers
                 {
                     var vOrderItem_Search = new OrderItem_Search();
                     vOrderItem_Search.OrderId = vResultObj.Id;
+                    vOrderItem_Search.OrderType = 0;
+                    vOrderItem_Search.IsAssignLoom = 0;
 
                     var vList = await _manageOrderRepository.GetOrderItemList(vOrderItem_Search);
 

@@ -30,6 +30,8 @@ namespace AVPolyPack.Persistence.Repositories
             queryParameters.Add("@CustomerId", parameters.CustomerId);
             queryParameters.Add("@PONumber", parameters.PONumber);
             queryParameters.Add("@PODate", parameters.PODate);
+            queryParameters.Add("@POAttachmentOriginalFileName", parameters.POAttachmentOriginalFileName);
+            queryParameters.Add("@POAttachmentFileName", parameters.POAttachmentFileName);
             queryParameters.Add("@OrderNumber", parameters.OrderNumber);
             queryParameters.Add("@OrderDate", parameters.OrderDate);
             queryParameters.Add("@DeliveryDate", parameters.DeliveryDate);

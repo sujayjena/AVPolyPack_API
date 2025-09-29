@@ -27,6 +27,69 @@ namespace AVPolyPack.Controllers
             _manageLabTestRepository = manageLabTestRepository;
         }
 
+        #region Size Entry
+        [Route("[action]")]
+        [HttpPost]
+        public async Task<ResponseModel> SaveSizeEntry(SizeEntry_Request parameters)
+        {
+            int result = await _manageLabTestRepository.SaveSizeEntry(parameters);
+
+            if (result == (int)SaveOperationEnums.NoRecordExists)
+            {
+                _response.Message = "No record exists";
+            }
+            else if (result == (int)SaveOperationEnums.ReocrdExists)
+            {
+                _response.Message = "Record already exists";
+            }
+            else if (result == (int)SaveOperationEnums.NoResult)
+            {
+                _response.Message = "Something went wrong, please try again";
+            }
+            else
+            {
+                if (parameters.Id == 0)
+                {
+                    _response.Message = "Record Submitted successfully";
+                }
+                else
+                {
+                    _response.Message = "Record Updated successfully";
+                }
+            }
+
+            _response.Id = result;
+            return _response;
+        }
+
+        [Route("[action]")]
+        [HttpPost]
+        public async Task<ResponseModel> GetSizeEntryList(SizeEntry_Search parameters)
+        {
+            IEnumerable<SizeEntry_Response> lstRoles = await _manageLabTestRepository.GetSizeEntryList(parameters);
+            _response.Data = lstRoles.ToList();
+            _response.Total = parameters.Total;
+            return _response;
+        }
+
+        [Route("[action]")]
+        [HttpPost]
+        public async Task<ResponseModel> GetSizeEntryById(int Id)
+        {
+            if (Id <= 0)
+            {
+                _response.Message = "Id is required";
+            }
+            else
+            {
+                var vResultObj = await _manageLabTestRepository.GetSizeEntryById(Id);
+                _response.Data = vResultObj;
+            }
+            return _response;
+        }
+
+        #endregion
+
         #region Mesh Entry
         [Route("[action]")]
         [HttpPost]

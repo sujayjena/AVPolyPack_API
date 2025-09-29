@@ -9,6 +9,12 @@ namespace AVPolyPack.Application.Interfaces
 {
     public interface IManageLabTestRepository
     {
+        #region Size Entry
+        Task<int> SaveSizeEntry(SizeEntry_Request parameters);
+        Task<IEnumerable<SizeEntry_Response>> GetSizeEntryList(SizeEntry_Search parameters);
+        Task<SizeEntry_Response?> GetSizeEntryById(int Id);
+        #endregion
+
         #region Mesh Entry
         Task<int> SaveMeshEntry(MeshEntry_Request parameters);
         Task<IEnumerable<MeshEntry_Response>> GetMeshEntryList(MeshEntry_Search parameters);

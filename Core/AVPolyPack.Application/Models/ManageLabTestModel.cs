@@ -9,6 +9,34 @@ using System.Threading.Tasks;
 
 namespace AVPolyPack.Application.Models
 {
+    #region Size Entry
+    public class SizeEntry_Search : BaseSearchEntity
+    {
+        [DefaultValue(null)]
+        public DateTime? FromDate { get; set; }
+
+        [DefaultValue(null)]
+        public DateTime? ToDate { get; set; }
+
+        public int? RollId { get; set; }
+    }
+    public class SizeEntry_Request : BaseEntity
+    {
+        public int? RollId { get; set; }
+        public string? RequiredSize { get; set; }
+        public string? Size { get; set; }
+    }
+
+    public class SizeEntry_Response : BaseResponseEntity
+    {
+        public int? RollId { get; set; }
+        public string? RollNo { get; set; }
+        public string? RollCode { get; set; }
+        public string? RequiredSize { get; set; }
+        public string? Size { get; set; }
+    }
+    #endregion
+
     #region Mesh Entry
     public class MeshEntry_Search : BaseSearchEntity
     {

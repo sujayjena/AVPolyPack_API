@@ -81,6 +81,7 @@ namespace AVPolyPack.Persistence.Repositories
             queryParameters.Add("@BankDetailsFileName", parameters.BankDetailsFileName);
 
             queryParameters.Add("@IsSupervisor", parameters.IsSupervisor);
+            queryParameters.Add("@WorkingHour", parameters.WorkingHour);
             queryParameters.Add("@IsMobileUser", parameters.IsMobileUser);
             queryParameters.Add("@IsWebUser", parameters.IsWebUser);
             queryParameters.Add("@IsActive", parameters.IsActive);

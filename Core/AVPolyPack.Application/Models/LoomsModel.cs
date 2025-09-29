@@ -324,6 +324,7 @@ namespace AVPolyPack.Application.Models
         public string? BarcodeOriginalFileName { get; set; }
         public string? BarcodeFileName { get; set; }
         public string? BarcodeURL { get; set; }
+        public bool? LabTestSizeEntry { get; set; }
         public bool? LabTestMeshEntry { get; set; }
         public bool? LabTestAvgGSMEntry { get; set; }
         public bool? LabTestStrengthEntry { get; set; }

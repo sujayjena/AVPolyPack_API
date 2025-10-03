@@ -34,14 +34,12 @@ namespace AVPolyPack.Application.Models
 
         public string? EmailId { get; set; }
 
-        [JsonIgnore]
         public string? AadharCardImageFileName { get; set; }
 
         public string? AadharCardOriginalFileName { get; set; }
 
         public string? AadharCardImage_Base64 { get; set; }
 
-        [JsonIgnore]
         public string? PanCardImageFileName { get; set; }
 
         public string? PanCardOriginalFileName { get; set; }

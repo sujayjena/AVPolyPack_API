@@ -28,8 +28,6 @@ namespace AVPolyPack.Application.Models
         public string? PONumber { get; set; }
         public DateTime? PODate { get; set; }
         public string? POAttachmentOriginalFileName { get; set; }
-
-        [JsonIgnore]
         public string? POAttachmentFileName { get; set; }
         public string? POAttachment_Base64 { get; set; }
 
@@ -164,13 +162,9 @@ namespace AVPolyPack.Application.Models
         public string? PerBundlePcs { get; set; }
         public string? PerBallWeight { get; set; }
         public string? FrontSideUploadOriginalFileName { get; set; }
-
-        [JsonIgnore]
         public string? FrontSideUploadFileName { get; set; }
         public string? FrontSideUpload_Base64 { get; set; }
         public string? BackSideUploadOriginalFileName { get; set; }
-
-        [JsonIgnore]
         public string? BackSideUploadFileName { get; set; }
         public string? BackSideUpload_Base64 { get; set; }
     }

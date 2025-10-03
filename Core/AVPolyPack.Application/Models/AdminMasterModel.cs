@@ -311,8 +311,6 @@ namespace AVPolyPack.Application.Models
         public int? ProductTypeId { get; set; }
         public bool? IsImage { get; set; }
         public string? ImageOriginalFileName { get; set; }
-
-        [JsonIgnore]
         public string? ImageFileName { get; set; }
         public string? Image_Base64 { get; set; }
         public bool? IsActive { get; set; }

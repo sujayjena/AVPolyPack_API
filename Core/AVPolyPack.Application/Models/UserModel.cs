@@ -71,29 +71,21 @@ namespace AVPolyPack.Application.Models
 
         public string? PanNumber { get; set; }
         public string? PanCardOriginalFileName { get; set; }
-
-        [JsonIgnore]
         public string? PanCardImage { get; set; }
         public string? PanCardImage_Base64 { get; set; }
 
         public string? ProfileOriginalFileName { get; set; }
-
-        [JsonIgnore]
         public string? ProfileImage { get; set; }
         public string? ProfileImage_Base64 { get; set; }
        
         public string? OtherProof { get; set; }
         public string? OtherProofOriginalFileName { get; set; }
-
-        [JsonIgnore]
         public string? OtherProofFileName { get; set; }
         public string? OtherProof_Base64 { get; set; }
         public int? BankId { get; set; }
         public string? BankAccountNo { get; set; }
         public string? BankIFSCCode { get; set; }
         public string? BankDetailsOriginalFileName { get; set; }
-
-        [JsonIgnore]
         public string? BankDetailsFileName { get; set; }
         public string? BankDetails_Base64 { get; set; }
 

@@ -39,8 +39,6 @@ namespace AVPolyPack.Application.Models
         public int? Pincode { get; set; }
         public string? GSTNumber { get; set; }
         public string? PANNumber { get; set; }
-
-        [JsonIgnore]
         public string? LogoImageFileName { get; set; }
         public string? LogoImageOriginalFileName { get; set; }
         public string? LogoImage_Base64 { get; set; }

@@ -35,14 +35,12 @@ namespace AVPolyPack.Application.Models
 
         public string? GSTNumber { get; set; }
 
-        [JsonIgnore]
         public string? GSTImageFileName { get; set; }
 
         public string? GSTImage_Base64 { get; set; }
 
         public string? GSTImageOriginalFileName { get; set; }
 
-        [JsonIgnore]
         public string? PanCardImageFileName { get; set; }
 
         public string? PanCardImage_Base64 { get; set; }

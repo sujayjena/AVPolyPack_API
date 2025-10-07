@@ -48,6 +48,17 @@ namespace AVPolyPack.API.Controllers.Admin
                 }
             }
 
+            // Aadhar Card Back Upload
+            if (parameters! != null && !string.IsNullOrWhiteSpace(parameters.AadharBack_Base64))
+            {
+                var vUploadFile = _fileManager.UploadDocumentsBase64ToFile(parameters.AadharBack_Base64, "\\Uploads\\Employee\\", parameters.AadharBackOriginalFileName);
+
+                if (!string.IsNullOrWhiteSpace(vUploadFile))
+                {
+                    parameters.AadharBackFileName = vUploadFile;
+                }
+            }
+
             // Pan Card Upload
             if (parameters != null && !string.IsNullOrWhiteSpace(parameters.PanCardImage_Base64))
             {
@@ -109,6 +120,10 @@ namespace AVPolyPack.API.Controllers.Admin
             else if (result == -4)
             {
                 _response.Message = "Mobile # already exists";
+            }
+            else if (result == -5)
+            {
+                _response.Message = "Aadhar # already exists";
             }
             else if (result == (int)SaveOperationEnums.NoResult)
             {

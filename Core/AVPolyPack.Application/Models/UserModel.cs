@@ -25,6 +25,7 @@ namespace AVPolyPack.Application.Models
         public string? UserCode { get; set; }
         public string? UserName { get; set; }
         public string? MobileNumber { get; set; }
+        public int? EmployeeType { get; set; }
         public string? EmailId { get; set; }
         public string? Password { get; set; }
         public string? UserType { get; set; }
@@ -69,6 +70,10 @@ namespace AVPolyPack.Application.Models
         public string? AadharImage { get; set; }
         public string? AadharImage_Base64 { get; set; }
 
+        public string? AadharBackOriginalFileName { get; set; }
+        public string? AadharBackFileName { get; set; }
+        public string? AadharBack_Base64 { get; set; }
+
         public string? PanNumber { get; set; }
         public string? PanCardOriginalFileName { get; set; }
         public string? PanCardImage { get; set; }
@@ -83,6 +88,7 @@ namespace AVPolyPack.Application.Models
         public string? OtherProofFileName { get; set; }
         public string? OtherProof_Base64 { get; set; }
         public int? BankId { get; set; }
+        public string? BankName { get; set; }
         public string? BankAccountNo { get; set; }
         public string? BankIFSCCode { get; set; }
         public string? BankDetailsOriginalFileName { get; set; }
@@ -109,6 +115,7 @@ namespace AVPolyPack.Application.Models
         public string? UserCode { get; set; }
         public string? UserName { get; set; }
         public string? MobileNumber { get; set; }
+        public int? EmployeeType { get; set; }
         public string? EmailId { get; set; }
         public string? Password { get; set; }
         public string? UserType { get; set; }
@@ -166,6 +173,10 @@ namespace AVPolyPack.Application.Models
         public string? AadharImage { get; set; }
         public string? AadharImageURL { get; set; }
 
+        public string? AadharBackOriginalFileName { get; set; }
+        public string? AadharBackFileName { get; set; }
+        public string? AadharBackURL { get; set; }
+
         public string? PanNumber { get; set; }
         public string? PanCardOriginalFileName { get; set; }
         public string? PanCardImage { get; set; }
@@ -180,7 +191,6 @@ namespace AVPolyPack.Application.Models
         public string? OtherProofFileName { get; set; }
         public string? OtherProofURL { get; set; }
 
-        public int? BankId { get; set; }
         public string? BankName { get; set; }
         public string? BankAccountNo { get; set; }
         public string? BankIFSCCode { get; set; }

@@ -29,6 +29,7 @@ namespace AVPolyPack.Persistence.Repositories
             queryParameters.Add("@UserCode", parameters.UserCode);
             queryParameters.Add("@UserName", parameters.UserName);
             queryParameters.Add("@MobileNumber", parameters.MobileNumber);
+            queryParameters.Add("@EmployeeType", parameters.EmployeeType);
             queryParameters.Add("@EmailId", parameters.EmailId);
             queryParameters.Add("@Password", !string.IsNullOrWhiteSpace(parameters.Password) ? EncryptDecryptHelper.EncryptString(parameters.Password) : string.Empty);
             queryParameters.Add("@UserType", parameters.UserType);
@@ -66,6 +67,9 @@ namespace AVPolyPack.Persistence.Repositories
             queryParameters.Add("@AadharNumber", parameters.AadharNumber);
             queryParameters.Add("@AadharOriginalFileName", parameters.AadharOriginalFileName);
             queryParameters.Add("@AadharImage", parameters.AadharImage);
+            queryParameters.Add("@AadharBackOriginalFileName", parameters.AadharBackOriginalFileName);
+            queryParameters.Add("@AadharBackFileName", parameters.AadharBackFileName);
+
             queryParameters.Add("@PanNumber", parameters.PanNumber);
             queryParameters.Add("@PanCardOriginalFileName", parameters.PanCardOriginalFileName);
             queryParameters.Add("@PanCardImage", parameters.PanCardImage);
@@ -75,6 +79,7 @@ namespace AVPolyPack.Persistence.Repositories
             queryParameters.Add("@OtherProofOriginalFileName", parameters.OtherProofOriginalFileName);
             queryParameters.Add("@OtherProofFileName", parameters.OtherProofFileName);
             queryParameters.Add("@BankId", parameters.BankId);
+            queryParameters.Add("@BankName", parameters.BankName);
             queryParameters.Add("@BankAccountNo", parameters.BankAccountNo);
             queryParameters.Add("@BankIFSCCode", parameters.BankIFSCCode);
             queryParameters.Add("@BankDetailsOriginalFileName", parameters.BankDetailsOriginalFileName);

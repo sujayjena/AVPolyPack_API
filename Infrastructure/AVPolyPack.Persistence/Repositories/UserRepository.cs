@@ -44,6 +44,7 @@ namespace AVPolyPack.Persistence.Repositories
             queryParameters.Add("@GenderId", parameters.GenderId);
             queryParameters.Add("@MaritalStatusId", parameters.MaritalStatusId);
             queryParameters.Add("@Hours", parameters.Hours);
+            queryParameters.Add("@RateType", parameters.RateType);
             queryParameters.Add("@Rate", parameters.Rate);
 
             queryParameters.Add("@AddressLine", parameters.AddressLine);

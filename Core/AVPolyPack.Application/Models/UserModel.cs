@@ -43,6 +43,7 @@ namespace AVPolyPack.Application.Models
         public int? GenderId { get; set; }
         public int? MaritalStatusId { get; set; }
         public string? Hours { get; set; }
+        public int? RateType { get; set; }
         public decimal? Rate { get; set; }
 
         public string? AddressLine { get; set; }
@@ -141,6 +142,7 @@ namespace AVPolyPack.Application.Models
         public int? MaritalStatusId { get; set; }
         public string? MaritalStatus { get; set; }
         public string? Hours { get; set; }
+        public int? RateType { get; set; }
         public decimal? Rate { get; set; }
 
         public string? AddressLine { get; set; }

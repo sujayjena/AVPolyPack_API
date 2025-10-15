@@ -277,23 +277,23 @@ namespace AVPolyPack.Application.Models
         [DefaultValue(null)]
         public bool? IsRollCompleted { get; set; }
 
-        [DefaultValue(null)]
-        public bool? IsLabTestCompleted { get; set; }
+        [DefaultValue(0)]
+        public int? OperationType { get; set; }
 
-        [DefaultValue(null)]
-        public bool? IsLaminationCompleted { get; set; }
+        [DefaultValue(false)]
+        public bool? IsOperationCompleted { get; set; }
 
-        [DefaultValue(null)]
-        public bool? IsLaminationLabTestCompleted { get; set; }
+        //[DefaultValue(null)]
+        //public bool? IsLaminationLabTestCompleted { get; set; }
 
-        [DefaultValue(null)]
-        public bool? IsPrintingCompleted { get; set; }
+        //[DefaultValue(null)]
+        //public bool? IsPrintingCompleted { get; set; }
 
-        [DefaultValue(null)]
-        public bool? IsCuttingCompleted { get; set; }
+        //[DefaultValue(null)]
+        //public bool? IsCuttingCompleted { get; set; }
 
-        [DefaultValue(null)]
-        public bool? IsInventoryCompleted { get; set; }
+        //[DefaultValue(null)]
+        //public bool? IsInventoryCompleted { get; set; }
     }
 
     public class Roll_Response : BaseResponseEntity

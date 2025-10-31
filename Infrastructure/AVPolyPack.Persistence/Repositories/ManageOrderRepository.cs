@@ -133,6 +133,7 @@ namespace AVPolyPack.Persistence.Repositories
             queryParameters.Add("@IsLinerStiching", parameters.IsLinerStiching);
             queryParameters.Add("@LinerSize", parameters.LinerSize);
             queryParameters.Add("@IsPrinting", parameters.IsPrinting);
+            queryParameters.Add("@TotalColor", parameters.TotalColor);
             queryParameters.Add("@PrintingSide", parameters.PrintingSide);
             queryParameters.Add("@IsCutting", parameters.IsCutting);
             queryParameters.Add("@CuttingType", parameters.CuttingType);
@@ -146,6 +147,10 @@ namespace AVPolyPack.Persistence.Repositories
             queryParameters.Add("@FrontSideUploadFileName", parameters.FrontSideUploadFileName);
             queryParameters.Add("@BackSideUploadOriginalFileName", parameters.BackSideUploadOriginalFileName);
             queryParameters.Add("@BackSideUploadFileName", parameters.BackSideUploadFileName);
+            queryParameters.Add("@TopPhotoOriginalFileName", parameters.TopPhotoOriginalFileName);
+            queryParameters.Add("@TopPhotoFileName", parameters.TopPhotoFileName);
+            queryParameters.Add("@BottomPhotoOriginalFileName", parameters.BottomPhotoOriginalFileName);
+            queryParameters.Add("@BottomPhotoFileName", parameters.BottomPhotoFileName);
             queryParameters.Add("@UserId", SessionManager.LoggedInUserId);
 
             return await SaveByStoredProcedure<int>("SaveOrderItem", queryParameters);

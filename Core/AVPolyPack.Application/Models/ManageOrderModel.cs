@@ -148,6 +148,7 @@ namespace AVPolyPack.Application.Models
 
         [DefaultValue(false)]
         public bool? IsPrinting { get; set; }
+        public int? TotalColor { get; set; }
         public int? PrintingSide { get; set; }
 
         [DefaultValue(false)]
@@ -167,6 +168,12 @@ namespace AVPolyPack.Application.Models
         public string? BackSideUploadOriginalFileName { get; set; }
         public string? BackSideUploadFileName { get; set; }
         public string? BackSideUpload_Base64 { get; set; }
+        public string? TopPhotoOriginalFileName { get; set; }
+        public string? TopPhotoFileName { get; set; }
+        public string? TopPhoto_Base64 { get; set; }
+        public string? BottomPhotoOriginalFileName { get; set; }
+        public string? BottomPhotoFileName { get; set; }
+        public string? BottomPhoto_Base64 { get; set; }
     }
 
     public class OrderItem_Response : BaseResponseEntity
@@ -236,6 +243,7 @@ namespace AVPolyPack.Application.Models
         public bool? IsLinerStiching { get; set; }
         public string? LinerSize { get; set; }
         public bool? IsPrinting { get; set; }
+        public int? TotalColor { get; set; }
         public int? PrintingSide { get; set; }
         public bool? IsCutting { get; set; }
         public int? CuttingType { get; set; }
@@ -251,6 +259,12 @@ namespace AVPolyPack.Application.Models
         public string? BackSideUploadOriginalFileName { get; set; }
         public string? BackSideUploadFileName { get; set; }
         public string? BackSideUpload_URL { get; set; }
+        public string? TopPhotoOriginalFileName { get; set; }
+        public string? TopPhotoFileName { get; set; }
+        public string? TopPhoto_URL { get; set; }
+        public string? BottomPhotoOriginalFileName { get; set; }
+        public string? BottomPhotoFileName { get; set; }
+        public string? BottomPhoto_URL { get; set; }
     }
     #endregion
 
@@ -363,6 +377,7 @@ namespace AVPolyPack.Application.Models
         public bool? IsLinerStiching { get; set; }
         public string? LinerSize { get; set; }
         public bool? IsPrinting { get; set; }
+        public int? TotalColor { get; set; }
         public int? PrintingSide { get; set; }
         public bool? IsCutting { get; set; }
         public int? CuttingType { get; set; }
@@ -378,6 +393,12 @@ namespace AVPolyPack.Application.Models
         public string? BackSideUploadOriginalFileName { get; set; }
         public string? BackSideUploadFileName { get; set; }
         public string? BackSideUpload_URL { get; set; }
+        public string? TopPhotoOriginalFileName { get; set; }
+        public string? TopPhotoFileName { get; set; }
+        public string? TopPhoto_URL { get; set; }
+        public string? BottomPhotoOriginalFileName { get; set; }
+        public string? BottomPhotoFileName { get; set; }
+        public string? BottomPhoto_URL { get; set; }
     }
     #endregion
 
@@ -504,6 +525,7 @@ namespace AVPolyPack.Application.Models
         public bool? IsLinerStiching { get; set; }
         public string? LinerSize { get; set; }
         public bool? IsPrinting { get; set; }
+        public int? TotalColor { get; set; }
         public int? PrintingSide { get; set; }
         public bool? IsCutting { get; set; }
         public int? CuttingType { get; set; }
@@ -519,6 +541,12 @@ namespace AVPolyPack.Application.Models
         public string? BackSideUploadOriginalFileName { get; set; }
         public string? BackSideUploadFileName { get; set; }
         public string? BackSideUpload_URL { get; set; }
+        public string? TopPhotoOriginalFileName { get; set; }
+        public string? TopPhotoFileName { get; set; }
+        public string? TopPhoto_URL { get; set; }
+        public string? BottomPhotoOriginalFileName { get; set; }
+        public string? BottomPhotoFileName { get; set; }
+        public string? BottomPhoto_URL { get; set; }
     }
     #endregion
 }

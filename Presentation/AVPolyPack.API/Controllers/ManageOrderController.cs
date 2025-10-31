@@ -94,16 +94,6 @@ namespace AVPolyPack.Controllers
                         }
                     }
 
-
-                    if (vOrder != null)
-                    {
-                        rowIndex = rowIndex + 1;
-                        if (item.Id == 0)
-                        {
-                            item.OrderItemNo = (vOrder.OrderType == 1 ? "R_" : "B_") + "" + vOrder.OrderNumber + "." + rowIndex;
-                        }
-                    }
-
                     //Back Side Upload
                     if (item != null && !string.IsNullOrWhiteSpace(item.BackSideUpload_Base64))
                     {
@@ -112,6 +102,37 @@ namespace AVPolyPack.Controllers
                         if (!string.IsNullOrWhiteSpace(vUploadFile))
                         {
                             item.BackSideUploadFileName = vUploadFile;
+                        }
+                    }
+
+                    //Top Photo
+                    if (item != null && !string.IsNullOrWhiteSpace(item.TopPhoto_Base64))
+                    {
+                        var vUploadFile = _fileManager.UploadDocumentsBase64ToFile(item.TopPhoto_Base64, "\\Uploads\\Order\\", item.TopPhotoOriginalFileName);
+
+                        if (!string.IsNullOrWhiteSpace(vUploadFile))
+                        {
+                            item.TopPhotoFileName = vUploadFile;
+                        }
+                    }
+
+                    //Bottom Photo
+                    if (item != null && !string.IsNullOrWhiteSpace(item.BottomPhoto_Base64))
+                    {
+                        var vUploadFile = _fileManager.UploadDocumentsBase64ToFile(item.BottomPhoto_Base64, "\\Uploads\\Order\\", item.BottomPhotoOriginalFileName);
+
+                        if (!string.IsNullOrWhiteSpace(vUploadFile))
+                        {
+                            item.BottomPhotoFileName = vUploadFile;
+                        }
+                    }
+
+                    if (vOrder != null)
+                    {
+                        rowIndex = rowIndex + 1;
+                        if (item.Id == 0)
+                        {
+                            item.OrderItemNo = (vOrder.OrderType == 1 ? "R_" : "B_") + "" + vOrder.OrderNumber + "." + rowIndex;
                         }
                     }
 

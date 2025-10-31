@@ -733,4 +733,65 @@ namespace AVPolyPack.Application.Models
     }
 
     #endregion
+
+    #region Advance License
+    public class AdvanceLicense_Search : BaseSearchEntity
+    {
+    }
+
+    public class AdvanceLicense_Request : BaseEntity
+    {
+        public string? AdvanceLicenseNo { get; set; }
+        public DateTime? AdvanceLicenseDate { get; set; }
+        public DateTime? ImportValidityDate { get; set; }
+        public DateTime? ExportValidityDate { get; set; }
+        public string? UDDINNumber { get; set; }
+        public string? FileNumber { get; set; }
+        public int? ForeignCurrency { get; set; }
+        public string? ED_ProductName { get; set; }
+        public string? ED_HSCode { get; set; }
+        public decimal? ED_Quantity { get; set; }
+        public int? ED_UOMId { get; set; }
+        public decimal? ED_FOBValueInINR { get; set; }
+        public decimal? ED_FOBValueInForeignC { get; set; }
+        public string? ID_ProductName { get; set; }
+        public string? ID_HSCode { get; set; }
+        public decimal? ID_Quantity { get; set; }
+        public int? ID_UOMId { get; set; }
+        public decimal? ID_CIFInINR { get; set; }
+        public decimal? ID_CIFInForeignC { get; set; }
+        public decimal? ID_DutySavedAmt { get; set; }
+        public DateTime? ID_RegistrationDate { get; set; }
+        public decimal? ID_BondValue { get; set; }
+    }
+
+    public class AdvanceLicense_Response : BaseResponseEntity
+    {
+        public string? AdvanceLicenseNo { get; set; }
+        public DateTime? AdvanceLicenseDate { get; set; }
+        public DateTime? ImportValidityDate { get; set; }
+        public DateTime? ExportValidityDate { get; set; }
+        public string? UDDINNumber { get; set; }
+        public string? FileNumber { get; set; }
+        public int? ForeignCurrency { get; set; }
+        public string? ED_ProductName { get; set; }
+        public string? ED_HSCode { get; set; }
+        public decimal? ED_Quantity { get; set; }
+        public int? ED_UOMId { get; set; }
+        public string? ED_UOMName { get; set; }
+        public decimal? ED_FOBValueInINR { get; set; }
+        public decimal? ED_FOBValueInForeignC { get; set; }
+        public string? ID_ProductName { get; set; }
+        public string? ID_HSCode { get; set; }
+        public decimal? ID_Quantity { get; set; }
+        public int? ID_UOMId { get; set; }
+        public string? ID_UOMName { get; set; }
+        public decimal? ID_CIFInINR { get; set; }
+        public decimal? ID_CIFInForeignC { get; set; }
+        public decimal? ID_DutySavedAmt { get; set; }
+        public DateTime? ID_RegistrationDate { get; set; }
+        public decimal? ID_BondValue { get; set; }
+    }
+
+    #endregion
 }

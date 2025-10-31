@@ -291,11 +291,15 @@ namespace AVPolyPack.Application.Interfaces
         #endregion
 
         #region Starting Series
-
         Task<int> SaveStartingSeries(StartingSeries_Request parameters);
         Task<IEnumerable<StartingSeries_Response>> GetStartingSeriesList(StartingSeries_Search parameters);
         Task<StartingSeries_Response?> GetStartingSeriesById(long Id);
+        #endregion
 
+        #region Advance License
+        Task<int> SaveAdvanceLicense(AdvanceLicense_Request parameters);
+        Task<IEnumerable<AdvanceLicense_Response>> GetAdvanceLicenseList(AdvanceLicense_Search parameters);
+        Task<AdvanceLicense_Response?> GetAdvanceLicenseById(long Id);
         #endregion
     }
 }

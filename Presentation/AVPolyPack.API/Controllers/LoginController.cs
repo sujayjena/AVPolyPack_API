@@ -173,8 +173,8 @@ namespace AVPolyPack.API.Controllers
 
             if (loginResponse != null)
             {
-                if (Convert.ToDateTime(DateTime.Now) < Convert.ToDateTime("2025-11-07"))
-                {
+                //if (Convert.ToDateTime(DateTime.Now) < Convert.ToDateTime("2025-11-20"))
+                //{
                     if (loginResponse.IsActive == true && (loginResponse.IsWebUser == true && parameters.IsWebOrMobileUser == "W" || (loginResponse.IsMobileUser == true && parameters.IsWebOrMobileUser == "M" && loginResponse.IsSupervisor == true)))
                     {
                         tokenResponse = _jwt.GenerateJwtToken(loginResponse);
@@ -250,12 +250,12 @@ namespace AVPolyPack.API.Controllers
                         _response.IsSuccess = false;
                         _response.Message = ErrorConstants.InactiveProfileError;
                     }
-                }
-                else
-                {
-                    _response.IsSuccess = false;
-                    _response.Message = "Invalid credential, please try again with correct credential";
-                }
+                //}
+                //else
+                //{
+                //    _response.IsSuccess = false;
+                //    _response.Message = "Service Unavailable (503) error.";
+                //}
             }
             else
             {

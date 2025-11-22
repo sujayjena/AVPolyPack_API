@@ -231,6 +231,7 @@ namespace AVPolyPack.Application.Models
 
     public class TerritoriesDataValidationErrors
     {
+        public string CountryName { get; set; }
         public string StateName { get; set; }
         public string DistrictName { get; set; }
         public string CityName { get; set; }
@@ -239,6 +240,7 @@ namespace AVPolyPack.Application.Models
     }
     public class ImportedTerritories
     {
+        public string CountryName { get; set; }
         public string StateName { get; set; }
         public string DistrictName { get; set; }
         public string CityName { get; set; }

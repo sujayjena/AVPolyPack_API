@@ -89,7 +89,7 @@ namespace AVPolyPack.Application.Models
         public string? GPM { get; set; }
         public string? Average { get; set; }
         public string? Gram { get; set; }
-        public string? Mesh { get; set; }
+        public int? MeshId { get; set; }
         public int? TypeId { get; set; }
         public int? SpecificationId { get; set; }
         public string? Strength { get; set; }
@@ -136,6 +136,7 @@ namespace AVPolyPack.Application.Models
 
         [DefaultValue(false)]
         public bool? IsLiner { get; set; }
+        public int? TypeOfLiner { get; set; }
         public int? LinerType { get; set; }
         public string? LinerWeight { get; set; }
 
@@ -174,6 +175,32 @@ namespace AVPolyPack.Application.Models
         public string? BottomPhotoOriginalFileName { get; set; }
         public string? BottomPhotoFileName { get; set; }
         public string? BottomPhoto_Base64 { get; set; }
+
+        [DefaultValue(false)]
+        public bool? IsUVStabilized { get; set; }
+        public string? UVPercentage { get; set; }
+
+        [DefaultValue(false)]
+        public bool? IsFolding { get; set; }
+        public string? FoldingSize { get; set; }
+
+        [DefaultValue(false)]
+        public bool? IsAntiSlip { get; set; }
+        public int? RollPackingType { get; set; }
+        public string? SpecialMarking { get; set; }
+        public string? AdditionalInstruction { get; set; }
+        public decimal? NetWeight { get; set; }
+        public string? BagName { get; set; }
+        public int? PackingType1 { get; set; }
+        public int? PackingType2 { get; set; }
+        public string? RollLength { get; set; }
+        public decimal? EstimatedWeight { get; set; }
+
+        [DefaultValue(false)]
+        public bool? IsGSM { get; set; }
+        public decimal? LaminationCoatingAvg { get; set; }
+        public decimal? LaminationAvg { get; set; }
+        public int? TopType { get; set; }
     }
 
     public class OrderItem_Response : BaseResponseEntity
@@ -201,7 +228,8 @@ namespace AVPolyPack.Application.Models
         public string? GPM { get; set; }
         public string? Average { get; set; }
         public string? Gram { get; set; }
-        public string? Mesh { get; set; }
+        public int? MeshId { get; set; }
+        public string? MeshName { get; set; }
         public int? TypeId { get; set; }
         public string? TypeName { get; set; }
         public int? SpecificationId { get; set; }
@@ -237,6 +265,7 @@ namespace AVPolyPack.Application.Models
         public bool? IsBOPPBag { get; set; }
         public string? PrintingMatter { get; set; }
         public bool? IsLiner { get; set; }
+        public int? TypeOfLiner { get; set; }
         public int? LinerType { get; set; }
         public string? LinerWeight { get; set; }
         public bool? IsLinerUV { get; set; }
@@ -265,6 +294,25 @@ namespace AVPolyPack.Application.Models
         public string? BottomPhotoOriginalFileName { get; set; }
         public string? BottomPhotoFileName { get; set; }
         public string? BottomPhoto_URL { get; set; }
+        public bool? IsUVStabilized { get; set; }
+        public string? UVPercentage { get; set; }
+        public bool? IsFolding { get; set; }
+        public string? FoldingSize { get; set; }
+        public bool? IsAntiSlip { get; set; }
+        public int? RollPackingType { get; set; }
+        public string? SpecialMarking { get; set; }
+        public string? AdditionalInstruction { get; set; }
+        public decimal? NetWeight { get; set; }
+        public string? BagName { get; set; }
+        public int? PackingType1 { get; set; }
+        public int? PackingType2 { get; set; }
+        public string? RollLength { get; set; }
+        public decimal? EstimatedWeight { get; set; }
+        public bool? IsGSM { get; set; }
+        public decimal? LaminationCoatingAvg { get; set; }
+        public decimal? LaminationAvg { get; set; }
+        public int? TopType { get; set; }
+        public DateTime? OrderItemAssignDateTime { get; set; }
     }
     #endregion
 

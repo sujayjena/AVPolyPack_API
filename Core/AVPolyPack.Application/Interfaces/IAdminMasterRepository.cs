@@ -301,5 +301,13 @@ namespace AVPolyPack.Application.Interfaces
         Task<IEnumerable<AdvanceLicense_Response>> GetAdvanceLicenseList(AdvanceLicense_Search parameters);
         Task<AdvanceLicense_Response?> GetAdvanceLicenseById(long Id);
         #endregion
+
+        #region Reference
+
+        Task<int> SaveReference(Reference_Request parameters);
+        Task<IEnumerable<Reference_Response>> GetReferenceList(Reference_Search parameters);
+        Task<Reference_Response?> GetReferenceById(long Id);
+
+        #endregion
     }
 }

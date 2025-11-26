@@ -794,4 +794,23 @@ namespace AVPolyPack.Application.Models
     }
 
     #endregion
+
+    #region Reference
+    public class Reference_Search : BaseSearchEntity
+    {
+    }
+
+    public class Reference_Request : BaseEntity
+    {
+        public string? ReferenceName { get; set; }
+        public bool? IsActive { get; set; }
+    }
+
+    public class Reference_Response : BaseResponseEntity
+    {
+        public string? ReferenceName { get; set; }
+        public bool? IsActive { get; set; }
+    }
+
+    #endregion
 }

@@ -94,7 +94,7 @@ namespace AVPolyPack.Persistence.Repositories
             queryParameters.Add("@GPM", parameters.GPM);
             queryParameters.Add("@Average", parameters.Average);
             queryParameters.Add("@Gram", parameters.Gram);
-            queryParameters.Add("@Mesh", parameters.Mesh);
+            queryParameters.Add("@MeshId", parameters.MeshId);
             queryParameters.Add("@TypeId", parameters.TypeId);
             queryParameters.Add("@SpecificationId", parameters.SpecificationId);
             queryParameters.Add("@Strength", parameters.Strength);
@@ -127,6 +127,7 @@ namespace AVPolyPack.Persistence.Repositories
             queryParameters.Add("@IsBOPPBag", parameters.IsBOPPBag);
             queryParameters.Add("@PrintingMatter", parameters.PrintingMatter);
             queryParameters.Add("@IsLiner", parameters.IsLiner);
+            queryParameters.Add("@TypeOfLiner", parameters.TypeOfLiner);
             queryParameters.Add("@LinerType", parameters.LinerType);
             queryParameters.Add("@LinerWeight", parameters.LinerWeight);
             queryParameters.Add("@IsLinerUV", parameters.IsLinerUV);
@@ -151,6 +152,24 @@ namespace AVPolyPack.Persistence.Repositories
             queryParameters.Add("@TopPhotoFileName", parameters.TopPhotoFileName);
             queryParameters.Add("@BottomPhotoOriginalFileName", parameters.BottomPhotoOriginalFileName);
             queryParameters.Add("@BottomPhotoFileName", parameters.BottomPhotoFileName);
+            queryParameters.Add("@IsUVStabilized", parameters.IsUVStabilized);
+            queryParameters.Add("@UVPercentage", parameters.UVPercentage);
+            queryParameters.Add("@IsFolding", parameters.IsFolding);
+            queryParameters.Add("@FoldingSize", parameters.FoldingSize);
+            queryParameters.Add("@IsAntiSlip", parameters.IsAntiSlip);
+            queryParameters.Add("@RollPackingType", parameters.RollPackingType);
+            queryParameters.Add("@SpecialMarking", parameters.SpecialMarking);
+            queryParameters.Add("@AdditionalInstruction", parameters.AdditionalInstruction);
+            queryParameters.Add("@NetWeight", parameters.NetWeight);
+            queryParameters.Add("@BagName", parameters.BagName);
+            queryParameters.Add("@PackingType1", parameters.PackingType1);
+            queryParameters.Add("@PackingType2", parameters.PackingType2);
+            queryParameters.Add("@RollLength", parameters.RollLength);
+            queryParameters.Add("@EstimatedWeight", parameters.EstimatedWeight);
+            queryParameters.Add("@IsGSM", parameters.IsGSM);
+            queryParameters.Add("@LaminationCoatingAvg", parameters.LaminationCoatingAvg);
+            queryParameters.Add("@LaminationAvg", parameters.LaminationAvg);
+            queryParameters.Add("@TopType", parameters.TopType);
             queryParameters.Add("@UserId", SessionManager.LoggedInUserId);
 
             return await SaveByStoredProcedure<int>("SaveOrderItem", queryParameters);

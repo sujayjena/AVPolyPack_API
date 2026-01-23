@@ -240,11 +240,10 @@ namespace AVPolyPack.API.Controllers.Admin
 
                     WorkSheet1.Cells[1, 1].Value = "Role Name";
                     WorkSheet1.Cells[1, 2].Value = "Department Name";
-                    WorkSheet1.Cells[1, 3].Value = "Employee Level";
-                    WorkSheet1.Cells[1, 4].Value = "Status";
+                    WorkSheet1.Cells[1, 3].Value = "Status";
 
-                    WorkSheet1.Cells[1, 5].Value = "CreatedDate";
-                    WorkSheet1.Cells[1, 6].Value = "CreatedBy";
+                    WorkSheet1.Cells[1, 4].Value = "CreatedDate";
+                    WorkSheet1.Cells[1, 5].Value = "CreatedBy";
 
 
                     recordIndex = 2;
@@ -253,22 +252,15 @@ namespace AVPolyPack.API.Controllers.Admin
                     {
                         WorkSheet1.Cells[recordIndex, 1].Value = items.RoleName;
                         WorkSheet1.Cells[recordIndex, 2].Value = items.DepartmentName;
-                        WorkSheet1.Cells[recordIndex, 3].Value = items.EmployeeLevel;
-                        WorkSheet1.Cells[recordIndex, 4].Value = items.IsActive == true ? "Active" : "Inactive";
+                        WorkSheet1.Cells[recordIndex, 3].Value = items.IsActive == true ? "Active" : "Inactive";
 
-                        WorkSheet1.Cells[recordIndex, 5].Style.Numberformat.Format = DateTimeFormatInfo.CurrentInfo.ShortDatePattern;
-                        WorkSheet1.Cells[recordIndex, 5].Value = items.CreatedDate;
-                        WorkSheet1.Cells[recordIndex, 6].Value = items.CreatorName;
+                        WorkSheet1.Cells[recordIndex, 4].Value = Convert.ToDateTime(items.CreatedDate).ToString("dd/MM/yyyy");
+                        WorkSheet1.Cells[recordIndex, 5].Value = items.CreatorName;
 
                         recordIndex += 1;
                     }
 
-                    WorkSheet1.Column(1).AutoFit();
-                    WorkSheet1.Column(2).AutoFit();
-                    WorkSheet1.Column(3).AutoFit();
-                    WorkSheet1.Column(4).AutoFit();
-                    WorkSheet1.Column(5).AutoFit();
-                    WorkSheet1.Column(6).AutoFit();
+                    WorkSheet1.Columns.AutoFit();
 
                     excelExportData.SaveAs(msExportDataFile);
                     msExportDataFile.Position = 0;

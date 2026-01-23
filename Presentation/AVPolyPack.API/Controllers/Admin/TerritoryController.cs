@@ -312,8 +312,7 @@ namespace AVPolyPack.API.Controllers.Admin
                         WorkSheet1.Cells[recordIndex, 1].Value = items.StateName;
                         WorkSheet1.Cells[recordIndex, 2].Value = items.IsActive == true ? "Active" : "Inactive";
 
-                        WorkSheet1.Cells[recordIndex, 3].Style.Numberformat.Format = DateTimeFormatInfo.CurrentInfo.ShortDatePattern;
-                        WorkSheet1.Cells[recordIndex, 3].Value = items.CreatedDate;
+                        WorkSheet1.Cells[recordIndex, 3].Value = Convert.ToDateTime(items.CreatedDate).ToString("dd/MM/yyyy");
                         WorkSheet1.Cells[recordIndex, 4].Value = items.CreatorName;
 
                         recordIndex += 1;
@@ -569,8 +568,7 @@ namespace AVPolyPack.API.Controllers.Admin
                         WorkSheet1.Cells[recordIndex, 1].Value = items.DistrictName;
                         WorkSheet1.Cells[recordIndex, 2].Value = items.IsActive == true ? "Active" : "Inactive";
 
-                        WorkSheet1.Cells[recordIndex, 3].Style.Numberformat.Format = DateTimeFormatInfo.CurrentInfo.ShortDatePattern;
-                        WorkSheet1.Cells[recordIndex, 3].Value = items.CreatedDate;
+                        WorkSheet1.Cells[recordIndex, 3].Value = Convert.ToDateTime(items.CreatedDate).ToString("dd/MM/yyyy");
                         WorkSheet1.Cells[recordIndex, 4].Value = items.CreatorName;
 
                         recordIndex += 1;
@@ -826,8 +824,7 @@ namespace AVPolyPack.API.Controllers.Admin
                         WorkSheet1.Cells[recordIndex, 1].Value = items.CityName;
                         WorkSheet1.Cells[recordIndex, 2].Value = items.IsActive == true ? "Active" : "Inactive";
 
-                        WorkSheet1.Cells[recordIndex, 3].Style.Numberformat.Format = DateTimeFormatInfo.CurrentInfo.ShortDatePattern;
-                        WorkSheet1.Cells[recordIndex, 3].Value = items.CreatedDate;
+                        WorkSheet1.Cells[recordIndex, 3].Value = Convert.ToDateTime(items.CreatedDate).ToString("dd/MM/yyyy");
                         WorkSheet1.Cells[recordIndex, 4].Value = items.CreatorName;
 
                         recordIndex += 1;
@@ -1109,8 +1106,7 @@ namespace AVPolyPack.API.Controllers.Admin
                         WorkSheet1.Cells[recordIndex, 4].Value = items.CityName;
                         WorkSheet1.Cells[recordIndex, 5].Value = items.IsActive == true ? "Active" : "Inactive";
 
-                        WorkSheet1.Cells[recordIndex, 6].Style.Numberformat.Format = DateTimeFormatInfo.CurrentInfo.ShortDatePattern;
-                        WorkSheet1.Cells[recordIndex, 6].Value = items.CreatedDate;
+                        WorkSheet1.Cells[recordIndex, 6].Value = Convert.ToDateTime(items.CreatedDate).ToString("dd/MM/yyyy");
                         WorkSheet1.Cells[recordIndex, 7].Value = items.CreatorName;
 
                         recordIndex += 1;

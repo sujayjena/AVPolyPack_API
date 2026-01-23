@@ -23,21 +23,19 @@ namespace AVPolyPack.Controllers
         private readonly ICustomerRepository _customerRepository;
         private readonly IContactDetailRepository _contactDetailRepository;
         private readonly IAddressRepository _addressRepository;
+        private readonly IShippingAddressRepository _shippingAddressRepository;
 
-        public CustomerController(
-            IFileManager fileManager,
-            ICustomerRepository customerRepository,
-            IContactDetailRepository contactDetailRepository,
-            IAddressRepository addressRepository
-            )
+        public CustomerController(IFileManager fileManager,ICustomerRepository customerRepository, IContactDetailRepository contactDetailRepository, IAddressRepository addressRepository, IShippingAddressRepository shippingAddressRepository)
         {
             _fileManager = fileManager;
             _customerRepository = customerRepository;
             _contactDetailRepository = contactDetailRepository;
             _addressRepository = addressRepository;
+            _shippingAddressRepository = shippingAddressRepository;
 
             _response = new ResponseModel();
             _response.IsSuccess = true;
+          
         }
 
         #region Customer 
@@ -87,11 +85,15 @@ namespace AVPolyPack.Controllers
                 parameters.ContactDetail.RefType = "Customer";
                 parameters.ContactDetail.IsDefault = true;
 
-                parameters.AddressDetail.RefId = result;
-                parameters.AddressDetail.RefType = "Customer";
-                parameters.AddressDetail.IsDefault = true;
+                parameters.BillingDetail.RefId = result;
+                parameters.BillingDetail.RefType = "Customer";
+                parameters.BillingDetail.IsDefault = true;
 
-                // Contact Detail
+                parameters.ShippingDetail.RefId = result;
+                parameters.ShippingDetail.RefType = "Customer";
+                parameters.ShippingDetail.IsDefault = true;
+
+                //Contact Detail
                 if (!string.IsNullOrWhiteSpace(parameters.ContactDetail.ContactName))
                 {
                     // Image Upload
@@ -118,10 +120,16 @@ namespace AVPolyPack.Controllers
                     int resultContact = await _contactDetailRepository.SaveContactDetail(parameters.ContactDetail);
                 }
 
-                // Address Detail
-                if (!string.IsNullOrWhiteSpace(parameters.AddressDetail.Address1))
+                //Billing Detail
+                if (!string.IsNullOrWhiteSpace(parameters.BillingDetail.Address1))
                 {
-                    int resultAddressDetail = await _addressRepository.SaveAddress(parameters.AddressDetail);
+                    int resultAddressDetail = await _addressRepository.SaveAddress(parameters.BillingDetail);
+                }
+
+                //Shipping Detail
+                if (!string.IsNullOrWhiteSpace(parameters.ShippingDetail.Address1))
+                {
+                    int resultAddressDetail = await _shippingAddressRepository.SaveShippingAddress(parameters.ShippingDetail);
                 }
 
                 if (parameters.Id == 0)
@@ -170,6 +178,11 @@ namespace AVPolyPack.Controllers
                     vCustomerDetail_Response.LandLineNumber = vResultObj.LandLineNumber;
                     vCustomerDetail_Response.MobileNumber = vResultObj.MobileNumber;
                     vCustomerDetail_Response.EmailId = vResultObj.EmailId;
+                    vCustomerDetail_Response.EmailId1 = vResultObj.EmailId1;
+                    vCustomerDetail_Response.ParentCustomerId = vResultObj.ParentCustomerId;
+                    vCustomerDetail_Response.ParentCustomerName = vResultObj.ParentCustomerName;
+                    vCustomerDetail_Response.ReferenceId = vResultObj.ReferenceId;
+                    vCustomerDetail_Response.ReferenceName = vResultObj.ReferenceName;
                     vCustomerDetail_Response.Website = vResultObj.Website;
                     vCustomerDetail_Response.Remark = vResultObj.Remark;
                     vCustomerDetail_Response.CustomerRemark = vResultObj.CustomerRemark;
@@ -181,8 +194,11 @@ namespace AVPolyPack.Controllers
                     vCustomerDetail_Response.PanCardImage = vResultObj.PanCardImage;
                     vCustomerDetail_Response.PanCardOriginalFileName = vResultObj.PanCardOriginalFileName;
                     vCustomerDetail_Response.PanCardImageURL = vResultObj.PanCardImageURL;
+                    vCustomerDetail_Response.BankName = vResultObj.BankName;
+                    vCustomerDetail_Response.BankAddress = vResultObj.BankAddress;
+                    vCustomerDetail_Response.BankAccount = vResultObj.BankAccount;
+                    vCustomerDetail_Response.BankIFSCCode = vResultObj.BankIFSCCode;
                     vCustomerDetail_Response.IsActive = vResultObj.IsActive;
-
 
                     var vContactDetail_Search = new ContactDetail_Search()
                     {
@@ -211,32 +227,62 @@ namespace AVPolyPack.Controllers
                         vCustomerDetail_Response.ContactDetail.IsActive = vContactObj.IsActive;
                     }
 
+                    //Billing Detail
                     var vAddress_Search = new Address_Search()
                     {
                         RefId = Convert.ToInt32(vResultObj.Id),
                         RefType = "Customer"
                     };
 
-                    // Address Detail
                     var vResultAddressListObj = await _addressRepository.GetAddressList(vAddress_Search);
                     var vAddressObj = vResultAddressListObj.ToList().Where(x => x.IsDefault == true).FirstOrDefault();
                     if (vAddressObj != null)
                     {
-                        vCustomerDetail_Response.AddressDetail.Id = vAddressObj.Id;
-                        vCustomerDetail_Response.AddressDetail.RefId = Convert.ToInt32(vAddressObj.RefId);
-                        vCustomerDetail_Response.AddressDetail.RefType = vAddressObj.RefType;
-                        vCustomerDetail_Response.AddressDetail.Address1 = vAddressObj.Address1;
-                        vCustomerDetail_Response.AddressDetail.CountryId = vAddressObj.CountryId;
-                        vCustomerDetail_Response.AddressDetail.CountryName = vAddressObj.CountryName;
-                        vCustomerDetail_Response.AddressDetail.StateId = vAddressObj.StateId;
-                        vCustomerDetail_Response.AddressDetail.StateName = vAddressObj.StateName;
-                        vCustomerDetail_Response.AddressDetail.DistrictId = vAddressObj.DistrictId;
-                        vCustomerDetail_Response.AddressDetail.DistrictName = vAddressObj.DistrictName;
-                        vCustomerDetail_Response.AddressDetail.CityId = vAddressObj.CityId;
-                        vCustomerDetail_Response.AddressDetail.CityName = vAddressObj.CityName;
-                        vCustomerDetail_Response.AddressDetail.PinCode = vAddressObj.PinCode;
-                        vCustomerDetail_Response.AddressDetail.IsDefault = vAddressObj.IsDefault;
-                        vCustomerDetail_Response.AddressDetail.IsActive = vAddressObj.IsActive;
+                        vCustomerDetail_Response.BillingDetail.Id = vAddressObj.Id;
+                        vCustomerDetail_Response.BillingDetail.RefId = Convert.ToInt32(vAddressObj.RefId);
+                        vCustomerDetail_Response.BillingDetail.RefType = vAddressObj.RefType;
+                        vCustomerDetail_Response.BillingDetail.IsNational_Or_International = vAddressObj.IsNational_Or_International;
+                        vCustomerDetail_Response.BillingDetail.Address1 = vAddressObj.Address1;
+                        vCustomerDetail_Response.BillingDetail.CountryId = vAddressObj.CountryId;
+                        vCustomerDetail_Response.BillingDetail.CountryName = vAddressObj.CountryName;
+                        vCustomerDetail_Response.BillingDetail.StateId = vAddressObj.StateId;
+                        vCustomerDetail_Response.BillingDetail.StateName = vAddressObj.StateName;
+                        vCustomerDetail_Response.BillingDetail.DistrictId = vAddressObj.DistrictId;
+                        vCustomerDetail_Response.BillingDetail.DistrictName = vAddressObj.DistrictName;
+                        vCustomerDetail_Response.BillingDetail.CityId = vAddressObj.CityId;
+                        vCustomerDetail_Response.BillingDetail.CityName = vAddressObj.CityName;
+                        vCustomerDetail_Response.BillingDetail.PinCode = vAddressObj.PinCode;
+                        vCustomerDetail_Response.BillingDetail.IsDefault = vAddressObj.IsDefault;
+                        vCustomerDetail_Response.BillingDetail.IsActive = vAddressObj.IsActive;
+                    }
+
+                    //Shipping Detail
+                    var vShippingAddress_Search = new ShippingAddress_Search()
+                    {
+                        RefId = Convert.ToInt32(vResultObj.Id),
+                        RefType = "Customer"
+                    };
+
+                    var vResultShippingAddressListObj = await _shippingAddressRepository.GetShippingAddressList(vShippingAddress_Search);
+                    var vShippingAddressObj = vResultShippingAddressListObj.ToList().Where(x => x.IsDefault == true).FirstOrDefault();
+                    if (vShippingAddressObj != null)
+                    {
+                        vCustomerDetail_Response.ShippingDetail.Id = vShippingAddressObj.Id;
+                        vCustomerDetail_Response.ShippingDetail.RefId = Convert.ToInt32(vShippingAddressObj.RefId);
+                        vCustomerDetail_Response.ShippingDetail.RefType = vShippingAddressObj.RefType;
+                        vCustomerDetail_Response.ShippingDetail.IsNational_Or_International = vShippingAddressObj.IsNational_Or_International;
+                        vCustomerDetail_Response.ShippingDetail.Address1 = vShippingAddressObj.Address1;
+                        vCustomerDetail_Response.ShippingDetail.CountryId = vShippingAddressObj.CountryId;
+                        vCustomerDetail_Response.ShippingDetail.CountryName = vShippingAddressObj.CountryName;
+                        vCustomerDetail_Response.ShippingDetail.StateId = vShippingAddressObj.StateId;
+                        vCustomerDetail_Response.ShippingDetail.StateName = vShippingAddressObj.StateName;
+                        vCustomerDetail_Response.ShippingDetail.DistrictId = vShippingAddressObj.DistrictId;
+                        vCustomerDetail_Response.ShippingDetail.DistrictName = vShippingAddressObj.DistrictName;
+                        vCustomerDetail_Response.ShippingDetail.CityId = vShippingAddressObj.CityId;
+                        vCustomerDetail_Response.ShippingDetail.CityName = vShippingAddressObj.CityName;
+                        vCustomerDetail_Response.ShippingDetail.PinCode = vShippingAddressObj.PinCode;
+                        vCustomerDetail_Response.ShippingDetail.IsDefault = vShippingAddressObj.IsDefault;
+                        vCustomerDetail_Response.ShippingDetail.IsActive = vShippingAddressObj.IsActive;
                     }
                 }
 
@@ -759,141 +805,6 @@ namespace AVPolyPack.Controllers
         //}
 
         */
-
-        #endregion
-
-        #region Customer Contact Detail
-
-        [Route("[action]")]
-        [HttpPost]
-        public async Task<ResponseModel> SaveCustomerContactDetail(ContactDetail_Request parameters)
-        {
-            // Image Upload
-            if (parameters! != null && !string.IsNullOrWhiteSpace(parameters.AadharCardImage_Base64))
-            {
-                var vUploadFile_AadharCardImage = _fileManager.UploadDocumentsBase64ToFile(parameters.AadharCardImage_Base64, "\\Uploads\\Customer\\", parameters.AadharCardOriginalFileName);
-
-                if (!string.IsNullOrWhiteSpace(vUploadFile_AadharCardImage))
-                {
-                    parameters.AadharCardImageFileName = vUploadFile_AadharCardImage;
-                }
-            }
-
-            if (parameters! != null && !string.IsNullOrWhiteSpace(parameters.PanCardImage_Base64))
-            {
-                var vUploadFile_PanCard = _fileManager.UploadDocumentsBase64ToFile(parameters.PanCardImage_Base64, "\\Uploads\\Customer\\", parameters.PanCardOriginalFileName);
-
-                if (!string.IsNullOrWhiteSpace(vUploadFile_PanCard))
-                {
-                    parameters.PanCardImageFileName = vUploadFile_PanCard;
-                }
-            }
-
-            int result = await _contactDetailRepository.SaveContactDetail(parameters);
-
-            if (result == (int)SaveOperationEnums.NoRecordExists)
-            {
-                _response.Message = "No record exists";
-            }
-            else if (result == (int)SaveOperationEnums.ReocrdExists)
-            {
-                _response.Message = "Record already exists";
-            }
-            else if (result == (int)SaveOperationEnums.NoResult)
-            {
-                _response.Message = "Something went wrong, please try again";
-            }
-            else
-            {
-                _response.Message = "Record details saved sucessfully";
-            }
-
-            _response.Id = result;
-            return _response;
-        }
-
-        [Route("[action]")]
-        [HttpPost]
-        public async Task<ResponseModel> GetCustomerContactDetailList(ContactDetail_Search parameters)
-        {
-            var objList = await _contactDetailRepository.GetContactDetailList(parameters);
-            _response.Data = objList.ToList();
-            _response.Total = parameters.Total;
-            return _response;
-        }
-
-        [Route("[action]")]
-        [HttpPost]
-        public async Task<ResponseModel> GetCustomerContactDetailById(int Id)
-        {
-            if (Id <= 0)
-            {
-                _response.Message = "Id is required";
-            }
-            else
-            {
-                var vResultObj = await _contactDetailRepository.GetContactDetailById(Id);
-                _response.Data = vResultObj;
-            }
-            return _response;
-        }
-
-        #endregion
-
-        #region Customer Address
-
-        [Route("[action]")]
-        [HttpPost]
-        public async Task<ResponseModel> SaveCustomerAddressDetail(Address_Request parameters)
-        {
-            int result = await _addressRepository.SaveAddress(parameters);
-
-            if (result == (int)SaveOperationEnums.NoRecordExists)
-            {
-                _response.Message = "No record exists";
-            }
-            else if (result == (int)SaveOperationEnums.ReocrdExists)
-            {
-                _response.Message = "Record already exists";
-            }
-            else if (result == (int)SaveOperationEnums.NoResult)
-            {
-                _response.Message = "Something went wrong, please try again";
-            }
-            else
-            {
-                _response.Message = "Record details saved sucessfully";
-            }
-
-            _response.Id = result;
-            return _response;
-        }
-
-        [Route("[action]")]
-        [HttpPost]
-        public async Task<ResponseModel> GetCustomerAddressDetailList(Address_Search parameters)
-        {
-            var objList = await _addressRepository.GetAddressList(parameters);
-            _response.Data = objList.ToList();
-            _response.Total = parameters.Total;
-            return _response;
-        }
-
-        [Route("[action]")]
-        [HttpPost]
-        public async Task<ResponseModel> GetCustomerAddressDetailById(int Id)
-        {
-            if (Id <= 0)
-            {
-                _response.Message = "Id is required";
-            }
-            else
-            {
-                var vResultObj = await _addressRepository.GetAddressById(Id);
-                _response.Data = vResultObj;
-            }
-            return _response;
-        }
 
         #endregion
     }

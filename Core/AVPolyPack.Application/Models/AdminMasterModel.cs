@@ -581,6 +581,7 @@ namespace AVPolyPack.Application.Models
         public int? UOMId { get; set; }
         public decimal? MinQty { get; set; }
         public decimal? AvailableMaterial { get; set; }
+        public int? DepartmentId { get; set; }
         public bool? IsActive { get; set; }
     }
 
@@ -594,6 +595,8 @@ namespace AVPolyPack.Application.Models
         public string? UOMName { get; set; }
         public decimal? MinQty { get; set; }
         public decimal? AvailableMaterial { get; set; }
+        public int? DepartmentId { get; set; }
+        public string? DepartmentName { get; set; }
         public bool? IsActive { get; set; }
     }
 
@@ -763,6 +766,7 @@ namespace AVPolyPack.Application.Models
         public decimal? ID_DutySavedAmt { get; set; }
         public DateTime? ID_RegistrationDate { get; set; }
         public decimal? ID_BondValue { get; set; }
+        public bool? IsActive { get; set; }
     }
 
     public class AdvanceLicense_Response : BaseResponseEntity
@@ -791,6 +795,7 @@ namespace AVPolyPack.Application.Models
         public decimal? ID_DutySavedAmt { get; set; }
         public DateTime? ID_RegistrationDate { get; set; }
         public decimal? ID_BondValue { get; set; }
+        public bool? IsActive { get; set; }
     }
 
     #endregion

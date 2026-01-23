@@ -1102,6 +1102,7 @@ namespace AVPolyPack.Persistence.Repositories
             queryParameters.Add("@UOMId", parameters.UOMId);
             queryParameters.Add("@MinQty", parameters.MinQty);
             queryParameters.Add("@AvailableMaterial", parameters.AvailableMaterial);
+            queryParameters.Add("@DepartmentId", parameters.DepartmentId);
             queryParameters.Add("@IsActive", parameters.IsActive);
             queryParameters.Add("@UserId", SessionManager.LoggedInUserId);
 
@@ -1429,6 +1430,7 @@ namespace AVPolyPack.Persistence.Repositories
             queryParameters.Add("@ID_DutySavedAmt", parameters.ID_DutySavedAmt);
             queryParameters.Add("@ID_RegistrationDate", parameters.ID_RegistrationDate);
             queryParameters.Add("@ID_BondValue", parameters.ID_BondValue);
+            queryParameters.Add("@IsActive", parameters.IsActive);
             queryParameters.Add("@UserId", SessionManager.LoggedInUserId);
 
             return await SaveByStoredProcedure<int>("SaveAdvanceLicense", queryParameters);

@@ -30,6 +30,9 @@ namespace AVPolyPack.Persistence.Repositories
             queryParameters.Add("@LandLineNumber", parameters.LandLineNumber);
             queryParameters.Add("@MobileNumber", parameters.MobileNumber);
             queryParameters.Add("@EmailId", parameters.EmailId);
+            queryParameters.Add("@EmailId1", parameters.EmailId1);
+            queryParameters.Add("@ParentCustomerId", parameters.ParentCustomerId);
+            queryParameters.Add("@ReferenceId", parameters.ReferenceId);
             queryParameters.Add("@Website", parameters.Website);
             queryParameters.Add("@Remark", parameters.Remark);
             queryParameters.Add("@CustomerRemark", parameters.CustomerRemark);
@@ -39,6 +42,10 @@ namespace AVPolyPack.Persistence.Repositories
             queryParameters.Add("@GSTImageOriginalFileName", parameters.GSTImageOriginalFileName);
             queryParameters.Add("@PanCardImage", parameters.PanCardImageFileName);
             queryParameters.Add("@PanCardOriginalFileName", parameters.PanCardOriginalFileName);
+            queryParameters.Add("@BankName", parameters.BankName);
+            queryParameters.Add("@BankAddress", parameters.BankAddress);
+            queryParameters.Add("@BankAccount", parameters.BankAccount);
+            queryParameters.Add("@BankIFSCCode", parameters.BankIFSCCode);
             queryParameters.Add("@IsActive", parameters.IsActive);
             queryParameters.Add("@UserId", SessionManager.LoggedInUserId);
 

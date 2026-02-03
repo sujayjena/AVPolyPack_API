@@ -11,7 +11,7 @@ namespace AVPolyPack.Application.Interfaces
     public interface ICustomerRepository
     {
         Task<int> SaveCustomer(Customer_Request parameters);
-        Task<IEnumerable<CustomerList_Response>> GetCustomerList(BaseSearchEntity parameters);
+        Task<IEnumerable<CustomerList_Response>> GetCustomerList(Customer_Search parameters);
         Task<CustomerList_Response?> GetCustomerById(int Id);
 
         Task<IEnumerable<Customer_ImportDataValidation>> ImportCustomer(List<Customer_ImportData> parameters);

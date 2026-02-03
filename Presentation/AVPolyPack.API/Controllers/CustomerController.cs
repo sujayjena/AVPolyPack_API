@@ -149,7 +149,7 @@ namespace AVPolyPack.Controllers
 
         [Route("[action]")]
         [HttpPost]
-        public async Task<ResponseModel> GetCustomerList(BaseSearchEntity parameters)
+        public async Task<ResponseModel> GetCustomerList(Customer_Search parameters)
         {
             var objList = await _customerRepository.GetCustomerList(parameters);
             _response.Data = objList.ToList();
@@ -215,6 +215,7 @@ namespace AVPolyPack.Controllers
                         vCustomerDetail_Response.ContactDetail.RefId = Convert.ToInt32(vContactObj.RefId);
                         vCustomerDetail_Response.ContactDetail.RefType = vContactObj.RefType;
                         vCustomerDetail_Response.ContactDetail.ContactName = vContactObj.ContactName;
+                        vCustomerDetail_Response.ContactDetail.ContactPerson = vContactObj.ContactPerson;
                         vCustomerDetail_Response.ContactDetail.MobileNumber = vContactObj.MobileNumber;
                         vCustomerDetail_Response.ContactDetail.EmailId = vContactObj.EmailId;
                         vCustomerDetail_Response.ContactDetail.AadharCardImageFileName = vContactObj.AadharCardImageFileName;

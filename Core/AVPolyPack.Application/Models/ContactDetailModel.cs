@@ -29,6 +29,7 @@ namespace AVPolyPack.Application.Models
         [DefaultValue("Customer")]
         public string? RefType { get; set; }
         public string? ContactName { get; set; }
+        public string? ContactPerson { get; set; }
         public string? MobileNumber { get; set; }
         public string? EmailId { get; set; }
         public string? AadharCardImageFileName { get; set; }
@@ -46,6 +47,7 @@ namespace AVPolyPack.Application.Models
         public int? RefId { get; set; }
         public string? RefType { get; set; }
         public string? ContactName { get; set; }
+        public string? ContactPerson { get; set; }
         public string? MobileNumber { get; set; }
         public string? EmailId { get; set; }
         public string? AadharCardImageFileName { get; set; }

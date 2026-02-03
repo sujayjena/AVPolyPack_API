@@ -1,4 +1,5 @@
 ﻿using AVPolyPack.Domain.Entities;
+using AVPolyPack.Persistence.Repositories;
 using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
@@ -9,8 +10,9 @@ using System.Threading.Tasks;
 
 namespace AVPolyPack.Application.Models
 {
-    public class CustomerModel
+    public class Customer_Search : BaseSearchEntity
     {
+        public int? ParentCustomerId { get; set; }
     }
 
     public class Customer_Request : BaseEntity
@@ -68,6 +70,9 @@ namespace AVPolyPack.Application.Models
         public string? PanCardImage { get; set; }
         public string? PanCardOriginalFileName { get; set; }
         public string? PanCardImageURL { get; set; }
+        public string? ContactName { get; set; }
+        public string? ContactMobileNo { get; set; }
+        public string? ContactEmailId { get; set; }
         public string? BankName { get; set; }
         public string? BankAddress { get; set; }
         public string? BankAccount { get; set; }

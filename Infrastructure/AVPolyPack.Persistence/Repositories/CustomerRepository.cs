@@ -52,10 +52,11 @@ namespace AVPolyPack.Persistence.Repositories
             return await SaveByStoredProcedure<int>("SaveCustomer", queryParameters);
         }
 
-        public async Task<IEnumerable<CustomerList_Response>> GetCustomerList(BaseSearchEntity parameters)
+        public async Task<IEnumerable<CustomerList_Response>> GetCustomerList(Customer_Search parameters)
         {
             DynamicParameters queryParameters = new DynamicParameters();
 
+            queryParameters.Add("@ParentCustomerId", parameters.ParentCustomerId);
             queryParameters.Add("@SearchText", parameters.SearchText.SanitizeValue());
             queryParameters.Add("@IsActive", parameters.IsActive);
             queryParameters.Add("@PageNo", parameters.PageNo);

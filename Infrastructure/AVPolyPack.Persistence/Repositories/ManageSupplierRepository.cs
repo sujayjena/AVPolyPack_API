@@ -23,6 +23,7 @@ namespace AVPolyPack.Persistence.Repositories
         public async Task<int> SaveSupplier(Supplier_Request parameters)
         {
             DynamicParameters queryParameters = new DynamicParameters();
+            queryParameters.Add("@Id", parameters.Id);
             queryParameters.Add("@SupplierCode", parameters.SupplierCode);
             queryParameters.Add("@SupplierName", parameters.SupplierName);
             queryParameters.Add("@PartyName", parameters.PartyName);

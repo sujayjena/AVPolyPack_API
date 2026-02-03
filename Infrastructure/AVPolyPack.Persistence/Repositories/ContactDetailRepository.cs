@@ -28,6 +28,7 @@ namespace AVPolyPack.Persistence.Repositories
             queryParameters.Add("@RefId", parameters.RefId);
             queryParameters.Add("@RefType", parameters.RefType);
             queryParameters.Add("@ContactName", parameters.ContactName);
+            queryParameters.Add("@ContactPerson", parameters.ContactPerson);
             queryParameters.Add("@MobileNumber", parameters.MobileNumber);
             queryParameters.Add("@EmailId", parameters.EmailId);
             queryParameters.Add("@AadharCardImage", parameters.AadharCardImageFileName);

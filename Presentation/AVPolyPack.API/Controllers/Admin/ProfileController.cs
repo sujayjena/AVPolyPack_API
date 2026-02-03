@@ -382,8 +382,7 @@ namespace AVPolyPack.API.Controllers.Admin
                         WorkSheet1.Cells[recordIndex, 2].Value = items.ReportingToName;
                         WorkSheet1.Cells[recordIndex, 3].Value = items.IsActive == true ? "Active" : "Inactive";
 
-                        WorkSheet1.Cells[recordIndex, 4].Style.Numberformat.Format = DateTimeFormatInfo.CurrentInfo.ShortDatePattern;
-                        WorkSheet1.Cells[recordIndex, 4].Value = items.CreatedDate;
+                        WorkSheet1.Cells[recordIndex, 4].Value = Convert.ToDateTime(items.CreatedDate).ToString("dd/MM/yyyy");
                         WorkSheet1.Cells[recordIndex, 5].Value = items.CreatorName;
 
                         recordIndex += 1;

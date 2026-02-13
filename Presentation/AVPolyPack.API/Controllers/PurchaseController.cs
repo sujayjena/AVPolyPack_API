@@ -3,6 +3,7 @@ using AVPolyPack.Application.Enums;
 using AVPolyPack.Application.Helpers;
 using AVPolyPack.Application.Interfaces;
 using AVPolyPack.Application.Models;
+using AVPolyPack.Persistence.Repositories;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -10,27 +11,28 @@ namespace AVPolyPack.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class ManageInventoryController : CustomBaseController
+    public class PurchaseController : CustomBaseController
     {
         private ResponseModel _response;
+        private readonly IPurchaseRepository _purchaseRepository;
         private IFileManager _fileManager;
 
-        private readonly IManageInventoryRepository _manageInventoryRepository;
-
-        public ManageInventoryController(IFileManager fileManager, IManageInventoryRepository manageInventoryRepository)
+        public PurchaseController(IPurchaseRepository purchaseRepository, IFileManager fileManager)
         {
+            _purchaseRepository = purchaseRepository;
             _fileManager = fileManager;
 
             _response = new ResponseModel();
             _response.IsSuccess = true;
-            _manageInventoryRepository = manageInventoryRepository;
         }
+
+        #region Purchase 
 
         [Route("[action]")]
         [HttpPost]
-        public async Task<ResponseModel> SaveInventory(Inventory_Request parameters)
+        public async Task<ResponseModel> SavePurchase(Purchase_Request parameters)
         {
-            int result = await _manageInventoryRepository.SaveInventory(parameters);
+            int result = await _purchaseRepository.SavePurchase(parameters);
 
             if (result == (int)SaveOperationEnums.NoRecordExists)
             {
@@ -39,6 +41,14 @@ namespace AVPolyPack.Controllers
             else if (result == (int)SaveOperationEnums.ReocrdExists)
             {
                 _response.Message = "Record already exists";
+            }
+            else if (result == -3)
+            {
+                _response.Message = "Email already exists";
+            }
+            else if (result == -4)
+            {
+                _response.Message = "Mobile # already exists";
             }
             else if (result == (int)SaveOperationEnums.NoResult)
             {
@@ -54,6 +64,13 @@ namespace AVPolyPack.Controllers
                 {
                     _response.Message = "Record Updated successfully";
                 }
+
+                foreach (var item in parameters.purchaseDetailsList)
+                {
+                    item.PurchaseId = result;
+
+                    int resultPurchaseDetails = await _purchaseRepository.SavePurchaseDetails(item);
+                }
             }
 
             _response.Id = result;
@@ -62,17 +79,17 @@ namespace AVPolyPack.Controllers
 
         [Route("[action]")]
         [HttpPost]
-        public async Task<ResponseModel> GetInventoryList(Inventory_Search parameters)
+        public async Task<ResponseModel> GetPurchaseList(Purchase_Search parameters)
         {
-            IEnumerable<Inventory_Response> lstRoles = await _manageInventoryRepository.GetInventoryList(parameters);
-            _response.Data = lstRoles.ToList();
+            IEnumerable<PurchaseList_Response> lstPurchases = await _purchaseRepository.GetPurchaseList(parameters);
+            _response.Data = lstPurchases.ToList();
             _response.Total = parameters.Total;
             return _response;
         }
 
         [Route("[action]")]
         [HttpPost]
-        public async Task<ResponseModel> GetInventoryById(int Id)
+        public async Task<ResponseModel> GetPurchaseById(int Id)
         {
             if (Id <= 0)
             {
@@ -80,40 +97,26 @@ namespace AVPolyPack.Controllers
             }
             else
             {
-                var vResultObj = await _manageInventoryRepository.GetInventoryById(Id);
+                var vResultObj = await _purchaseRepository.GetPurchaseById(Id);
+                if (vResultObj != null)
+                {
+                    var vPurchaseDetails_Search = new PurchaseDetails_Search();
+                    vPurchaseDetails_Search.PurchaseId = vResultObj.Id;
+
+                    var vList = await _purchaseRepository.GetPurchaseDetailsList(vPurchaseDetails_Search);
+
+                    vResultObj.purchaseDetailsList = vList.ToList();
+                }
                 _response.Data = vResultObj;
             }
             return _response;
         }
 
-        #region Split Roll
         [Route("[action]")]
         [HttpPost]
-        public async Task<ResponseModel> GetSplitList(Split_Search parameters)
+        public async Task<ResponseModel> DeletePurchaseDetails(int Id)
         {
-            IEnumerable<Split_Response> lstRoles = await _manageInventoryRepository.GetSplitList(parameters);
-            _response.Data = lstRoles.ToList();
-            _response.Total = parameters.Total;
-            return _response;
-        }
-
-        [Route("[action]")]
-        [HttpPost]
-        public async Task<ResponseModel> SaveSplitRoll(List<SplitRoll_Request> parameters)
-        {
-            int result = 0;
-
-            foreach (var item in parameters)
-            {
-                var vSplitRoll_Request = new SplitRoll_Request()
-                { 
-                    Id = item.Id,
-                    RollId = item.RollId,
-                    SplitRollNo = item.SplitRollNo,
-                    SplitRollLength = item.SplitRollLength,
-                };
-                result = await _manageInventoryRepository.SaveSplitRoll(vSplitRoll_Request);
-            }
+            int result = await _purchaseRepository.DeletePurchaseDetails(Id);
 
             if (result == (int)SaveOperationEnums.NoRecordExists)
             {
@@ -129,20 +132,10 @@ namespace AVPolyPack.Controllers
             }
             else
             {
-                 _response.Message = "Record Submitted successfully";
+                _response.Message = "Record deleted successfully";
             }
 
             _response.Id = result;
-            return _response;
-        }
-
-        [Route("[action]")]
-        [HttpPost]
-        public async Task<ResponseModel> GetSplitRollList(SplitRoll_Search parameters)
-        {
-            IEnumerable<SplitRoll_Response> lstRoles = await _manageInventoryRepository.GetSplitRollList(parameters);
-            _response.Data = lstRoles.ToList();
-            _response.Total = parameters.Total;
             return _response;
         }
         #endregion

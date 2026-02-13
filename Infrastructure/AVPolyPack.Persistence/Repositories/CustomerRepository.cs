@@ -37,6 +37,7 @@ namespace AVPolyPack.Persistence.Repositories
             queryParameters.Add("@Remark", parameters.Remark);
             queryParameters.Add("@CustomerRemark", parameters.CustomerRemark);
             queryParameters.Add("@RefParty", parameters.RefParty);
+            queryParameters.Add("@IsGST", parameters.IsGST);
             queryParameters.Add("@GSTNumber", parameters.GSTNumber);
             queryParameters.Add("@GSTImage", parameters.GSTImageFileName);
             queryParameters.Add("@GSTImageOriginalFileName", parameters.GSTImageOriginalFileName);
@@ -57,6 +58,8 @@ namespace AVPolyPack.Persistence.Repositories
             DynamicParameters queryParameters = new DynamicParameters();
 
             queryParameters.Add("@ParentCustomerId", parameters.ParentCustomerId);
+            queryParameters.Add("@CountryId", parameters.CountryId);
+            queryParameters.Add("@CustomerId", parameters.CustomerId);
             queryParameters.Add("@SearchText", parameters.SearchText.SanitizeValue());
             queryParameters.Add("@IsActive", parameters.IsActive);
             queryParameters.Add("@PageNo", parameters.PageNo);

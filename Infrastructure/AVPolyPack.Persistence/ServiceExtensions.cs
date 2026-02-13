@@ -59,6 +59,8 @@ namespace AVPolyPack.Persistence
             services.AddScoped<IManageSupplierRepository, ManageSupplierRepository>();
             services.AddScoped<IManageInventoryRepository, ManageInventoryRepository>();
             services.AddScoped<IBranchRepository, BranchRepository>();
+            services.AddScoped<IPurchaseRepository, PurchaseRepository>();
+            services.AddScoped<ISaleRepository, SaleRepository>();
         }
     }
 }

@@ -15,6 +15,7 @@ namespace AVPolyPack.Application.Models
     {
         public int? StatusId { get; set; }
         public int? OrderType { get; set; }
+        public int? CustomerId { get; set; }
     }
 
     public class Order_Request : BaseEntity
@@ -36,6 +37,8 @@ namespace AVPolyPack.Application.Models
         public DateTime? DeliveryDate { get; set; }
         public int? PaymentTermId { get; set; }
         public int? StatusId { get; set; }
+        public int? BillingAddressId { get; set; }
+        public int? ShippingAddressId { get; set; }
 
         public List<OrderItem_Request> orderItemList { get; set; }
     }
@@ -59,7 +62,30 @@ namespace AVPolyPack.Application.Models
         public DateTime? DeliveryDate { get; set; }
         public string? SLAStatus { get; set; }
         public int? StatusId { get; set; }
-
+        public int? BillingAddressId { get; set; }
+        public int? BillingIsNational_Or_International { get; set; }
+        public string? BillingAddress1 { get; set; }
+        public int? BillingCountryId { get; set; }
+        public string? BillingCountryName { get; set; }
+        public int? BillingStateId { get; set; }
+        public string? BillingStateName { get; set; }
+        public int? BillingDistrictId { get; set; }
+        public string? BillingDistrictName { get; set; }
+        public int? BillingCityId { get; set; }
+        public string? BillingCityName { get; set; }
+        public string? BillingPinCode { get; set; }
+        public int? ShippingAddressId { get; set; }
+        public int? ShippingIsNational_Or_International { get; set; }
+        public string? ShippingAddress1 { get; set; }
+        public int? ShippingCountryId { get; set; }
+        public string? ShippingCountryName { get; set; }
+        public int? ShippingStateId { get; set; }
+        public string? ShippingStateName { get; set; }
+        public int? ShippingDistrictId { get; set; }
+        public string? ShippingDistrictName { get; set; }
+        public int? ShippingCityId { get; set; }
+        public string? ShippingCityName { get; set; }
+        public string? ShippingPinCode { get; set; }
         public List<OrderItem_Response> orderItemList { get; set; }
     }
     #endregion

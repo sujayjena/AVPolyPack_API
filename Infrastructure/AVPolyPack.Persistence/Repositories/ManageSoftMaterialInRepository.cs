@@ -112,6 +112,14 @@ namespace AVPolyPack.Persistence.Repositories
             return await SaveByStoredProcedure<int>("ReceivedSoftMaterialIn", queryParameters);
         }
 
+        public async Task<int> DeleteSoftMaterialInDetails(int Id)
+        {
+            DynamicParameters queryParameters = new DynamicParameters();
+
+            queryParameters.Add("@Id", Id);
+
+            return await SaveByStoredProcedure<int>("DeleteSoftMaterialInDetails", queryParameters);
+        }
         #endregion
     }
 }

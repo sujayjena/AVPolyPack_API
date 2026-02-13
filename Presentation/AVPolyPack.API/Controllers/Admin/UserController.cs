@@ -385,11 +385,9 @@ namespace AVPolyPack.API.Controllers.Admin
                     WorkSheet1.Cells[1, 16].Value = "Blood Group";
                     WorkSheet1.Cells[1, 17].Value = "Aadhar Number";
                     WorkSheet1.Cells[1, 18].Value = "Pan Number";
-                    WorkSheet1.Cells[1, 19].Value = "Mobile UniqueId";
-                    WorkSheet1.Cells[1, 20].Value = "IsMobileUser";
-                    WorkSheet1.Cells[1, 21].Value = "IsWebUser";
-                    WorkSheet1.Cells[1, 22].Value = "IsActive";
-
+                    WorkSheet1.Cells[1, 19].Value = "IsMobileUser";
+                    WorkSheet1.Cells[1, 20].Value = "IsWebUser";
+                    WorkSheet1.Cells[1, 21].Value = "IsActive";
 
                     recordIndex = 2;
 
@@ -415,36 +413,14 @@ namespace AVPolyPack.API.Controllers.Admin
                         WorkSheet1.Cells[recordIndex, 16].Value = items.BloodGroupName;
                         WorkSheet1.Cells[recordIndex, 17].Value = items.AadharNumber;
                         WorkSheet1.Cells[recordIndex, 18].Value = items.PanNumber;
-                        WorkSheet1.Cells[recordIndex, 19].Value = items.MobileUniqueId;
-                        WorkSheet1.Cells[recordIndex, 20].Value = items.IsMobileUser;
-                        WorkSheet1.Cells[recordIndex, 21].Value = items.IsWebUser;
-                        WorkSheet1.Cells[recordIndex, 22].Value = items.IsActive == true ? "Active" : "Inactive";
+                        WorkSheet1.Cells[recordIndex, 19].Value = items.IsMobileUser;
+                        WorkSheet1.Cells[recordIndex, 20].Value = items.IsWebUser;
+                        WorkSheet1.Cells[recordIndex, 21].Value = items.IsActive == true ? "Active" : "Inactive";
 
                         recordIndex += 1;
                     }
 
-                    WorkSheet1.Column(1).AutoFit();
-                    WorkSheet1.Column(2).AutoFit();
-                    WorkSheet1.Column(3).AutoFit();
-                    WorkSheet1.Column(4).AutoFit();
-                    WorkSheet1.Column(5).AutoFit();
-                    WorkSheet1.Column(6).AutoFit();
-                    WorkSheet1.Column(7).AutoFit();
-                    WorkSheet1.Column(8).AutoFit();
-                    WorkSheet1.Column(9).AutoFit();
-                    WorkSheet1.Column(10).AutoFit();
-                    WorkSheet1.Column(11).AutoFit();
-                    WorkSheet1.Column(12).AutoFit();
-                    WorkSheet1.Column(13).AutoFit();
-                    WorkSheet1.Column(14).AutoFit();
-                    WorkSheet1.Column(15).AutoFit();
-                    WorkSheet1.Column(16).AutoFit();
-                    WorkSheet1.Column(17).AutoFit();
-                    WorkSheet1.Column(18).AutoFit();
-                    WorkSheet1.Column(19).AutoFit();
-                    WorkSheet1.Column(20).AutoFit();
-                    WorkSheet1.Column(21).AutoFit();
-                    WorkSheet1.Column(22).AutoFit();
+                    WorkSheet1.Columns.AutoFit();
 
                     excelExportData.SaveAs(msExportDataFile);
                     msExportDataFile.Position = 0;

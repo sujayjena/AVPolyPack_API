@@ -187,6 +187,7 @@ namespace AVPolyPack.Controllers
                     vCustomerDetail_Response.Remark = vResultObj.Remark;
                     vCustomerDetail_Response.CustomerRemark = vResultObj.CustomerRemark;
                     vCustomerDetail_Response.RefParty = vResultObj.RefParty;
+                    vCustomerDetail_Response.IsGST = vResultObj.IsGST;
                     vCustomerDetail_Response.GSTNumber = vResultObj.GSTNumber;
                     vCustomerDetail_Response.GSTImage = vResultObj.GSTImage;
                     vCustomerDetail_Response.GSTImageOriginalFileName = vResultObj.GSTImageOriginalFileName;

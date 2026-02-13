@@ -37,6 +37,8 @@ namespace AVPolyPack.Persistence.Repositories
             queryParameters.Add("@DeliveryDate", parameters.DeliveryDate);
             queryParameters.Add("@PaymentTermId", parameters.PaymentTermId);
             queryParameters.Add("@StatusId", parameters.StatusId);
+            queryParameters.Add("@BillingAddressId", parameters.BillingAddressId);
+            queryParameters.Add("@ShippingAddressId", parameters.ShippingAddressId);
             queryParameters.Add("@UserId", SessionManager.LoggedInUserId);
 
             return await SaveByStoredProcedure<int>("SaveOrder", queryParameters);
@@ -48,6 +50,7 @@ namespace AVPolyPack.Persistence.Repositories
 
             queryParameters.Add("@StatusId", parameters.StatusId);
             queryParameters.Add("@OrderType", parameters.OrderType);
+            queryParameters.Add("@CustomerId", parameters.CustomerId);
             queryParameters.Add("@SearchText", parameters.SearchText.SanitizeValue());
             queryParameters.Add("@IsActive", parameters.IsActive);
             queryParameters.Add("@PageNo", parameters.PageNo);

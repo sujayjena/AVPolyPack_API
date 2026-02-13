@@ -19,6 +19,7 @@ namespace AVPolyPack.Application.Interfaces
         Task<int> SaveSoftMaterialInDetails(SoftMaterialInDetails_Request parameters);
         Task<IEnumerable<SoftMaterialInDetails_Response>> GetSoftMaterialInDetailsList(SoftMaterialInDetails_Search parameters);
         Task<int> ReceivedSoftMaterialIn(ReceivedSoftMaterialInList_Request parameters);
+        Task<int> DeleteSoftMaterialInDetails(int Id);
         #endregion
     }
 }

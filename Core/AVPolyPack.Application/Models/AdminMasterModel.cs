@@ -582,6 +582,7 @@ namespace AVPolyPack.Application.Models
         public decimal? MinQty { get; set; }
         public decimal? AvailableMaterial { get; set; }
         public int? DepartmentId { get; set; }
+        public string? HSNCode { get; set; }
         public bool? IsActive { get; set; }
     }
 
@@ -597,6 +598,7 @@ namespace AVPolyPack.Application.Models
         public decimal? AvailableMaterial { get; set; }
         public int? DepartmentId { get; set; }
         public string? DepartmentName { get; set; }
+        public string? HSNCode { get; set; }
         public bool? IsActive { get; set; }
     }
 

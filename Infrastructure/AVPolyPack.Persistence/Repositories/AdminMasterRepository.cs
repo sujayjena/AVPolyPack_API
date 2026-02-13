@@ -1103,6 +1103,7 @@ namespace AVPolyPack.Persistence.Repositories
             queryParameters.Add("@MinQty", parameters.MinQty);
             queryParameters.Add("@AvailableMaterial", parameters.AvailableMaterial);
             queryParameters.Add("@DepartmentId", parameters.DepartmentId);
+            queryParameters.Add("@HSNCode", parameters.HSNCode);
             queryParameters.Add("@IsActive", parameters.IsActive);
             queryParameters.Add("@UserId", SessionManager.LoggedInUserId);
 

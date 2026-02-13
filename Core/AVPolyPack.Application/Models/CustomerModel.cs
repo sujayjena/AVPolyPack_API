@@ -3,6 +3,7 @@ using AVPolyPack.Persistence.Repositories;
 using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Text.Json.Serialization;
@@ -13,6 +14,8 @@ namespace AVPolyPack.Application.Models
     public class Customer_Search : BaseSearchEntity
     {
         public int? ParentCustomerId { get; set; }
+        public int? CountryId { get; set; }
+        public int? CustomerId { get; set; }
     }
 
     public class Customer_Request : BaseEntity
@@ -29,6 +32,9 @@ namespace AVPolyPack.Application.Models
         public string? Remark { get; set; }
         public string? CustomerRemark { get; set; }
         public string? RefParty { get; set; }
+
+        [DefaultValue(false)]
+        public bool? IsGST { get; set; }
         public string? GSTNumber { get; set; }
         public string? GSTImageFileName { get; set; }
         public string? GSTImage_Base64 { get; set; }
@@ -63,6 +69,7 @@ namespace AVPolyPack.Application.Models
         public string? Remark { get; set; }
         public string? CustomerRemark { get; set; }
         public string? RefParty { get; set; }
+        public bool? IsGST { get; set; }
         public string? GSTNumber { get; set; }
         public string? GSTImage { get; set; }
         public string? GSTImageOriginalFileName { get; set; }
@@ -113,6 +120,7 @@ namespace AVPolyPack.Application.Models
         public string? Remark { get; set; }
         public string? CustomerRemark { get; set; }
         public string? RefParty { get; set; }
+        public bool? IsGST { get; set; }
         public string? GSTNumber { get; set; }
         public string? GSTImage { get; set; }
         public string? GSTImageOriginalFileName { get; set; }

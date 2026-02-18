@@ -15,6 +15,7 @@ namespace AVPolyPack.Application.Models
         public string? SupplierName { get; set; }
         public string? PartyName { get; set; }
         public int? CustomerId { get; set; }
+        public int? GroupNameId { get; set; }
         public int? ReferenceId { get; set; }
         public string? MobileNumber1 { get; set; }
         public string? MobileNumber2 { get; set; }
@@ -74,6 +75,9 @@ namespace AVPolyPack.Application.Models
         public string? CompanyCode { get; set; }
         public int? CustomerId { get; set; }
         public string? CustomerName { get; set; }
+        public string? CustomerCode { get; set; }
+        public int? GroupNameId { get; set; }
+        public string? GroupName { get; set; }
         public int? ReferenceId { get; set; }
         public string? ReferenceName { get; set; }
         public string? MobileNumber1 { get; set; }

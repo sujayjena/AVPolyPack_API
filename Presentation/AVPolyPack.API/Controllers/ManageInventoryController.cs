@@ -3,6 +3,7 @@ using AVPolyPack.Application.Enums;
 using AVPolyPack.Application.Helpers;
 using AVPolyPack.Application.Interfaces;
 using AVPolyPack.Application.Models;
+using AVPolyPack.Persistence.Repositories;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -14,16 +15,18 @@ namespace AVPolyPack.Controllers
     {
         private ResponseModel _response;
         private IFileManager _fileManager;
+        private readonly IBarcodeRepository _barcodeRepository;
 
         private readonly IManageInventoryRepository _manageInventoryRepository;
 
-        public ManageInventoryController(IFileManager fileManager, IManageInventoryRepository manageInventoryRepository)
+        public ManageInventoryController(IFileManager fileManager, IManageInventoryRepository manageInventoryRepository, IBarcodeRepository barcodeRepository)
         {
             _fileManager = fileManager;
 
             _response = new ResponseModel();
             _response.IsSuccess = true;
             _manageInventoryRepository = manageInventoryRepository;
+            _barcodeRepository = barcodeRepository;
         }
 
         [Route("[action]")]
@@ -113,6 +116,31 @@ namespace AVPolyPack.Controllers
                     SplitRollLength = item.SplitRollLength,
                 };
                 result = await _manageInventoryRepository.SaveSplitRoll(vSplitRoll_Request);
+
+                //#region Generate Barcode
+                //if (vSplitRoll_Request.Id == 0 && result > 0)
+                //{
+                //    var vSplitRoll = await _manageInventoryRepository.GetSplitRollById(result);
+                //    if (vSplitRoll != null)
+                //    {
+                //        var vGenerateBarcode = _barcodeRepository.GenerateBarcode(vSplitRoll.SplitRollNo, "SplitRoll");
+                //        if (vGenerateBarcode.Barcode_Unique_Id != "")
+                //        {
+                //            var vBarcode_Request = new Barcode_Request()
+                //            {
+                //                Id = 0,
+                //                BarcodeNo = vSplitRoll.SplitRollNo,
+                //                BarcodeType = "SplitRoll",
+                //                Barcode_Unique_Id = vGenerateBarcode.Barcode_Unique_Id,
+                //                BarcodeOriginalFileName = vGenerateBarcode.BarcodeOriginalFileName,
+                //                BarcodeFileName = vGenerateBarcode.BarcodeFileName,
+                //                RefId = vSplitRoll.Id
+                //            };
+                //            var resultBarcode = _barcodeRepository.SaveBarcode(vBarcode_Request);
+                //        }
+                //    }
+                //}
+                //#endregion
             }
 
             if (result == (int)SaveOperationEnums.NoRecordExists)

@@ -17,6 +17,7 @@ namespace AVPolyPack.Application.Interfaces
         Task<IEnumerable<Split_Response>> GetSplitList(Split_Search parameters);
         Task<int> SaveSplitRoll(SplitRoll_Request parameters);
         Task<IEnumerable<SplitRoll_Response>> GetSplitRollList(SplitRoll_Search parameters);
+        Task<SplitRoll_Response?> GetSplitRollById(int Id);
         #endregion
     }
 }

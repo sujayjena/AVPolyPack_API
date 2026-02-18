@@ -26,6 +26,7 @@ namespace AVPolyPack.Application.Models
         public DateTime? DateAndTime { get; set; }
         public string? VehicleNumber { get; set; }
         public int? VendorId { get; set; }
+        public int? SupplierId { get; set; }
         public string? Remarks { get; set; }
         public int? StatusId { get; set; }
         public bool? IsActive { get; set; }
@@ -43,6 +44,8 @@ namespace AVPolyPack.Application.Models
         public string? VehicleNumber { get; set; }
         public int? VendorId { get; set; }
         public string? VendorName { get; set; }
+        public int? SupplierId { get; set; }
+        public string? SupplierName { get; set; }
         public string? Remarks { get; set; }
         public int? StatusId { get; set; }
         public string? StatusName { get; set; }
@@ -72,6 +75,7 @@ namespace AVPolyPack.Application.Models
         public int? SoftMaterialInId { get; set; }
         public int? MaterialId { get; set; }
         public string? MaterialName { get; set; }
+        public string? HSNCode { get; set; }
         public decimal? Quantity { get; set; }
         public decimal? Weight { get; set; }
         public int? IsOk { get; set; }

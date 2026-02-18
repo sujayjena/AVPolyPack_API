@@ -113,6 +113,12 @@ namespace AVPolyPack.Persistence.Repositories
 
             return result;
         }
+        public async Task<SplitRoll_Response?> GetSplitRollById(int Id)
+        {
+            DynamicParameters queryParameters = new DynamicParameters();
+            queryParameters.Add("@Id", Id);
+            return (await ListByStoredProcedure<SplitRoll_Response>("GetSplitRollById", queryParameters)).FirstOrDefault();
+        }
         #endregion
     }
 }

@@ -30,6 +30,7 @@ namespace AVPolyPack.Persistence.Repositories
             queryParameters.Add("@DateAndTime", parameters.DateAndTime);
             queryParameters.Add("@VehicleNumber", parameters.VehicleNumber);
             queryParameters.Add("@VendorId", parameters.VendorId);
+            queryParameters.Add("@SupplierId", parameters.SupplierId);
             queryParameters.Add("@Remarks", parameters.Remarks);
             queryParameters.Add("@StatusId", parameters.StatusId);
             queryParameters.Add("@IsActive", parameters.IsActive);

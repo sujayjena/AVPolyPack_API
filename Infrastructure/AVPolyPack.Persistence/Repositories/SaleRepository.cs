@@ -78,6 +78,7 @@ namespace AVPolyPack.Persistence.Repositories
 
             queryParameters.Add("@Id", parameters.Id);
             queryParameters.Add("@SaleId", parameters.SaleId);
+            queryParameters.Add("@MaterialTypeId", parameters.MaterialTypeId);
             queryParameters.Add("@MaterialDetailsId", parameters.MaterialDetailsId);
             queryParameters.Add("@OtherDetails", parameters.OtherDetails);
             queryParameters.Add("@Quantity", parameters.Quantity);

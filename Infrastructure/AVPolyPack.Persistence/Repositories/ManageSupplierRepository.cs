@@ -28,6 +28,7 @@ namespace AVPolyPack.Persistence.Repositories
             queryParameters.Add("@SupplierName", parameters.SupplierName);
             queryParameters.Add("@PartyName", parameters.PartyName);
             queryParameters.Add("@CustomerId", parameters.CustomerId);
+            queryParameters.Add("@GroupNameId", parameters.GroupNameId);
             queryParameters.Add("@ReferenceId", parameters.ReferenceId);
             queryParameters.Add("@MobileNumber1", parameters.MobileNumber1);
             queryParameters.Add("@MobileNumber2", parameters.MobileNumber2);

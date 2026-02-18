@@ -80,6 +80,7 @@ namespace AVPolyPack.Application.Models
     public class SaleDetails_Request : BaseEntity
     {
         public int? SaleId { get; set; }
+        public int? MaterialTypeId { get; set; }
         public int? MaterialDetailsId { get; set; }
         public string? OtherDetails { get; set; }
         public decimal? Quantity { get; set; }
@@ -117,6 +118,8 @@ namespace AVPolyPack.Application.Models
     {
         public int? SaleId { get; set; }
         public string? SaleInvoiceNo { get; set; }
+        public int? MaterialTypeId { get; set; }
+        public string? MaterialType { get; set; }
         public int? MaterialDetailsId { get; set; }
         public int? MaterialId { get; set; }
         public string? MaterialName { get; set; }

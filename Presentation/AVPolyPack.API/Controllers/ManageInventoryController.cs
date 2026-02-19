@@ -16,10 +16,10 @@ namespace AVPolyPack.Controllers
         private ResponseModel _response;
         private IFileManager _fileManager;
         private readonly IBarcodeRepository _barcodeRepository;
-
         private readonly IManageInventoryRepository _manageInventoryRepository;
+        private readonly ILoomsRepository _loomsRepository;
 
-        public ManageInventoryController(IFileManager fileManager, IManageInventoryRepository manageInventoryRepository, IBarcodeRepository barcodeRepository)
+        public ManageInventoryController(IFileManager fileManager, IManageInventoryRepository manageInventoryRepository, IBarcodeRepository barcodeRepository, ILoomsRepository loomsRepository)
         {
             _fileManager = fileManager;
 
@@ -27,6 +27,7 @@ namespace AVPolyPack.Controllers
             _response.IsSuccess = true;
             _manageInventoryRepository = manageInventoryRepository;
             _barcodeRepository = barcodeRepository;
+            _loomsRepository = loomsRepository;
         }
 
         [Route("[action]")]
@@ -117,30 +118,30 @@ namespace AVPolyPack.Controllers
                 };
                 result = await _manageInventoryRepository.SaveSplitRoll(vSplitRoll_Request);
 
-                //#region Generate Barcode
-                //if (vSplitRoll_Request.Id == 0 && result > 0)
-                //{
-                //    var vSplitRoll = await _manageInventoryRepository.GetSplitRollById(result);
-                //    if (vSplitRoll != null)
-                //    {
-                //        var vGenerateBarcode = _barcodeRepository.GenerateBarcode(vSplitRoll.SplitRollNo, "SplitRoll");
-                //        if (vGenerateBarcode.Barcode_Unique_Id != "")
-                //        {
-                //            var vBarcode_Request = new Barcode_Request()
-                //            {
-                //                Id = 0,
-                //                BarcodeNo = vSplitRoll.SplitRollNo,
-                //                BarcodeType = "SplitRoll",
-                //                Barcode_Unique_Id = vGenerateBarcode.Barcode_Unique_Id,
-                //                BarcodeOriginalFileName = vGenerateBarcode.BarcodeOriginalFileName,
-                //                BarcodeFileName = vGenerateBarcode.BarcodeFileName,
-                //                RefId = vSplitRoll.Id
-                //            };
-                //            var resultBarcode = _barcodeRepository.SaveBarcode(vBarcode_Request);
-                //        }
-                //    }
-                //}
-                //#endregion
+                #region Generate Barcode
+                if (vSplitRoll_Request.Id == 0 && result > 0)
+                {
+                    var vRoll = await _loomsRepository.GetRollById(result);
+                    if (vRoll != null)
+                    {
+                        var vGenerateBarcode = _barcodeRepository.GenerateBarcode(vRoll.RollNo, "Roll");
+                        if (vGenerateBarcode.Barcode_Unique_Id != "")
+                        {
+                            var vBarcode_Request = new Barcode_Request()
+                            {
+                                Id = 0,
+                                BarcodeNo = vRoll.RollNo,
+                                BarcodeType = "Roll",
+                                Barcode_Unique_Id = vGenerateBarcode.Barcode_Unique_Id,
+                                BarcodeOriginalFileName = vGenerateBarcode.BarcodeOriginalFileName,
+                                BarcodeFileName = vGenerateBarcode.BarcodeFileName,
+                                RefId = vRoll.Id
+                            };
+                            var resultBarcode = _barcodeRepository.SaveBarcode(vBarcode_Request);
+                        }
+                    }
+                }
+                #endregion
             }
 
             if (result == (int)SaveOperationEnums.NoRecordExists)

@@ -96,6 +96,7 @@ namespace AVPolyPack.Application.Models
         public bool? IsInventory { get; set; }
         public string? OrderRemarks { get; set; }
         public string? Remarks { get; set; }
+        public string? RollLength { get; set; }
     }
     public class SplitRoll_Search : BaseSearchEntity
     {
@@ -107,6 +108,7 @@ namespace AVPolyPack.Application.Models
         public string? RollNo { get; set; }
         public string? LoomNumber { get; set; }
         public string? SplitRollNo { get; set; }
+        public string? SplitRollLength { get; set; }
         public decimal? TotalMeter { get; set; }
         public decimal? GrossWeight { get; set; }
         public decimal? TareWeight { get; set; }
@@ -114,6 +116,10 @@ namespace AVPolyPack.Application.Models
         public decimal? CurrentAvg { get; set; }
         public decimal? CurrentGSM { get; set; }
         public decimal? AvgDiff { get; set; }
+        public string? BarcodeOriginalFileName { get; set; }
+        public string? BarcodeFileName { get; set; }
+        public string? BarcodeURL { get; set; }
+
     }
     #endregion
 }

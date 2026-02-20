@@ -90,17 +90,19 @@ namespace AVPolyPack.Controllers
             return _response;
         }
 
-        #region Split Roll
+        #region Inventory Roll
         [Route("[action]")]
         [HttpPost]
-        public async Task<ResponseModel> GetSplitList(Split_Search parameters)
+        public async Task<ResponseModel> GetInventoryRollList(InventoryRoll_Search parameters)
         {
-            IEnumerable<Split_Response> lstRoles = await _manageInventoryRepository.GetSplitList(parameters);
+            IEnumerable<InventoryRoll_Response> lstRoles = await _manageInventoryRepository.GetInventoryRollList(parameters);
             _response.Data = lstRoles.ToList();
             _response.Total = parameters.Total;
             return _response;
         }
+        #endregion
 
+        #region Split Roll
         [Route("[action]")]
         [HttpPost]
         public async Task<ResponseModel> SaveSplitRoll(List<SplitRoll_Request> parameters)
@@ -170,6 +172,84 @@ namespace AVPolyPack.Controllers
         public async Task<ResponseModel> GetSplitRollList(SplitRoll_Search parameters)
         {
             IEnumerable<SplitRoll_Response> lstRoles = await _manageInventoryRepository.GetSplitRollList(parameters);
+            _response.Data = lstRoles.ToList();
+            _response.Total = parameters.Total;
+            return _response;
+        }
+        #endregion
+
+        #region Merge Roll 
+        [Route("[action]")]
+        [HttpPost]
+        public async Task<ResponseModel> SaveMergeRoll(List<MergeRoll_Request> parameters)
+        {
+            int result = 0;
+
+            foreach (var item in parameters)
+            {
+                var vMergeRoll_Request = new MergeRoll_Request()
+                {
+                    Id = item.Id,
+                    RollId = item.RollId,
+                    CustomerId = item.CustomerId,
+                    OrderItemId = item.OrderItemId,
+                    MergeRollNo = item.MergeRollNo,
+                    MergeRollLength = item.MergeRollLength,
+                };
+                result = await _manageInventoryRepository.SaveMergeRoll(vMergeRoll_Request);
+
+                #region Generate Barcode
+                if (vMergeRoll_Request.Id == 0 && result > 0)
+                {
+                    var vRoll = await _loomsRepository.GetRollById(result);
+                    if (vRoll != null)
+                    {
+                        var vGenerateBarcode = _barcodeRepository.GenerateBarcode(vRoll.RollNo, "Roll");
+                        if (vGenerateBarcode.Barcode_Unique_Id != "")
+                        {
+                            var vBarcode_Request = new Barcode_Request()
+                            {
+                                Id = 0,
+                                BarcodeNo = vRoll.RollNo,
+                                BarcodeType = "Roll",
+                                Barcode_Unique_Id = vGenerateBarcode.Barcode_Unique_Id,
+                                BarcodeOriginalFileName = vGenerateBarcode.BarcodeOriginalFileName,
+                                BarcodeFileName = vGenerateBarcode.BarcodeFileName,
+                                RefId = vRoll.Id
+                            };
+                            var resultBarcode = _barcodeRepository.SaveBarcode(vBarcode_Request);
+                        }
+                    }
+                }
+                #endregion
+            }
+
+            if (result == (int)SaveOperationEnums.NoRecordExists)
+            {
+                _response.Message = "No record exists";
+            }
+            else if (result == (int)SaveOperationEnums.ReocrdExists)
+            {
+                _response.Message = "Record already exists";
+            }
+            else if (result == (int)SaveOperationEnums.NoResult)
+            {
+                _response.Message = "Something went wrong, please try again";
+            }
+            else
+            {
+                _response.Message = "Record Submitted successfully";
+            }
+
+            _response.Id = result;
+            return _response;
+        }
+
+        [Route("[action]")]
+        [HttpPost]
+        public async Task<ResponseModel> GetMergeRollList(MergeRoll_Search parameters)
+        {
+            IEnumerable<MergeRoll_Response> lstRoles = await _manageInventoryRepository.GetMergeRollList(parameters);
             _response.Data = lstRoles.ToList();
             _response.Total = parameters.Total;
             return _response;

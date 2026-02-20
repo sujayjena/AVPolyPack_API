@@ -56,8 +56,8 @@ namespace AVPolyPack.Persistence.Repositories
             return (await ListByStoredProcedure<Inventory_Response>("GetInventoryById", queryParameters)).FirstOrDefault();
         }
 
-        #region Split Roll
-        public async Task<IEnumerable<Split_Response>> GetSplitList(Split_Search parameters)
+        #region Invetory Roll
+        public async Task<IEnumerable<InventoryRoll_Response>> GetInventoryRollList(InventoryRoll_Search parameters)
         {
             DynamicParameters queryParameters = new DynamicParameters();
             queryParameters.Add("@FromDate", parameters.FromDate);
@@ -81,11 +81,14 @@ namespace AVPolyPack.Persistence.Repositories
             queryParameters.Add("@Total", parameters.Total, null, System.Data.ParameterDirection.Output);
             queryParameters.Add("@UserId", SessionManager.LoggedInUserId);
 
-            var result = await ListByStoredProcedure<Split_Response>("GetSplitList", queryParameters);
+            var result = await ListByStoredProcedure<InventoryRoll_Response>("GetInventoryRollList", queryParameters);
             parameters.Total = queryParameters.Get<int>("Total");
 
             return result;
         }
+        #endregion
+
+        #region Split Roll
         public async Task<int> SaveSplitRoll(SplitRoll_Request parameters)
         {
             DynamicParameters queryParameters = new DynamicParameters();
@@ -118,6 +121,38 @@ namespace AVPolyPack.Persistence.Repositories
             DynamicParameters queryParameters = new DynamicParameters();
             queryParameters.Add("@Id", Id);
             return (await ListByStoredProcedure<SplitRoll_Response>("GetSplitRollById", queryParameters)).FirstOrDefault();
+        }
+        #endregion
+
+        #region Merge Roll
+        public async Task<int> SaveMergeRoll(MergeRoll_Request parameters)
+        {
+            DynamicParameters queryParameters = new DynamicParameters();
+            queryParameters.Add("@Id", parameters.Id);
+            queryParameters.Add("@RollId", parameters.RollId);
+            queryParameters.Add("@CustomerId", parameters.CustomerId);
+            queryParameters.Add("@OrderItemId", parameters.OrderItemId);
+            queryParameters.Add("@MergeRollNo", parameters.MergeRollNo);
+            queryParameters.Add("@MergeRollLength", parameters.MergeRollLength);
+            queryParameters.Add("@UserId", SessionManager.LoggedInUserId);
+
+            return await SaveByStoredProcedure<int>("SaveMergeRoll", queryParameters);
+        }
+        public async Task<IEnumerable<MergeRoll_Response>> GetMergeRollList(MergeRoll_Search parameters)
+        {
+            DynamicParameters queryParameters = new DynamicParameters();
+            queryParameters.Add("@RollId", parameters.RollId);
+            queryParameters.Add("@SearchText", parameters.SearchText.SanitizeValue());
+            queryParameters.Add("@IsActive", parameters.IsActive);
+            queryParameters.Add("@PageNo", parameters.PageNo);
+            queryParameters.Add("@PageSize", parameters.PageSize);
+            queryParameters.Add("@Total", parameters.Total, null, System.Data.ParameterDirection.Output);
+            queryParameters.Add("@UserId", SessionManager.LoggedInUserId);
+
+            var result = await ListByStoredProcedure<MergeRoll_Response>("GetMergeRollList", queryParameters);
+            parameters.Total = queryParameters.Get<int>("Total");
+
+            return result;
         }
         #endregion
     }

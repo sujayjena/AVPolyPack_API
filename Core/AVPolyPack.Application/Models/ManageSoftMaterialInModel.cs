@@ -64,7 +64,10 @@ namespace AVPolyPack.Application.Models
     {
         [JsonIgnore]
         public int? SoftMaterialInId { get; set; }
-        public int? MaterialId { get; set; }
+        public int? MaterialTypeId { get; set; }
+        public int? MaterialDetailsId { get; set; }
+
+        //public int? MaterialId { get; set; }
         public decimal? Quantity { get; set; }
         public decimal? Weight { get; set; }
         public bool? IsActive { get; set; }
@@ -73,6 +76,9 @@ namespace AVPolyPack.Application.Models
     public class SoftMaterialInDetails_Response : BaseResponseEntity
     {
         public int? SoftMaterialInId { get; set; }
+        public int? MaterialTypeId { get; set; }
+        public string? MaterialType { get; set; }
+        public int? MaterialDetailsId { get; set; }
         public int? MaterialId { get; set; }
         public string? MaterialName { get; set; }
         public string? HSNCode { get; set; }

@@ -32,14 +32,8 @@ namespace AVPolyPack.Application.Models
         public DateTime? CompletedDateTime { get; set; }
     }
 
-    #region Split Roll
-    public class SplitRoll_Request : BaseEntity
-    {
-        public int? RollId { get; set; }
-        public string? SplitRollNo { get; set; }
-        public string? SplitRollLength { get; set; }
-    }
-    public class Split_Search : BaseSearchEntity
+    #region Inventory Roll
+    public class InventoryRoll_Search : BaseSearchEntity
     {
         public DateTime? FromDate { get; set; }
         public DateTime? ToDate { get; set; }
@@ -58,7 +52,7 @@ namespace AVPolyPack.Application.Models
         [DefaultValue(false)]
         public bool? IsAntiSlip { get; set; }
     }
-    public class Split_Response : BaseResponseEntity
+    public class InventoryRoll_Response : BaseResponseEntity
     {
         public string? OrderItemNo { get; set; }
         public string? LoomNumber { get; set; }
@@ -98,6 +92,15 @@ namespace AVPolyPack.Application.Models
         public string? Remarks { get; set; }
         public string? RollLength { get; set; }
     }
+    #endregion
+
+    #region Split Roll
+    public class SplitRoll_Request : BaseEntity
+    {
+        public int? RollId { get; set; }
+        public string? SplitRollNo { get; set; }
+        public string? SplitRollLength { get; set; }
+    }
     public class SplitRoll_Search : BaseSearchEntity
     {
         public int? RollId { get; set; }
@@ -109,6 +112,44 @@ namespace AVPolyPack.Application.Models
         public string? LoomNumber { get; set; }
         public string? SplitRollNo { get; set; }
         public string? SplitRollLength { get; set; }
+        public decimal? TotalMeter { get; set; }
+        public decimal? GrossWeight { get; set; }
+        public decimal? TareWeight { get; set; }
+        public decimal? NetWeight { get; set; }
+        public decimal? CurrentAvg { get; set; }
+        public decimal? CurrentGSM { get; set; }
+        public decimal? AvgDiff { get; set; }
+        public string? BarcodeOriginalFileName { get; set; }
+        public string? BarcodeFileName { get; set; }
+        public string? BarcodeURL { get; set; }
+
+    }
+    #endregion
+
+    #region Merge Roll
+    public class MergeRoll_Request : BaseEntity
+    {
+        public int? RollId { get; set; }
+        public int? CustomerId { get; set; }
+        public int? OrderItemId { get; set; }
+        public string? MergeRollNo { get; set; }
+        public string? MergeRollLength { get; set; }
+    }
+    public class MergeRoll_Search : BaseSearchEntity
+    {
+        public int? RollId { get; set; }
+    }
+    public class MergeRoll_Response : BaseResponseEntity
+    {
+        public int? RollId { get; set; }
+        public string? RollNo { get; set; }
+        public string? LoomNumber { get; set; }
+        public int? CustomerId { get; set; }
+        public string? CustomerName { get; set; }
+        public int? OrderItemId { get; set; }
+        public string? OrderItemNo { get; set; }
+        public string? MergeRollNo { get; set; }
+        public string? MergeRollLength { get; set; }
         public decimal? TotalMeter { get; set; }
         public decimal? GrossWeight { get; set; }
         public decimal? TareWeight { get; set; }

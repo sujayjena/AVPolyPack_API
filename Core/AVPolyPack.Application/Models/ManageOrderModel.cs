@@ -96,6 +96,7 @@ namespace AVPolyPack.Application.Models
         public int? OrderId { get; set; }
         public int? OrderType { get; set; }
         public int? IsAssignLoom { get; set; }
+        public int? CustomerId { get; set; }
     }
     public class OrderItem_Request : BaseEntity
     {

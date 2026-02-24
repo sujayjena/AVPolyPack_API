@@ -185,6 +185,7 @@ namespace AVPolyPack.Persistence.Repositories
             queryParameters.Add("@OrderId", parameters.OrderId);
             queryParameters.Add("@OrderType", parameters.OrderType);
             queryParameters.Add("@IsAssignLoom", parameters.IsAssignLoom);
+            queryParameters.Add("@CustomerId", parameters.CustomerId);
             queryParameters.Add("@SearchText", parameters.SearchText.SanitizeValue());
             queryParameters.Add("@IsActive", parameters.IsActive);
             queryParameters.Add("@PageNo", parameters.PageNo);

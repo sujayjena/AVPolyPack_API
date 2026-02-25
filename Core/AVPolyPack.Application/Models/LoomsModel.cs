@@ -286,6 +286,9 @@ namespace AVPolyPack.Application.Models
         [DefaultValue(0)]
         public int? OrderType { get; set; }
 
+        [DefaultValue(null)]
+        public bool? IsPickup { get; set; }
+
         //[DefaultValue(null)]
         //public bool? IsLaminationLabTestCompleted { get; set; }
 
@@ -345,6 +348,20 @@ namespace AVPolyPack.Application.Models
         public int? CuttingType { get; set; }
         public bool? IsInventory { get; set; }
 
+        public string? Color { get; set; }
+        public string? BagSizeWidth { get; set; }
+        public string? BagSizeLength { get; set; }
+        public string? BagWeight { get; set; }
+        public bool? IsHemming { get; set; }
+        public int? ButtomFold { get; set; }
+        public int? ButtomStich { get; set; }
+        public string? StichingYarnColor { get; set; }
+        public int? LinerType { get; set; }
+        public string? LinerWeight { get; set; }
+        public string? LinerSize { get; set; }
+        public int? PrintingSide { get; set; }
+        public string? PerBallWeight { get; set; }
+
         public decimal? StartMeter { get; set; }
         public decimal? EndMeter { get; set; }
         public decimal? TotalMeter { get; set; }
@@ -370,6 +387,54 @@ namespace AVPolyPack.Application.Models
         public bool? LabTestStrengthEntry { get; set; }
         public bool? LaminationLabTestAvgGSMEntry { get; set; }
         public bool? LaminationLabTestStrengthEntry { get; set; }
+    }
+
+    public class TrackingStatus_Response
+    {
+        public bool? IsOrderItemCompleted { get; set; }
+        public DateTime? OrderItemCompletedDateTime { get; set; }
+        public bool? IsLoomCompleted { get; set; }
+        public DateTime? LoomCompletedDateTime { get; set; }
+        public bool? IsRollCompleted { get; set; }
+        public DateTime? RollCompletedDateTime { get; set; }
+        public bool? IsLabTestCompleted { get; set; }
+        public DateTime? LabTestCompletedDateTime { get; set; }
+        public bool? IsLaminationCompleted { get; set; }
+        public DateTime? LaminationCompletedDateTime { get; set; }
+        public bool? IsLaminationLabTestCompleted { get; set; }
+        public DateTime? LaminationLabTestCompletedDateTime { get; set; }
+        public bool? IsPrintingCompleted { get; set; }
+        public DateTime? PrintingCompletedDateTime { get; set; }
+        public bool? IsCuttingCompleted { get; set; }
+        public DateTime? CuttingCompletedDateTime { get; set; }
+        public bool? IsInventoryCompleted { get; set; }
+        public DateTime? InventoryCompletedDateTime { get; set; }
+        public bool? IsDispatchCompleted { get; set; }
+        public DateTime? DispatchCompletedDateTime { get; set; }
+    }
+
+    public class PickupRoll_Request : BaseEntity
+    {
+        public bool? IsPickup { get; set; }
+    }
+
+    public class OutwardingStock_Search : BaseSearchEntity
+    {
+        [DefaultValue(0)]
+        public int? OperationType { get; set; }
+
+        [DefaultValue(false)]
+        public bool? IsOperationCompleted { get; set; }
+    }
+    public class OutwardingStock_Response : BaseResponseEntity
+    {
+        public int? OrderItemId { get; set; }
+        public string? OrderItemNo { get; set; }
+        public int? LoomId { get; set; }
+        public string? LoomName { get; set; }
+        public int? ShiftType { get; set; }
+        public string? RollNo { get; set; }
+        public string? RollCode { get; set; }
     }
     #endregion
 }

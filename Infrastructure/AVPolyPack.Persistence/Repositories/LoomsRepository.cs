@@ -343,6 +343,7 @@ namespace AVPolyPack.Persistence.Repositories
             queryParameters.Add("@OperationType", parameters.OperationType);
             queryParameters.Add("@IsOperationCompleted", parameters.IsOperationCompleted);
             queryParameters.Add("@OrderType", parameters.OrderType);
+            queryParameters.Add("@IsPickup", parameters.IsPickup);
             queryParameters.Add("@SearchText", parameters.SearchText.SanitizeValue());
             queryParameters.Add("@IsActive", parameters.IsActive);
             queryParameters.Add("@PageNo", parameters.PageNo);
@@ -372,6 +373,44 @@ namespace AVPolyPack.Persistence.Repositories
             return await SaveByStoredProcedure<int>("RollCodeReset", queryParameters);
         }
 
+        public async Task<TrackingStatus_Response?> GetTrackingStatusById(int Id)
+        {
+            DynamicParameters queryParameters = new DynamicParameters();
+
+            queryParameters.Add("@Id", Id);
+
+            return (await ListByStoredProcedure<TrackingStatus_Response>("GetTrackingStatusById", queryParameters)).FirstOrDefault();
+        }
+
+        public async Task<int> PickupRoll(PickupRoll_Request parameters)
+        {
+            DynamicParameters queryParameters = new DynamicParameters();
+
+            queryParameters.Add("@Id", parameters.Id);
+            queryParameters.Add("@IsPickup", parameters.IsPickup);
+            queryParameters.Add("@UserId", SessionManager.LoggedInUserId);
+
+            return await SaveByStoredProcedure<int>("PickupRoll", queryParameters);
+        }
+
+        public async Task<IEnumerable<OutwardingStock_Response>> GetOutwardingStockList(OutwardingStock_Search parameters)
+        {
+            DynamicParameters queryParameters = new DynamicParameters();
+
+            queryParameters.Add("@OperationType", parameters.OperationType);
+            queryParameters.Add("@IsOperationCompleted", parameters.IsOperationCompleted);
+            queryParameters.Add("@SearchText", parameters.SearchText.SanitizeValue());
+            queryParameters.Add("@IsActive", parameters.IsActive);
+            queryParameters.Add("@PageNo", parameters.PageNo);
+            queryParameters.Add("@PageSize", parameters.PageSize);
+            queryParameters.Add("@Total", parameters.Total, null, System.Data.ParameterDirection.Output);
+            queryParameters.Add("@UserId", SessionManager.LoggedInUserId);
+
+            var result = await ListByStoredProcedure<OutwardingStock_Response>("GetOutwardingStockList", queryParameters);
+            parameters.Total = queryParameters.Get<int>("Total");
+
+            return result;
+        }
         #endregion
     }
 }

@@ -25,5 +25,15 @@ namespace AVPolyPack.API.Controllers
             _response.IsSuccess = true;
             _dashboardRepository = dashboardRepository;
         }
+
+        [Route("[action]")]
+        [HttpPost]
+        public async Task<ResponseModel> GetDashboard_OutwardingStockSummary(Dashboard_OutwardingStock_Search parameters)
+        {
+            IEnumerable<Dashboard_OutwardingStock_Response> lst = await _dashboardRepository.GetDashboard_OutwardingStockSummary(parameters);
+            _response.Data = lst.ToList();
+            _response.Total = parameters.Total;
+            return _response;
+        }
     }
 }

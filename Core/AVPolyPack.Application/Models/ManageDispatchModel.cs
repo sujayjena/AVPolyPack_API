@@ -13,6 +13,9 @@ namespace AVPolyPack.Application.Models
     {
         public DateTime? FromDate { get; set; }
         public DateTime? ToDate { get; set; }
+
+        [DefaultValue(null)]
+        public bool? IsDispatch { get; set; }
     }
 
     public class Dispatch_Request : BaseEntity

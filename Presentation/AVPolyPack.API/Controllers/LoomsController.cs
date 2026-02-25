@@ -531,6 +531,64 @@ namespace AVPolyPack.Controllers
             _response.Id = result;
             return _response;
         }
+
+        [Route("[action]")]
+        [HttpPost]
+        public async Task<ResponseModel> GetTrackingStatusById(int Id)
+        {
+            if (Id <= 0)
+            {
+                _response.Message = "Id is required";
+            }
+            else
+            {
+                var vResultObj = await _loomsRepository.GetTrackingStatusById(Id);
+                _response.Data = vResultObj;
+            }
+            return _response;
+        }
+
+        [Route("[action]")]
+        [HttpPost]
+        public async Task<ResponseModel> PickupRoll(List<PickupRoll_Request> parameters)
+        {
+            int result = 0;
+            foreach(var item in parameters)
+            {
+                result = await _loomsRepository.PickupRoll(item);
+            }
+
+            if (result == (int)SaveOperationEnums.NoRecordExists)
+            {
+                _response.Message = "No record exists";
+            }
+            else if (result == (int)SaveOperationEnums.ReocrdExists)
+            {
+                _response.Message = "Record already exists";
+            }
+            else if (result == (int)SaveOperationEnums.NoResult)
+            {
+                _response.Message = "Something went wrong, please try again";
+            }
+            else
+            {
+                _response.Message = "Record Submitted successfully";
+            }
+
+            _response.Id = result;
+            return _response;
+
+        }
+
+        [Route("[action]")]
+        [HttpPost]
+        public async Task<ResponseModel> GetOutwardingStockList(OutwardingStock_Search parameters)
+        {
+            IEnumerable<OutwardingStock_Response> lstRoles = await _loomsRepository.GetOutwardingStockList(parameters);
+            _response.Data = lstRoles.ToList();
+            _response.Total = parameters.Total;
+            return _response;
+        }
         #endregion
     }
 }

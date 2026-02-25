@@ -74,6 +74,7 @@ namespace AVPolyPack.Persistence.Repositories
             queryParameters.Add("@Guzzet", parameters.Guzzet);
             queryParameters.Add("@FoldingSize", parameters.FoldingSize);
             queryParameters.Add("@IsAntiSlip", parameters.IsAntiSlip);
+            queryParameters.Add("@OrderType", parameters.OrderType);
             queryParameters.Add("@SearchText", parameters.SearchText.SanitizeValue());
             queryParameters.Add("@IsActive", parameters.IsActive);
             queryParameters.Add("@PageNo", parameters.PageNo);

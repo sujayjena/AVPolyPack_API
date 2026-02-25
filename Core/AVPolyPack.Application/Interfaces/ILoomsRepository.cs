@@ -48,6 +48,9 @@ namespace AVPolyPack.Application.Interfaces
         Task<IEnumerable<Roll_Response>> GetRollList(Roll_Search parameters);
         Task<Roll_Response?> GetRollById(int Id);
         Task<int> RollCodeReset();
+        Task<TrackingStatus_Response?> GetTrackingStatusById(int Id);
+        Task<int> PickupRoll(PickupRoll_Request parameters);
+        Task<IEnumerable<OutwardingStock_Response>> GetOutwardingStockList(OutwardingStock_Search parameters);
         #endregion
     }
 }

@@ -51,6 +51,8 @@ namespace AVPolyPack.Application.Models
 
         [DefaultValue(false)]
         public bool? IsAntiSlip { get; set; }
+
+        public int? OrderType { get; set; }
     }
     public class InventoryRoll_Response : BaseResponseEntity
     {

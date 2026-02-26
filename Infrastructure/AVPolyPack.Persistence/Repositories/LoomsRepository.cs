@@ -387,6 +387,7 @@ namespace AVPolyPack.Persistence.Repositories
             DynamicParameters queryParameters = new DynamicParameters();
 
             queryParameters.Add("@Id", parameters.Id);
+            queryParameters.Add("@OperationType", parameters.OperationType);
             queryParameters.Add("@IsPickup", parameters.IsPickup);
             queryParameters.Add("@UserId", SessionManager.LoggedInUserId);
 

@@ -415,6 +415,7 @@ namespace AVPolyPack.Application.Models
 
     public class PickupRoll_Request : BaseEntity
     {
+        public int? OperationType { get; set; }
         public bool? IsPickup { get; set; }
     }
 

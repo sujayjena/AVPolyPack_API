@@ -20,13 +20,24 @@ namespace AVPolyPack.Persistence.Repositories
             _configuration = configuration;
         }
 
-        public async Task<IEnumerable<Dashboard_OutwardingStock_Response>> GetDashboard_OutwardingStockSummary(Dashboard_OutwardingStock_Search parameters)
+        public async Task<IEnumerable<Dashboard_OutwardingStock_Response>> GetDashboard_OutwardingStockSummary()
         {
             DynamicParameters queryParameters = new DynamicParameters();
 
             queryParameters.Add("@UserId", SessionManager.LoggedInUserId);
 
             var result = await ListByStoredProcedure<Dashboard_OutwardingStock_Response>("GetDashboard_OutwardingStockSummary", queryParameters);
+
+            return result;
+        }
+
+        public async Task<IEnumerable<Dashboard_Roll_Response>> GetDashboard_RollSummary()
+        {
+            DynamicParameters queryParameters = new DynamicParameters();
+
+            queryParameters.Add("@UserId", SessionManager.LoggedInUserId);
+
+            var result = await ListByStoredProcedure<Dashboard_Roll_Response>("GetDashboard_RollSummary", queryParameters);
 
             return result;
         }

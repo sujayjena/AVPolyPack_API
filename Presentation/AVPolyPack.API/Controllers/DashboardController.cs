@@ -28,11 +28,19 @@ namespace AVPolyPack.API.Controllers
 
         [Route("[action]")]
         [HttpPost]
-        public async Task<ResponseModel> GetDashboard_OutwardingStockSummary(Dashboard_OutwardingStock_Search parameters)
+        public async Task<ResponseModel> GetDashboard_OutwardingStockSummary()
         {
-            IEnumerable<Dashboard_OutwardingStock_Response> lst = await _dashboardRepository.GetDashboard_OutwardingStockSummary(parameters);
+            IEnumerable<Dashboard_OutwardingStock_Response> lst = await _dashboardRepository.GetDashboard_OutwardingStockSummary();
             _response.Data = lst.ToList();
-            _response.Total = parameters.Total;
+            return _response;
+        }
+
+        [Route("[action]")]
+        [HttpPost]
+        public async Task<ResponseModel> GetDashboard_RollSummary()
+        {
+            IEnumerable<Dashboard_Roll_Response> lst = await _dashboardRepository.GetDashboard_RollSummary();
+            _response.Data = lst.ToList();
             return _response;
         }
     }

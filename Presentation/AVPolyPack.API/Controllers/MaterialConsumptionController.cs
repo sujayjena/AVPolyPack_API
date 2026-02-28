@@ -65,6 +65,15 @@ namespace AVPolyPack.Controllers
             return _response;
         }
 
+        [Route("[action]")]
+        [HttpPost]
+        public async Task<ResponseModel> GetConsumptionHeaderList(Consumption_Search parameters)
+        {
+            IEnumerable<ConsumptionHeader_Response> lstRoles = await _materialConsumptionRepository.GetConsumptionHeaderList(parameters);
+            _response.Data = lstRoles.ToList();
+            _response.Total = parameters.Total;
+            return _response;
+        }
 
         [Route("[action]")]
         [HttpPost]
@@ -133,6 +142,15 @@ namespace AVPolyPack.Controllers
             return _response;
         }
 
+        [Route("[action]")]
+        [HttpPost]
+        public async Task<ResponseModel> GetWasteMaterialHeaderList(WasteMaterial_Search parameters)
+        {
+            IEnumerable<WasteMaterialHeader_Response> lstRoles = await _materialConsumptionRepository.GetWasteMaterialHeaderList(parameters);
+            _response.Data = lstRoles.ToList();
+            _response.Total = parameters.Total;
+            return _response;
+        }
 
         [Route("[action]")]
         [HttpPost]

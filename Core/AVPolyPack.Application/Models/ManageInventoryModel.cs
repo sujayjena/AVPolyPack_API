@@ -97,6 +97,27 @@ namespace AVPolyPack.Application.Models
     #endregion
 
     #region Split Roll
+    public class SplitRequest_Request : BaseEntity
+    {
+        public int? RollId { get; set; }
+        public string? SplitRequestNo { get; set; }
+        public string? RequestRollLength { get; set; }
+        public bool? IsPending { get; set; }
+    }
+    public class SplitRequest_Search : BaseSearchEntity
+    {
+    }
+    public class SplitRequest_Response : BaseResponseEntity
+    {
+        public int? RollId { get; set; }
+        public string? RollNo { get; set; }
+        public string? RollCode { get; set; }
+        public string? SplitRequestNo { get; set; }
+        public string? RequestRollLength { get; set; }
+        public int? CustomerId { get; set; }
+        public string? CustomerName { get; set; }
+        public bool? IsPending { get; set; }
+    }
     public class SplitRoll_Request : BaseEntity
     {
         public int? RollId { get; set; }
@@ -129,6 +150,31 @@ namespace AVPolyPack.Application.Models
     #endregion
 
     #region Merge Roll
+    public class MergeRequest_Request : BaseEntity
+    {
+        public int? RollId { get; set; }
+        public int? CustomerId { get; set; }
+        public int? OrderItemId { get; set; }
+        public string? MergeRequestNo { get; set; }
+        public string? RequestRollLength { get; set; }
+        public bool? IsPending { get; set; }
+    }
+    public class MergeRequest_Search : BaseSearchEntity
+    {
+    }
+    public class MergeRequest_Response : BaseResponseEntity
+    {
+        public int? RollId { get; set; }
+        public string? RollNo { get; set; }
+        public string? RollCode { get; set; }
+        public int? CustomerId { get; set; }
+        public string? CustomerName { get; set; }
+        public int? OrderItemId { get; set; }
+        public string? OrderItemNo { get; set; }
+        public string? MergeRequestNo { get; set; }
+        public string? RequestRollLength { get; set; }
+        public bool? IsPending { get; set; }
+    }
     public class MergeRoll_Request : BaseEntity
     {
         public int? RollId { get; set; }

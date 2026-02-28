@@ -32,7 +32,13 @@ namespace AVPolyPack.Application.Models
         public decimal? TotalWeight { get; set; }
         public bool? IsActive { get; set; }
     }
-
+    public class ConsumptionHeader_Response : BaseEntity
+    {
+        public int? TapeMachineId { get; set; }
+        public string? TapeMachineName { get; set; }
+        public int? ShiftType { get; set; }
+        public DateTime? CreatedDate { get; set; }
+    }
     public class Consumption_Response : BaseResponseEntity
     {
         public int? TapeMachineId { get; set; }
@@ -69,7 +75,13 @@ namespace AVPolyPack.Application.Models
         public decimal? WasteWeight { get; set; }
         public bool? IsActive { get; set; }
     }
-
+    public class WasteMaterialHeader_Response : BaseEntity
+    {
+        public int? TapeMachineId { get; set; }
+        public string? TapeMachineName { get; set; }
+        public int? ShiftType { get; set; }
+        public DateTime? CreatedDate { get; set; }
+    }
     public class WasteMaterial_Response : BaseResponseEntity
     {
         public int? TapeMachineId { get; set; }

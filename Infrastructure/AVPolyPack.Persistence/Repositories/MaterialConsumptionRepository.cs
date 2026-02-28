@@ -38,6 +38,27 @@ namespace AVPolyPack.Persistence.Repositories
             return await SaveByStoredProcedure<int>("SaveConsumption", queryParameters);
         }
 
+        public async Task<IEnumerable<ConsumptionHeader_Response>> GetConsumptionHeaderList(Consumption_Search parameters)
+        {
+            DynamicParameters queryParameters = new DynamicParameters();
+
+            queryParameters.Add("@FromDate", parameters.FromDate);
+            queryParameters.Add("@ToDate", parameters.ToDate);
+            queryParameters.Add("@TapeMachineId", parameters.TapeMachineId);
+            queryParameters.Add("@ShiftType", parameters.ShiftType);
+            queryParameters.Add("@SearchText", parameters.SearchText.SanitizeValue());
+            queryParameters.Add("@IsActive", parameters.IsActive);
+            queryParameters.Add("@PageNo", parameters.PageNo);
+            queryParameters.Add("@PageSize", parameters.PageSize);
+            queryParameters.Add("@Total", parameters.Total, null, System.Data.ParameterDirection.Output);
+            queryParameters.Add("@UserId", SessionManager.LoggedInUserId);
+
+            var result = await ListByStoredProcedure<ConsumptionHeader_Response>("GetConsumptionHeaderList", queryParameters);
+            parameters.Total = queryParameters.Get<int>("Total");
+
+            return result;
+        }
+
         public async Task<IEnumerable<Consumption_Response>> GetConsumptionList(Consumption_Search parameters)
         {
             DynamicParameters queryParameters = new DynamicParameters();
@@ -85,7 +106,26 @@ namespace AVPolyPack.Persistence.Repositories
 
             return await SaveByStoredProcedure<int>("SaveWasteMaterial", queryParameters);
         }
+        public async Task<IEnumerable<WasteMaterialHeader_Response>> GetWasteMaterialHeaderList(WasteMaterial_Search parameters)
+        {
+            DynamicParameters queryParameters = new DynamicParameters();
 
+            queryParameters.Add("@FromDate", parameters.FromDate);
+            queryParameters.Add("@ToDate", parameters.ToDate);
+            queryParameters.Add("@TapeMachineId", parameters.TapeMachineId);
+            queryParameters.Add("@ShiftType", parameters.ShiftType);
+            queryParameters.Add("@SearchText", parameters.SearchText.SanitizeValue());
+            queryParameters.Add("@IsActive", parameters.IsActive);
+            queryParameters.Add("@PageNo", parameters.PageNo);
+            queryParameters.Add("@PageSize", parameters.PageSize);
+            queryParameters.Add("@Total", parameters.Total, null, System.Data.ParameterDirection.Output);
+            queryParameters.Add("@UserId", SessionManager.LoggedInUserId);
+
+            var result = await ListByStoredProcedure<WasteMaterialHeader_Response>("GetWasteMaterialHeaderList", queryParameters);
+            parameters.Total = queryParameters.Get<int>("Total");
+
+            return result;
+        }
         public async Task<IEnumerable<WasteMaterial_Response>> GetWasteMaterialList(WasteMaterial_Search parameters)
         {
             DynamicParameters queryParameters = new DynamicParameters();

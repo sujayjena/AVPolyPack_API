@@ -105,6 +105,44 @@ namespace AVPolyPack.Controllers
         #region Split Roll
         [Route("[action]")]
         [HttpPost]
+        public async Task<ResponseModel> SaveSplitRequest(SplitRequest_Request parameters)
+        {
+            int result = await _manageInventoryRepository.SaveSplitRequest(parameters); 
+
+            if (result == (int)SaveOperationEnums.NoRecordExists)
+            {
+                _response.Message = "No record exists";
+            }
+            else if (result == (int)SaveOperationEnums.ReocrdExists)
+            {
+                _response.Message = "Record already exists";
+            }
+
+            else if (result == (int)SaveOperationEnums.NoResult)
+            {
+                _response.Message = "Something went wrong, please try again";
+            }
+            else
+            {
+                _response.Message = "Record Submitted successfully";
+            }
+
+            _response.Id = result;
+            return _response;
+        }
+
+        [Route("[action]")]
+        [HttpPost]
+        public async Task<ResponseModel> GetSplitRequestList(SplitRequest_Search parameters)
+        {
+            IEnumerable<SplitRequest_Response> lst = await _manageInventoryRepository.GetSplitRequestList(parameters);
+            _response.Data = lst.ToList();
+            _response.Total = parameters.Total;
+            return _response;
+        }
+
+        [Route("[action]")]
+        [HttpPost]
         public async Task<ResponseModel> SaveSplitRoll(List<SplitRoll_Request> parameters)
         {
             int result = 0;
@@ -179,6 +217,44 @@ namespace AVPolyPack.Controllers
         #endregion
 
         #region Merge Roll 
+        [Route("[action]")]
+        [HttpPost]
+        public async Task<ResponseModel> SaveMergeRequest(MergeRequest_Request parameters)
+        {
+            int result = await _manageInventoryRepository.SaveMergeRequest(parameters);
+
+            if (result == (int)SaveOperationEnums.NoRecordExists)
+            {
+                _response.Message = "No record exists";
+            }
+            else if (result == (int)SaveOperationEnums.ReocrdExists)
+            {
+                _response.Message = "Record already exists";
+            }
+
+            else if (result == (int)SaveOperationEnums.NoResult)
+            {
+                _response.Message = "Something went wrong, please try again";
+            }
+            else
+            {
+                _response.Message = "Record Submitted successfully";
+            }
+
+            _response.Id = result;
+            return _response;
+        }
+
+        [Route("[action]")]
+        [HttpPost]
+        public async Task<ResponseModel> GetMergeRequestList(MergeRequest_Search parameters)
+        {
+            IEnumerable<MergeRequest_Response> lst = await _manageInventoryRepository.GetMergeRequestList(parameters);
+            _response.Data = lst.ToList();
+            _response.Total = parameters.Total;
+            return _response;
+        }
+
         [Route("[action]")]
         [HttpPost]
         public async Task<ResponseModel> SaveMergeRoll(List<MergeRoll_Request> parameters)

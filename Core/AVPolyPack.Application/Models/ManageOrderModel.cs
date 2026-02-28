@@ -228,6 +228,9 @@ namespace AVPolyPack.Application.Models
         public decimal? LaminationCoatingAvg { get; set; }
         public decimal? LaminationAvg { get; set; }
         public int? TopType { get; set; }
+        public string? TapeWidth { get; set; }
+        public string? ELongation { get; set; }
+        public string? MeterTarget { get; set; }
     }
 
     public class OrderItem_Response : BaseResponseEntity
@@ -339,6 +342,9 @@ namespace AVPolyPack.Application.Models
         public decimal? LaminationCoatingAvg { get; set; }
         public decimal? LaminationAvg { get; set; }
         public int? TopType { get; set; }
+        public string? TapeWidth { get; set; }
+        public string? ELongation { get; set; }
+        public string? MeterTarget { get; set; }
         public DateTime? OrderItemAssignDateTime { get; set; }
     }
     #endregion

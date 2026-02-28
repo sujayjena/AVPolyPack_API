@@ -173,6 +173,9 @@ namespace AVPolyPack.Persistence.Repositories
             queryParameters.Add("@LaminationCoatingAvg", parameters.LaminationCoatingAvg);
             queryParameters.Add("@LaminationAvg", parameters.LaminationAvg);
             queryParameters.Add("@TopType", parameters.TopType);
+            queryParameters.Add("@TapeWidth", parameters.TapeWidth);
+            queryParameters.Add("@ELongation", parameters.ELongation);
+            queryParameters.Add("@MeterTarget", parameters.MeterTarget);
             queryParameters.Add("@UserId", SessionManager.LoggedInUserId);
 
             return await SaveByStoredProcedure<int>("SaveOrderItem", queryParameters);

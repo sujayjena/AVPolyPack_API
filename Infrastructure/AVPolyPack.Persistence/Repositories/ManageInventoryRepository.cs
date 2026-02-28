@@ -90,6 +90,34 @@ namespace AVPolyPack.Persistence.Repositories
         #endregion
 
         #region Split Roll
+        public async Task<int> SaveSplitRequest(SplitRequest_Request parameters)
+        {
+            DynamicParameters queryParameters = new DynamicParameters();
+            queryParameters.Add("@Id", parameters.Id);
+            queryParameters.Add("@RollId", parameters.RollId);
+            queryParameters.Add("@SplitRequestNo", parameters.SplitRequestNo);
+            queryParameters.Add("@RequestRollLength", parameters.RequestRollLength);
+            queryParameters.Add("@IsPending", parameters.IsPending);
+            queryParameters.Add("@UserId", SessionManager.LoggedInUserId);
+
+            return await SaveByStoredProcedure<int>("SaveSplitRequest", queryParameters);
+        }
+        public async Task<IEnumerable<SplitRequest_Response>> GetSplitRequestList(SplitRequest_Search parameters)
+        {
+            DynamicParameters queryParameters = new DynamicParameters();
+            queryParameters.Add("@SearchText", parameters.SearchText.SanitizeValue());
+            queryParameters.Add("@IsActive", parameters.IsActive);
+            queryParameters.Add("@PageNo", parameters.PageNo);
+            queryParameters.Add("@PageSize", parameters.PageSize);
+            queryParameters.Add("@Total", parameters.Total, null, System.Data.ParameterDirection.Output);
+            queryParameters.Add("@UserId", SessionManager.LoggedInUserId);
+
+            var result = await ListByStoredProcedure<SplitRequest_Response>("GetSplitRequestList", queryParameters);
+            parameters.Total = queryParameters.Get<int>("Total");
+
+            return result;
+        }
+
         public async Task<int> SaveSplitRoll(SplitRoll_Request parameters)
         {
             DynamicParameters queryParameters = new DynamicParameters();
@@ -126,6 +154,36 @@ namespace AVPolyPack.Persistence.Repositories
         #endregion
 
         #region Merge Roll
+        public async Task<int> SaveMergeRequest(MergeRequest_Request parameters)
+        {
+            DynamicParameters queryParameters = new DynamicParameters();
+            queryParameters.Add("@Id", parameters.Id);
+            queryParameters.Add("@RollId", parameters.RollId);
+            queryParameters.Add("@CustomerId", parameters.CustomerId);
+            queryParameters.Add("@OrderItemId", parameters.OrderItemId);
+            queryParameters.Add("@MergeRequestNo", parameters.MergeRequestNo);
+            queryParameters.Add("@RequestRollLength", parameters.RequestRollLength);
+            queryParameters.Add("@IsPending", parameters.IsPending);
+            queryParameters.Add("@UserId", SessionManager.LoggedInUserId);
+
+            return await SaveByStoredProcedure<int>("SaveMergeRequest", queryParameters);
+        }
+        public async Task<IEnumerable<MergeRequest_Response>> GetMergeRequestList(MergeRequest_Search parameters)
+        {
+            DynamicParameters queryParameters = new DynamicParameters();
+            queryParameters.Add("@SearchText", parameters.SearchText.SanitizeValue());
+            queryParameters.Add("@IsActive", parameters.IsActive);
+            queryParameters.Add("@PageNo", parameters.PageNo);
+            queryParameters.Add("@PageSize", parameters.PageSize);
+            queryParameters.Add("@Total", parameters.Total, null, System.Data.ParameterDirection.Output);
+            queryParameters.Add("@UserId", SessionManager.LoggedInUserId);
+
+            var result = await ListByStoredProcedure<MergeRequest_Response>("GetMergeRequestList", queryParameters);
+            parameters.Total = queryParameters.Get<int>("Total");
+
+            return result;
+        }
+
         public async Task<int> SaveMergeRoll(MergeRoll_Request parameters)
         {
             DynamicParameters queryParameters = new DynamicParameters();

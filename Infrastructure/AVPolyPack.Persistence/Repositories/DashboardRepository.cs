@@ -20,7 +20,7 @@ namespace AVPolyPack.Persistence.Repositories
             _configuration = configuration;
         }
 
-        public async Task<IEnumerable<Dashboard_OutwardingStock_Response>> GetDashboard_OutwardingStockSummary()
+        public async Task<Dashboard_OutwardingStock_Response?> GetDashboard_OutwardingStockSummary()
         {
             DynamicParameters queryParameters = new DynamicParameters();
 
@@ -28,18 +28,17 @@ namespace AVPolyPack.Persistence.Repositories
 
             var result = await ListByStoredProcedure<Dashboard_OutwardingStock_Response>("GetDashboard_OutwardingStockSummary", queryParameters);
 
-            return result;
+            return result.FirstOrDefault();
         }
 
-        public async Task<IEnumerable<Dashboard_Roll_Response>> GetDashboard_RollSummary()
+        public async Task<Dashboard_Roll_Response?> GetDashboard_RollSummary()
         {
             DynamicParameters queryParameters = new DynamicParameters();
 
             queryParameters.Add("@UserId", SessionManager.LoggedInUserId);
 
             var result = await ListByStoredProcedure<Dashboard_Roll_Response>("GetDashboard_RollSummary", queryParameters);
-
-            return result;
+            return result.FirstOrDefault(); 
         }
     }
 }

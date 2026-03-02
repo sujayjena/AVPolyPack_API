@@ -106,6 +106,8 @@ namespace AVPolyPack.Application.Models
     }
     public class SplitRequest_Search : BaseSearchEntity
     {
+        [DefaultValue(null)]
+        public bool? IsPending { get; set; }
     }
     public class SplitRequest_Response : BaseResponseEntity
     {
@@ -116,6 +118,9 @@ namespace AVPolyPack.Application.Models
         public string? RequestRollLength { get; set; }
         public int? CustomerId { get; set; }
         public string? CustomerName { get; set; }
+        public int? OrderItemId { get; set; }
+        public string? OrderItemNo { get; set; }
+        public string? RollLength { get; set; }
         public bool? IsPending { get; set; }
     }
     #endregion
@@ -170,6 +175,8 @@ namespace AVPolyPack.Application.Models
     }
     public class MergeRequest_Search : BaseSearchEntity
     {
+        [DefaultValue(null)]
+        public bool? IsPending { get; set; }
     }
     public class MergeRequest_Response : BaseResponseEntity
     {

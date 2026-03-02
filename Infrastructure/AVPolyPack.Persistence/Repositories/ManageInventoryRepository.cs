@@ -105,6 +105,7 @@ namespace AVPolyPack.Persistence.Repositories
         public async Task<IEnumerable<SplitRequest_Response>> GetSplitRequestList(SplitRequest_Search parameters)
         {
             DynamicParameters queryParameters = new DynamicParameters();
+            queryParameters.Add("@IsPending", parameters.IsPending);
             queryParameters.Add("@SearchText", parameters.SearchText.SanitizeValue());
             queryParameters.Add("@IsActive", parameters.IsActive);
             queryParameters.Add("@PageNo", parameters.PageNo);
@@ -172,6 +173,7 @@ namespace AVPolyPack.Persistence.Repositories
         public async Task<IEnumerable<MergeRequest_Response>> GetMergeRequestList(MergeRequest_Search parameters)
         {
             DynamicParameters queryParameters = new DynamicParameters();
+            queryParameters.Add("@IsPending", parameters.IsPending);
             queryParameters.Add("@SearchText", parameters.SearchText.SanitizeValue());
             queryParameters.Add("@IsActive", parameters.IsActive);
             queryParameters.Add("@PageNo", parameters.PageNo);

@@ -344,6 +344,7 @@ namespace AVPolyPack.Persistence.Repositories
             queryParameters.Add("@IsOperationCompleted", parameters.IsOperationCompleted);
             queryParameters.Add("@OrderType", parameters.OrderType);
             queryParameters.Add("@IsPickup", parameters.IsPickup);
+            queryParameters.Add("@OperationType_NextStep", parameters.OperationType_NextStep);
             queryParameters.Add("@SearchText", parameters.SearchText.SanitizeValue());
             queryParameters.Add("@IsActive", parameters.IsActive);
             queryParameters.Add("@PageNo", parameters.PageNo);

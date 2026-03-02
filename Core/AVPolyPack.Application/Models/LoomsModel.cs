@@ -289,6 +289,9 @@ namespace AVPolyPack.Application.Models
         [DefaultValue(null)]
         public bool? IsPickup { get; set; }
 
+        [DefaultValue(0)]
+        public int? OperationType_NextStep { get; set; }
+
         //[DefaultValue(null)]
         //public bool? IsLaminationLabTestCompleted { get; set; }
 

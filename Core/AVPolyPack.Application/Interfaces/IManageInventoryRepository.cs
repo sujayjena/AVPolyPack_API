@@ -17,19 +17,25 @@ namespace AVPolyPack.Application.Interfaces
         Task<IEnumerable<InventoryRoll_Response>> GetInventoryRollList(InventoryRoll_Search parameters);
         #endregion
 
-        #region Split Roll
+        #region Split Request
         Task<int> SaveSplitRequest(SplitRequest_Request parameters);
         Task<IEnumerable<SplitRequest_Response>> GetSplitRequestList(SplitRequest_Search parameters);
+        #endregion
 
+        #region Split Roll
         Task<int> SaveSplitRoll(SplitRoll_Request parameters);
         Task<IEnumerable<SplitRoll_Response>> GetSplitRollList(SplitRoll_Search parameters);
         Task<SplitRoll_Response?> GetSplitRollById(int Id);
         #endregion
 
-        #region Merge Roll
+        #region Merge Request
         Task<int> SaveMergeRequest(MergeRequest_Request parameters);
         Task<IEnumerable<MergeRequest_Response>> GetMergeRequestList(MergeRequest_Search parameters);
+        Task<int> SaveMergeRequestDetails(MergeRequestDetails_Request parameters);
+        Task<IEnumerable<MergeRequestDetails_Response>> GetMergeRequestDetailsList(MergeRequestDetails_Search parameters);
+        #endregion
 
+        #region Merge Roll
         Task<int> SaveMergeRoll(MergeRoll_Request parameters);
         Task<IEnumerable<MergeRoll_Response>> GetMergeRollList(MergeRoll_Search parameters);
         #endregion

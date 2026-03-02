@@ -102,12 +102,12 @@ namespace AVPolyPack.Controllers
         }
         #endregion
 
-        #region Split Roll
+        #region Split Request
         [Route("[action]")]
         [HttpPost]
         public async Task<ResponseModel> SaveSplitRequest(SplitRequest_Request parameters)
         {
-            int result = await _manageInventoryRepository.SaveSplitRequest(parameters); 
+            int result = await _manageInventoryRepository.SaveSplitRequest(parameters);
 
             if (result == (int)SaveOperationEnums.NoRecordExists)
             {
@@ -140,7 +140,9 @@ namespace AVPolyPack.Controllers
             _response.Total = parameters.Total;
             return _response;
         }
+        #endregion
 
+        #region Split Roll
         [Route("[action]")]
         [HttpPost]
         public async Task<ResponseModel> SaveSplitRoll(List<SplitRoll_Request> parameters)
@@ -152,6 +154,7 @@ namespace AVPolyPack.Controllers
                 var vSplitRoll_Request = new SplitRoll_Request()
                 { 
                     Id = item.Id,
+                    SplitRequestId = item.SplitRequestId,
                     RollId = item.RollId,
                     SplitRollNo = item.SplitRollNo,
                     SplitRollLength = item.SplitRollLength,
@@ -216,7 +219,7 @@ namespace AVPolyPack.Controllers
         }
         #endregion
 
-        #region Merge Roll 
+        #region Merge Request
         [Route("[action]")]
         [HttpPost]
         public async Task<ResponseModel> SaveMergeRequest(MergeRequest_Request parameters)
@@ -239,6 +242,18 @@ namespace AVPolyPack.Controllers
             else
             {
                 _response.Message = "Record Submitted successfully";
+
+                foreach (var item in parameters.mergeRequestDetails)
+                {
+                    var vMergeRequestDetails_Request = new MergeRequestDetails_Request()
+                    {
+                        Id = item.Id,
+                        MergeRequestId = result,
+                        RollId = item.RollId,
+                        RequestRollLength = item.RequestRollLength,
+                    };
+                    var resultDetails = await _manageInventoryRepository.SaveMergeRequestDetails(vMergeRequestDetails_Request);
+                }
             }
 
             _response.Id = result;
@@ -250,11 +265,22 @@ namespace AVPolyPack.Controllers
         public async Task<ResponseModel> GetMergeRequestList(MergeRequest_Search parameters)
         {
             IEnumerable<MergeRequest_Response> lst = await _manageInventoryRepository.GetMergeRequestList(parameters);
+            foreach (var item in lst)
+            {
+                var vMergeRequestDetails_Search = new MergeRequestDetails_Search()
+                {
+                    MergeRequestId = item.Id,
+                };
+                var lstDetails = await _manageInventoryRepository.GetMergeRequestDetailsList(vMergeRequestDetails_Search);
+                item.mergeRequestDetails = lstDetails.ToList();
+            }
             _response.Data = lst.ToList();
             _response.Total = parameters.Total;
             return _response;
         }
+        #endregion
 
+        #region Merge Roll 
         [Route("[action]")]
         [HttpPost]
         public async Task<ResponseModel> SaveMergeRoll(List<MergeRoll_Request> parameters)
@@ -266,6 +292,7 @@ namespace AVPolyPack.Controllers
                 var vMergeRoll_Request = new MergeRoll_Request()
                 {
                     Id = item.Id,
+                    MergeRequestId = item.MergeRequestId,
                     RollId = item.RollId,
                     CustomerId = item.CustomerId,
                     OrderItemId = item.OrderItemId,

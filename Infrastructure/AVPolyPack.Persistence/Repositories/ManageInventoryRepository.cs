@@ -89,7 +89,7 @@ namespace AVPolyPack.Persistence.Repositories
         }
         #endregion
 
-        #region Split Roll
+        #region Split Request
         public async Task<int> SaveSplitRequest(SplitRequest_Request parameters)
         {
             DynamicParameters queryParameters = new DynamicParameters();
@@ -117,11 +117,14 @@ namespace AVPolyPack.Persistence.Repositories
 
             return result;
         }
+        #endregion
 
+        #region Split Roll
         public async Task<int> SaveSplitRoll(SplitRoll_Request parameters)
         {
             DynamicParameters queryParameters = new DynamicParameters();
             queryParameters.Add("@Id", parameters.Id);
+            queryParameters.Add("@SplitRequestId", parameters.SplitRequestId);
             queryParameters.Add("@RollId", parameters.RollId);
             queryParameters.Add("@SplitRollNo", parameters.SplitRollNo);
             queryParameters.Add("@SplitRollLength", parameters.SplitRollLength);
@@ -153,16 +156,14 @@ namespace AVPolyPack.Persistence.Repositories
         }
         #endregion
 
-        #region Merge Roll
+        #region Merge Request
         public async Task<int> SaveMergeRequest(MergeRequest_Request parameters)
         {
             DynamicParameters queryParameters = new DynamicParameters();
             queryParameters.Add("@Id", parameters.Id);
-            queryParameters.Add("@RollId", parameters.RollId);
             queryParameters.Add("@CustomerId", parameters.CustomerId);
             queryParameters.Add("@OrderItemId", parameters.OrderItemId);
             queryParameters.Add("@MergeRequestNo", parameters.MergeRequestNo);
-            queryParameters.Add("@RequestRollLength", parameters.RequestRollLength);
             queryParameters.Add("@IsPending", parameters.IsPending);
             queryParameters.Add("@UserId", SessionManager.LoggedInUserId);
 
@@ -183,11 +184,41 @@ namespace AVPolyPack.Persistence.Repositories
 
             return result;
         }
+        public async Task<int> SaveMergeRequestDetails(MergeRequestDetails_Request parameters)
+        {
+            DynamicParameters queryParameters = new DynamicParameters();
+            queryParameters.Add("@Id", parameters.Id);
+            queryParameters.Add("@MergeRequestId", parameters.MergeRequestId);
+            queryParameters.Add("@RollId", parameters.RollId);
+            queryParameters.Add("@RequestRollLength", parameters.RequestRollLength);
+            queryParameters.Add("@UserId", SessionManager.LoggedInUserId);
 
+            return await SaveByStoredProcedure<int>("SaveMergeRequestDetails", queryParameters);
+        }
+        public async Task<IEnumerable<MergeRequestDetails_Response>> GetMergeRequestDetailsList(MergeRequestDetails_Search parameters)
+        {
+            DynamicParameters queryParameters = new DynamicParameters();
+            queryParameters.Add("@MergeRequestId", parameters.MergeRequestId);
+            queryParameters.Add("@SearchText", parameters.SearchText.SanitizeValue());
+            queryParameters.Add("@IsActive", parameters.IsActive);
+            queryParameters.Add("@PageNo", parameters.PageNo);
+            queryParameters.Add("@PageSize", parameters.PageSize);
+            queryParameters.Add("@Total", parameters.Total, null, System.Data.ParameterDirection.Output);
+            queryParameters.Add("@UserId", SessionManager.LoggedInUserId);
+
+            var result = await ListByStoredProcedure<MergeRequestDetails_Response>("GetMergeRequestDetailsList", queryParameters);
+            parameters.Total = queryParameters.Get<int>("Total");
+
+            return result;
+        }
+        #endregion
+
+        #region Merge Roll
         public async Task<int> SaveMergeRoll(MergeRoll_Request parameters)
         {
             DynamicParameters queryParameters = new DynamicParameters();
             queryParameters.Add("@Id", parameters.Id);
+            queryParameters.Add("@MergeRequestId", parameters.MergeRequestId);
             queryParameters.Add("@RollId", parameters.RollId);
             queryParameters.Add("@CustomerId", parameters.CustomerId);
             queryParameters.Add("@OrderItemId", parameters.OrderItemId);

@@ -96,7 +96,7 @@ namespace AVPolyPack.Application.Models
     }
     #endregion
 
-    #region Split Roll
+    #region Split Request
     public class SplitRequest_Request : BaseEntity
     {
         public int? RollId { get; set; }
@@ -118,8 +118,12 @@ namespace AVPolyPack.Application.Models
         public string? CustomerName { get; set; }
         public bool? IsPending { get; set; }
     }
+    #endregion
+
+    #region Split Roll
     public class SplitRoll_Request : BaseEntity
     {
+        public int? SplitRequestId { get; set; }
         public int? RollId { get; set; }
         public string? SplitRollNo { get; set; }
         public string? SplitRollLength { get; set; }
@@ -130,6 +134,8 @@ namespace AVPolyPack.Application.Models
     }
     public class SplitRoll_Response : BaseResponseEntity
     {
+        public int? SplitRequestId { get; set; }
+        public string? SplitRequestNo { get; set; }
         public int? RollId { get; set; }
         public string? RollNo { get; set; }
         public string? LoomNumber { get; set; }
@@ -149,34 +155,61 @@ namespace AVPolyPack.Application.Models
     }
     #endregion
 
-    #region Merge Roll
+    #region Merge Request
     public class MergeRequest_Request : BaseEntity
     {
-        public int? RollId { get; set; }
+        public MergeRequest_Request()
+        {
+            mergeRequestDetails = new List<MergeRequestDetails_Request>();
+        }
         public int? CustomerId { get; set; }
         public int? OrderItemId { get; set; }
         public string? MergeRequestNo { get; set; }
-        public string? RequestRollLength { get; set; }
         public bool? IsPending { get; set; }
+        public List<MergeRequestDetails_Request> mergeRequestDetails { get; set; }
     }
     public class MergeRequest_Search : BaseSearchEntity
     {
     }
     public class MergeRequest_Response : BaseResponseEntity
     {
-        public int? RollId { get; set; }
-        public string? RollNo { get; set; }
-        public string? RollCode { get; set; }
+        public MergeRequest_Response()
+        {
+            mergeRequestDetails = new List<MergeRequestDetails_Response>();
+        }
         public int? CustomerId { get; set; }
         public string? CustomerName { get; set; }
         public int? OrderItemId { get; set; }
         public string? OrderItemNo { get; set; }
         public string? MergeRequestNo { get; set; }
-        public string? RequestRollLength { get; set; }
         public bool? IsPending { get; set; }
+        public List<MergeRequestDetails_Response> mergeRequestDetails { get; set; }
     }
+   
+    public class MergeRequestDetails_Request : BaseEntity
+    {
+        public int? MergeRequestId { get; set; }
+        public int? RollId { get; set; }
+        public string? RequestRollLength { get; set; }
+    }
+    public class MergeRequestDetails_Search : BaseSearchEntity
+    {
+        public int? MergeRequestId { get; set; }
+    }
+    public class MergeRequestDetails_Response : BaseEntity
+    {
+        public int? MergeRequestId { get; set; }
+        public int? RollId { get; set; }
+        public string? RollNo { get; set; }
+        public string? RollCode { get; set; }
+        public string? RequestRollLength { get; set; }
+    }
+    #endregion
+
+    #region Merge Roll
     public class MergeRoll_Request : BaseEntity
     {
+        public int? MergeRequestId { get; set; }
         public int? RollId { get; set; }
         public int? CustomerId { get; set; }
         public int? OrderItemId { get; set; }
@@ -189,6 +222,8 @@ namespace AVPolyPack.Application.Models
     }
     public class MergeRoll_Response : BaseResponseEntity
     {
+        public int? MergeRequestId { get; set; }
+        public string? MergeRequestNo { get; set; }
         public int? RollId { get; set; }
         public string? RollNo { get; set; }
         public string? LoomNumber { get; set; }

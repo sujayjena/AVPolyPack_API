@@ -87,6 +87,7 @@ namespace AVPolyPack.Application.Models
         public int? IsOk { get; set; }
         public decimal? ReceivedQty { get; set; }
         public decimal? ReceivedWeight { get; set; }
+        public decimal? PendingReceivedQty { get; set; }
         public bool? IsActive { get; set; }
     }
     public class ReceivedSoftMaterialInList_Request : BaseEntity

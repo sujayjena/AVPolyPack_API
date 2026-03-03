@@ -210,6 +210,8 @@ namespace AVPolyPack.Application.Models
         public string? RollNo { get; set; }
         public string? RollCode { get; set; }
         public string? RequestRollLength { get; set; }
+        public int? OrderItemId { get; set; }
+        public string? OrderItemNo { get; set; }
     }
     #endregion
 

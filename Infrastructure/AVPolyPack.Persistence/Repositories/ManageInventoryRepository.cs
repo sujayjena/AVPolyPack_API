@@ -247,5 +247,18 @@ namespace AVPolyPack.Persistence.Repositories
             return result;
         }
         #endregion
+
+        #region Replace Customer Order Item 
+        public async Task<int> ReplacedOrderItem_Customer(ReplacedOrderItem_Customer_Request parameters)
+        {
+            DynamicParameters queryParameters = new DynamicParameters();
+            queryParameters.Add("@Id", parameters.Id);
+            queryParameters.Add("@CustomerId", parameters.CustomerId);
+            queryParameters.Add("@OrderItemId", parameters.OrderItemId);
+            queryParameters.Add("@UserId", SessionManager.LoggedInUserId);
+
+            return await SaveByStoredProcedure<int>("ReplacedOrderItem_Customer", queryParameters);
+        }
+        #endregion
     }
 }

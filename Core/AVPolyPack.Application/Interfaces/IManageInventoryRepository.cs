@@ -39,5 +39,9 @@ namespace AVPolyPack.Application.Interfaces
         Task<int> SaveMergeRoll(MergeRoll_Request parameters);
         Task<IEnumerable<MergeRoll_Response>> GetMergeRollList(MergeRoll_Search parameters);
         #endregion
+
+        #region Replace Customer Order Item 
+        Task<int> ReplacedOrderItem_Customer(ReplacedOrderItem_Customer_Request parameters);
+        #endregion
     }
 }

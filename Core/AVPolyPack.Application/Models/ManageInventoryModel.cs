@@ -38,15 +38,32 @@ namespace AVPolyPack.Application.Models
         public DateTime? FromDate { get; set; }
         public DateTime? ToDate { get; set; }
         public int? TypeId { get; set; }
+
+        [DefaultValue("")]
         public string? Size { get; set; }
+
+        [DefaultValue("")]
         public string? RollLength { get; set; }
         public decimal? EstimatedWeight { get; set; }
+
+        [DefaultValue("")]
         public string? GSM { get; set; }
+
+        [DefaultValue("")]
         public string? Average { get; set; }
+
+        [DefaultValue("")]
         public string? Gram { get; set; }
+
         public int? MeshId { get; set; }
+
+        [DefaultValue("")]
         public string? Strength { get; set; }
+
+        [DefaultValue("")]
         public string? Guzzet { get; set; }
+
+        [DefaultValue("")]
         public string? FoldingSize { get; set; }
 
         [DefaultValue(false)]
@@ -93,6 +110,8 @@ namespace AVPolyPack.Application.Models
         public string? OrderRemarks { get; set; }
         public string? Remarks { get; set; }
         public string? RollLength { get; set; }
+        public bool? IsSplit { get; set; }
+        public bool? IsMerge { get; set; }
     }
     #endregion
 
@@ -253,6 +272,14 @@ namespace AVPolyPack.Application.Models
         public string? BarcodeFileName { get; set; }
         public string? BarcodeURL { get; set; }
 
+    }
+    #endregion
+
+    #region Replace Order Item Customer
+    public class ReplacedOrderItem_Customer_Request : BaseEntity
+    {
+        public int? CustomerId { get; set; }
+        public int? OrderItemId { get; set; }
     }
     #endregion
 }

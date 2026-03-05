@@ -358,5 +358,45 @@ namespace AVPolyPack.Controllers
             return _response;
         }
         #endregion
+
+        #region Replace Customer Order Item 
+        [Route("[action]")]
+        [HttpPost]
+        public async Task<ResponseModel> ReplacedOrderItem_Customer(List<ReplacedOrderItem_Customer_Request> parameters)
+        {
+            int result = 0;
+
+            foreach (var item in parameters)
+            {
+                var vReplacedOrderItem_Customer_Request = new ReplacedOrderItem_Customer_Request()
+                {
+                    Id = item.Id,
+                    CustomerId = item.CustomerId,
+                    OrderItemId = item.OrderItemId,
+                };
+                result = await _manageInventoryRepository.ReplacedOrderItem_Customer(vReplacedOrderItem_Customer_Request);
+            }
+
+            if (result == (int)SaveOperationEnums.NoRecordExists)
+            {
+                _response.Message = "No record exists";
+            }
+            else if (result == (int)SaveOperationEnums.ReocrdExists)
+            {
+                _response.Message = "Record already exists";
+            }
+            else if (result == (int)SaveOperationEnums.NoResult)
+            {
+                _response.Message = "Something went wrong, please try again";
+            }
+            else
+            {
+                _response.Message = "Record Submitted successfully";
+            }
+
+            _response.Id = result;
+            return _response;
+        }
+        #endregion
     }
 }

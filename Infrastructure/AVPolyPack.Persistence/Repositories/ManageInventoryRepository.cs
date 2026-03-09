@@ -253,8 +253,8 @@ namespace AVPolyPack.Persistence.Repositories
         {
             DynamicParameters queryParameters = new DynamicParameters();
             queryParameters.Add("@Id", parameters.Id);
-            queryParameters.Add("@CustomerId", parameters.CustomerId);
             queryParameters.Add("@OrderItemId", parameters.OrderItemId);
+            queryParameters.Add("@RollId", parameters.RollId);
             queryParameters.Add("@UserId", SessionManager.LoggedInUserId);
 
             return await SaveByStoredProcedure<int>("ReplacedOrderItem_Customer", queryParameters);

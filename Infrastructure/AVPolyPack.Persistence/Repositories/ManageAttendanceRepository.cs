@@ -82,5 +82,20 @@ namespace AVPolyPack.Persistence.Repositories
 
             return result;
         }
+
+        public async Task<IEnumerable<AttendanceCalendar_Response>> GetAttendanceCalendarList(AttendanceCalendar_Search parameters)
+        {
+            DynamicParameters queryParameters = new DynamicParameters();
+
+            queryParameters.Add("@FromDate", parameters.FromDate);
+            queryParameters.Add("@ToDate", parameters.ToDate);
+            queryParameters.Add("@EmployeeType", parameters.EmployeeType);
+            queryParameters.Add("@RefId", parameters.RefId);
+            queryParameters.Add("@UserId", SessionManager.LoggedInUserId);
+
+            var result = await ListByStoredProcedure<AttendanceCalendar_Response>("GetAttendanceCalendarList", queryParameters);
+
+            return result;
+        }
     }
 }

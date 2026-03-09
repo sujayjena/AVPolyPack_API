@@ -278,8 +278,8 @@ namespace AVPolyPack.Application.Models
     #region Replace Order Item Customer
     public class ReplacedOrderItem_Customer_Request : BaseEntity
     {
-        public int? CustomerId { get; set; }
         public int? OrderItemId { get; set; }
+        public int? RollId { get; set; }
     }
     #endregion
 }

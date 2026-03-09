@@ -371,8 +371,8 @@ namespace AVPolyPack.Controllers
                 var vReplacedOrderItem_Customer_Request = new ReplacedOrderItem_Customer_Request()
                 {
                     Id = item.Id,
-                    CustomerId = item.CustomerId,
                     OrderItemId = item.OrderItemId,
+                    RollId = item.RollId,
                 };
                 result = await _manageInventoryRepository.ReplacedOrderItem_Customer(vReplacedOrderItem_Customer_Request);
             }

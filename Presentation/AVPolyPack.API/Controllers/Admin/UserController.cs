@@ -161,7 +161,7 @@ namespace AVPolyPack.API.Controllers.Admin
 
         [Route("[action]")]
         [HttpPost]
-        public async Task<ResponseModel> GetUserList(BaseSearchEntity parameters)
+        public async Task<ResponseModel> GetUserList(User_Search parameters)
         {
             IEnumerable<User_Response> lstUsers = await _userRepository.GetUserList(parameters);
             _response.Data = lstUsers.ToList();
@@ -348,8 +348,11 @@ namespace AVPolyPack.API.Controllers.Admin
             ExcelWorksheet WorkSheet1;
             ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
 
-            var request = new BaseSearchEntity();
-            request.IsActive = IsActive;
+            var request = new User_Search()
+            {
+                IsActive = IsActive,
+            };
+            
 
             IEnumerable<User_Response> lstSizeObj = await _userRepository.GetUserList(request);
 

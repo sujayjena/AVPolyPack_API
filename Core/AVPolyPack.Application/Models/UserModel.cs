@@ -105,7 +105,10 @@ namespace AVPolyPack.Application.Models
 
         public List<UserOtherDetails_Request> UserDetailsList { get; set; }
     }
-
+    public class User_Search : BaseSearchEntity
+    {
+        public int? EmployeeType { get; set; }
+    }
     public class User_Response : BaseResponseEntity
     {
         public User_Response()

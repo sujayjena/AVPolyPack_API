@@ -85,4 +85,24 @@ namespace AVPolyPack.Application.Models
         public string? UserCode { get; set; }
         public string? RefType { get; set; }
     }
+
+    public class AttendanceCalendar_Search
+    {
+        [DefaultValue(null)]
+        public DateTime? FromDate { get; set; }
+
+        [DefaultValue(null)]
+        public DateTime? ToDate { get; set; }
+        public int? EmployeeType { get; set; }
+        public int? RefId { get; set; }
+    }
+    public class AttendanceCalendar_Response
+    {
+        public int Id { get; set; }
+        public int? EmployeeType { get; set; }
+        public string? RefName { get; set; }
+        public string? RefCode { get; set; }
+        public DateTime? CheckedInDate { get; set; }
+        public DateTime? CheckedOutDate { get; set; }
+    }
 }

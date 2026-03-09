@@ -76,5 +76,14 @@ namespace AVPolyPack.Controllers
             _response.Total = parameters.Total;
             return _response;
         }
+
+        [Route("[action]")]
+        [HttpPost]
+        public async Task<ResponseModel> GetAttendanceCalendarList(AttendanceCalendar_Search parameters)
+        {
+            IEnumerable<AttendanceCalendar_Response> lstRoles = await _manageAttendanceRepository.GetAttendanceCalendarList(parameters);
+            _response.Data = lstRoles.ToList();
+            return _response;
+        }
     }
 }

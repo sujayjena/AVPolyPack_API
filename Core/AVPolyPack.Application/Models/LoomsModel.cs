@@ -292,6 +292,9 @@ namespace AVPolyPack.Application.Models
         [DefaultValue(0)]
         public int? OperationType_NextStep { get; set; }
 
+        [DefaultValue(null)]
+        public bool? IsDispatch { get; set; }
+
         //[DefaultValue(null)]
         //public bool? IsLaminationLabTestCompleted { get; set; }
 

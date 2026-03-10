@@ -397,6 +397,15 @@ namespace AVPolyPack.Controllers
             _response.Id = result;
             return _response;
         }
+        [Route("[action]")]
+        [HttpPost]
+        public async Task<ResponseModel> GetReplacedOrderItemLogHistoryList(ReplacedOrderItemLogHistory_Search parameters)
+        {
+            IEnumerable<ReplacedOrderItemLogHistory_Response> lstRoles = await _manageInventoryRepository.GetReplacedOrderItemLogHistoryList(parameters);
+            _response.Data = lstRoles.ToList();
+            _response.Total = parameters.Total;
+            return _response;
+        }
         #endregion
     }
 }

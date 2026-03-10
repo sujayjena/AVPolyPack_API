@@ -42,6 +42,7 @@ namespace AVPolyPack.Application.Interfaces
 
         #region Replace Customer Order Item 
         Task<int> ReplacedOrderItem_Customer(ReplacedOrderItem_Customer_Request parameters);
+        Task<IEnumerable<ReplacedOrderItemLogHistory_Response>> GetReplacedOrderItemLogHistoryList(ReplacedOrderItemLogHistory_Search parameters);
         #endregion
     }
 }

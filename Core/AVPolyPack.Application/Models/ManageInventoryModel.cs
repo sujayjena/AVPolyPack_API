@@ -281,5 +281,20 @@ namespace AVPolyPack.Application.Models
         public int? OrderItemId { get; set; }
         public int? RollId { get; set; }
     }
+    public class ReplacedOrderItemLogHistory_Search : BaseSearchEntity
+    {
+        public int? RollId { get; set; }
+    }
+    public class ReplacedOrderItemLogHistory_Response : BaseEntity
+    {
+        public int? RollId { get; set; }
+        public string? RollCode { get; set; }
+        public string? RollNo { get; set; }
+        public int? OrderItemId { get; set; }
+        public string? OrderItemNo { get; set; }
+        public string? CreatorName { get; set; }
+        public long CreatedBy { get; set; }
+        public DateTime? CreatedDate { get; set; }
+    }
     #endregion
 }

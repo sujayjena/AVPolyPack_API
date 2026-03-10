@@ -259,6 +259,22 @@ namespace AVPolyPack.Persistence.Repositories
 
             return await SaveByStoredProcedure<int>("ReplacedOrderItem_Customer", queryParameters);
         }
+        public async Task<IEnumerable<ReplacedOrderItemLogHistory_Response>> GetReplacedOrderItemLogHistoryList(ReplacedOrderItemLogHistory_Search parameters)
+        {
+            DynamicParameters queryParameters = new DynamicParameters();
+            queryParameters.Add("@RollId", parameters.RollId);
+            queryParameters.Add("@SearchText", parameters.SearchText.SanitizeValue());
+            queryParameters.Add("@IsActive", parameters.IsActive);
+            queryParameters.Add("@PageNo", parameters.PageNo);
+            queryParameters.Add("@PageSize", parameters.PageSize);
+            queryParameters.Add("@Total", parameters.Total, null, System.Data.ParameterDirection.Output);
+            queryParameters.Add("@UserId", SessionManager.LoggedInUserId);
+
+            var result = await ListByStoredProcedure<ReplacedOrderItemLogHistory_Response>("GetReplacedOrderItemLogHistoryList", queryParameters);
+            parameters.Total = queryParameters.Get<int>("Total");
+
+            return result;
+        }
         #endregion
     }
 }

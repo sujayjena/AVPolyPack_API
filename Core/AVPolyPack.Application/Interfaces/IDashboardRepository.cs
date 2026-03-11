@@ -10,6 +10,6 @@ namespace AVPolyPack.Application.Interfaces
     public interface IDashboardRepository
     {
         Task<Dashboard_OutwardingStock_Response?> GetDashboard_OutwardingStockSummary();
-        Task<Dashboard_Roll_Response?> GetDashboard_RollSummary();
+        Task<Dashboard_Roll_Response?> GetDashboard_RollSummary(Dashboard_Roll_Search parameter);
     }
 }

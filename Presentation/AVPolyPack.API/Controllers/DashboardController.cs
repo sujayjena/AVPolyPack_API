@@ -37,9 +37,9 @@ namespace AVPolyPack.API.Controllers
 
         [Route("[action]")]
         [HttpPost]
-        public async Task<ResponseModel> GetDashboard_RollSummary()
+        public async Task<ResponseModel> GetDashboard_RollSummary(Dashboard_Roll_Search parameter)
         {
-            var lst = await _dashboardRepository.GetDashboard_RollSummary();
+            var lst = await _dashboardRepository.GetDashboard_RollSummary(parameter);
             _response.Data = lst;
             return _response;
         }

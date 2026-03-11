@@ -23,7 +23,11 @@ namespace AVPolyPack.Application.Models
         public int? TotalInventoryCount { get; set; }
         //public int? TotalCount { get; set; }
     }
-
+    public class Dashboard_Roll_Search
+    {
+        [DefaultValue(null)]
+        public bool? IsDispatch { get; set; }
+    }
     public class Dashboard_Roll_Response
     {
         public int? TotalRoll_PendingPickupCount { get; set; }

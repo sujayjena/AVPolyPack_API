@@ -31,10 +31,11 @@ namespace AVPolyPack.Persistence.Repositories
             return result.FirstOrDefault();
         }
 
-        public async Task<Dashboard_Roll_Response?> GetDashboard_RollSummary()
+        public async Task<Dashboard_Roll_Response?> GetDashboard_RollSummary(Dashboard_Roll_Search parameter)
         {
             DynamicParameters queryParameters = new DynamicParameters();
 
+            queryParameters.Add("@IsDispatch", parameter.IsDispatch);
             queryParameters.Add("@UserId", SessionManager.LoggedInUserId);
 
             var result = await ListByStoredProcedure<Dashboard_Roll_Response>("GetDashboard_RollSummary", queryParameters);

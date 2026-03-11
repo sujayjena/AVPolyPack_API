@@ -173,6 +173,7 @@ namespace AVPolyPack.Controllers
                     vOrderItem_Search.OrderId = vResultObj.Id;
                     vOrderItem_Search.OrderType = 0;
                     vOrderItem_Search.IsAssignLoom = 0;
+                    vOrderItem_Search.CustomerId = 0;
 
                     var vList = await _manageOrderRepository.GetOrderItemList(vOrderItem_Search);
 

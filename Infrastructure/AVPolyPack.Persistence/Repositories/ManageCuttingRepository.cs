@@ -41,7 +41,7 @@ namespace AVPolyPack.Persistence.Repositories
             return await SaveByStoredProcedure<int>("SaveCutting", queryParameters);
         }
 
-        public async Task<IEnumerable<Cutting_Response>> GetCuttingList(Cutting_Search parameters)
+        public async Task<IEnumerable<CuttingList_Response>> GetCuttingList(Cutting_Search parameters)
         {
             DynamicParameters queryParameters = new DynamicParameters();
             queryParameters.Add("@RollId", parameters.RollId);
@@ -52,7 +52,7 @@ namespace AVPolyPack.Persistence.Repositories
             queryParameters.Add("@Total", parameters.Total, null, System.Data.ParameterDirection.Output);
             queryParameters.Add("@UserId", SessionManager.LoggedInUserId);
 
-            var result = await ListByStoredProcedure<Cutting_Response>("GetCuttingList", queryParameters);
+            var result = await ListByStoredProcedure<CuttingList_Response>("GetCuttingList", queryParameters);
             parameters.Total = queryParameters.Get<int>("Total");
 
             return result;

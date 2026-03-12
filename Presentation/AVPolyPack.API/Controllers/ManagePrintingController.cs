@@ -64,7 +64,7 @@ namespace AVPolyPack.Controllers
         [HttpPost]
         public async Task<ResponseModel> GetPrintingList(Printing_Search parameters)
         {
-            IEnumerable<Printing_Response> lstRoles = await _managePrintingRepository.GetPrintingList(parameters);
+            IEnumerable<PrintingList_Response> lstRoles = await _managePrintingRepository.GetPrintingList(parameters);
             _response.Data = lstRoles.ToList();
             _response.Total = parameters.Total;
             return _response;

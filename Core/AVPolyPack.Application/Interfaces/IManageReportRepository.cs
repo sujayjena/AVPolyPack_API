@@ -10,5 +10,7 @@ namespace AVPolyPack.Application.Interfaces
     public interface IManageReportRepository
     {
         Task<IEnumerable<PrintingReport_Response>> GetPrintingReport(PrintingReport_Search parameters);
+        Task<IEnumerable<LaminationReport_Response>> GetLaminationReport(LaminationReport_Search parameters);
+        Task<IEnumerable<StrengthReport_Response>> GetStrengthReport(StrengthReport_Search parameters);
     }
 }

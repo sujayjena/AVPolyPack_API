@@ -31,5 +31,25 @@ namespace AVPolyPack.Controllers
             _response.Total = parameters.Total;
             return _response;
         }
+
+        [Route("[action]")]
+        [HttpPost]
+        public async Task<ResponseModel> GetLaminationReport(LaminationReport_Search parameters)
+        {
+            var objList = await _manageReportRepository.GetLaminationReport(parameters);
+            _response.Data = objList.ToList();
+            _response.Total = parameters.Total;
+            return _response;
+        }
+
+        [Route("[action]")]
+        [HttpPost]
+        public async Task<ResponseModel> GetStrengthReport(StrengthReport_Search parameters)
+        {
+            var objList = await _manageReportRepository.GetStrengthReport(parameters);
+            _response.Data = objList.ToList();
+            _response.Total = parameters.Total;
+            return _response;
+        }
     }
 }

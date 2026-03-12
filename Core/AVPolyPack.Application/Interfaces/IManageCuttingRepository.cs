@@ -11,7 +11,7 @@ namespace AVPolyPack.Application.Interfaces
     {
         #region Cutting
         Task<int> SaveCutting(Cutting_Request parameters);
-        Task<IEnumerable<Cutting_Response>> GetCuttingList(Cutting_Search parameters);
+        Task<IEnumerable<CuttingList_Response>> GetCuttingList(Cutting_Search parameters);
         Task<Cutting_Response?> GetCuttingById(int Id);
         #endregion
 

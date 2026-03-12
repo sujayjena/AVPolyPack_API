@@ -35,7 +35,7 @@ namespace AVPolyPack.Persistence.Repositories
             return await SaveByStoredProcedure<int>("SavePrinting", queryParameters);
         }
 
-        public async Task<IEnumerable<Printing_Response>> GetPrintingList(Printing_Search parameters)
+        public async Task<IEnumerable<PrintingList_Response>> GetPrintingList(Printing_Search parameters)
         {
             DynamicParameters queryParameters = new DynamicParameters();
             queryParameters.Add("@RollId", parameters.RollId);
@@ -46,7 +46,7 @@ namespace AVPolyPack.Persistence.Repositories
             queryParameters.Add("@Total", parameters.Total, null, System.Data.ParameterDirection.Output);
             queryParameters.Add("@UserId", SessionManager.LoggedInUserId);
 
-            var result = await ListByStoredProcedure<Printing_Response>("GetPrintingList", queryParameters);
+            var result = await ListByStoredProcedure<PrintingList_Response>("GetPrintingList", queryParameters);
             parameters.Total = queryParameters.Get<int>("Total");
 
             return result;

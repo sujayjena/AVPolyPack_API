@@ -65,7 +65,7 @@ namespace AVPolyPack.Controllers
         [HttpPost]
         public async Task<ResponseModel> GetCuttingList(Cutting_Search parameters)
         {
-            IEnumerable<Cutting_Response> lstRoles = await _manageCuttingRepository.GetCuttingList(parameters);
+            IEnumerable<CuttingList_Response> lstRoles = await _manageCuttingRepository.GetCuttingList(parameters);
             _response.Data = lstRoles.ToList();
             _response.Total = parameters.Total;
             return _response;

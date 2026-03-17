@@ -126,6 +126,10 @@ namespace AVPolyPack.Application.Models
         [DefaultValue(null)]
         public DateTime? ToDate { get; set; }
         public int? ShiftType { get; set; }
+        public int? OrderItemId { get; set; }
+
+        [DefaultValue(null)]
+        public bool? IsCompleted { get; set; }
     }
 
     public class OrderItemAssign_Response : BaseResponseEntity
@@ -137,6 +141,8 @@ namespace AVPolyPack.Application.Models
         public string? OrderItemNo { get; set; }
         public int? EmployeeId { get; set; }
         public string? AssignedOperatorName { get; set; }
+        public bool? IsCompleted { get; set; }
+        public DateTime? CompletedDateTime { get; set; }
     }
 
     public class AssignOrderItemCompleted_Request : BaseEntity

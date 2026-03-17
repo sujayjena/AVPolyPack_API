@@ -160,6 +160,8 @@ namespace AVPolyPack.Persistence.Repositories
             queryParameters.Add("@FromDate", parameters.FromDate);
             queryParameters.Add("@ToDate", parameters.ToDate);
             queryParameters.Add("@ShiftType", parameters.ShiftType);
+            queryParameters.Add("@OrderItemId", parameters.OrderItemId);
+            queryParameters.Add("@IsCompleted", parameters.IsCompleted);
             queryParameters.Add("@SearchText", parameters.SearchText.SanitizeValue());
             queryParameters.Add("@IsActive", parameters.IsActive);
             queryParameters.Add("@PageNo", parameters.PageNo);

@@ -176,6 +176,10 @@ namespace AVPolyPack.Persistence.Repositories
             queryParameters.Add("@TapeWidth", parameters.TapeWidth);
             queryParameters.Add("@ELongation", parameters.ELongation);
             queryParameters.Add("@MeterTarget", parameters.MeterTarget);
+            queryParameters.Add("@BillingAddressId", parameters.BillingAddressId);
+            queryParameters.Add("@BillingAddress", parameters.BillingAddress);
+            queryParameters.Add("@ShippingAddressId", parameters.ShippingAddressId);
+            queryParameters.Add("@ShippingAddress", parameters.ShippingAddress);
             queryParameters.Add("@UserId", SessionManager.LoggedInUserId);
 
             return await SaveByStoredProcedure<int>("SaveOrderItem", queryParameters);

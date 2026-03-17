@@ -231,6 +231,10 @@ namespace AVPolyPack.Application.Models
         public string? TapeWidth { get; set; }
         public string? ELongation { get; set; }
         public string? MeterTarget { get; set; }
+        public int? BillingAddressId { get; set; }
+        public string? BillingAddress { get; set; }
+        public int? ShippingAddressId { get; set; }
+        public string? ShippingAddress { get; set; }
     }
 
     public class OrderItem_Response : BaseResponseEntity
@@ -346,6 +350,9 @@ namespace AVPolyPack.Application.Models
         public string? ELongation { get; set; }
         public string? MeterTarget { get; set; }
         public DateTime? OrderItemAssignDateTime { get; set; }
+        public int? CustomerId { get; set; }
+        public int? BillingAddressId { get; set; }
+        public int? ShippingAddressId { get; set; }
     }
     #endregion
 

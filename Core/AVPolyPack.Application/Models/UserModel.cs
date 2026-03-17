@@ -244,104 +244,85 @@ namespace AVPolyPack.Application.Models
     public class User_ImportData
     {
         public string? UserCode { get; set; }
-
         public string? UserName { get; set; }
-
+        public string? EmployeeType { get; set; }
         public string? MobileNumber { get; set; }
-
         public string? EmailId { get; set; }
-
         public string? Password { get; set; }
-
         public string? Role { get; set; }
-
         public string? ReportingTo { get; set; }
-
         public string? Department { get; set; }
-
         public string? Company { get; set; }
-
         public string? Address { get; set; }
-
+        public string? Country { get; set; }
         public string? State { get; set; }
-
         public string? District { get; set; }
-
         public string? City { get; set; }
-
         public string? Pincode { get; set; }
-
         public DateTime? DateOfBirth { get; set; }
-
         public DateTime? DateOfJoining { get; set; }
-
+        public string? EmergencyName { get; set; }
         public string? EmergencyContactNumber { get; set; }
-
+        public string? EmergencyRelation { get; set; }
         public string? BloodGroup { get; set; }
-
+        public string? Gender { get; set; }
+        public string? MaritalStatus { get; set; }
+        public string? WorkingHour { get; set; }
+        public string? Rate { get; set; }
+        public string? RateValue { get; set; }
+        public string? BankName { get; set; }
+        public string? BankAccountNo { get; set; }
+        public string? BankIFSCCode { get; set; }
         public string? AadharNumber { get; set; }
-
         public string? PanNumber { get; set; }
-
+        public string? OtherProof { get; set; }
+        public string? IsSupervisor { get; set; }
         public string? MobileUniqueId { get; set; }
-
         public string? IsMobileUser { get; set; }
-
         public string? IsWebUser { get; set; }
-
         public string? IsActive { get; set; }
     }
 
     public class User_ImportDataValidation
     {
         public string? UserCode { get; set; }
-
         public string? UserName { get; set; }
-
+        public string? EmployeeType { get; set; }
         public string? MobileNumber { get; set; }
-
         public string? EmailId { get; set; }
-
         public string? Password { get; set; }
-
         public string? Role { get; set; }
-
         public string? ReportingTo { get; set; }
-
         public string? Department { get; set; }
-
         public string? Company { get; set; }
-
         public string? Address { get; set; }
-
+        public string? Country { get; set; }
         public string? State { get; set; }
-
         public string? District { get; set; }
-
         public string? City { get; set; }
-
         public string? Pincode { get; set; }
-
         public string? DateOfBirth { get; set; }
-
         public string? DateOfJoining { get; set; }
-
+        public string? EmergencyName { get; set; }
         public string? EmergencyContactNumber { get; set; }
-
+        public string? EmergencyRelation { get; set; }
         public string? BloodGroup { get; set; }
-
+        public string? Gender { get; set; }
+        public string? MaritalStatus { get; set; }
+        public string? WorkingHour { get; set; }
+        public string? Rate { get; set; }
+        public string? RateValue { get; set; }
+        public string? BankName { get; set; }
+        public string? BankAccountNo { get; set; }
+        public string? BankIFSCCode { get; set; }
         public string? AadharNumber { get; set; }
-
         public string? PanNumber { get; set; }
-
+        public string? OtherProof { get; set; }
+        public string? IsSupervisor { get; set; }
         public string? MobileUniqueId { get; set; }
-
         public string? IsMobileUser { get; set; }
-
         public string? IsWebUser { get; set; }
-
         public string? IsActive { get; set; }
-
         public string ValidationMessage { get; set; }
     }
 

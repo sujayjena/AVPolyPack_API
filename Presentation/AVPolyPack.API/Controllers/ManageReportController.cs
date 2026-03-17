@@ -51,5 +51,15 @@ namespace AVPolyPack.Controllers
             _response.Total = parameters.Total;
             return _response;
         }
+
+        [Route("[action]")]
+        [HttpPost]
+        public async Task<ResponseModel> GetEmployeeAttendanceReport(EmployeeAttendanceReport_Search parameters)
+        {
+            var objList = await _manageReportRepository.GetEmployeeAttendanceReport(parameters);
+            _response.Data = objList.ToList();
+            _response.Total = parameters.Total;
+            return _response;
+        }
     }
 }

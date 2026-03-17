@@ -250,28 +250,42 @@ namespace AVPolyPack.API.Controllers.Admin
 
                 if (!string.Equals(workSheet.Cells[1, 1].Value.ToString(), "UserCode", StringComparison.OrdinalIgnoreCase) ||
                     !string.Equals(workSheet.Cells[1, 2].Value.ToString(), "UserName", StringComparison.OrdinalIgnoreCase) ||
-                    !string.Equals(workSheet.Cells[1, 3].Value.ToString(), "MobileNumber", StringComparison.OrdinalIgnoreCase) ||
-                    !string.Equals(workSheet.Cells[1, 4].Value.ToString(), "EmailId", StringComparison.OrdinalIgnoreCase) ||
-                    !string.Equals(workSheet.Cells[1, 5].Value.ToString(), "Password", StringComparison.OrdinalIgnoreCase) ||
-                    !string.Equals(workSheet.Cells[1, 6].Value.ToString(), "Role", StringComparison.OrdinalIgnoreCase) ||
-                    !string.Equals(workSheet.Cells[1, 7].Value.ToString(), "ReportingTo", StringComparison.OrdinalIgnoreCase) ||
-                    !string.Equals(workSheet.Cells[1, 8].Value.ToString(), "Department", StringComparison.OrdinalIgnoreCase) ||
-                    !string.Equals(workSheet.Cells[1, 9].Value.ToString(), "Company", StringComparison.OrdinalIgnoreCase) ||
-                    !string.Equals(workSheet.Cells[1, 10].Value.ToString(), "Address", StringComparison.OrdinalIgnoreCase) ||
-                    !string.Equals(workSheet.Cells[1, 11].Value.ToString(), "State", StringComparison.OrdinalIgnoreCase) ||
-                    !string.Equals(workSheet.Cells[1, 12].Value.ToString(), "District", StringComparison.OrdinalIgnoreCase) ||
-                    !string.Equals(workSheet.Cells[1, 13].Value.ToString(), "City", StringComparison.OrdinalIgnoreCase) ||
-                    !string.Equals(workSheet.Cells[1, 14].Value.ToString(), "Pincode", StringComparison.OrdinalIgnoreCase) ||
-                    !string.Equals(workSheet.Cells[1, 15].Value.ToString(), "DateOfBirth", StringComparison.OrdinalIgnoreCase) ||
-                    !string.Equals(workSheet.Cells[1, 16].Value.ToString(), "DateOfJoining", StringComparison.OrdinalIgnoreCase) ||
-                    !string.Equals(workSheet.Cells[1, 17].Value.ToString(), "EmergencyContactNumber", StringComparison.OrdinalIgnoreCase) ||
-                    !string.Equals(workSheet.Cells[1, 18].Value.ToString(), "BloodGroup", StringComparison.OrdinalIgnoreCase) ||
-                    !string.Equals(workSheet.Cells[1, 19].Value.ToString(), "AadharNumber", StringComparison.OrdinalIgnoreCase) ||
-                    !string.Equals(workSheet.Cells[1, 20].Value.ToString(), "PanNumber", StringComparison.OrdinalIgnoreCase) ||
-                    !string.Equals(workSheet.Cells[1, 21].Value.ToString(), "MobileUniqueId", StringComparison.OrdinalIgnoreCase) ||
-                    !string.Equals(workSheet.Cells[1, 22].Value.ToString(), "IsMobileUser", StringComparison.OrdinalIgnoreCase) ||
-                    !string.Equals(workSheet.Cells[1, 23].Value.ToString(), "IsWebUser", StringComparison.OrdinalIgnoreCase) ||
-                    !string.Equals(workSheet.Cells[1, 24].Value.ToString(), "IsActive", StringComparison.OrdinalIgnoreCase))
+                    !string.Equals(workSheet.Cells[1, 3].Value.ToString(), "EmployeeType", StringComparison.OrdinalIgnoreCase) ||
+                    !string.Equals(workSheet.Cells[1, 4].Value.ToString(), "MobileNumber", StringComparison.OrdinalIgnoreCase) ||
+                    !string.Equals(workSheet.Cells[1, 5].Value.ToString(), "EmailId", StringComparison.OrdinalIgnoreCase) ||
+                    !string.Equals(workSheet.Cells[1, 6].Value.ToString(), "Password", StringComparison.OrdinalIgnoreCase) ||
+                    !string.Equals(workSheet.Cells[1, 7].Value.ToString(), "Role", StringComparison.OrdinalIgnoreCase) ||
+                    !string.Equals(workSheet.Cells[1, 8].Value.ToString(), "ReportingTo", StringComparison.OrdinalIgnoreCase) ||
+                    !string.Equals(workSheet.Cells[1, 9].Value.ToString(), "Department", StringComparison.OrdinalIgnoreCase) ||
+                    !string.Equals(workSheet.Cells[1, 10].Value.ToString(), "Company", StringComparison.OrdinalIgnoreCase) ||
+                    !string.Equals(workSheet.Cells[1, 11].Value.ToString(), "Address", StringComparison.OrdinalIgnoreCase) ||
+                    !string.Equals(workSheet.Cells[1, 12].Value.ToString(), "Country", StringComparison.OrdinalIgnoreCase) ||
+                    !string.Equals(workSheet.Cells[1, 13].Value.ToString(), "State", StringComparison.OrdinalIgnoreCase) ||
+                    !string.Equals(workSheet.Cells[1, 14].Value.ToString(), "District", StringComparison.OrdinalIgnoreCase) ||
+                    !string.Equals(workSheet.Cells[1, 15].Value.ToString(), "City", StringComparison.OrdinalIgnoreCase) ||
+                    !string.Equals(workSheet.Cells[1, 16].Value.ToString(), "Pincode", StringComparison.OrdinalIgnoreCase) ||
+                    !string.Equals(workSheet.Cells[1, 17].Value.ToString(), "DateOfBirth", StringComparison.OrdinalIgnoreCase) ||
+                    !string.Equals(workSheet.Cells[1, 18].Value.ToString(), "DateOfJoining", StringComparison.OrdinalIgnoreCase) ||
+                    !string.Equals(workSheet.Cells[1, 19].Value.ToString(), "EmergencyName", StringComparison.OrdinalIgnoreCase) ||
+                    !string.Equals(workSheet.Cells[1, 20].Value.ToString(), "EmergencyContactNumber", StringComparison.OrdinalIgnoreCase) ||
+                    !string.Equals(workSheet.Cells[1, 21].Value.ToString(), "EmergencyRelation", StringComparison.OrdinalIgnoreCase) ||
+                    !string.Equals(workSheet.Cells[1, 22].Value.ToString(), "BloodGroup", StringComparison.OrdinalIgnoreCase) ||
+                    !string.Equals(workSheet.Cells[1, 23].Value.ToString(), "Gender", StringComparison.OrdinalIgnoreCase) ||
+                    !string.Equals(workSheet.Cells[1, 24].Value.ToString(), "MaritalStatus", StringComparison.OrdinalIgnoreCase) ||
+                    !string.Equals(workSheet.Cells[1, 25].Value.ToString(), "WorkingHour", StringComparison.OrdinalIgnoreCase) ||
+                    !string.Equals(workSheet.Cells[1, 26].Value.ToString(), "Rate", StringComparison.OrdinalIgnoreCase) ||
+                    !string.Equals(workSheet.Cells[1, 27].Value.ToString(), "RateValue", StringComparison.OrdinalIgnoreCase) ||
+                    !string.Equals(workSheet.Cells[1, 28].Value.ToString(), "BankName", StringComparison.OrdinalIgnoreCase) ||
+                    !string.Equals(workSheet.Cells[1, 29].Value.ToString(), "BankAccountNo", StringComparison.OrdinalIgnoreCase) ||
+                    !string.Equals(workSheet.Cells[1, 30].Value.ToString(), "BankIFSCCode", StringComparison.OrdinalIgnoreCase) ||
+                    !string.Equals(workSheet.Cells[1, 31].Value.ToString(), "AadharNumber", StringComparison.OrdinalIgnoreCase) ||
+                    !string.Equals(workSheet.Cells[1, 32].Value.ToString(), "PanNumber", StringComparison.OrdinalIgnoreCase) ||
+                    !string.Equals(workSheet.Cells[1, 33].Value.ToString(), "OtherProof", StringComparison.OrdinalIgnoreCase) ||
+                    !string.Equals(workSheet.Cells[1, 34].Value.ToString(), "IsSupervisor", StringComparison.OrdinalIgnoreCase) ||
+                    !string.Equals(workSheet.Cells[1, 35].Value.ToString(), "MobileUniqueId", StringComparison.OrdinalIgnoreCase) ||
+                    !string.Equals(workSheet.Cells[1, 36].Value.ToString(), "IsMobileUser", StringComparison.OrdinalIgnoreCase) ||
+                    !string.Equals(workSheet.Cells[1, 37].Value.ToString(), "IsWebUser", StringComparison.OrdinalIgnoreCase) ||
+                    !string.Equals(workSheet.Cells[1, 38].Value.ToString(), "IsActive", StringComparison.OrdinalIgnoreCase))
                 {
                     _response.IsSuccess = false;
                     _response.Message = "Please upload a valid excel file";
@@ -286,28 +300,42 @@ namespace AVPolyPack.API.Controllers.Admin
                         {
                             UserCode = workSheet.Cells[rowIterator, 1].Value?.ToString(),
                             UserName = workSheet.Cells[rowIterator, 2].Value?.ToString(),
-                            MobileNumber = workSheet.Cells[rowIterator, 3].Value?.ToString(),
-                            EmailId = workSheet.Cells[rowIterator, 4].Value?.ToString(),
-                            Password = !string.IsNullOrWhiteSpace(workSheet.Cells[rowIterator, 5].Value?.ToString()) ? EncryptDecryptHelper.EncryptString(workSheet.Cells[rowIterator, 5].Value?.ToString()) : string.Empty,
-                            Role = workSheet.Cells[rowIterator, 6].Value?.ToString(),
-                            ReportingTo = workSheet.Cells[rowIterator, 7].Value?.ToString(),
-                            Department = workSheet.Cells[rowIterator, 8].Value?.ToString(),
-                            Company = workSheet.Cells[rowIterator, 9].Value?.ToString(),
-                            Address = workSheet.Cells[rowIterator, 10].Value?.ToString(),
-                            State = workSheet.Cells[rowIterator, 11].Value?.ToString(),
-                            District = workSheet.Cells[rowIterator, 12].Value?.ToString(),
-                            City = workSheet.Cells[rowIterator, 13].Value?.ToString(),
-                            Pincode = workSheet.Cells[rowIterator, 14].Value?.ToString(),
-                            DateOfBirth = !string.IsNullOrWhiteSpace(workSheet.Cells[rowIterator, 15].Value?.ToString()) ? DateTime.ParseExact(workSheet.Cells[rowIterator, 16].Value?.ToString(), "dd/MM/yyyy", System.Globalization.CultureInfo.CurrentUICulture.DateTimeFormat) : null,
-                            DateOfJoining = !string.IsNullOrWhiteSpace(workSheet.Cells[rowIterator, 16].Value?.ToString()) ? DateTime.ParseExact(workSheet.Cells[rowIterator, 17].Value?.ToString(), "dd/MM/yyyy", System.Globalization.CultureInfo.CurrentUICulture.DateTimeFormat) : null,
-                            EmergencyContactNumber = workSheet.Cells[rowIterator, 17].Value?.ToString(),
-                            BloodGroup = workSheet.Cells[rowIterator, 18].Value?.ToString(),
-                            AadharNumber = workSheet.Cells[rowIterator, 19].Value?.ToString(),
-                            PanNumber = workSheet.Cells[rowIterator, 20].Value?.ToString(),
-                            MobileUniqueId = workSheet.Cells[rowIterator, 21].Value?.ToString(),
-                            IsMobileUser = workSheet.Cells[rowIterator, 22].Value?.ToString(),
-                            IsWebUser = workSheet.Cells[rowIterator, 23].Value?.ToString(),
-                            IsActive = workSheet.Cells[rowIterator, 24].Value?.ToString()
+                            EmployeeType = workSheet.Cells[rowIterator, 3].Value?.ToString(),
+                            MobileNumber = workSheet.Cells[rowIterator, 4].Value?.ToString(),
+                            EmailId = workSheet.Cells[rowIterator, 5].Value?.ToString(),
+                            Password = !string.IsNullOrWhiteSpace(workSheet.Cells[rowIterator, 6].Value?.ToString()) ? EncryptDecryptHelper.EncryptString(workSheet.Cells[rowIterator, 6].Value?.ToString()) : string.Empty,
+                            Role = workSheet.Cells[rowIterator, 7].Value?.ToString(),
+                            ReportingTo = workSheet.Cells[rowIterator, 8].Value?.ToString(),
+                            Department = workSheet.Cells[rowIterator, 9].Value?.ToString(),
+                            Company = workSheet.Cells[rowIterator, 10].Value?.ToString(),
+                            Address = workSheet.Cells[rowIterator, 11].Value?.ToString(),
+                            Country = workSheet.Cells[rowIterator, 12].Value?.ToString(),
+                            State = workSheet.Cells[rowIterator, 13].Value?.ToString(),
+                            District = workSheet.Cells[rowIterator, 14].Value?.ToString(),
+                            City = workSheet.Cells[rowIterator, 15].Value?.ToString(),
+                            Pincode = workSheet.Cells[rowIterator, 16].Value?.ToString(),
+                            DateOfBirth = !string.IsNullOrWhiteSpace(workSheet.Cells[rowIterator, 17].Value?.ToString()) ? DateTime.ParseExact(workSheet.Cells[rowIterator, 17].Value?.ToString(), "dd/MM/yyyy", System.Globalization.CultureInfo.CurrentUICulture.DateTimeFormat) : null,
+                            DateOfJoining = !string.IsNullOrWhiteSpace(workSheet.Cells[rowIterator, 18].Value?.ToString()) ? DateTime.ParseExact(workSheet.Cells[rowIterator, 18].Value?.ToString(), "dd/MM/yyyy", System.Globalization.CultureInfo.CurrentUICulture.DateTimeFormat) : null,
+                            EmergencyName = workSheet.Cells[rowIterator, 19].Value?.ToString(),
+                            EmergencyContactNumber = workSheet.Cells[rowIterator, 20].Value?.ToString(),
+                            EmergencyRelation = workSheet.Cells[rowIterator, 21].Value?.ToString(),
+                            BloodGroup = workSheet.Cells[rowIterator, 22].Value?.ToString(),
+                            Gender = workSheet.Cells[rowIterator, 23].Value?.ToString(),
+                            MaritalStatus = workSheet.Cells[rowIterator, 24].Value?.ToString(),
+                            WorkingHour = workSheet.Cells[rowIterator, 25].Value?.ToString(),
+                            Rate = workSheet.Cells[rowIterator, 26].Value?.ToString(),
+                            RateValue = workSheet.Cells[rowIterator, 27].Value?.ToString(),
+                            BankName = workSheet.Cells[rowIterator, 28].Value?.ToString(),
+                            BankAccountNo = workSheet.Cells[rowIterator, 29].Value?.ToString(),
+                            BankIFSCCode = workSheet.Cells[rowIterator, 30].Value?.ToString(),
+                            AadharNumber = workSheet.Cells[rowIterator, 31].Value?.ToString(),
+                            PanNumber = workSheet.Cells[rowIterator, 32].Value?.ToString(),
+                            OtherProof = workSheet.Cells[rowIterator, 33].Value?.ToString(),
+                            IsSupervisor = workSheet.Cells[rowIterator, 34].Value?.ToString(),
+                            MobileUniqueId = workSheet.Cells[rowIterator, 35].Value?.ToString(),
+                            IsMobileUser = workSheet.Cells[rowIterator, 36].Value?.ToString(),
+                            IsWebUser = workSheet.Cells[rowIterator, 37].Value?.ToString(),
+                            IsActive = workSheet.Cells[rowIterator, 38].Value?.ToString()
                         });
                     }
                 }
@@ -462,28 +490,43 @@ namespace AVPolyPack.API.Controllers.Admin
 
                     WorkSheet1.Cells[1, 1].Value = "UserCode";
                     WorkSheet1.Cells[1, 2].Value = "UserName";
-                    WorkSheet1.Cells[1, 3].Value = "MobileNumber";
-                    WorkSheet1.Cells[1, 4].Value = "EmailId";
-                    WorkSheet1.Cells[1, 5].Value = "Password";
-                    WorkSheet1.Cells[1, 6].Value = "Role";
-                    WorkSheet1.Cells[1, 7].Value = "ReportingTo";
-                    WorkSheet1.Cells[1, 8].Value = "Department";
-                    WorkSheet1.Cells[1, 9].Value = "Company";
-                    WorkSheet1.Cells[1, 10].Value = "Address";
-                    WorkSheet1.Cells[1, 11].Value = "State";
-                    WorkSheet1.Cells[1, 12].Value = "District";
-                    WorkSheet1.Cells[1, 13].Value = "City";
-                    WorkSheet1.Cells[1, 14].Value = "Pincode";
-                    WorkSheet1.Cells[1, 15].Value = "DateOfBirth";
-                    WorkSheet1.Cells[1, 16].Value = "DateOfJoining";
-                    WorkSheet1.Cells[1, 17].Value = "EmergencyContactNumber";
-                    WorkSheet1.Cells[1, 18].Value = "BloodGroup";
-                    WorkSheet1.Cells[1, 19].Value = "AadharNumber";
-                    WorkSheet1.Cells[1, 20].Value = "PanNumber";
-                    WorkSheet1.Cells[1, 21].Value = "MobileUniqueId";
-                    WorkSheet1.Cells[1, 22].Value = "IsMobileUser";
-                    WorkSheet1.Cells[1, 23].Value = "IsWebUser";
-                    WorkSheet1.Cells[1, 24].Value = "ErrorMessage";
+                    WorkSheet1.Cells[1, 3].Value = "EmployeeType";
+                    WorkSheet1.Cells[1, 4].Value = "MobileNumber";
+                    WorkSheet1.Cells[1, 5].Value = "EmailId";
+                    WorkSheet1.Cells[1, 6].Value = "Password";
+                    WorkSheet1.Cells[1, 7].Value = "Role";
+                    WorkSheet1.Cells[1, 8].Value = "ReportingTo";
+                    WorkSheet1.Cells[1, 9].Value = "Department";
+                    WorkSheet1.Cells[1, 10].Value = "Company";
+                    WorkSheet1.Cells[1, 11].Value = "Address";
+                    WorkSheet1.Cells[1, 12].Value = "Country";
+                    WorkSheet1.Cells[1, 13].Value = "State";
+                    WorkSheet1.Cells[1, 14].Value = "District";
+                    WorkSheet1.Cells[1, 15].Value = "City";
+                    WorkSheet1.Cells[1, 16].Value = "Pincode";
+                    WorkSheet1.Cells[1, 17].Value = "DateOfBirth";
+                    WorkSheet1.Cells[1, 18].Value = "DateOfJoining";
+                    WorkSheet1.Cells[1, 19].Value = "EmergencyName";
+                    WorkSheet1.Cells[1, 20].Value = "EmergencyContactNumber";
+                    WorkSheet1.Cells[1, 21].Value = "EmergencyRelation";
+                    WorkSheet1.Cells[1, 22].Value = "BloodGroup";
+                    WorkSheet1.Cells[1, 23].Value = "Gender";
+                    WorkSheet1.Cells[1, 24].Value = "MaritalStatus";
+                    WorkSheet1.Cells[1, 25].Value = "WorkingHour";
+                    WorkSheet1.Cells[1, 26].Value = "Rate";
+                    WorkSheet1.Cells[1, 27].Value = "RateValue";
+                    WorkSheet1.Cells[1, 28].Value = "BankName";
+                    WorkSheet1.Cells[1, 29].Value = "BankAccountNo";
+                    WorkSheet1.Cells[1, 30].Value = "BankIFSCCode";
+                    WorkSheet1.Cells[1, 31].Value = "AadharNumber";
+                    WorkSheet1.Cells[1, 32].Value = "PanNumber";
+                    WorkSheet1.Cells[1, 33].Value = "OtherProof";
+                    WorkSheet1.Cells[1, 34].Value = "IsSupervisor";
+                    WorkSheet1.Cells[1, 35].Value = "MobileUniqueId";
+                    WorkSheet1.Cells[1, 36].Value = "IsMobileUser";
+                    WorkSheet1.Cells[1, 37].Value = "IsWebUser";
+                    WorkSheet1.Cells[1, 38].Value = "IsActive";
+                    WorkSheet1.Cells[1, 39].Value = "ErrorMessage";
 
                     recordIndex = 2;
 
@@ -491,28 +534,43 @@ namespace AVPolyPack.API.Controllers.Admin
                     {
                         WorkSheet1.Cells[recordIndex, 1].Value = record.UserCode;
                         WorkSheet1.Cells[recordIndex, 2].Value = record.UserName;
-                        WorkSheet1.Cells[recordIndex, 3].Value = record.MobileNumber;
-                        WorkSheet1.Cells[recordIndex, 4].Value = record.EmailId;
-                        WorkSheet1.Cells[recordIndex, 5].Value = record.Password;
-                        WorkSheet1.Cells[recordIndex, 6].Value = record.Role;
-                        WorkSheet1.Cells[recordIndex, 7].Value = record.ReportingTo;
-                        WorkSheet1.Cells[recordIndex, 8].Value = record.Department;
-                        WorkSheet1.Cells[recordIndex, 9].Value = record.Company;
-                        WorkSheet1.Cells[recordIndex, 10].Value = record.Address;
-                        WorkSheet1.Cells[recordIndex, 11].Value = record.State;
-                        WorkSheet1.Cells[recordIndex, 12].Value = record.District;
-                        WorkSheet1.Cells[recordIndex, 13].Value = record.City;
-                        WorkSheet1.Cells[recordIndex, 14].Value = record.Pincode;
-                        WorkSheet1.Cells[recordIndex, 15].Value = record.DateOfBirth;
-                        WorkSheet1.Cells[recordIndex, 16].Value = record.DateOfJoining;
-                        WorkSheet1.Cells[recordIndex, 17].Value = record.EmergencyContactNumber;
-                        WorkSheet1.Cells[recordIndex, 18].Value = record.BloodGroup;
-                        WorkSheet1.Cells[recordIndex, 19].Value = record.AadharNumber;
-                        WorkSheet1.Cells[recordIndex, 20].Value = record.PanNumber;
-                        WorkSheet1.Cells[recordIndex, 21].Value = record.MobileUniqueId;
-                        WorkSheet1.Cells[recordIndex, 22].Value = record.IsMobileUser;
-                        WorkSheet1.Cells[recordIndex, 23].Value = record.IsWebUser;
-                        WorkSheet1.Cells[recordIndex, 24].Value = record.ValidationMessage;
+                        WorkSheet1.Cells[recordIndex, 3].Value = record.EmployeeType;
+                        WorkSheet1.Cells[recordIndex, 4].Value = record.MobileNumber;
+                        WorkSheet1.Cells[recordIndex, 5].Value = record.EmailId;
+                        WorkSheet1.Cells[recordIndex, 6].Value = record.Password;
+                        WorkSheet1.Cells[recordIndex, 7].Value = record.Role;
+                        WorkSheet1.Cells[recordIndex, 8].Value = record.ReportingTo;
+                        WorkSheet1.Cells[recordIndex, 9].Value = record.Department;
+                        WorkSheet1.Cells[recordIndex, 10].Value = record.Company;
+                        WorkSheet1.Cells[recordIndex, 11].Value = record.Address;
+                        WorkSheet1.Cells[recordIndex, 12].Value = record.Country;
+                        WorkSheet1.Cells[recordIndex, 13].Value = record.State;
+                        WorkSheet1.Cells[recordIndex, 14].Value = record.District;
+                        WorkSheet1.Cells[recordIndex, 15].Value = record.City;
+                        WorkSheet1.Cells[recordIndex, 16].Value = record.Pincode;
+                        WorkSheet1.Cells[recordIndex, 17].Value = record.DateOfBirth;
+                        WorkSheet1.Cells[recordIndex, 18].Value = record.DateOfJoining;
+                        WorkSheet1.Cells[recordIndex, 19].Value = record.EmergencyName;
+                        WorkSheet1.Cells[recordIndex, 20].Value = record.EmergencyContactNumber;
+                        WorkSheet1.Cells[recordIndex, 21].Value = record.EmergencyRelation;
+                        WorkSheet1.Cells[recordIndex, 22].Value = record.BloodGroup;
+                        WorkSheet1.Cells[recordIndex, 23].Value = record.Gender;
+                        WorkSheet1.Cells[recordIndex, 24].Value = record.MaritalStatus;
+                        WorkSheet1.Cells[recordIndex, 25].Value = record.WorkingHour;
+                        WorkSheet1.Cells[recordIndex, 26].Value = record.Rate;
+                        WorkSheet1.Cells[recordIndex, 27].Value = record.RateValue;
+                        WorkSheet1.Cells[recordIndex, 28].Value = record.BankName;
+                        WorkSheet1.Cells[recordIndex, 29].Value = record.BankAccountNo;
+                        WorkSheet1.Cells[recordIndex, 30].Value = record.BankIFSCCode;
+                        WorkSheet1.Cells[recordIndex, 31].Value = record.AadharNumber;
+                        WorkSheet1.Cells[recordIndex, 32].Value = record.PanNumber;
+                        WorkSheet1.Cells[recordIndex, 33].Value = record.OtherProof;
+                        WorkSheet1.Cells[recordIndex, 34].Value = record.IsSupervisor;
+                        WorkSheet1.Cells[recordIndex, 35].Value = record.MobileUniqueId;
+                        WorkSheet1.Cells[recordIndex, 36].Value = record.IsMobileUser;
+                        WorkSheet1.Cells[recordIndex, 37].Value = record.IsWebUser;
+                        WorkSheet1.Cells[recordIndex, 38].Value = record.IsActive;
+                        WorkSheet1.Cells[recordIndex, 39].Value = record.ValidationMessage;
 
                         recordIndex += 1;
                     }

@@ -88,4 +88,31 @@ namespace AVPolyPack.Application.Models
         public int? CreatedBy { get; set; }
         public string? CreatorName { get; set; }
     }
+
+    public class EmployeeAttendanceReport_Search : BaseSearchEntity
+    {
+        [DefaultValue(null)]
+        public DateTime? FromDate { get; set; }
+
+        [DefaultValue(null)]
+        public DateTime? ToDate { get; set; }
+
+        public int? ShiftType { get; set; }
+        public int? DepartmentId { get; set; }
+    }
+    public class EmployeeAttendanceReport_Response : BaseEntity
+    {
+        public string? UserCode { get; set; }
+        public string? EmployeeName { get; set; }
+        public string? DepartmentName { get; set; }
+        public int? ShiftType { get; set; }
+        public DateTime? CheckedInDate { get; set; }
+        public DateTime? CheckedOutDate { get; set; }
+        public string? TotalHours { get; set; }
+        public string? TotalDays { get; set; }
+        public string? EffortName { get; set; }
+        public DateTime? CreatedDate { get; set; }
+        public int? CreatedBy { get; set; }
+        public string? CreatorName { get; set; }
+    }
 }

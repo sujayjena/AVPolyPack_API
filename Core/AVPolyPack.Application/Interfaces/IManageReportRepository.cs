@@ -13,5 +13,6 @@ namespace AVPolyPack.Application.Interfaces
         Task<IEnumerable<LaminationReport_Response>> GetLaminationReport(LaminationReport_Search parameters);
         Task<IEnumerable<StrengthReport_Response>> GetStrengthReport(StrengthReport_Search parameters);
         Task<IEnumerable<EmployeeAttendanceReport_Response>> GetEmployeeAttendanceReport(EmployeeAttendanceReport_Search parameters);
+        Task<IEnumerable<LoomReport_Response>> GetLoomReport(LoomReport_Search parameters);
     }
 }

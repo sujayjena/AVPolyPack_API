@@ -115,4 +115,32 @@ namespace AVPolyPack.Application.Models
         public int? CreatedBy { get; set; }
         public string? CreatorName { get; set; }
     }
+    public class LoomReport_Search : BaseSearchEntity
+    {
+        [DefaultValue(null)]
+        public DateTime? FromDate { get; set; }
+
+        [DefaultValue(null)]
+        public DateTime? ToDate { get; set; }
+
+        public int? ShiftType { get; set; }
+    }
+    public class LoomReport_Response : BaseEntity
+    {
+        public string? LoomNumber { get; set; }
+        public string? OperatorName { get; set; }
+        public string? OpeningReading { get; set; }
+        public string? Reading_8_10 { get; set; }
+        public string? Production_8_10 { get; set; }
+        public string? Reading_10_12 { get; set; }
+        public string? Production_10_12 { get; set; }
+        public string? Reading_12_02 { get; set; }
+        public string? Production_12_02 { get; set; }
+        public string? Reading_02_04 { get; set; }
+        public string? Production_02_04 { get; set; }
+        public string? Reading_04_06 { get; set; }
+        public string? Production_04_06 { get; set; }
+        public DateTime? CreatedDate { get; set; }
+        public string? CreatorName { get; set; }
+    }
 }

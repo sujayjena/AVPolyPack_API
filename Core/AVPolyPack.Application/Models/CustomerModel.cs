@@ -147,49 +147,82 @@ namespace AVPolyPack.Application.Models
 
     public class Customer_ImportData
     {
-        public string? CustomerName { get; set; }
-
         public string? CustomerCode { get; set; }
-
-        public string? LandLineNumber { get; set; }
-
-        public string? MobileNumber { get; set; }
-
-        public string? Email { get; set; }
-
-        public string? Website { get; set; }
-
-        public string? SpecialRemark { get; set; }
-
-        public string? CustomerRemark { get; set; }
-
-        public string? RefParty { get; set; }
-
+        public string? CustomerName { get; set; }
+        public string? ParentCustomer { get; set; }
+	    public string? ReferenceFrom { get; set; }
+	    public string? MobileNo1 { get; set; }
+	    public string? MobileNo2 { get; set; }
+	    public string? EmailId1 { get; set; }
+	    public string? EmailId2 { get; set; }
+	    public string? IsGST { get; set; }
+	    public string? GSTNumber { get; set; }
+	    public string? Website { get; set; }
+	    public string? SpecialRemark { get; set; }
+	    public string? CustomerRemark { get; set; }
+	    public string? ContactName { get; set; }
+	    public string? ContactPerson { get; set; }
+	    public string? ContactMobileNo { get; set; }
+	    public string? ContactEmailId { get; set; }
+	    public string? BankName { get; set; }
+	    public string? BankAddress { get; set; }
+	    public string? BankAccount { get; set; }
+	    public string? BankIFSCCode { get; set; }
+	    public string? IsBillingNationalOrInternational { get; set; }	
+	    public string? BillingAddress { get; set; }
+	    public string? BillingCountry { get; set; }
+	    public string? BillingState { get; set; }
+	    public string? BillingDistrict { get; set; }
+	    public string? BillingCity { get; set; }
+	    public string? BillingPincode { get; set; }
+	    public string? IsShippingNationalOrInternational { get; set; }
+        public string? ShippingAddress { get; set; }
+        public string? ShippingCountry { get; set; }
+	    public string? ShippingState { get; set; }
+	    public string? ShippingDistrict { get; set; }
+	    public string? ShippingCity { get; set; }
+        public string? ShippingPincode { get; set; }
         public string? IsActive { get; set; }
     }
 
     public class Customer_ImportDataValidation
     {
-        public string? CustomerName { get; set; }
-
         public string? CustomerCode { get; set; }
-
-        public string? LandLineNumber { get; set; }
-
-        public string? MobileNumber { get; set; }
-
-        public string? Email { get; set; }
-
+        public string? CustomerName { get; set; }
+        public string? ParentCustomer { get; set; }
+        public string? ReferenceFrom { get; set; }
+        public string? MobileNo1 { get; set; }
+        public string? MobileNo2 { get; set; }
+        public string? EmailId1 { get; set; }
+        public string? EmailId2 { get; set; }
+        public string? IsGST { get; set; }
+        public string? GSTNumber { get; set; }
         public string? Website { get; set; }
-
         public string? SpecialRemark { get; set; }
-
         public string? CustomerRemark { get; set; }
-
-        public string? RefParty { get; set; }
-
+        public string? ContactName { get; set; }
+        public string? ContactPerson { get; set; }
+        public string? ContactMobileNo { get; set; }
+        public string? ContactEmailId { get; set; }
+        public string? BankName { get; set; }
+        public string? BankAddress { get; set; }
+        public string? BankAccount { get; set; }
+        public string? BankIFSCCode { get; set; }
+        public string? IsBillingNationalOrInternational { get; set; }
+        public string? BillingAddress { get; set; }
+        public string? BillingCountry { get; set; }
+        public string? BillingState { get; set; }
+        public string? BillingDistrict { get; set; }
+        public string? BillingCity { get; set; }
+        public string? BillingPincode { get; set; }
+        public string? IsShippingNationalOrInternational { get; set; }
+        public string? ShippingAddress { get; set; }
+        public string? ShippingCountry { get; set; }
+        public string? ShippingState { get; set; }
+        public string? ShippingDistrict { get; set; }
+        public string? ShippingCity { get; set; }
+        public string? ShippingPincode { get; set; }
         public string? IsActive { get; set; }
-
         public string ValidationMessage { get; set; }
     }
 

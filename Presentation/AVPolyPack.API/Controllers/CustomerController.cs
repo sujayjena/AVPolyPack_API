@@ -293,7 +293,6 @@ namespace AVPolyPack.Controllers
             return _response;
         }
 
-        /*
         [Route("[action]")]
         [HttpPost]
         public async Task<ResponseModel> DownloadCustomerTemplate()
@@ -310,25 +309,21 @@ namespace AVPolyPack.Controllers
 
         [Route("[action]")]
         [HttpPost]
-        public async Task<ResponseModel> ImportCustomerCustomer([FromQuery] ImportRequest request)
+        public async Task<ResponseModel> ImportCustomer([FromQuery] ImportRequest request)
         {
             byte[] result;
             _response.IsSuccess = false;
 
-            int noOfColCustomer, noOfRowCustomer, noOfColCustomerContact, noOfRowCustomerContact, noOfColCustomerAddress, noOfRowCustomerAddress;
-            bool tableHasNullCustomer = false, tableHasNullCustomerContact = false, tableHasNullCustomerAddress = false;
+            int noOfColCustomer, noOfRowCustomer;
+            bool tableHasNullCustomer = false;
 
             List<Customer_ImportData> lstCustomerImportRequestModel = new List<Customer_ImportData>();
-            List<Contact_ImportData> lstCustomerContactImportRequestModel = new List<Contact_ImportData>();
-            List<Address_ImportData> lstCustomerAddressImportRequestModel = new List<Address_ImportData>();
 
             DataTable dtCustomerTable;
             DataTable dtCustomerContactTable;
             DataTable dtCustomerAddressTable;
 
             IEnumerable<Customer_ImportDataValidation> lstCustomer_ImportDataValidation_Result;
-            IEnumerable<Contact_ImportDataValidation> lstCustomerContact_ImportDataValidation_Result;
-            IEnumerable<Address_ImportDataValidation> lstCustomerAddress_ImportDataValidation_Result;
 
             ExcelWorksheets currentSheet;
             ExcelWorksheet workSheet;
@@ -352,65 +347,47 @@ namespace AVPolyPack.Controllers
 
                 for (int rowIterator = 2; rowIterator <= noOfRowCustomer; rowIterator++)
                 {
-                    if (!string.IsNullOrWhiteSpace(workSheet.Cells[rowIterator, 2].Value?.ToString()) && !string.IsNullOrWhiteSpace(workSheet.Cells[rowIterator, 3].Value?.ToString()))
+                    if (!string.IsNullOrWhiteSpace(workSheet.Cells[rowIterator, 1].Value?.ToString()) && !string.IsNullOrWhiteSpace(workSheet.Cells[rowIterator, 2].Value?.ToString()))
                     {
                         Customer_ImportData record = new Customer_ImportData();
-                        record.CustomerType = workSheet.Cells[rowIterator, 1].Value != null ? workSheet.Cells[rowIterator, 1].Value.ToString() : null;
+                        record.CustomerCode = workSheet.Cells[rowIterator, 1].Value != null ? workSheet.Cells[rowIterator, 1].Value.ToString() : null;
                         record.CustomerName = workSheet.Cells[rowIterator, 2].Value != null ? workSheet.Cells[rowIterator, 2].Value.ToString() : null;
-                        record.CustomerCode = workSheet.Cells[rowIterator, 3].Value != null ? workSheet.Cells[rowIterator, 3].Value.ToString() : null;
-                        record.LandLineNumber = workSheet.Cells[rowIterator, 4].Value != null ? workSheet.Cells[rowIterator, 4].Value.ToString() : null;
-                        record.MobileNumber = workSheet.Cells[rowIterator, 5].Value != null ? workSheet.Cells[rowIterator, 5].Value.ToString() : null;
-                        record.Email = workSheet.Cells[rowIterator, 6].Value != null ? workSheet.Cells[rowIterator, 6].Value.ToString() : null;
-                        record.Website = workSheet.Cells[rowIterator, 7].Value != null ? workSheet.Cells[rowIterator, 7].Value.ToString() : null;
-                        record.SpecialRemark = workSheet.Cells[rowIterator, 8].Value != null ? workSheet.Cells[rowIterator, 8].Value.ToString() : null;
-                        record.CustomerRemark = workSheet.Cells[rowIterator, 9].Value != null ? workSheet.Cells[rowIterator, 9].Value.ToString() : null;
-                        record.RefParty = workSheet.Cells[rowIterator, 10].Value != null ? workSheet.Cells[rowIterator, 10].Value.ToString() : null;
-                        record.IsActive = workSheet.Cells[rowIterator, 11].Value != null ? workSheet.Cells[rowIterator, 11].Value.ToString() : null;
+                        record.ParentCustomer = workSheet.Cells[rowIterator, 3].Value != null ? workSheet.Cells[rowIterator, 3].Value.ToString() : null;
+                        record.ReferenceFrom = workSheet.Cells[rowIterator, 4].Value != null ? workSheet.Cells[rowIterator, 4].Value.ToString() : null;
+                        record.MobileNo1 = workSheet.Cells[rowIterator, 5].Value != null ? workSheet.Cells[rowIterator, 5].Value.ToString() : null;
+                        record.MobileNo2 = workSheet.Cells[rowIterator, 6].Value != null ? workSheet.Cells[rowIterator, 6].Value.ToString() : null;
+                        record.EmailId1 = workSheet.Cells[rowIterator, 7].Value != null ? workSheet.Cells[rowIterator, 7].Value.ToString() : null;
+                        record.EmailId2 = workSheet.Cells[rowIterator, 8].Value != null ? workSheet.Cells[rowIterator, 8].Value.ToString() : null;
+                        record.IsGST = workSheet.Cells[rowIterator, 9].Value != null ? workSheet.Cells[rowIterator, 9].Value.ToString() : null;
+                        record.GSTNumber = workSheet.Cells[rowIterator, 10].Value != null ? workSheet.Cells[rowIterator, 10].Value.ToString() : null;
+                        record.Website = workSheet.Cells[rowIterator, 11].Value != null ? workSheet.Cells[rowIterator, 11].Value.ToString() : null;
+                        record.SpecialRemark = workSheet.Cells[rowIterator, 12].Value != null ? workSheet.Cells[rowIterator, 12].Value.ToString() : null;
+                        record.CustomerRemark = workSheet.Cells[rowIterator, 13].Value != null ? workSheet.Cells[rowIterator, 13].Value.ToString() : null;
+                        record.ContactName = workSheet.Cells[rowIterator, 14].Value != null ? workSheet.Cells[rowIterator, 14].Value.ToString() : null;
+                        record.ContactPerson = workSheet.Cells[rowIterator, 15].Value != null ? workSheet.Cells[rowIterator, 15].Value.ToString() : null;
+                        record.ContactMobileNo = workSheet.Cells[rowIterator, 16].Value != null ? workSheet.Cells[rowIterator, 16].Value.ToString() : null;
+                        record.ContactEmailId = workSheet.Cells[rowIterator, 17].Value != null ? workSheet.Cells[rowIterator, 17].Value.ToString() : null;
+                        record.BankName = workSheet.Cells[rowIterator, 18].Value != null ? workSheet.Cells[rowIterator, 18].Value.ToString() : null;
+                        record.BankAddress = workSheet.Cells[rowIterator, 19].Value != null ? workSheet.Cells[rowIterator, 19].Value.ToString() : null;
+                        record.BankAccount = workSheet.Cells[rowIterator, 20].Value != null ? workSheet.Cells[rowIterator, 20].Value.ToString() : null;
+                        record.BankIFSCCode = workSheet.Cells[rowIterator, 21].Value != null ? workSheet.Cells[rowIterator, 21].Value.ToString() : null;
+                        record.IsBillingNationalOrInternational = workSheet.Cells[rowIterator, 22].Value != null ? workSheet.Cells[rowIterator, 22].Value.ToString() : null;
+                        record.BillingAddress = workSheet.Cells[rowIterator, 23].Value != null ? workSheet.Cells[rowIterator, 23].Value.ToString() : null;
+                        record.BillingCountry = workSheet.Cells[rowIterator, 24].Value != null ? workSheet.Cells[rowIterator, 24].Value.ToString() : null;
+                        record.BillingState = workSheet.Cells[rowIterator, 25].Value != null ? workSheet.Cells[rowIterator, 25].Value.ToString() : null;
+                        record.BillingDistrict = workSheet.Cells[rowIterator, 26].Value != null ? workSheet.Cells[rowIterator, 26].Value.ToString() : null;
+                        record.BillingCity = workSheet.Cells[rowIterator, 27].Value != null ? workSheet.Cells[rowIterator, 27].Value.ToString() : null;
+                        record.BillingPincode = workSheet.Cells[rowIterator, 28].Value != null ? workSheet.Cells[rowIterator, 28].Value.ToString() : null;
+                        record.IsShippingNationalOrInternational = workSheet.Cells[rowIterator, 29].Value != null ? workSheet.Cells[rowIterator, 29].Value.ToString() : null;
+                        record.ShippingAddress = workSheet.Cells[rowIterator, 30].Value != null ? workSheet.Cells[rowIterator, 30].Value.ToString() : null;
+                        record.ShippingCountry = workSheet.Cells[rowIterator, 31].Value != null ? workSheet.Cells[rowIterator, 31].Value.ToString() : null;
+                        record.ShippingState = workSheet.Cells[rowIterator, 32].Value != null ? workSheet.Cells[rowIterator, 32].Value.ToString() : null;
+                        record.ShippingDistrict = workSheet.Cells[rowIterator, 33].Value != null ? workSheet.Cells[rowIterator, 33].Value.ToString() : null;
+                        record.ShippingCity = workSheet.Cells[rowIterator, 34].Value != null ? workSheet.Cells[rowIterator, 34].Value.ToString() : null;
+                        record.ShippingPincode = workSheet.Cells[rowIterator, 35].Value != null ? workSheet.Cells[rowIterator, 35].Value.ToString() : null;
+                        record.IsActive = workSheet.Cells[rowIterator, 36].Value != null ? workSheet.Cells[rowIterator, 36].Value.ToString() : null;
 
                         lstCustomerImportRequestModel.Add(record);
-                    }
-                }
-
-                workSheet = currentSheet[1];
-                noOfColCustomerContact = workSheet.Dimension.End.Column;
-                noOfRowCustomerContact = workSheet.Dimension.End.Row;
-
-                for (int rowIterator = 2; rowIterator <= noOfRowCustomerContact; rowIterator++)
-                {
-                    if (!string.IsNullOrWhiteSpace(workSheet.Cells[rowIterator, 1].Value?.ToString()) && !string.IsNullOrWhiteSpace(workSheet.Cells[rowIterator, 2].Value?.ToString()))
-                    {
-                        Contact_ImportData record = new Contact_ImportData();
-                        record.CustomerName = workSheet.Cells[rowIterator, 1].Value != null ? workSheet.Cells[rowIterator, 1].Value.ToString() : null;
-                        record.VendorName = string.Empty;
-                        record.ContactName = workSheet.Cells[rowIterator, 2].Value != null ? workSheet.Cells[rowIterator, 2].Value.ToString() : null;
-                        record.MobileNumber = workSheet.Cells[rowIterator, 3].Value != null ? workSheet.Cells[rowIterator, 3].Value.ToString() : null;
-                        record.Email = workSheet.Cells[rowIterator, 4].Value != null ? workSheet.Cells[rowIterator, 4].Value.ToString() : null;
-                        record.IsActive = workSheet.Cells[rowIterator, 5].Value != null ? workSheet.Cells[rowIterator, 5].Value.ToString() : null;
-
-                        lstCustomerContactImportRequestModel.Add(record);
-                    }
-                }
-
-                workSheet = currentSheet[2];
-                noOfColCustomerAddress = workSheet.Dimension.End.Column;
-                noOfRowCustomerAddress = workSheet.Dimension.End.Row;
-
-                for (int rowIterator = 2; rowIterator <= noOfRowCustomerAddress; rowIterator++)
-                {
-                    if (!string.IsNullOrWhiteSpace(workSheet.Cells[rowIterator, 1].Value?.ToString()) && !string.IsNullOrWhiteSpace(workSheet.Cells[rowIterator, 2].Value?.ToString()))
-                    {
-                        Address_ImportData record = new Address_ImportData();
-                        record.CustomerName = workSheet.Cells[rowIterator, 1].Value != null ? workSheet.Cells[rowIterator, 1].Value.ToString() : null;
-                        record.VendorName = string.Empty;
-                        record.Address = workSheet.Cells[rowIterator, 2].Value != null ? workSheet.Cells[rowIterator, 2].Value.ToString() : null;
-                        record.State = workSheet.Cells[rowIterator, 3].Value != null ? workSheet.Cells[rowIterator, 3].Value.ToString() : null;
-                        record.District = workSheet.Cells[rowIterator, 4].Value != null ? workSheet.Cells[rowIterator, 4].Value.ToString() : null;
-                        record.City = workSheet.Cells[rowIterator, 5].Value != null ? workSheet.Cells[rowIterator, 5].Value.ToString() : null;
-                        record.PinCode = workSheet.Cells[rowIterator, 6].Value != null ? workSheet.Cells[rowIterator, 6].Value.ToString() : null;
-                        record.IsActive = workSheet.Cells[rowIterator, 7].Value != null ? workSheet.Cells[rowIterator, 7].Value.ToString() : null;
-
-
-                        lstCustomerAddressImportRequestModel.Add(record);
                     }
                 }
 
@@ -422,8 +399,6 @@ namespace AVPolyPack.Controllers
                 };
 
                 dtCustomerTable = (DataTable)JsonConvert.DeserializeObject(JsonConvert.SerializeObject(lstCustomerImportRequestModel), typeof(DataTable));
-                dtCustomerContactTable = (DataTable)JsonConvert.DeserializeObject(JsonConvert.SerializeObject(lstCustomerContactImportRequestModel), typeof(DataTable));
-                dtCustomerAddressTable = (DataTable)JsonConvert.DeserializeObject(JsonConvert.SerializeObject(lstCustomerAddressImportRequestModel), typeof(DataTable));
 
                 //Excel Column Mismatch check. If column name has been changed then it's value will be null;
                 foreach (DataRow row in dtCustomerTable.Rows)
@@ -438,33 +413,7 @@ namespace AVPolyPack.Controllers
                     }
                 }
 
-                //Excel Column Mismatch check. If column name has been changed then it's value will be null;
-                foreach (DataRow row in dtCustomerContactTable.Rows)
-                {
-                    foreach (DataColumn col in dtCustomerContactTable.Columns)
-                    {
-                        if (row[col] == DBNull.Value)
-                        {
-                            tableHasNullCustomerContact = true;
-                            break;
-                        }
-                    }
-                }
-
-                //Excel Column Mismatch check. If column name has been changed then it's value will be null;
-                foreach (DataRow row in dtCustomerAddressTable.Rows)
-                {
-                    foreach (DataColumn col in dtCustomerAddressTable.Columns)
-                    {
-                        if (row[col] == DBNull.Value)
-                        {
-                            tableHasNullCustomerAddress = true;
-                            break;
-                        }
-                    }
-                }
-
-
+               
                 //if (tableHasNullCustomer || tableHasNullCustomerContact || tableHasNullCustomerAddress)
                 //{
                 //    _response.IsSuccess = false;
@@ -474,10 +423,8 @@ namespace AVPolyPack.Controllers
 
                 // Import Data
                 lstCustomer_ImportDataValidation_Result = await _customerRepository.ImportCustomer(lstCustomerImportRequestModel);
-                lstCustomerContact_ImportDataValidation_Result = await _customerRepository.ImportCustomerContact(lstCustomerContactImportRequestModel);
-                lstCustomerAddress_ImportDataValidation_Result = await _customerRepository.ImportCustomerAddress(lstCustomerAddressImportRequestModel);
 
-                if (lstCustomer_ImportDataValidation_Result.ToList().Count == 0 && lstCustomerContact_ImportDataValidation_Result.ToList().Count == 0 && lstCustomerAddress_ImportDataValidation_Result.ToList().Count == 0)
+                if (lstCustomer_ImportDataValidation_Result.ToList().Count == 0)
                 {
                     _response.IsSuccess = true;
                     _response.Message = "Record imported successfully";
@@ -490,7 +437,7 @@ namespace AVPolyPack.Controllers
 
                 #region Generate Excel file for Invalid Data
 
-                if (lstCustomer_ImportDataValidation_Result.ToList().Count > 0 || lstCustomerContact_ImportDataValidation_Result.ToList().Count > 0 || lstCustomerAddress_ImportDataValidation_Result.ToList().Count > 0)
+                if (lstCustomer_ImportDataValidation_Result.ToList().Count > 0)
                 {
                     _response.IsSuccess = false;
 
@@ -511,105 +458,85 @@ namespace AVPolyPack.Controllers
                                 WorkSheet1.Row(1).Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
                                 WorkSheet1.Row(1).Style.Font.Bold = true;
 
-                                WorkSheet1.Cells[1, 1].Value = "CustomerName";
-                                WorkSheet1.Cells[1, 2].Value = "CustomerCode";
-                                WorkSheet1.Cells[1, 3].Value = "LandLineNumber";
-                                WorkSheet1.Cells[1, 4].Value = "MobileNumber";
-                                WorkSheet1.Cells[1, 5].Value = "Email";
-                                WorkSheet1.Cells[1, 6].Value = "Website";
-                                WorkSheet1.Cells[1, 7].Value = "SpecialRemark";
-                                WorkSheet1.Cells[1, 8].Value = "CustomerRemark";
-                                WorkSheet1.Cells[1, 9].Value = "RefParty";
-                                WorkSheet1.Cells[1, 10].Value = "ErrorMessage";
+                                WorkSheet1.Cells[1, 1].Value = "CustomerCode";
+                                WorkSheet1.Cells[1, 2].Value = "CustomerName";
+                                WorkSheet1.Cells[1, 3].Value = "ParentCustomer";
+                                WorkSheet1.Cells[1, 4].Value = "ReferenceFrom";
+                                WorkSheet1.Cells[1, 5].Value = "MobileNo1";
+                                WorkSheet1.Cells[1, 6].Value = "MobileNo2";
+                                WorkSheet1.Cells[1, 7].Value = "EmailId1";
+                                WorkSheet1.Cells[1, 8].Value = "EmailId2";
+                                WorkSheet1.Cells[1, 9].Value = "IsGST";
+                                WorkSheet1.Cells[1, 10].Value = "GSTNumber";
+                                WorkSheet1.Cells[1, 11].Value = "Website";
+                                WorkSheet1.Cells[1, 12].Value = "SpecialRemark";
+                                WorkSheet1.Cells[1, 13].Value = "CustomerRemark";
+                                WorkSheet1.Cells[1, 14].Value = "ContactName";
+                                WorkSheet1.Cells[1, 15].Value = "ContactPerson";
+                                WorkSheet1.Cells[1, 16].Value = "ContactMobileNo";
+                                WorkSheet1.Cells[1, 17].Value = "ContactEmailId";
+                                WorkSheet1.Cells[1, 18].Value = "BankName";
+                                WorkSheet1.Cells[1, 19].Value = "BankAddress";
+                                WorkSheet1.Cells[1, 20].Value = "BankAccount";
+                                WorkSheet1.Cells[1, 21].Value = "BankIFSCCode";
+                                WorkSheet1.Cells[1, 22].Value = "IsBillingNationalOrInternational";
+                                WorkSheet1.Cells[1, 23].Value = "BillingAddress";
+                                WorkSheet1.Cells[1, 24].Value = "BillingCountry";
+                                WorkSheet1.Cells[1, 25].Value = "BillingState";
+                                WorkSheet1.Cells[1, 26].Value = "BillingDistrict";
+                                WorkSheet1.Cells[1, 27].Value = "BillingCity";
+                                WorkSheet1.Cells[1, 28].Value = "BillingPincode";
+                                WorkSheet1.Cells[1, 29].Value = "IsShippingNationalOrInternational";
+                                WorkSheet1.Cells[1, 30].Value = "ShippingAddress";
+                                WorkSheet1.Cells[1, 31].Value = "ShippingCountry";
+                                WorkSheet1.Cells[1, 31].Value = "ShippingState";
+                                WorkSheet1.Cells[1, 33].Value = "ShippingDistrict";
+                                WorkSheet1.Cells[1, 34].Value = "ShippingCity";
+                                WorkSheet1.Cells[1, 35].Value = "ShippingPincode";
+                                WorkSheet1.Cells[1, 36].Value = "IsActive";
+                                WorkSheet1.Cells[1, 37].Value = "ValidationMessage";
 
                                 recordIndex = 2;
 
                                 foreach (Customer_ImportDataValidation record in lstCustomer_ImportDataValidation_Result)
                                 {
-                                    WorkSheet1.Cells[recordIndex, 1].Value = record.CustomerName;
-                                    WorkSheet1.Cells[recordIndex, 2].Value = record.CustomerCode;
-                                    WorkSheet1.Cells[recordIndex, 3].Value = record.LandLineNumber;
-                                    WorkSheet1.Cells[recordIndex, 4].Value = record.MobileNumber;
-                                    WorkSheet1.Cells[recordIndex, 5].Value = record.Email;
-                                    WorkSheet1.Cells[recordIndex, 6].Value = record.Website;
-                                    WorkSheet1.Cells[recordIndex, 7].Value = record.SpecialRemark;
-                                    WorkSheet1.Cells[recordIndex, 8].Value = record.CustomerRemark;
-                                    WorkSheet1.Cells[recordIndex, 9].Value = record.RefParty;
-                                    WorkSheet1.Cells[recordIndex, 10].Value = record.ValidationMessage;
-
-                                    recordIndex += 1;
-                                }
-
-                                WorkSheet1.Columns.AutoFit();
-                            }
-
-                            if (lstCustomerContact_ImportDataValidation_Result.ToList().Count > 0)
-                            {
-                                ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
-                                int recordIndex;
-                                ExcelWorksheet WorkSheet1 = excelInvalidData.Workbook.Worksheets.Add("Invalid_Contact_Records");
-                                WorkSheet1.TabColor = System.Drawing.Color.Black;
-                                WorkSheet1.DefaultRowHeight = 12;
-
-                                //Header of table
-                                WorkSheet1.Row(1).Height = 20;
-                                WorkSheet1.Row(1).Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
-                                WorkSheet1.Row(1).Style.Font.Bold = true;
-
-                                WorkSheet1.Cells[1, 1].Value = "CustomerName";
-                                WorkSheet1.Cells[1, 2].Value = "ContactName";
-                                WorkSheet1.Cells[1, 3].Value = "MobileNumber";
-                                WorkSheet1.Cells[1, 4].Value = "Email";
-                                WorkSheet1.Cells[1, 5].Value = "ErrorMessage";
-
-                                recordIndex = 2;
-
-                                foreach (Contact_ImportDataValidation record in lstCustomerContact_ImportDataValidation_Result)
-                                {
-                                    WorkSheet1.Cells[recordIndex, 1].Value = record.CustomerName;
-                                    WorkSheet1.Cells[recordIndex, 2].Value = record.ContactName;
-                                    WorkSheet1.Cells[recordIndex, 3].Value = record.MobileNumber;
-                                    WorkSheet1.Cells[recordIndex, 4].Value = record.Email;
-                                    WorkSheet1.Cells[recordIndex, 11].Value = record.ValidationMessage;
-
-                                    recordIndex += 1;
-                                }
-
-                                WorkSheet1.Columns.AutoFit();
-                            }
-
-                            if (lstCustomerAddress_ImportDataValidation_Result.ToList().Count > 0)
-                            {
-                                ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
-                                int recordIndex;
-                                ExcelWorksheet WorkSheet1 = excelInvalidData.Workbook.Worksheets.Add("Invalid_Address_Records");
-                                WorkSheet1.TabColor = System.Drawing.Color.Black;
-                                WorkSheet1.DefaultRowHeight = 12;
-
-                                //Header of table
-                                WorkSheet1.Row(1).Height = 20;
-                                WorkSheet1.Row(1).Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
-                                WorkSheet1.Row(1).Style.Font.Bold = true;
-
-                                WorkSheet1.Cells[1, 1].Value = "CustomerName";
-                                WorkSheet1.Cells[1, 2].Value = "Address";
-                                WorkSheet1.Cells[1, 3].Value = "State";
-                                WorkSheet1.Cells[1, 4].Value = "District";
-                                WorkSheet1.Cells[1, 5].Value = "City";
-                                WorkSheet1.Cells[1, 6].Value = "PinCode";
-                                WorkSheet1.Cells[1, 7].Value = "ErrorMessage";
-
-                                recordIndex = 2;
-
-                                foreach (Address_ImportDataValidation record in lstCustomerAddress_ImportDataValidation_Result)
-                                {
-                                    WorkSheet1.Cells[recordIndex, 1].Value = record.CustomerName;
-                                    WorkSheet1.Cells[recordIndex, 2].Value = record.Address;
-                                    WorkSheet1.Cells[recordIndex, 3].Value = record.State;
-                                    WorkSheet1.Cells[recordIndex, 4].Value = record.District;
-                                    WorkSheet1.Cells[recordIndex, 5].Value = record.City;
-                                    WorkSheet1.Cells[recordIndex, 6].Value = record.PinCode;
-                                    WorkSheet1.Cells[recordIndex, 7].Value = record.ValidationMessage;
+                                    WorkSheet1.Cells[recordIndex, 1].Value = record.CustomerCode;
+                                    WorkSheet1.Cells[recordIndex, 2].Value = record.CustomerName;
+                                    WorkSheet1.Cells[recordIndex, 3].Value = record.ParentCustomer;
+                                    WorkSheet1.Cells[recordIndex, 4].Value = record.ReferenceFrom;
+                                    WorkSheet1.Cells[recordIndex, 5].Value = record.MobileNo1;
+                                    WorkSheet1.Cells[recordIndex, 6].Value = record.MobileNo2;
+                                    WorkSheet1.Cells[recordIndex, 7].Value = record.EmailId1;
+                                    WorkSheet1.Cells[recordIndex, 8].Value = record.EmailId2;
+                                    WorkSheet1.Cells[recordIndex, 9].Value = record.IsGST;
+                                    WorkSheet1.Cells[recordIndex, 10].Value = record.GSTNumber;
+                                    WorkSheet1.Cells[recordIndex, 11].Value = record.Website;
+                                    WorkSheet1.Cells[recordIndex, 12].Value = record.SpecialRemark;
+                                    WorkSheet1.Cells[recordIndex, 13].Value = record.CustomerRemark;
+                                    WorkSheet1.Cells[recordIndex, 14].Value = record.ContactName;
+                                    WorkSheet1.Cells[recordIndex, 15].Value = record.ContactPerson;
+                                    WorkSheet1.Cells[recordIndex, 16].Value = record.ContactMobileNo;
+                                    WorkSheet1.Cells[recordIndex, 17].Value = record.ContactEmailId;
+                                    WorkSheet1.Cells[recordIndex, 18].Value = record.BankName;
+                                    WorkSheet1.Cells[recordIndex, 19].Value = record.BankAddress;
+                                    WorkSheet1.Cells[recordIndex, 20].Value = record.BankAccount;
+                                    WorkSheet1.Cells[recordIndex, 21].Value = record.BankIFSCCode;
+                                    WorkSheet1.Cells[recordIndex, 22].Value = record.IsBillingNationalOrInternational;
+                                    WorkSheet1.Cells[recordIndex, 23].Value = record.BillingAddress;
+                                    WorkSheet1.Cells[recordIndex, 24].Value = record.BillingCountry;
+                                    WorkSheet1.Cells[recordIndex, 25].Value = record.BillingState;
+                                    WorkSheet1.Cells[recordIndex, 26].Value = record.BillingDistrict;
+                                    WorkSheet1.Cells[recordIndex, 27].Value = record.BillingCity;
+                                    WorkSheet1.Cells[recordIndex, 28].Value = record.BillingPincode;
+                                    WorkSheet1.Cells[recordIndex, 29].Value = record.IsShippingNationalOrInternational;
+                                    WorkSheet1.Cells[recordIndex, 30].Value = record.ShippingAddress;
+                                    WorkSheet1.Cells[recordIndex, 31].Value = record.ShippingCountry;
+                                    WorkSheet1.Cells[recordIndex, 32].Value = record.ShippingState;
+                                    WorkSheet1.Cells[recordIndex, 33].Value = record.ShippingDistrict;
+                                    WorkSheet1.Cells[recordIndex, 34].Value = record.ShippingCity;
+                                    WorkSheet1.Cells[recordIndex, 35].Value = record.ShippingPincode;
+                                    WorkSheet1.Cells[recordIndex, 36].Value = record.IsActive;
+                                    WorkSheet1.Cells[recordIndex, 37].Value = record.ValidationMessage;
 
                                     recordIndex += 1;
                                 }
@@ -632,170 +559,170 @@ namespace AVPolyPack.Controllers
             }
         }
 
-        [Route("[action]")]
-        [HttpPost]
-        public async Task<ResponseModel> ExportCustomerCustomer()
-        {
-            _response.IsSuccess = false;
-            byte[] result;
+        //[Route("[action]")]
+        //[HttpPost]
+        //public async Task<ResponseModel> ExportCustomerCustomer()
+        //{
+        //    _response.IsSuccess = false;
+        //    byte[] result;
 
-            var request = new BaseSearchEntity();
+        //    var request = new BaseSearchEntity();
 
-            var lstCustomerListObj = await _customerRepository.GetCustomerList(request);
+        //    var lstCustomerListObj = await _customerRepository.GetCustomerList(request);
 
-            using (MemoryStream msExportDataFile = new MemoryStream())
-            {
-                ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
-                using (ExcelPackage excelExportData = new ExcelPackage())
-                {
-                    int recordIndex;
-                    ExcelWorksheet WorkSheet1 = excelExportData.Workbook.Worksheets.Add("Customer");
-                    WorkSheet1.TabColor = System.Drawing.Color.Black;
-                    WorkSheet1.DefaultRowHeight = 12;
+        //    using (MemoryStream msExportDataFile = new MemoryStream())
+        //    {
+        //        ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
+        //        using (ExcelPackage excelExportData = new ExcelPackage())
+        //        {
+        //            int recordIndex;
+        //            ExcelWorksheet WorkSheet1 = excelExportData.Workbook.Worksheets.Add("Customer");
+        //            WorkSheet1.TabColor = System.Drawing.Color.Black;
+        //            WorkSheet1.DefaultRowHeight = 12;
 
-                    //Header of table
-                    WorkSheet1.Row(1).Height = 20;
-                    WorkSheet1.Row(1).Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
-                    WorkSheet1.Row(1).Style.Font.Bold = true;
+        //            //Header of table
+        //            WorkSheet1.Row(1).Height = 20;
+        //            WorkSheet1.Row(1).Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
+        //            WorkSheet1.Row(1).Style.Font.Bold = true;
 
-                    WorkSheet1.Cells[1, 1].Value = "Customer Type";
-                    WorkSheet1.Cells[1, 2].Value = "Customer Name";
-                    WorkSheet1.Cells[1, 3].Value = "Customer Code";
-                    WorkSheet1.Cells[1, 4].Value = "LandLine Number";
-                    WorkSheet1.Cells[1, 5].Value = "Mobile Number";
-                    WorkSheet1.Cells[1, 6].Value = "Email";
-                    WorkSheet1.Cells[1, 7].Value = "Website";
-                    WorkSheet1.Cells[1, 8].Value = "Special Remark";
-                    WorkSheet1.Cells[1, 9].Value = "Customer Remark";
-                    WorkSheet1.Cells[1, 10].Value = "Ref Party";
-                    WorkSheet1.Cells[1, 11].Value = "IsActive";
+        //            WorkSheet1.Cells[1, 1].Value = "Customer Type";
+        //            WorkSheet1.Cells[1, 2].Value = "Customer Name";
+        //            WorkSheet1.Cells[1, 3].Value = "Customer Code";
+        //            WorkSheet1.Cells[1, 4].Value = "LandLine Number";
+        //            WorkSheet1.Cells[1, 5].Value = "Mobile Number";
+        //            WorkSheet1.Cells[1, 6].Value = "Email";
+        //            WorkSheet1.Cells[1, 7].Value = "Website";
+        //            WorkSheet1.Cells[1, 8].Value = "Special Remark";
+        //            WorkSheet1.Cells[1, 9].Value = "Customer Remark";
+        //            WorkSheet1.Cells[1, 10].Value = "Ref Party";
+        //            WorkSheet1.Cells[1, 11].Value = "IsActive";
 
-                    recordIndex = 2;
-                    foreach (var items in lstCustomerListObj)
-                    {
-                        WorkSheet1.Cells[recordIndex, 1].Value = items.CustomerType;
-                        WorkSheet1.Cells[recordIndex, 2].Value = items.CustomerName;
-                        WorkSheet1.Cells[recordIndex, 3].Value = items.CustomerCode;
-                        WorkSheet1.Cells[recordIndex, 4].Value = items.LandLineNumber;
-                        WorkSheet1.Cells[recordIndex, 5].Value = items.MobileNumber;
-                        WorkSheet1.Cells[recordIndex, 6].Value = items.EmailId;
-                        WorkSheet1.Cells[recordIndex, 7].Value = items.Website;
-                        WorkSheet1.Cells[recordIndex, 8].Value = items.Remark;
-                        WorkSheet1.Cells[recordIndex, 9].Value = items.CustomerRemark;
-                        WorkSheet1.Cells[recordIndex, 10].Value = items.RefParty;
-                        WorkSheet1.Cells[recordIndex, 11].Value = items.IsActive == true ? "Active" : "Inactive";
+        //            recordIndex = 2;
+        //            foreach (var items in lstCustomerListObj)
+        //            {
+        //                WorkSheet1.Cells[recordIndex, 1].Value = items.CustomerType;
+        //                WorkSheet1.Cells[recordIndex, 2].Value = items.CustomerName;
+        //                WorkSheet1.Cells[recordIndex, 3].Value = items.CustomerCode;
+        //                WorkSheet1.Cells[recordIndex, 4].Value = items.LandLineNumber;
+        //                WorkSheet1.Cells[recordIndex, 5].Value = items.MobileNumber;
+        //                WorkSheet1.Cells[recordIndex, 6].Value = items.EmailId;
+        //                WorkSheet1.Cells[recordIndex, 7].Value = items.Website;
+        //                WorkSheet1.Cells[recordIndex, 8].Value = items.Remark;
+        //                WorkSheet1.Cells[recordIndex, 9].Value = items.CustomerRemark;
+        //                WorkSheet1.Cells[recordIndex, 10].Value = items.RefParty;
+        //                WorkSheet1.Cells[recordIndex, 11].Value = items.IsActive == true ? "Active" : "Inactive";
 
-                        recordIndex += 1;
-                    }
+        //                recordIndex += 1;
+        //            }
 
-                    WorkSheet1.Columns.AutoFit();
-
-
-                    // Contact
-                    WorkSheet1 = excelExportData.Workbook.Worksheets.Add("Contact");
-                    WorkSheet1.TabColor = System.Drawing.Color.Black;
-                    WorkSheet1.DefaultRowHeight = 12;
-
-                    //Header of table
-                    WorkSheet1.Row(1).Height = 20;
-                    WorkSheet1.Row(1).Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
-                    WorkSheet1.Row(1).Style.Font.Bold = true;
-
-                    WorkSheet1.Cells[1, 1].Value = "Customer Name";
-                    WorkSheet1.Cells[1, 2].Value = "Contact Name";
-                    WorkSheet1.Cells[1, 3].Value = "Mobile Number";
-                    WorkSheet1.Cells[1, 4].Value = "Email";
-                    WorkSheet1.Cells[1, 5].Value = "IsActive";
-
-                    recordIndex = 2;
-                    foreach (var items in lstCustomerListObj.ToList().Distinct())
-                    {
-                        if (items.Id == 13)
-                        {
-                            string fdf = "";
-                        }
-
-                        var vContactDetail_Search = new ContactDetail_Search()
-                        {
-                            RefId = Convert.ToInt32(items.Id),
-                            RefType = "Customer"
-                        };
-
-                        var lstContactListObj = await _contactDetailRepository.GetContactDetailList(vContactDetail_Search);
-                        foreach (var itemContact in lstContactListObj)
-                        {
-                            WorkSheet1.Cells[recordIndex, 1].Value = items.CustomerName;
-                            WorkSheet1.Cells[recordIndex, 2].Value = itemContact.ContactName;
-                            WorkSheet1.Cells[recordIndex, 3].Value = itemContact.MobileNumber;
-                            WorkSheet1.Cells[recordIndex, 4].Value = itemContact.EmailId;
-                            WorkSheet1.Cells[recordIndex, 11].Value = itemContact.IsActive == true ? "Active" : "Inactive";
-
-                            recordIndex += 1;
-                        }
-                    }
-                    WorkSheet1.Columns.AutoFit();
+        //            WorkSheet1.Columns.AutoFit();
 
 
-                    // Address
-                    WorkSheet1 = excelExportData.Workbook.Worksheets.Add("Address");
-                    WorkSheet1.TabColor = System.Drawing.Color.Black;
-                    WorkSheet1.DefaultRowHeight = 12;
+        //            // Contact
+        //            WorkSheet1 = excelExportData.Workbook.Worksheets.Add("Contact");
+        //            WorkSheet1.TabColor = System.Drawing.Color.Black;
+        //            WorkSheet1.DefaultRowHeight = 12;
 
-                    //Header of table
-                    WorkSheet1.Row(1).Height = 20;
-                    WorkSheet1.Row(1).Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
-                    WorkSheet1.Row(1).Style.Font.Bold = true;
+        //            //Header of table
+        //            WorkSheet1.Row(1).Height = 20;
+        //            WorkSheet1.Row(1).Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
+        //            WorkSheet1.Row(1).Style.Font.Bold = true;
 
-                    WorkSheet1.Cells[1, 1].Value = "Customer Name";
-                    WorkSheet1.Cells[1, 2].Value = "Address1";
-                    WorkSheet1.Cells[1, 3].Value = "StateName";
-                    WorkSheet1.Cells[1, 4].Value = "DistrictName";
-                    WorkSheet1.Cells[1, 5].Value = "CityName";
-                    WorkSheet1.Cells[1, 6].Value = "PinCode";
-                    WorkSheet1.Cells[1, 7].Value = "IsActive";
+        //            WorkSheet1.Cells[1, 1].Value = "Customer Name";
+        //            WorkSheet1.Cells[1, 2].Value = "Contact Name";
+        //            WorkSheet1.Cells[1, 3].Value = "Mobile Number";
+        //            WorkSheet1.Cells[1, 4].Value = "Email";
+        //            WorkSheet1.Cells[1, 5].Value = "IsActive";
 
-                    recordIndex = 2;
-                    foreach (var items in lstCustomerListObj)
-                    {
-                        var vAddress_Search = new Address_Search()
-                        {
-                            RefId = Convert.ToInt32(items.Id),
-                            RefType = "Customer"
-                        };
+        //            recordIndex = 2;
+        //            foreach (var items in lstCustomerListObj.ToList().Distinct())
+        //            {
+        //                if (items.Id == 13)
+        //                {
+        //                    string fdf = "";
+        //                }
 
-                        var lstAddressListObj = await _addressRepository.GetAddressList(vAddress_Search);
-                        foreach (var itemAddress in lstAddressListObj)
-                        {
-                            WorkSheet1.Cells[recordIndex, 1].Value = items.CustomerName;
-                            WorkSheet1.Cells[recordIndex, 2].Value = itemAddress.Address1;
-                            WorkSheet1.Cells[recordIndex, 3].Value = itemAddress.StateName;
-                            WorkSheet1.Cells[recordIndex, 4].Value = itemAddress.DistrictName;
-                            WorkSheet1.Cells[recordIndex, 5].Value = itemAddress.CityName;
-                            WorkSheet1.Cells[recordIndex, 6].Value = itemAddress.PinCode;
-                            WorkSheet1.Cells[recordIndex, 7].Value = items.IsActive == true ? "Active" : "Inactive";
+        //                var vContactDetail_Search = new ContactDetail_Search()
+        //                {
+        //                    RefId = Convert.ToInt32(items.Id),
+        //                    RefType = "Customer"
+        //                };
 
-                            recordIndex += 1;
-                        }
-                    }
-                    WorkSheet1.Columns.AutoFit();
+        //                var lstContactListObj = await _contactDetailRepository.GetContactDetailList(vContactDetail_Search);
+        //                foreach (var itemContact in lstContactListObj)
+        //                {
+        //                    WorkSheet1.Cells[recordIndex, 1].Value = items.CustomerName;
+        //                    WorkSheet1.Cells[recordIndex, 2].Value = itemContact.ContactName;
+        //                    WorkSheet1.Cells[recordIndex, 3].Value = itemContact.MobileNumber;
+        //                    WorkSheet1.Cells[recordIndex, 4].Value = itemContact.EmailId;
+        //                    WorkSheet1.Cells[recordIndex, 11].Value = itemContact.IsActive == true ? "Active" : "Inactive";
 
-
-                    excelExportData.SaveAs(msExportDataFile);
-                    msExportDataFile.Position = 0;
-                    result = msExportDataFile.ToArray();
-                }
-            }
+        //                    recordIndex += 1;
+        //                }
+        //            }
+        //            WorkSheet1.Columns.AutoFit();
 
 
-            if (result != null)
-            {
-                _response.Data = result;
-                _response.IsSuccess = true;
-                _response.Message = "Exported successfully";
-            }
+        //            // Address
+        //            WorkSheet1 = excelExportData.Workbook.Worksheets.Add("Address");
+        //            WorkSheet1.TabColor = System.Drawing.Color.Black;
+        //            WorkSheet1.DefaultRowHeight = 12;
 
-            return _response;
-        }
+        //            //Header of table
+        //            WorkSheet1.Row(1).Height = 20;
+        //            WorkSheet1.Row(1).Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
+        //            WorkSheet1.Row(1).Style.Font.Bold = true;
+
+        //            WorkSheet1.Cells[1, 1].Value = "Customer Name";
+        //            WorkSheet1.Cells[1, 2].Value = "Address1";
+        //            WorkSheet1.Cells[1, 3].Value = "StateName";
+        //            WorkSheet1.Cells[1, 4].Value = "DistrictName";
+        //            WorkSheet1.Cells[1, 5].Value = "CityName";
+        //            WorkSheet1.Cells[1, 6].Value = "PinCode";
+        //            WorkSheet1.Cells[1, 7].Value = "IsActive";
+
+        //            recordIndex = 2;
+        //            foreach (var items in lstCustomerListObj)
+        //            {
+        //                var vAddress_Search = new Address_Search()
+        //                {
+        //                    RefId = Convert.ToInt32(items.Id),
+        //                    RefType = "Customer"
+        //                };
+
+        //                var lstAddressListObj = await _addressRepository.GetAddressList(vAddress_Search);
+        //                foreach (var itemAddress in lstAddressListObj)
+        //                {
+        //                    WorkSheet1.Cells[recordIndex, 1].Value = items.CustomerName;
+        //                    WorkSheet1.Cells[recordIndex, 2].Value = itemAddress.Address1;
+        //                    WorkSheet1.Cells[recordIndex, 3].Value = itemAddress.StateName;
+        //                    WorkSheet1.Cells[recordIndex, 4].Value = itemAddress.DistrictName;
+        //                    WorkSheet1.Cells[recordIndex, 5].Value = itemAddress.CityName;
+        //                    WorkSheet1.Cells[recordIndex, 6].Value = itemAddress.PinCode;
+        //                    WorkSheet1.Cells[recordIndex, 7].Value = items.IsActive == true ? "Active" : "Inactive";
+
+        //                    recordIndex += 1;
+        //                }
+        //            }
+        //            WorkSheet1.Columns.AutoFit();
+
+
+        //            excelExportData.SaveAs(msExportDataFile);
+        //            msExportDataFile.Position = 0;
+        //            result = msExportDataFile.ToArray();
+        //        }
+        //    }
+
+
+        //    if (result != null)
+        //    {
+        //        _response.Data = result;
+        //        _response.IsSuccess = true;
+        //        _response.Message = "Exported successfully";
+        //    }
+
+        //    return _response;
+        //}
 
         //[Route("[action]")]
         //[HttpPost]
@@ -806,7 +733,6 @@ namespace AVPolyPack.Controllers
         //    return _response;
         //}
 
-        */
 
         #endregion
     }

@@ -192,6 +192,50 @@ namespace AVPolyPack.Controllers
         [HttpPost]
         public async Task<ResponseModel> SaveOrderItem(OrderItem_Request parameters)
         {
+            //Front Side Upload
+            if (parameters != null && !string.IsNullOrWhiteSpace(parameters.FrontSideUpload_Base64))
+            {
+                var vUploadFile = _fileManager.UploadDocumentsBase64ToFile(parameters.FrontSideUpload_Base64, "\\Uploads\\Order\\", parameters.FrontSideUploadOriginalFileName);
+
+                if (!string.IsNullOrWhiteSpace(vUploadFile))
+                {
+                    parameters.FrontSideUploadFileName = vUploadFile;
+                }
+            }
+
+            //Back Side Upload
+            if (parameters != null && !string.IsNullOrWhiteSpace(parameters.BackSideUpload_Base64))
+            {
+                var vUploadFile = _fileManager.UploadDocumentsBase64ToFile(parameters.BackSideUpload_Base64, "\\Uploads\\Order\\", parameters.BackSideUploadOriginalFileName);
+
+                if (!string.IsNullOrWhiteSpace(vUploadFile))
+                {
+                    parameters.BackSideUploadFileName = vUploadFile;
+                }
+            }
+
+            //Top Photo
+            if (parameters != null && !string.IsNullOrWhiteSpace(parameters.TopPhoto_Base64))
+            {
+                var vUploadFile = _fileManager.UploadDocumentsBase64ToFile(parameters.TopPhoto_Base64, "\\Uploads\\Order\\", parameters.TopPhotoOriginalFileName);
+
+                if (!string.IsNullOrWhiteSpace(vUploadFile))
+                {
+                    parameters.TopPhotoFileName = vUploadFile;
+                }
+            }
+
+            //Bottom Photo
+            if (parameters != null && !string.IsNullOrWhiteSpace(parameters.BottomPhoto_Base64))
+            {
+                var vUploadFile = _fileManager.UploadDocumentsBase64ToFile(parameters.BottomPhoto_Base64, "\\Uploads\\Order\\", parameters.BottomPhotoOriginalFileName);
+
+                if (!string.IsNullOrWhiteSpace(vUploadFile))
+                {
+                    parameters.BottomPhotoFileName = vUploadFile;
+                }
+            }
+
             int result = await _manageOrderRepository.SaveOrderItem(parameters);
 
             if (result == (int)SaveOperationEnums.NoRecordExists)

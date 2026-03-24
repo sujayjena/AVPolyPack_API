@@ -129,6 +129,7 @@ namespace AVPolyPack.Application.Models
     {
         public string? LoomNumber { get; set; }
         public string? OperatorName { get; set; }
+        public int? ShiftType { get; set; }
         public string? OpeningReading { get; set; }
         public string? Reading_8_10 { get; set; }
         public string? Production_8_10 { get; set; }

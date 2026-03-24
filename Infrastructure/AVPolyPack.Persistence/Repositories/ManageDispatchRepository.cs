@@ -67,5 +67,23 @@ namespace AVPolyPack.Persistence.Repositories
             return (await ListByStoredProcedure<Dispatch_Response>("GetDispatchById", queryParameters)).FirstOrDefault();
         }
 
+        public async Task<IEnumerable<DispatchRoll_Response>> GetDispatchRollList(DispatchRoll_Search parameters)
+        {
+            DynamicParameters queryParameters = new DynamicParameters();
+
+            queryParameters.Add("@OrderItemId", parameters.OrderItemId);
+            queryParameters.Add("@IsDispatch", parameters.IsDispatch);
+            queryParameters.Add("@SearchText", parameters.SearchText.SanitizeValue());
+            queryParameters.Add("@IsActive", parameters.IsActive);
+            queryParameters.Add("@PageNo", parameters.PageNo);
+            queryParameters.Add("@PageSize", parameters.PageSize);
+            queryParameters.Add("@Total", parameters.Total, null, System.Data.ParameterDirection.Output);
+            queryParameters.Add("@UserId", SessionManager.LoggedInUserId);
+
+            var result = await ListByStoredProcedure<DispatchRoll_Response>("GetDispatchRollList", queryParameters);
+            parameters.Total = queryParameters.Get<int>("Total");
+
+            return result;
+        }
     }
 }

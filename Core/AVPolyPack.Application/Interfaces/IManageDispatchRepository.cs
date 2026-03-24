@@ -12,5 +12,6 @@ namespace AVPolyPack.Application.Interfaces
         Task<int> SaveDispatch(Dispatch_Request parameters);
         Task<IEnumerable<Dispatch_Response>> GetDispatchList(Dispatch_Search parameters);
         Task<Dispatch_Response?> GetDispatchById(int Id);
+        Task<IEnumerable<DispatchRoll_Response>> GetDispatchRollList(DispatchRoll_Search parameters);
     }
 }

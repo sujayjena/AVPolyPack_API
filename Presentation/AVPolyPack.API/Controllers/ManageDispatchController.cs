@@ -92,5 +92,16 @@ namespace AVPolyPack.Controllers
             }
             return _response;
         }
+
+        [Route("[action]")]
+        [HttpPost]
+        public async Task<ResponseModel> GetDispatchRollList(DispatchRoll_Search parameters)
+        {
+            IEnumerable<DispatchRoll_Response> lstDispatchs = await _manageDispatchRepository.GetDispatchRollList(parameters);
+            _response.Data = lstDispatchs.ToList();
+            _response.Total = parameters.Total;
+            return _response;
+        }
+
     }
 }

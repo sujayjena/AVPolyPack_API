@@ -561,14 +561,14 @@ namespace AVPolyPack.Controllers
 
         //[Route("[action]")]
         //[HttpPost]
-        //public async Task<ResponseModel> ExportCustomerCustomer()
+        //public async Task<ResponseModel> ExportCustomer(Customer_Search parameters)
         //{
         //    _response.IsSuccess = false;
         //    byte[] result;
 
         //    var request = new BaseSearchEntity();
 
-        //    var lstCustomerListObj = await _customerRepository.GetCustomerList(request);
+        //    var lstCustomerListObj = await _customerRepository.GetCustomerList(parameters);
 
         //    using (MemoryStream msExportDataFile = new MemoryStream())
         //    {

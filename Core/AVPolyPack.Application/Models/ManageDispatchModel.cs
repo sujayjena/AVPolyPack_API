@@ -46,4 +46,27 @@ namespace AVPolyPack.Application.Models
         public string? Remarks { get; set; }
         public bool? IsDispatch { get; set; }
     }
+
+    public class DispatchRoll_Search : BaseSearchEntity
+    {
+        public int? OrderItemId { get; set; }
+
+        [DefaultValue(null)]
+        public bool? IsDispatch { get; set; }
+    }
+
+    public class DispatchRoll_Response : BaseResponseEntity
+    {
+        public string? ShiftType { get; set; }
+        public string? RollNo { get; set; }
+        public string? RollCode { get; set; }
+        public int? OrderItemId { get; set; }
+        public string? OrderItemNo { get; set; }
+        public string? Size { get; set; }
+        public string? RollLength { get; set; }
+        //public int? OrderId { get; set; }
+        //public string? OrderNumber { get; set; }
+        public int? CustomerId { get; set; }
+        public string? CustomerName { get; set; }
+    }
 }

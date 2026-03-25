@@ -85,5 +85,15 @@ namespace AVPolyPack.Persistence.Repositories
             queryParameters.Add("@Id", Id);
             return (await ListByStoredProcedure<Supplier_Response>("GetSupplierById", queryParameters)).FirstOrDefault();
         }
+
+        public async Task<IEnumerable<Supplier_ImportDataValidation>> ImportSupplier(List<Supplier_ImportData> parameters)
+        {
+            DynamicParameters queryParameters = new DynamicParameters();
+            string xmlData = ConvertListToXml(parameters);
+            queryParameters.Add("@XmlData", xmlData);
+            queryParameters.Add("@UserId", SessionManager.LoggedInUserId);
+
+            return await ListByStoredProcedure<Supplier_ImportDataValidation>("ImportSupplier", queryParameters);
+        }
     }
 }

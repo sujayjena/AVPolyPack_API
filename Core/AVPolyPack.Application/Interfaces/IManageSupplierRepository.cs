@@ -12,5 +12,6 @@ namespace AVPolyPack.Application.Interfaces
         Task<int> SaveSupplier(Supplier_Request parameters);
         Task<IEnumerable<Supplier_Response>> GetSupplierList(Supplier_Search parameters);
         Task<Supplier_Response?> GetSupplierById(int Id);
+        Task<IEnumerable<Supplier_ImportDataValidation>> ImportSupplier(List<Supplier_ImportData> parameters);
     }
 }

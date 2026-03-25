@@ -1,5 +1,6 @@
 ﻿using AVPolyPack.Domain.Entities;
 using AVPolyPack.Persistence.Repositories;
+using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -130,4 +131,82 @@ namespace AVPolyPack.Application.Models
         public string? PinCode { get; set; }
         public bool? IsActive { get; set; }
     }
+
+    #region Import and Download
+
+    public class Supplier_ImportRequest
+    {
+        public IFormFile FileUpload { get; set; }
+    }
+
+    public class Supplier_ImportData
+    {
+        public string? SupplierCode { get; set; }
+        public string? SupplierName { get; set; }
+        public string? CustomerName { get; set; }
+        public string? GroupName { get; set; }
+        public string? ParentCustomer { get; set; }
+        public string? ReferenceFrom { get; set; }
+        public string? MobileNo1 { get; set; }
+        public string? MobileNo2 { get; set; }
+        public string? EmailId1 { get; set; }
+        public string? EmailId2 { get; set; }
+        public string? Website { get; set; }
+        public string? SpecialRemark { get; set; }
+        public string? CompanyRemark { get; set; }
+        public string? PanCardNumber { get; set; }
+        public string? GSTNumber { get; set; }
+        public string? ContactPerson { get; set; }
+        public string? ContactMobileNo { get; set; }
+        public string? ContactEmailId { get; set; }
+        public string? BankName { get; set; }
+        public string? BankAddress { get; set; }
+        public string? BankAccount { get; set; }
+        public string? BankIFSCCode { get; set; }
+        public string? AddressLine1 { get; set; }
+        public string? AddressLine2 { get; set; }
+        public string? Country { get; set; }
+        public string? State { get; set; }
+        public string? District { get; set; }
+        public string? City { get; set; }
+        public string? Pincode { get; set; }
+        public string? IsActive { get; set; }
+    }
+
+    public class Supplier_ImportDataValidation
+    {
+        public string? SupplierCode { get; set; }
+        public string? SupplierName { get; set; }
+        public string? CustomerName { get; set; }
+        public string? GroupName { get; set; }
+        public string? ParentCustomer { get; set; }
+        public string? ReferenceFrom { get; set; }
+        public string? MobileNo1 { get; set; }
+        public string? MobileNo2 { get; set; }
+        public string? EmailId1 { get; set; }
+        public string? EmailId2 { get; set; }
+        public string? Website { get; set; }
+        public string? SpecialRemark { get; set; }
+        public string? CompanyRemark { get; set; }
+        public string? PanCardNumber { get; set; }
+        public string? GSTNumber { get; set; }
+        public string? ContactPerson { get; set; }
+        public string? ContactMobileNo { get; set; }
+        public string? ContactEmailId { get; set; }
+        public string? BankName { get; set; }
+        public string? BankAddress { get; set; }
+        public string? BankAccount { get; set; }
+        public string? BankIFSCCode { get; set; }
+        public string? AddressLine1 { get; set; }
+        public string? AddressLine2 { get; set; }
+        public string? Country { get; set; }
+        public string? State { get; set; }
+        public string? District { get; set; }
+        public string? City { get; set; }
+        public string? Pincode { get; set; }
+        public string? IsActive { get; set; }
+        public string ValidationMessage { get; set; }
+    }
+
+    #endregion
 }

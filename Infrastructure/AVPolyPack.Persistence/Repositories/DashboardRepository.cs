@@ -4,6 +4,7 @@ using AVPolyPack.Application.Models;
 using Dapper;
 using Microsoft.Extensions.Configuration;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -40,6 +41,19 @@ namespace AVPolyPack.Persistence.Repositories
 
             var result = await ListByStoredProcedure<Dashboard_Roll_Response>("GetDashboard_RollSummary", queryParameters);
             return result.FirstOrDefault(); 
+        }
+
+        public async Task<IEnumerable<Dashboard_CountryWiseCustomerSummary_Response>> GetDashboard_CountryWiseCustomerSummary(Dashboard_CountryWiseCustomerSummary_Search parameter)
+        {
+            DynamicParameters queryParameters = new DynamicParameters();
+
+            queryParameters.Add("@FromDate", parameter.FromDate);
+            queryParameters.Add("@ToDate", parameter.ToDate);
+            queryParameters.Add("@CountryId", parameter.CountryId);
+            queryParameters.Add("@UserId", SessionManager.LoggedInUserId);
+
+            var result = await ListByStoredProcedure<Dashboard_CountryWiseCustomerSummary_Response>("GetDashboard_CountryWiseCustomerSummary", queryParameters);
+            return result;
         }
     }
 }

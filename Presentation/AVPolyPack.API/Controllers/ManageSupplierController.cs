@@ -408,6 +408,8 @@ namespace AVPolyPack.Controllers
                     WorkSheet1.Cells[1, 27].Value = "City";
                     WorkSheet1.Cells[1, 28].Value = "Pincode";
                     WorkSheet1.Cells[1, 29].Value = "IsActive";
+                    WorkSheet1.Cells[1, 30].Value = "CreatedDate";
+                    WorkSheet1.Cells[1, 31].Value = "CreatedBy";
 
                     recordIndex = 2;
                     foreach (var items in lstListObj)
@@ -441,6 +443,8 @@ namespace AVPolyPack.Controllers
                         WorkSheet1.Cells[recordIndex, 27].Value = items.CityName;
                         WorkSheet1.Cells[recordIndex, 28].Value = items.PinCode;
                         WorkSheet1.Cells[recordIndex, 29].Value = items.IsActive == true ? "Active" : "Inactive";
+                        WorkSheet1.Cells[recordIndex, 30].Value = Convert.ToDateTime(items.CreatedDate).ToString("dd/MM/yyyy");
+                        WorkSheet1.Cells[recordIndex, 31].Value = items.CreatorName;
 
                         recordIndex += 1;
                     }

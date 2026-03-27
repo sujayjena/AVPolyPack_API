@@ -4,6 +4,8 @@ using AVPolyPack.Application.Interfaces;
 using AVPolyPack.Application.Models;
 using AVPolyPack.Persistence.Repositories;
 using Microsoft.AspNetCore.Mvc;
+using OfficeOpenXml;
+using OfficeOpenXml.Style;
 
 namespace AVPolyPack.API.Controllers.Admin
 {
@@ -1832,6 +1834,74 @@ namespace AVPolyPack.API.Controllers.Admin
             return _response;
         }
 
+        [Route("[action]")]
+        [HttpPost]
+        public async Task<ResponseModel> ExportMaterialMasterData(MaterialMaster_Search parameters)
+        {
+            _response.IsSuccess = false;
+            byte[] result;
+            int recordIndex;
+            ExcelWorksheet WorkSheet1;
+            ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
+
+            var request = new BaseSearchEntity();
+
+            IEnumerable<MaterialMaster_Response> lstObj = await _adminMasterRepository.GetMaterialMasterList(parameters);
+
+            using (MemoryStream msExportDataFile = new MemoryStream())
+            {
+                using (ExcelPackage excelExportData = new ExcelPackage())
+                {
+                    WorkSheet1 = excelExportData.Workbook.Worksheets.Add("MaterialMaster");
+                    WorkSheet1.TabColor = System.Drawing.Color.Black;
+                    WorkSheet1.DefaultRowHeight = 12;
+
+                    //Header of table
+                    WorkSheet1.Row(1).Height = 20;
+                    WorkSheet1.Row(1).Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
+                    WorkSheet1.Row(1).Style.Font.Bold = true;
+
+                    WorkSheet1.Cells[1, 1].Value = "Material Group";
+                    WorkSheet1.Cells[1, 2].Value = "Material Type";
+                    WorkSheet1.Cells[1, 3].Value = "UOM";
+                    WorkSheet1.Cells[1, 4].Value = "Status";
+
+                    WorkSheet1.Cells[1, 5].Value = "CreatedDate";
+                    WorkSheet1.Cells[1, 6].Value = "CreatedBy";
+
+
+                    recordIndex = 2;
+
+                    foreach (var items in lstObj)
+                    {
+                        WorkSheet1.Cells[recordIndex, 1].Value = items.MaterialName;
+                        WorkSheet1.Cells[recordIndex, 2].Value = items.MaterialType;
+                        WorkSheet1.Cells[recordIndex, 3].Value = items.UOMName;
+                        WorkSheet1.Cells[recordIndex, 4].Value = items.IsActive == true ? "Active" : "Inactive";
+
+                        WorkSheet1.Cells[recordIndex, 5].Value = Convert.ToDateTime(items.CreatedDate).ToString("dd/MM/yyyy");
+                        WorkSheet1.Cells[recordIndex, 6].Value = items.CreatorName;
+
+                        recordIndex += 1;
+                    }
+
+                    WorkSheet1.Columns.AutoFit();
+
+                    excelExportData.SaveAs(msExportDataFile);
+                    msExportDataFile.Position = 0;
+                    result = msExportDataFile.ToArray();
+                }
+            }
+
+            if (result != null)
+            {
+                _response.Data = result;
+                _response.IsSuccess = true;
+                _response.Message = "Exported successfully";
+            }
+
+            return _response;
+        }
         #endregion
 
         #region Material Details
@@ -1896,6 +1966,82 @@ namespace AVPolyPack.API.Controllers.Admin
             return _response;
         }
 
+        [Route("[action]")]
+        [HttpPost]
+        public async Task<ResponseModel> ExportMaterialDetailsData(MaterialDetails_Search parameters)
+        {
+            _response.IsSuccess = false;
+            byte[] result;
+            int recordIndex;
+            ExcelWorksheet WorkSheet1;
+            ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
+
+            var request = new BaseSearchEntity();
+
+            IEnumerable<MaterialDetails_Response> lstObj = await _adminMasterRepository.GetMaterialDetailsList(parameters);
+
+            using (MemoryStream msExportDataFile = new MemoryStream())
+            {
+                using (ExcelPackage excelExportData = new ExcelPackage())
+                {
+                    WorkSheet1 = excelExportData.Workbook.Worksheets.Add("MaterialDetails");
+                    WorkSheet1.TabColor = System.Drawing.Color.Black;
+                    WorkSheet1.DefaultRowHeight = 12;
+
+                    //Header of table
+                    WorkSheet1.Row(1).Height = 20;
+                    WorkSheet1.Row(1).Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
+                    WorkSheet1.Row(1).Style.Font.Bold = true;
+
+                    WorkSheet1.Cells[1, 1].Value = "Material Name";
+                    WorkSheet1.Cells[1, 2].Value = "Material Group";
+                    WorkSheet1.Cells[1, 3].Value = "UOM";
+                    WorkSheet1.Cells[1, 4].Value = "HSN Code";
+                    WorkSheet1.Cells[1, 5].Value = "Min Qty";
+                    WorkSheet1.Cells[1, 6].Value = "Available Material";
+                    WorkSheet1.Cells[1, 7].Value = "Department";
+                    WorkSheet1.Cells[1, 8].Value = "Status";
+
+                    WorkSheet1.Cells[1, 9].Value = "CreatedDate";
+                    WorkSheet1.Cells[1, 10].Value = "CreatedBy";
+
+
+                    recordIndex = 2;
+
+                    foreach (var items in lstObj)
+                    {
+                        WorkSheet1.Cells[recordIndex, 1].Value = items.MaterialType;
+                        WorkSheet1.Cells[recordIndex, 2].Value = items.MaterialName;
+                        WorkSheet1.Cells[recordIndex, 3].Value = items.UOMName;
+                        WorkSheet1.Cells[recordIndex, 4].Value = items.HSNCode;
+                        WorkSheet1.Cells[recordIndex, 5].Value = items.MinQty;
+                        WorkSheet1.Cells[recordIndex, 6].Value = items.AvailableMaterial;
+                        WorkSheet1.Cells[recordIndex, 7].Value = items.DepartmentName;
+                        WorkSheet1.Cells[recordIndex, 8].Value = items.IsActive == true ? "Active" : "Inactive";
+
+                        WorkSheet1.Cells[recordIndex, 9].Value = Convert.ToDateTime(items.CreatedDate).ToString("dd/MM/yyyy");
+                        WorkSheet1.Cells[recordIndex, 10].Value = items.CreatorName;
+
+                        recordIndex += 1;
+                    }
+
+                    WorkSheet1.Columns.AutoFit();
+
+                    excelExportData.SaveAs(msExportDataFile);
+                    msExportDataFile.Position = 0;
+                    result = msExportDataFile.ToArray();
+                }
+            }
+
+            if (result != null)
+            {
+                _response.Data = result;
+                _response.IsSuccess = true;
+                _response.Message = "Exported successfully";
+            }
+
+            return _response;
+        }
         #endregion
 
         #region Product Type

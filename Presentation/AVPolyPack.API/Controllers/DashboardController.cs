@@ -43,5 +43,14 @@ namespace AVPolyPack.API.Controllers
             _response.Data = lst;
             return _response;
         }
+
+        [Route("[action]")]
+        [HttpPost]
+        public async Task<ResponseModel> GetDashboard_CountryWiseCustomerSummary(Dashboard_CountryWiseCustomerSummary_Search parameter)
+        {
+            var lst = await _dashboardRepository.GetDashboard_CountryWiseCustomerSummary(parameter);
+            _response.Data = lst;
+            return _response;
+        }
     }
 }

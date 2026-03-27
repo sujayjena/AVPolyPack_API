@@ -62,4 +62,19 @@ namespace AVPolyPack.Application.Models
         public int? TotalMerge_PendingCount { get; set; }
         public int? TotalDispatch_PendingCount { get; set; }
     }
+
+    public class Dashboard_CountryWiseCustomerSummary_Search
+    {
+        [DefaultValue(null)]
+        public DateTime? FromDate { get; set; }
+
+        [DefaultValue(null)]
+        public DateTime? ToDate { get; set; }
+        public int? CountryId { get; set; }
+    }
+    public class Dashboard_CountryWiseCustomerSummary_Response
+    {
+        public int? CustomerCount { get; set; }
+        public string? CountryName { get; set; }
+    }
 }

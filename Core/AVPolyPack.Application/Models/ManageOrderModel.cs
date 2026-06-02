@@ -353,6 +353,7 @@ namespace AVPolyPack.Application.Models
         public int? CustomerId { get; set; }
         public int? BillingAddressId { get; set; }
         public int? ShippingAddressId { get; set; }
+        public string? WIP_Status { get; set; }
     }
     #endregion
 

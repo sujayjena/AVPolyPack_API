@@ -417,5 +417,27 @@ namespace AVPolyPack.Persistence.Repositories
             return result;
         }
         #endregion
+
+        #region Loom Release
+        public async Task<int> SaveLoomRelease(LoomRelease_Request parameters)
+        {
+            DynamicParameters queryParameters = new DynamicParameters();
+
+            queryParameters.Add("@Id", parameters.Id);
+            queryParameters.Add("@LoomId", parameters.LoomId);
+            queryParameters.Add("@OrderItemId", parameters.OrderItemId);
+            queryParameters.Add("@UserId", SessionManager.LoggedInUserId);
+
+            return await SaveByStoredProcedure<int>("SaveLoomRelease", queryParameters);
+        }
+        #endregion
+
+        public async Task<IEnumerable<LoomListByOrderItemId_Response>> GetLoomListByOrderItemId(LoomListByOrderItemId_Search parameters)
+        {
+            DynamicParameters queryParameters = new DynamicParameters();
+            queryParameters.Add("@OrderItemId", parameters.OrderItemId);
+
+            return await ListByStoredProcedure<LoomListByOrderItemId_Response>("GetLoomListByOrderItemId", queryParameters);
+        }
     }
 }

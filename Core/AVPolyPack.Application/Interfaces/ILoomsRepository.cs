@@ -52,5 +52,11 @@ namespace AVPolyPack.Application.Interfaces
         Task<int> PickupRoll(PickupRoll_Request parameters);
         Task<IEnumerable<OutwardingStock_Response>> GetOutwardingStockList(OutwardingStock_Search parameters);
         #endregion
+
+        #region Loom Release
+        Task<int> SaveLoomRelease(LoomRelease_Request parameters);
+        #endregion
+
+        Task<IEnumerable<LoomListByOrderItemId_Response>> GetLoomListByOrderItemId(LoomListByOrderItemId_Search parameters);
     }
 }

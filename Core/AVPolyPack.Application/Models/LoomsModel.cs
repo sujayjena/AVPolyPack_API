@@ -450,4 +450,22 @@ namespace AVPolyPack.Application.Models
         public string? RollCode { get; set; }
     }
     #endregion
+
+    #region Loom Release
+    public class LoomRelease_Request : BaseEntity
+    {
+        public int? LoomId { get; set; }
+        public int? OrderItemId { get; set; }
+    }
+    #endregion
+
+    public class LoomListByOrderItemId_Search
+    {
+        public int? OrderItemId { get; set; }
+    }
+    public class LoomListByOrderItemId_Response
+    {
+        public int Id { get; set; }
+        public string? LoomName { get; set; }
+    }
 }

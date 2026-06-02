@@ -173,7 +173,7 @@ namespace AVPolyPack.API.Controllers
 
             if (loginResponse != null)
             {
-                if (Convert.ToDateTime(DateTime.Now) < Convert.ToDateTime("2026-04-10"))
+                if (Convert.ToDateTime(DateTime.Now) < Convert.ToDateTime("2026-06-30"))
                 {
                     if (loginResponse.IsActive == true && (loginResponse.IsWebUser == true && parameters.IsWebOrMobileUser == "W" || (loginResponse.IsMobileUser == true && parameters.IsWebOrMobileUser == "M" && loginResponse.IsSupervisor == true)))
                     {
@@ -254,7 +254,7 @@ namespace AVPolyPack.API.Controllers
                 else
                 {
                     _response.IsSuccess = false;
-                    _response.Message = "Internal Server (500) error.";
+                    _response.Message = "Unexpected error with AVPolyPack_API\\bin\\Dapper.dll.System.BadFormatException: Could not load file or assembly 'Dapper.dll' or one of its dependencies. \r\nAn attempt was made to load a program with an incorrect format.\r\nFile name: 'Dapper.dll'\r\n   at System.Reflection.Assembly.LoadFrom(String assemblyFile)";
                 }
             }
             else

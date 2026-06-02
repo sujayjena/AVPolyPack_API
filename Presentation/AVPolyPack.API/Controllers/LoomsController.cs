@@ -233,6 +233,10 @@ namespace AVPolyPack.Controllers
             {
                 _response.Message = "Something went wrong, please try again";
             }
+            else if (result == -3)
+            {
+                _response.Message = "Order item running in other loom";
+            }
             else
             {
                 _response.Message = "Record Submitted successfully";
@@ -590,5 +594,50 @@ namespace AVPolyPack.Controllers
             return _response;
         }
         #endregion
+
+        #region Loom Release
+        [Route("[action]")]
+        [HttpPost]
+        public async Task<ResponseModel> SaveLoomRelease(LoomRelease_Request parameters)
+        {
+            int result = await _loomsRepository.SaveLoomRelease(parameters);
+
+            if (result == (int)SaveOperationEnums.NoRecordExists)
+            {
+                _response.Message = "No record exists";
+            }
+            else if (result == (int)SaveOperationEnums.ReocrdExists)
+            {
+                _response.Message = "Record already exists";
+            }
+            else if (result == (int)SaveOperationEnums.NoResult)
+            {
+                _response.Message = "Something went wrong, please try again";
+            }
+            else
+            {
+                if (parameters.Id == 0)
+                {
+                    _response.Message = "Record Submitted successfully";
+                }
+                else
+                {
+                    _response.Message = "Record Updated successfully";
+                }
+            }
+
+            _response.Id = result;
+            return _response;
+        }
+        #endregion
+
+        [Route("[action]")]
+        [HttpPost]
+        public async Task<ResponseModel> GetLoomListByOrderItemId(LoomListByOrderItemId_Search parameters)
+        {
+            var objList = await _loomsRepository.GetLoomListByOrderItemId(parameters);
+            _response.Data = objList.ToList();
+            return _response;
+        }
     }
 }

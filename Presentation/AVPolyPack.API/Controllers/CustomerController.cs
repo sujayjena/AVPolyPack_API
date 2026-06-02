@@ -600,6 +600,8 @@ namespace AVPolyPack.Controllers
                     WorkSheet1.Cells[1, 13].Value = "Customer Remark";
                     WorkSheet1.Cells[1, 14].Value = "Country";
                     WorkSheet1.Cells[1, 15].Value = "IsActive";
+                    WorkSheet1.Cells[1, 16].Value = "CreatedDate";
+                    WorkSheet1.Cells[1, 17].Value = "CreatedBy";
 
                     recordIndex = 2;
                     foreach (var items in lstCustomerListObj)
@@ -619,6 +621,8 @@ namespace AVPolyPack.Controllers
                         WorkSheet1.Cells[recordIndex, 13].Value = items.CustomerRemark;
                         WorkSheet1.Cells[recordIndex, 14].Value = items.CountryName;
                         WorkSheet1.Cells[recordIndex, 15].Value = items.IsActive == true ? "Active" : "Inactive";
+                        WorkSheet1.Cells[recordIndex, 16].Value = Convert.ToDateTime(items.CreatedDate).ToString("dd/MM/yyyy");
+                        WorkSheet1.Cells[recordIndex, 17].Value = items.CreatorName;
 
                         recordIndex += 1;
                     }
@@ -636,14 +640,19 @@ namespace AVPolyPack.Controllers
                     WorkSheet1.Row(1).Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
                     WorkSheet1.Row(1).Style.Font.Bold = true;
 
-                    WorkSheet1.Cells[1, 1].Value = "Customer Name";
-                    WorkSheet1.Cells[1, 2].Value = "Contact Name";
-                    WorkSheet1.Cells[1, 3].Value = "Contact Person";
-                    WorkSheet1.Cells[1, 4].Value = "Mobile Number";
-                    WorkSheet1.Cells[1, 5].Value = "Email";
-                    WorkSheet1.Cells[1, 6].Value = "IsActive";
+                    WorkSheet1.Cells[1, 1].Value = "Sr.No";
+                    WorkSheet1.Cells[1, 2].Value = "Customer Name";
+                    WorkSheet1.Cells[1, 3].Value = "Contact Name";
+                    WorkSheet1.Cells[1, 4].Value = "Contact Person";
+                    WorkSheet1.Cells[1, 5].Value = "Mobile Number";
+                    WorkSheet1.Cells[1, 6].Value = "Email";
+                    WorkSheet1.Cells[1, 7].Value = "IsActive";
+                    WorkSheet1.Cells[1, 8].Value = "CreatedDate";
+                    WorkSheet1.Cells[1, 9].Value = "CreatedBy";
 
                     recordIndex = 2;
+
+                    int cusomerSR = 0;
                     foreach (var items in lstCustomerListObj.ToList().Distinct())
                     {
                         //if (items.Id == 13)
@@ -657,21 +666,27 @@ namespace AVPolyPack.Controllers
                             RefType = "Customer"
                         };
 
+                        cusomerSR++;
+                        int contactSR = 0;
+
                         var lstContactListObj = await _contactDetailRepository.GetContactDetailList(vContactDetail_Search);
                         foreach (var itemContact in lstContactListObj)
                         {
-                            WorkSheet1.Cells[recordIndex, 1].Value = items.CustomerName;
-                            WorkSheet1.Cells[recordIndex, 2].Value = itemContact.ContactName;
-                            WorkSheet1.Cells[recordIndex, 3].Value = itemContact.ContactPerson;
-                            WorkSheet1.Cells[recordIndex, 4].Value = itemContact.MobileNumber;
-                            WorkSheet1.Cells[recordIndex, 5].Value = itemContact.EmailId;
-                            WorkSheet1.Cells[recordIndex, 6].Value = itemContact.IsActive == true ? "Active" : "Inactive";
+                            WorkSheet1.Cells[recordIndex, 1].Value = contactSR == 0 ? cusomerSR.ToString() : cusomerSR.ToString() + "." + contactSR;
+                            WorkSheet1.Cells[recordIndex, 2].Value = items.CustomerName;
+                            WorkSheet1.Cells[recordIndex, 3].Value = itemContact.ContactName;
+                            WorkSheet1.Cells[recordIndex, 4].Value = itemContact.ContactPerson;
+                            WorkSheet1.Cells[recordIndex, 5].Value = itemContact.MobileNumber;
+                            WorkSheet1.Cells[recordIndex, 6].Value = itemContact.EmailId;
+                            WorkSheet1.Cells[recordIndex, 7].Value = itemContact.IsActive == true ? "Active" : "Inactive";
+                            WorkSheet1.Cells[recordIndex, 8].Value = Convert.ToDateTime(itemContact.CreatedDate).ToString("dd/MM/yyyy");
+                            WorkSheet1.Cells[recordIndex, 9].Value = itemContact.CreatorName;
 
                             recordIndex += 1;
+                            contactSR++;
                         }
                     }
                     WorkSheet1.Columns.AutoFit();
-
 
                     //Billing Address
                     WorkSheet1 = excelExportData.Workbook.Worksheets.Add("BillingAddress");
@@ -683,17 +698,22 @@ namespace AVPolyPack.Controllers
                     WorkSheet1.Row(1).Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
                     WorkSheet1.Row(1).Style.Font.Bold = true;
 
-                    WorkSheet1.Cells[1, 1].Value = "Customer Name";
-                    WorkSheet1.Cells[1, 2].Value = "NationalOrInternational";
-                    WorkSheet1.Cells[1, 3].Value = "Address1";
-                    WorkSheet1.Cells[1, 4].Value = "CountryName";
-                    WorkSheet1.Cells[1, 5].Value = "StateName";
-                    WorkSheet1.Cells[1, 6].Value = "DistrictName";
-                    WorkSheet1.Cells[1, 7].Value = "CityName";
-                    WorkSheet1.Cells[1, 8].Value = "PinCode";
-                    WorkSheet1.Cells[1, 9].Value = "IsActive";
+                    WorkSheet1.Cells[1, 1].Value = "Sr.No";
+                    WorkSheet1.Cells[1, 2].Value = "Customer Name";
+                    WorkSheet1.Cells[1, 3].Value = "NationalOrInternational";
+                    WorkSheet1.Cells[1, 4].Value = "Address1";
+                    WorkSheet1.Cells[1, 5].Value = "CountryName";
+                    WorkSheet1.Cells[1, 6].Value = "StateName";
+                    WorkSheet1.Cells[1, 7].Value = "DistrictName";
+                    WorkSheet1.Cells[1, 8].Value = "CityName";
+                    WorkSheet1.Cells[1, 9].Value = "PinCode";
+                    WorkSheet1.Cells[1, 10].Value = "IsActive";
+                    WorkSheet1.Cells[1, 11].Value = "CreatedDate";
+                    WorkSheet1.Cells[1, 12].Value = "CreatedBy";
 
                     recordIndex = 2;
+
+                    cusomerSR = 0;
                     foreach (var items in lstCustomerListObj)
                     {
                         var vAddress_Search = new Address_Search()
@@ -702,20 +722,27 @@ namespace AVPolyPack.Controllers
                             RefType = "Customer"
                         };
 
+                        cusomerSR++;
+                        int addressSR = 0;
+
                         var lstAddressListObj = await _addressRepository.GetAddressList(vAddress_Search);
                         foreach (var itemAddress in lstAddressListObj)
                         {
-                            WorkSheet1.Cells[recordIndex, 1].Value = items.CustomerName;
-                            WorkSheet1.Cells[recordIndex, 2].Value = itemAddress.IsNational_Or_International == 1 ? "National" : itemAddress.IsNational_Or_International == 2 ? "International" : "";
-                            WorkSheet1.Cells[recordIndex, 3].Value = itemAddress.Address1;
-                            WorkSheet1.Cells[recordIndex, 4].Value = itemAddress.CountryName;
-                            WorkSheet1.Cells[recordIndex, 5].Value = itemAddress.StateName;
-                            WorkSheet1.Cells[recordIndex, 6].Value = itemAddress.DistrictName;
-                            WorkSheet1.Cells[recordIndex, 7].Value = itemAddress.CityName;
-                            WorkSheet1.Cells[recordIndex, 8].Value = itemAddress.PinCode;
-                            WorkSheet1.Cells[recordIndex, 9].Value = items.IsActive == true ? "Active" : "Inactive";
+                            WorkSheet1.Cells[recordIndex, 1].Value = addressSR == 0 ? cusomerSR.ToString() : cusomerSR.ToString() + "." + addressSR;
+                            WorkSheet1.Cells[recordIndex, 2].Value = items.CustomerName;
+                            WorkSheet1.Cells[recordIndex, 3].Value = itemAddress.IsNational_Or_International == 1 ? "National" : itemAddress.IsNational_Or_International == 2 ? "International" : "";
+                            WorkSheet1.Cells[recordIndex, 4].Value = itemAddress.Address1;
+                            WorkSheet1.Cells[recordIndex, 5].Value = itemAddress.CountryName;
+                            WorkSheet1.Cells[recordIndex, 6].Value = itemAddress.StateName;
+                            WorkSheet1.Cells[recordIndex, 7].Value = itemAddress.DistrictName;
+                            WorkSheet1.Cells[recordIndex, 8].Value = itemAddress.CityName;
+                            WorkSheet1.Cells[recordIndex, 9].Value = itemAddress.PinCode;
+                            WorkSheet1.Cells[recordIndex, 10].Value = items.IsActive == true ? "Active" : "Inactive";
+                            WorkSheet1.Cells[recordIndex, 11].Value = Convert.ToDateTime(itemAddress.CreatedDate).ToString("dd/MM/yyyy");
+                            WorkSheet1.Cells[recordIndex, 12].Value = itemAddress.CreatorName;
 
                             recordIndex += 1;
+                            addressSR++;
                         }
                     }
                     WorkSheet1.Columns.AutoFit();
@@ -730,17 +757,22 @@ namespace AVPolyPack.Controllers
                     WorkSheet1.Row(1).Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
                     WorkSheet1.Row(1).Style.Font.Bold = true;
 
-                    WorkSheet1.Cells[1, 1].Value = "Customer Name";
-                    WorkSheet1.Cells[1, 2].Value = "NationalOrInternational";
-                    WorkSheet1.Cells[1, 3].Value = "Address1";
-                    WorkSheet1.Cells[1, 4].Value = "CountryName";
-                    WorkSheet1.Cells[1, 5].Value = "StateName";
-                    WorkSheet1.Cells[1, 6].Value = "DistrictName";
-                    WorkSheet1.Cells[1, 7].Value = "CityName";
-                    WorkSheet1.Cells[1, 8].Value = "PinCode";
-                    WorkSheet1.Cells[1, 9].Value = "IsActive";
+                    WorkSheet1.Cells[1, 1].Value = "Sr.No";
+                    WorkSheet1.Cells[1, 2].Value = "Customer Name";
+                    WorkSheet1.Cells[1, 3].Value = "NationalOrInternational";
+                    WorkSheet1.Cells[1, 4].Value = "Address1";
+                    WorkSheet1.Cells[1, 5].Value = "CountryName";
+                    WorkSheet1.Cells[1, 6].Value = "StateName";
+                    WorkSheet1.Cells[1, 7].Value = "DistrictName";
+                    WorkSheet1.Cells[1, 8].Value = "CityName";
+                    WorkSheet1.Cells[1, 9].Value = "PinCode";
+                    WorkSheet1.Cells[1, 10].Value = "IsActive";
+                    WorkSheet1.Cells[1, 11].Value = "CreatedDate";
+                    WorkSheet1.Cells[1, 12].Value = "CreatedBy";
 
                     recordIndex = 2;
+
+                    cusomerSR = 0;
                     foreach (var items in lstCustomerListObj)
                     {
                         var vShippingAddress_Search = new ShippingAddress_Search()
@@ -749,20 +781,27 @@ namespace AVPolyPack.Controllers
                             RefType = "Customer"
                         };
 
+                        cusomerSR++;
+                        int saddressSR = 0;
+
                         var lstShippingAddressListObj = await _shippingAddressRepository.GetShippingAddressList(vShippingAddress_Search);
                         foreach (var itemAddress in lstShippingAddressListObj)
                         {
-                            WorkSheet1.Cells[recordIndex, 1].Value = items.CustomerName;
-                            WorkSheet1.Cells[recordIndex, 2].Value = itemAddress.IsNational_Or_International == 1 ? "National" : itemAddress.IsNational_Or_International == 2 ? "International" : "";
-                            WorkSheet1.Cells[recordIndex, 3].Value = itemAddress.Address1;
-                            WorkSheet1.Cells[recordIndex, 4].Value = itemAddress.CountryName;
-                            WorkSheet1.Cells[recordIndex, 5].Value = itemAddress.StateName;
-                            WorkSheet1.Cells[recordIndex, 6].Value = itemAddress.DistrictName;
-                            WorkSheet1.Cells[recordIndex, 7].Value = itemAddress.CityName;
-                            WorkSheet1.Cells[recordIndex, 8].Value = itemAddress.PinCode;
-                            WorkSheet1.Cells[recordIndex, 9].Value = items.IsActive == true ? "Active" : "Inactive";
+                            WorkSheet1.Cells[recordIndex, 1].Value = saddressSR == 0 ? cusomerSR.ToString() : cusomerSR.ToString() + "." + saddressSR;
+                            WorkSheet1.Cells[recordIndex, 2].Value = items.CustomerName;
+                            WorkSheet1.Cells[recordIndex, 3].Value = itemAddress.IsNational_Or_International == 1 ? "National" : itemAddress.IsNational_Or_International == 2 ? "International" : "";
+                            WorkSheet1.Cells[recordIndex, 4].Value = itemAddress.Address1;
+                            WorkSheet1.Cells[recordIndex, 5].Value = itemAddress.CountryName;
+                            WorkSheet1.Cells[recordIndex, 6].Value = itemAddress.StateName;
+                            WorkSheet1.Cells[recordIndex, 7].Value = itemAddress.DistrictName;
+                            WorkSheet1.Cells[recordIndex, 8].Value = itemAddress.CityName;
+                            WorkSheet1.Cells[recordIndex, 9].Value = itemAddress.PinCode;
+                            WorkSheet1.Cells[recordIndex, 10].Value = items.IsActive == true ? "Active" : "Inactive";
+                            WorkSheet1.Cells[recordIndex, 11].Value = Convert.ToDateTime(itemAddress.CreatedDate).ToString("dd/MM/yyyy");
+                            WorkSheet1.Cells[recordIndex, 12].Value = itemAddress.CreatorName;
 
                             recordIndex += 1;
+                            saddressSR++;
                         }
                     }
                     WorkSheet1.Columns.AutoFit();

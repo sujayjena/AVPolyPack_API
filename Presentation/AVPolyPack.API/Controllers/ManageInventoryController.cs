@@ -168,7 +168,7 @@ namespace AVPolyPack.Controllers
                     if (vRoll != null)
                     {
                         var vGenerateBarcode = _barcodeRepository.GenerateBarcode(vRoll.RollNo, "Roll");
-                        if (vGenerateBarcode.Barcode_Unique_Id != "")
+                        if (!string.IsNullOrEmpty(vGenerateBarcode.Barcode_Unique_Id))
                         {
                             var vBarcode_Request = new Barcode_Request()
                             {
@@ -308,7 +308,7 @@ namespace AVPolyPack.Controllers
                     if (vRoll != null)
                     {
                         var vGenerateBarcode = _barcodeRepository.GenerateBarcode(vRoll.RollNo, "Roll");
-                        if (vGenerateBarcode.Barcode_Unique_Id != "")
+                        if (!string.IsNullOrEmpty(vGenerateBarcode.Barcode_Unique_Id))
                         {
                             var vBarcode_Request = new Barcode_Request()
                             {

@@ -165,7 +165,7 @@ namespace AVPolyPack.Controllers
         [HttpPost]
         public async Task<ResponseModel> GetOrderItemNoForSelectList()
         {
-            IEnumerable<SelectListResponse> lstResponse = await _loomsRepository.GetOrderItemNoForSelectList();
+            IEnumerable<OrderItemNoSelectListResponse> lstResponse = await _loomsRepository.GetOrderItemNoForSelectList();
             _response.Data = lstResponse.ToList();
             return _response;
         }
@@ -444,7 +444,7 @@ namespace AVPolyPack.Controllers
                     if (vVisitor != null)
                     {
                         var vGenerateBarcode = _barcodeRepository.GenerateBarcode(vVisitor.RollNo, "Roll");
-                        if (vGenerateBarcode.Barcode_Unique_Id != "")
+                        if (!string.IsNullOrEmpty(vGenerateBarcode.Barcode_Unique_Id))
                         {
                             var vBarcode_Request = new Barcode_Request()
                             {
@@ -591,6 +591,50 @@ namespace AVPolyPack.Controllers
             IEnumerable<OutwardingStock_Response> lstRoles = await _loomsRepository.GetOutwardingStockList(parameters);
             _response.Data = lstRoles.ToList();
             _response.Total = parameters.Total;
+            return _response;
+        }
+
+        [Route("[action]")]
+        [HttpPost]
+        public async Task<ResponseModel> BarcodeRegenerate(BarcodeRegenerate_Request parameters)
+        {
+            var vRoll = await _loomsRepository.GetRollById(Convert.ToInt32(parameters.RefId));
+            if (vRoll != null)
+            {
+                var vGenerateBarcode = _barcodeRepository.GenerateBarcode(vRoll.RollNo, parameters.RefType);
+                if (!string.IsNullOrEmpty(vGenerateBarcode.Barcode_Unique_Id))
+                {
+                    var vBarcode_Request = new Barcode_Request()
+                    {
+                        Id = 0,
+                        BarcodeNo = vRoll.RollNo,
+                        BarcodeType = "Roll",
+                        Barcode_Unique_Id = vGenerateBarcode.Barcode_Unique_Id,
+                        BarcodeOriginalFileName = vGenerateBarcode.BarcodeOriginalFileName,
+                        BarcodeFileName = vGenerateBarcode.BarcodeFileName,
+                        RefId = vRoll.Id
+                    };
+                    var resultBarcode = _barcodeRepository.SaveBarcode(vBarcode_Request);
+                }
+
+                if (string.IsNullOrEmpty(vGenerateBarcode.BarcodeFileName))
+                {
+                    _response.IsSuccess = false;
+                    _response.Message = "Barcode is not generated";
+
+                    return _response;
+                }
+            }
+            else
+            {
+                _response.IsSuccess = false;
+                _response.Message = "Roll is not exists.";
+
+                return _response;
+            }
+
+            _response.IsSuccess = true;
+            _response.Message = "Barcode Regenerate successfully";
             return _response;
         }
         #endregion

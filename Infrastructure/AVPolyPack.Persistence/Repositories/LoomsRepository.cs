@@ -133,11 +133,11 @@ namespace AVPolyPack.Persistence.Repositories
 
         #region Order Item Assign
 
-        public async Task<IEnumerable<SelectListResponse>> GetOrderItemNoForSelectList()
+        public async Task<IEnumerable<OrderItemNoSelectListResponse>> GetOrderItemNoForSelectList()
         {
             DynamicParameters queryParameters = new DynamicParameters();
 
-            return await ListByStoredProcedure<SelectListResponse>("GetOrderItemNoForSelectList", queryParameters);
+            return await ListByStoredProcedure<OrderItemNoSelectListResponse>("GetOrderItemNoForSelectList", queryParameters);
         }
 
         public async Task<int> SaveOrderItemAssign(OrderItemAssign_Request parameters)

@@ -21,7 +21,7 @@ namespace AVPolyPack.Application.Interfaces
         #endregion
 
         #region Order Item Assign
-        Task<IEnumerable<SelectListResponse>> GetOrderItemNoForSelectList();
+        Task<IEnumerable<OrderItemNoSelectListResponse>> GetOrderItemNoForSelectList();
         Task<int> SaveOrderItemAssign(OrderItemAssign_Request parameters);
         Task<IEnumerable<OrderItemAssign_Response>> GetOrderItemAssignList(OrderItemAssign_Search parameters);
         Task<int> AssignOrderItemCompleted(AssignOrderItemCompleted_Request parameters);

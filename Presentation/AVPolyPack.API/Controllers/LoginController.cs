@@ -173,7 +173,7 @@ namespace AVPolyPack.API.Controllers
 
             if (loginResponse != null)
             {
-                if (Convert.ToDateTime(DateTime.Now) < Convert.ToDateTime("2026-06-30"))
+                if (Convert.ToDateTime(DateTime.Now) < Convert.ToDateTime("2026-07-30"))
                 {
                     if (loginResponse.IsActive == true && (loginResponse.IsWebUser == true && parameters.IsWebOrMobileUser == "W" || (loginResponse.IsMobileUser == true && parameters.IsWebOrMobileUser == "M" && loginResponse.IsSupervisor == true)))
                     {

@@ -17,56 +17,57 @@ namespace AVPolyPack.Persistence.Repositories
     {
         private IConfiguration _configuration;
         private IFileManager _fileManager;
+        private IConfigRefRepository _configRefRepository;
 
-        public BarcodeRepository(IConfiguration configuration, IFileManager fileManager) : base(configuration)
+        public BarcodeRepository(IConfiguration configuration, IFileManager fileManager, IConfigRefRepository configRefRepository) : base(configuration)
         {
             _configuration = configuration;
             _fileManager = fileManager;
+            _configRefRepository = configRefRepository;
         }
 
         public BarcodeGenerate_Response GenerateBarcode(string value, string barcodeType)
         {
+            var vBarcodeGenerate = new BarcodeGenerate_Response();
+
+            //Call API
+            var vConfigRef_Search = new ConfigRef_Search()
+            {
+                Ref_Type = "Barcode",
+                Ref_Param = "APIHostLink"
+            };
+
+            string barcodeBaseApi = string.Empty;
+            var vConfigRefObj = _configRefRepository.GetConfigRefList(vConfigRef_Search).Result.ToList().FirstOrDefault();
+            if (vConfigRefObj != null)
+            {
+                barcodeBaseApi = vConfigRefObj.Ref_Value1;
+            }
+
+            if (string.IsNullOrWhiteSpace(barcodeBaseApi))
+            {
+                return vBarcodeGenerate;
+            }
+
             //Prepare you post parameters  
             var postData = new BarcodeGenerate_Request()
             {
                 value = value
             };
 
-            //Call API
-            string sendUri = "http://164.52.213.175:5050/generate_barcode_v2";
-
-            //Create HTTPWebrequest  
-            HttpWebRequest httpWReq = (HttpWebRequest)WebRequest.Create(sendUri);
-
             var jsonData = JsonConvert.SerializeObject(postData);
+            var content = new StringContent(jsonData, Encoding.UTF8, "application/json");
 
-            //Prepare and Add URL Encoded data  
-            UTF8Encoding encoding = new UTF8Encoding();
-            byte[] data = encoding.GetBytes(jsonData);
-
-            //Specify post method  
-            httpWReq.Method = "POST";
-            httpWReq.ContentType = "application/json";
-            httpWReq.ContentLength = data.Length;
-            using (Stream stream = httpWReq.GetRequestStream())
+            string responseString;
+            using (var httpClient = new HttpClient())
             {
-                stream.Write(data, 0, data.Length);
+                var response = httpClient.PostAsync(barcodeBaseApi, content).Result;
+                response.EnsureSuccessStatusCode();
+                responseString = response.Content.ReadAsStringAsync().Result;
             }
-
-            //Get the response  
-            HttpWebResponse response = (HttpWebResponse)httpWReq.GetResponse();
-            StreamReader reader = new StreamReader(response.GetResponseStream());
-            string responseString = reader.ReadToEnd();
-
-            //Close the response  
-            reader.Close();
-
-            response.Close();
 
             dynamic jsonResults = JsonConvert.DeserializeObject<dynamic>(responseString);
             var status = jsonResults.ContainsKey("isSuccess") ? jsonResults.isSuccess : false;
-
-            var vBarcodeGenerate = new BarcodeGenerate_Response();
 
             if (status == true)
             {

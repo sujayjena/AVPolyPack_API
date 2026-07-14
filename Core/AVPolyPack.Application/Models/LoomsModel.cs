@@ -150,6 +150,19 @@ namespace AVPolyPack.Application.Models
         public bool? IsCompleted { get; set; }
     }
 
+    public class OrderItemNoSelectListResponse
+    {
+        public long Value { get; set; }
+        public string? Text { get; set; }
+        public int? TypeId { get; set; }
+        public string? TypeName { get; set; }
+        public string? Size { get; set; }
+        public string? MeasurementType { get; set; }
+        public string? Average { get; set; }
+        public int? SpecificationId { get; set; }
+        public string? SpecificationName { get; set; }
+    }
+
     #endregion
 
     #region Size Reading
@@ -448,6 +461,13 @@ namespace AVPolyPack.Application.Models
         public int? ShiftType { get; set; }
         public string? RollNo { get; set; }
         public string? RollCode { get; set; }
+    }
+
+    public class BarcodeRegenerate_Request
+    {
+        [DefaultValue("Roll")]
+        public string? RefType { get; set; }
+        public int? RefId { get; set; }
     }
     #endregion
 
